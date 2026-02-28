@@ -1,0 +1,74 @@
+# Frontend Stack Blueprint
+
+> Canonical frontend stack reference for AI coding agents. Platform-
+> agnostic: same core stack for any project. Deployment targets are
+> optional layers.
+
+## Consumer Contract (read first)
+
+- Audience: external coding agents consuming this repository as reference.
+- This file is a navigation index for fast retrieval.
+- For full operational rules, use `llms-full.txt`.
+- If any document conflicts, treat `stack.yaml` as the source of truth.
+- Local maintenance workflow lives in `.claude/skills/blueprint-maintenance/SKILL.md`.
+
+## Universal Governance (technology-agnostic)
+
+- Keep one canonical source of truth for rules and versions.
+- Keep machine-readable artifacts and narrative docs synchronized.
+- Classify changes by impact/risk before implementation.
+- Never silently remove consolidated decisions; deprecate with migration path.
+- Use explicit dates and absolute versions for temporal claims.
+- If context is ambiguous, ask the developer instead of guessing.
+
+## Stack (applies to every project)
+
+- [Full Spec](stack/STACK.md): Complete manifest
+- [Architecture](stack/architecture.md): Modular, DRY, KISS, YAGNI
+- [Core](stack/core.md): TypeScript, React, TanStack Router / React Router
+- [Build & Test](stack/build-and-test.md): Vite (Node.js >=20.19 or >=22.12), Vitest, Husky
+- [UI](stack/ui.md): Radix UI, shadcn/ui, Floating UI, Embla, cmdk
+- [Forms](stack/forms.md): React Hook Form + Zod
+- [Styling](stack/styling.md): Tailwind CSS, Motion
+- [State](stack/state-and-data.md): Zustand + TanStack Query (TanStack Store replaces Zustand at v1 GA)
+- [Dates](stack/dates.md): date-fns
+- [Content](stack/content.md): Lexical, ProseMirror, Shiki
+- [i18n](stack/i18n.md): Format.js, react-intl
+- [Observability](stack/observability.md): Sentry, OTel, Statsig
+- [Icons](stack/icons.md): Lucide (default), Phosphor, Tabler
+- [Machine-readable](stack.yaml): Versions and install commands
+
+## Deployment Targets (optional)
+
+- [Overview](targets/TARGETS.md): When to use each
+- [Electron](targets/electron.md)
+- [Tauri](targets/tauri.md)
+- [PWA](targets/pwa.md)
+
+## Guides
+
+- [Setup](guides/new-project-setup.md)
+- [Versions](guides/package-versions.md)
+- [Structure](guides/project-structure.md)
+- [Migration](guides/migration-paths.md)
+
+## Rationale
+
+- [Why React](rationale/why-react.md)
+- [Why Vite](rationale/why-vite.md)
+- [Why Vitest](rationale/why-vitest.md)
+- [Why TanStack](rationale/why-tanstack.md)
+- [Why TanStack Router](rationale/why-tanstack-router.md)
+- [Why Radix](rationale/why-radix.md)
+- [Why shadcn/ui](rationale/why-shadcn-ui.md)
+- [Why Tailwind](rationale/why-tailwind.md)
+- [Why RHF + Zod](rationale/why-rhf-zod.md)
+- [Why date-fns](rationale/why-date-fns.md)
+- [Why Lexical](rationale/why-lexical-over-prosemirror.md)
+- [Electron vs Tauri](rationale/electron-vs-tauri.md)
+
+## Optional
+
+- [Roadmap](backlog/ROADMAP.md)
+- [Under Evaluation](backlog/under-evaluation.md)
+- [Deprecated](backlog/deprecated.md)

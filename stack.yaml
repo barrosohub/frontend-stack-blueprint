@@ -1,0 +1,165 @@
+# frontend-stack-blueprint/stack.yaml
+# Machine-readable stack manifest for LLMs and tooling
+# This file is the single source of truth for versions.
+
+schema_version: "1.0"
+blueprint_version: "1.1.0"
+updated: "2026-02-28"
+
+core:
+  typescript:
+    min: ">=5.9.0"
+    current: "5.9.3"
+    install: "typescript"
+  react:
+    min: ">=19.2.0"
+    current: "19.2.4"
+    install: "react react-dom"
+    types: "@types/react @types/react-dom"
+  routing:
+    default: "tanstack-router"
+    alternative: "react-router"
+    tanstack_router:
+      min: ">=1.0.0"
+      install: "@tanstack/react-router @tanstack/router-devtools"
+    react_router:
+      min: ">=7.1.0"
+      install: "react-router"
+
+build:
+  vite:
+    min: ">=7.0.0"
+    current: "7.3.1"
+    install: "vite"
+    plugins: "@vitejs/plugin-react"
+    node_requires: ">=20.19.0 || >=22.12.0"
+
+test:
+  vitest:
+    min: ">=3.2.0"
+    recommended: ">=4.0.0"
+    install: "vitest @testing-library/react @testing-library/jest-dom"
+
+quality:
+  husky:
+    install: "husky"
+    init: "npx husky init"
+  lint_staged:
+    install: "lint-staged"
+  eslint:
+    install: "eslint @eslint/js typescript-eslint"
+  prettier:
+    install: "prettier"
+
+ui:
+  radix:
+    install: "@radix-ui/react-dialog @radix-ui/react-popover @radix-ui/react-select @radix-ui/react-tabs"
+    note: "Install primitives individually as needed"
+  shadcn_ui:
+    status: "recommended"
+    init: "npx shadcn@latest init"
+    note: "Copy-paste components, not an npm dependency"
+  floating_ui:
+    install: "@floating-ui/react"
+  embla_carousel:
+    install: "embla-carousel-react"
+  cmdk:
+    install: "cmdk"
+
+styling:
+  tailwind:
+    min: ">=4.0.0"
+    install: "tailwindcss @tailwindcss/vite"
+  clsx:
+    install: "clsx"
+    note: "Always used with tailwind-merge via cn() helper"
+  tailwind_merge:
+    install: "tailwind-merge"
+    note: "Resolves Tailwind class conflicts"
+  motion:
+    install: "motion"
+    note: "Successor to framer-motion. Import from 'motion/react'"
+
+forms:
+  react_hook_form:
+    install: "react-hook-form"
+  zod:
+    install: "zod @hookform/resolvers"
+
+dates:
+  date_fns:
+    min: ">=4.1.0"
+    install: "date-fns"
+  date_fns_tz:
+    install: "@date-fns/tz"
+    note: "First-class timezone support via TZDate (date-fns v4+)"
+
+state:
+  zustand:
+    status: "core"
+    install: "zustand"
+    note: "Primary client state manager. Lightweight, minimal boilerplate."
+  tanstack_store:
+    status: "under-evaluation"
+    install: "@tanstack/store @tanstack/react-store"
+    note: "Alpha (v0.x). Not GA yet. When v1 ships, TanStack Store becomes the priority state manager, replacing Zustand."
+  tanstack_query:
+    min: ">=5.60.0"
+    install: "@tanstack/react-query @tanstack/react-query-devtools"
+
+content:
+  lexical:
+    status: "primary"
+    install: "lexical @lexical/react"
+  prosemirror:
+    status: "fallback"
+    install: "prosemirror-state prosemirror-view prosemirror-model"
+  shiki:
+    install: "shiki"
+
+i18n:
+  formatjs:
+    install: "react-intl"
+
+observability:
+  sentry:
+    install: "@sentry/react"
+  opentelemetry:
+    install: "@opentelemetry/api @opentelemetry/sdk-trace-web"
+  statsig:
+    install: "@statsig/react-bindings"
+
+icons:
+  default: "lucide"
+  lucide:
+    install: "lucide-react"
+  phosphor:
+    install: "@phosphor-icons/react"
+  tabler:
+    install: "@tabler/icons-react"
+
+targets:
+  electron:
+    min: ">=33.0.0"
+    install: "electron"
+    tooling: "@electron-forge/cli"
+  tauri:
+    min: ">=2.10.0"
+    note: "Requires Rust toolchain"
+  pwa:
+    install: "vite-plugin-pwa"
+
+banned:
+  - { name: "any (type)", reason: "Use unknown + type guards" }
+  - { name: "redux", reason: "Use Zustand" }
+  - { name: "mobx", reason: "Use Zustand" }
+  - { name: "styled-components", reason: "Use Tailwind CSS" }
+  - { name: "emotion", reason: "Use Tailwind CSS" }
+  - { name: "css-in-js (any)", reason: "Use Tailwind CSS" }
+  - { name: "jest", reason: "Use Vitest" }
+  - { name: "moment", reason: "Use date-fns" }
+  - { name: "dayjs", reason: "Use date-fns" }
+  - { name: "formik", reason: "Use React Hook Form + Zod" }
+  - { name: "yup", reason: "Use Zod" }
+  - { name: "class components", reason: "Use functional components" }
+  - { name: "deep relative imports", reason: "Use @/* path aliases" }

@@ -1,0 +1,245 @@
+FRONTEND STACK BLUEPRINT v1.1.0 (2026-02-28)
+Agnostic — applies to ANY frontend project.
+Repository: https://github.com/barrosohub/frontend-stack-blueprint
+Audience: external coding agents consuming this repo as stack reference.
+Local maintenance protocol: .claude/skills/blueprint-maintenance/SKILL.md
+
+================================================================================
+STACK
+================================================================================
+
+LANGUAGE & RUNTIME:
+  TypeScript ≥5.9 (strict mode, no `any`, use unknown + type guards)
+  React ≥19.2 (functional components only, no class components)
+  Node.js >=20.19 or >=22.12 (required by Vite 7)
+
+ROUTING:
+  TanStack Router ≥1 (default, type-safe routing)
+  React Router ≥7.1 (alternative, for teams already using it or SSR/Remix)
+  → If not specified by developer, use TanStack Router
+  → If ambiguous, ASK the developer
+
+BUILD & TEST:
+  Vite ≥7 (dev server + production build)
+  Vitest ≥3.2 (unit + integration testing, 4.x recommended)
+  Husky + lint-staged (pre-commit gate, mandatory on all projects)
+  ESLint (flat config) + Prettier (formatting)
+
+UI COMPONENTS (headless):
+  Radix UI (Dialog, Popover, Select, Tabs, etc.)
+  Floating UI (tooltip/popover positioning)
+  Embla Carousel (carousels and sliders)
+  cmdk (command palette ⌘K)
+
+UI COMPONENTS (pre-styled, recommended):
+  shadcn/ui (Radix + Tailwind, copy-paste not npm)
+  → Suggested by default for 80%+ of projects
+
+FORMS & VALIDATION:
+  React Hook Form (form state management)
+  Zod (schema validation with type inference)
+  @hookform/resolvers/zod (integration bridge)
+  → Required for any form with 2+ fields
+
+DATES & TIME:
+  date-fns ≥4.1 (tree-shakable, immutable)
+  @date-fns/tz (timezone via TZDate, built-in since v4)
+  → No Moment.js, no Luxon, no Day.js
+
+STYLING & ANIMATION:
+  Tailwind CSS ≥4 (utility-first CSS)
+  clsx (conditional class concatenation)
+  tailwind-merge (resolves Tailwind class conflicts)
+  → cn() utility required: twMerge(clsx(inputs))
+  Motion (declarative animations and gestures)
+  → Package: motion (successor to framer-motion)
+  → Import: import { motion } from 'motion/react'
+  → No CSS-in-JS ever (no styled-components, no emotion)
+
+STATE & DATA:
+  Zustand (client state, lightweight, minimal boilerplate)
+  → Primary client state manager. Battle-tested, ~1KB bundle.
+  → Install: npm install zustand
+  → TanStack Store replaces Zustand when it reaches v1 GA.
+  TanStack Query ≥5.60 (server state, cache, fetching)
+  → No Redux, no MobX
+
+CONTENT & EDITING:
+  Lexical (rich text, primary — Meta-backed)
+  ProseMirror (rich text, fallback for complex collab only)
+  Shiki (syntax highlighting with themes)
+
+INTERNATIONALIZATION:
+  Format.js (runtime formatting: numbers, dates, plurals)
+  react-intl (React bindings for Format.js)
+
+OBSERVABILITY:
+  Sentry (error tracking and crash reporting)
+  OpenTelemetry (distributed tracing and metrics)
+  Statsig (feature flags and experimentation)
+
+ICONS:
+  Lucide (default — clean, minimal)
+  Phosphor (alternative — flexible, 6 weights)
+  Tabler (alternative — stroke-based, 5400+ icons)
+  → If dev doesn't specify, use Lucide
+
+================================================================================
+ARCHITECTURE (MANDATORY — these are RULES, not suggestions)
+================================================================================
+
+1. MODULAR BY FEATURE
+   Structure by feature/domain, NEVER by file type.
+   Each feature: components, hooks, utils, types, tests — co-located.
+   Barrel files (index.ts) with named exports per module.
+   Path aliases: @/* → src/*. Never ../../../
+
+2. STRONG TYPING
+   strict: true mandatory. No `any` ever → use `unknown` + type guards.
+   Props MUST have explicit interfaces/types.
+   Return types MUST be explicit.
+   Discriminated unions for complex states.
+   Zod for ALL external data validation.
+
+3. COMPOSITION OVER INHERITANCE
+   Components accept children, render props, or slots.
+   Hooks as primary logic reuse mechanism.
+   Configurations externalized (never hardcoded).
+
+4. DRY — Don't Repeat Yourself
+   Pattern 2+ times → extract to util/hook/component.
+   Business logic NEVER duplicated.
+   Constants and configs in dedicated files.
+   BUT: don't abstract prematurely.
+
+5. KISS — Keep It Simple
+   Simplest solution that solves the problem.
+   Components: single responsibility, max ~150 lines.
+   Functions: single responsibility, max ~30 lines.
+   Self-documenting names.
+
+6. YAGNI — You Aren't Gonna Need It
+   Don't build for the future.
+   Don't add libs "just in case".
+   Don't create abstractions without concrete need.
+   Implement minimum. Refactor when need arises.
+
+7. REACT COMPILER
+   Use when available and stable.
+   Eliminates need for useMemo, useCallback, React.memo.
+   Until adopted: manual memoization only when measurable.
+
+================================================================================
+UNIVERSAL GOVERNANCE PROTOCOL (TECHNOLOGY-AGNOSTIC)
+================================================================================
+
+1. SINGLE SOURCE OF TRUTH
+   If rules or versions appear in multiple files, one canonical artifact
+   must govern all others. In this repo, use stack.yaml as canonical.
+
+2. NO MULTI-SURFACE DRIFT
+   When changing a rule, update every agent entry point in the same
+   change set. Never leave partial sync.
+
+3. DETERMINISTIC TERMINOLOGY
+   Use one canonical term per concept across all files. Avoid synonyms
+   that can confuse agents and automation.
+
+4. EXPLICIT TEMPORALITY
+   Use concrete versions and dates for temporal claims. Avoid ambiguous
+   "latest/current" language without a timestamp.
+
+5. TRACEABLE DECISIONS
+   Never silently remove consolidated decisions. Deprecate with rationale
+   and migration path.
+
+6. AMBIGUOUS CONTEXT
+   If requirements are conflicting or unclear, ask the developer instead
+   of guessing.
+
+================================================================================
+RULES FOR AGENTS
+================================================================================
+
+1. Structure by features — never components/, hooks/ at root
+2. Type everything — explicit types on functions, hooks, components, state
+3. Extract logic — zero business logic inline in components
+4. **Name with intention** — `useAuthSession` not `useAuth`
+5. **Clean exports** — barrel files with named exports
+6. **Don't install without need** — native JS/TS solves it? Don't add a lib
+7. **No empty abstractions** — no wrappers that only delegate
+8. **Test** — Vitest on every module (hooks and utils at minimum)
+9. **Validate inputs** — external data ALWAYS with Zod
+10. **Handle errors** — Error Boundaries, try/catch, NEVER silent fail
+11. **Use cn()** — always combine Tailwind classes with cn(), never template literals
+12. **Use path aliases** — imports with `@/features/...`, never `../../../`
+13. **Run verification gate** — before final handoff, run typecheck, test, lint, build
+14. **Resolve conflicts canonically** — if docs conflict, follow stack.yaml and report drift
+
+================================================================================
+BANNED TECHNOLOGIES
+================================================================================
+
+any (type) → Use unknown + type guards
+redux → Use Zustand
+mobx → Use Zustand
+styled-components → Use Tailwind CSS
+emotion → Use Tailwind CSS
+jest → Use Vitest
+moment → Use date-fns
+dayjs → Use date-fns
+formik → Use React Hook Form + Zod
+yup → Use Zod
+css-in-js (any) → Use Tailwind CSS
+class components → Use functional components
+deep relative imports → Use @/* path aliases
+
+================================================================================
+DEPLOYMENT TARGETS (optional — only when project requires)
+================================================================================
+
+1. ALWAYS start with the stack core
+2. ONLY consult targets/ if the project requires it
+3. Project doesn't specify where it runs → browser by default
+4. Project asks for desktop/mobile/PWA → consult relevant target
+5. Ambiguous context → ASK the developer. NEVER guess.
+
+BROWSER (default):
+  No extra config needed. Stack core is sufficient.
+
+ELECTRON (desktop — JS-only team, max compatibility):
+  + Electron ≥33 + Forge + electron-updater
+  Bundle: 80–150 MB | RAM: 200–300 MB | Startup: 1–2s
+
+TAURI (desktop — lightweight, future mobile):
+  + Tauri ≥2.10 + Rust + Tauri plugins
+  Bundle: 3–10 MB | RAM: 30–40 MB | Startup: <500ms
+
+PWA (web with offline):
+  + vite-plugin-pwa
+
+================================================================================
+QUALITY GATE
+================================================================================
+
+Pre-commit (Husky + lint-staged):
+  *.{ts,tsx} → eslint --fix → prettier --write
+  *.{json,md,css} → prettier --write
+
+Code with lint errors NEVER enters the repo.
+
+================================================================================
+cn() UTILITY (required in every project)
+================================================================================
+
+// src/shared/utils/cn.ts
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]): string {
+  return twMerge(clsx(inputs));
+}
+
+================================================================================
+VERSION: 1.1.0 | DATE: 2026-02-28 | SCHEMA: stack.yaml
+================================================================================

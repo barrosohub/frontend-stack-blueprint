@@ -1,0 +1,80 @@
+---
+description: Frontend Stack Blueprint canonical rules for AI coding agents
+alwaysApply: true
+---
+
+# Frontend Stack Blueprint
+
+> Canonical frontend stack for any new project. Platform-agnostic.
+> This file defines the technology decisions and rules an AI coding
+> agent MUST follow when generating frontend code.
+
+## Stack
+
+- TypeScript ≥5.9 (strict mode, no `any`)
+- React ≥19.2 (functional components only)
+- TanStack Router ≥1 (default) or React Router ≥7.1
+- Vite ≥7 (requires Node.js >=20.19 or >=22.12)
+- Vitest ≥3.2 (4.x recommended)
+- Husky + lint-staged + ESLint + Prettier
+- Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
+- Tailwind CSS ≥4 + clsx + tailwind-merge (cn() utility required)
+- Motion (formerly Framer Motion) — `import from 'motion/react'`
+- React Hook Form + Zod
+- date-fns ≥4.1 (+@date-fns/tz)
+- Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
+- Lexical (primary) · ProseMirror (fallback) · Shiki
+- Format.js · react-intl
+- Sentry · OpenTelemetry · Statsig
+- Lucide (default icon library)
+
+## Architecture (MANDATORY)
+
+- Structure by feature/domain, NEVER by file type
+- Composition over inheritance — hooks for logic reuse
+- Strong typing: strict mode, no `any`, explicit types everywhere
+- DRY: extract patterns at 2+ repetitions
+- KISS: components ≤150 lines, functions ≤30 lines
+- YAGNI: no speculative features or abstractions
+- React Compiler: use when available
+
+## Universal Execution Protocol (technology-agnostic)
+
+- Define one canonical source of truth for rules and versions
+- Keep manifests/config and docs synchronized after any rule change
+- Classify changes by impact/risk before editing
+- Never silently remove consolidated decisions; deprecate with migration path
+- Use explicit dates and absolute versions for temporal claims
+- If context is ambiguous, ask the developer instead of guessing
+
+## Rules
+
+- ALWAYS setup Husky + lint-staged on project init
+- ALWAYS write tests (Vitest) for hooks and utils
+- ALWAYS run verification gate before merge (`typecheck`, `test`, `lint`, `build`)
+- ALWAYS structure code by feature (`src/features/`)
+- ALWAYS use cn() for conditional Tailwind classes
+- ALWAYS use `@/*` path aliases, never ../../../
+- ALWAYS use React Hook Form + Zod for forms (2+ fields)
+- ALWAYS use Radix/shadcn before custom components
+- ALWAYS use Zustand for client state
+- NEVER use `any` — use `unknown` + type guards
+- NEVER put business logic in components
+- NEVER install packages outside this stack without asking
+
+## Banned Technologies
+
+redux, mobx, styled-components, emotion, jest, moment, dayjs,
+formik, yup, class components, CSS-in-JS, relative deep imports
+
+## Deployment Targets (optional)
+
+Browser → default (no extra config)
+Desktop → Electron ≥33 or Tauri ≥2.10 (see targets/)
+PWA → vite-plugin-pwa (see targets/pwa.md)
+
+## Deep Dive
+
+See stack/ directory for detailed specs per layer.
+See stack.yaml for machine-readable version manifest.
+See guides/new-project-setup.md for bootstrapping.
