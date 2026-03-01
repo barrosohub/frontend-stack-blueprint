@@ -5,6 +5,20 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] — 2026-03-01
+
+### Added
+
+- **Governance:** `Official CLI-First` policy across core docs and all agent entry points
+- **Safety:** `Impact Preflight` mandatory checks before official CLI execution
+- **Guidance:** explicit preflight checklist in `guides/new-project-setup.md`
+
+### Changed
+
+- **shadcn/ui behavior:** agents must use official CLI baseline setup (`npx shadcn@latest init`) and must not manually recreate CLI-generated base files
+- **Agent contracts:** added confirmation requirement when Impact Preflight indicates non-trivial or uncertain risk
+- **Release metadata:** blueprint bumped to `1.1.1` with date `2026-03-01`
+
 ## [1.1.0] — 2026-02-28
 
 ### Changed

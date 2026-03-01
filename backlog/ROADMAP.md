@@ -1,17 +1,18 @@
 ---
 title: "Roadmap"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.1.1"
+updated: "2026-03-01"
 tier: 4
 ---
 
 # Roadmap
 
-## Current: v1.1.0 (2026-02-28)
+## Current: v1.1.1 (2026-03-01)
 
 The complete frontend stack blueprint is defined and documented.
 Zustand is the primary client state manager. TanStack Store succession
 plan is in place for when it reaches v1 GA.
+Official CLI-First and Impact Preflight are now mandatory governance rules.
 
 ## Planned
 

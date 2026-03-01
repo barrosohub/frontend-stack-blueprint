@@ -1,7 +1,7 @@
 ---
 title: "UI Components"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.1.1"
+updated: "2026-03-01"
 tier: 1
 ---
 
@@ -89,6 +89,10 @@ out of the box.
 
 - Suggest shadcn/ui **by default** for new projects
 - If developer declines → fall back to raw Radix + Tailwind
+- Follow **Official CLI-First**: use official shadcn CLI for base setup
+- Run **Impact Preflight** before CLI (overwrite + structural compatibility checks)
+- If impact is non-trivial or uncertain, ask developer confirmation before running CLI
+- Never manually recreate shadcn base setup that `npx shadcn@latest init` can generate
 - NEVER install a competing UI library (Material UI, Ant Design, Chakra)
 
 **Setup:**

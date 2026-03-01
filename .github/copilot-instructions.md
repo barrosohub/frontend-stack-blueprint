@@ -28,15 +28,20 @@ frontend stack for any new project. For the complete reference, see:
 12. Use Radix/shadcn primitives before building custom components
 13. Write tests with Vitest for hooks and utils
 14. Never install packages outside this stack without asking
+15. Apply **Official CLI-First** when official docs recommend a CLI
+16. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
 
 ## Universal Governance Protocol (technology-agnostic)
 
 1. Define one source of truth for rules and versions, then follow it.
 2. Keep machine-readable config and human docs synchronized.
 3. Classify change impact/risk before implementation.
-4. Never silently remove consolidated decisions; deprecate with migration path.
-5. Use explicit dates and absolute versions for temporal claims.
-6. Run verification gate before merge (`typecheck`, `test`, `lint`, `build`).
+4. Apply **Official CLI-First** when official docs recommend a CLI.
+5. Run **Impact Preflight** before any official CLI execution.
+6. If Impact Preflight is non-trivial or uncertain, ask developer confirmation before running CLI.
+7. Never silently remove consolidated decisions; deprecate with migration path.
+8. Use explicit dates and absolute versions for temporal claims.
+9. Run verification gate before merge (`typecheck`, `test`, `lint`, `build`).
 
 ## Banned
 

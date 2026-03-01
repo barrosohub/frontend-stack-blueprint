@@ -28,6 +28,8 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - ALWAYS keep machine-readable manifests and human docs synchronized
 - ALWAYS classify changes by impact/risk before implementation
 - ALWAYS use explicit dates and absolute versions for temporal claims
+- ALWAYS apply **Official CLI-First** when official docs recommend a CLI
+- ALWAYS run **Impact Preflight** before any official CLI execution
 - NEVER silently remove consolidated decisions — deprecate with rationale + migration path
 - NEVER create multiple terms for the same rule — keep canonical terminology
 - If context is ambiguous or conflicting, ASK before implementing
@@ -42,6 +44,8 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
 - ALWAYS use Radix/shadcn primitives before building custom
+- ALWAYS prefer official docs-recommended CLI over manual scaffolding
+- ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use TanStack Query for async/server state
 - ALWAYS use Zustand for client state
 - NEVER use `any` — use `unknown` + type guards

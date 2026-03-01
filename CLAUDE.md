@@ -1,4 +1,4 @@
-# Frontend Stack Blueprint v1.1.0
+# Frontend Stack Blueprint v1.1.1
 
 This repository defines the canonical frontend stack for any new
 frontend project. It is platform-agnostic — the same stack applies
@@ -41,6 +41,8 @@ whether the project targets browser, desktop, or anything else.
 - Define one canonical source of truth for rules and versions.
 - Keep machine-readable config/manifests and narrative docs synchronized.
 - Classify change impact/risk before editing.
+- Apply **Official CLI-First** when official docs recommend a CLI.
+- Run **Impact Preflight** before any official CLI execution.
 - Never silently remove consolidated decisions; deprecate with rationale and migration path.
 - Use explicit dates and absolute versions when documenting temporal changes.
 - Keep terminology canonical and stable across all agent entry points.
@@ -56,6 +58,8 @@ whether the project targets browser, desktop, or anything else.
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
 - ALWAYS use Radix primitives (shadcn/ui) before building custom
+- ALWAYS prefer official docs-recommended CLI over manual scaffolding
+- ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use TanStack Query for async/server state
 - ALWAYS use Zustand for client state
 - NEVER use `any` — use `unknown` + type guards

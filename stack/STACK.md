@@ -1,7 +1,7 @@
 ---
 title: "Frontend Stack Blueprint — Complete Manifesto"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.1.1"
+updated: "2026-03-01"
 tier: 1
 tokens: "~3000"
 ---
@@ -85,6 +85,21 @@ Each layer has its own document:
 - [i18n](i18n.md) — Format.js + react-intl
 - [Observability](observability.md) — Sentry, OTel, Statsig
 - [Icons](icons.md) — Lucide, Phosphor, Tabler
+
+## Installation Policy (Official CLI-First + Impact Preflight)
+
+- **Official CLI-First:** if an official CLI exists and official docs
+  recommend it, agents MUST prefer that CLI over manual scaffolding.
+- **Impact Preflight:** before running any official CLI, agents MUST
+  evaluate:
+  - files likely to be created or modified
+  - overwrite risk
+  - structural conflicts with current architecture rules
+  - compatibility with current config/tooling scripts
+- If impact is non-trivial or uncertain, agents MUST ask the developer
+  for confirmation before running the CLI.
+- Never manually recreate baseline setup that an official CLI already
+  generates (example: shadcn/ui base setup).
 
 ## Banned Technologies
 

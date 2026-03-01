@@ -1,7 +1,7 @@
 ---
 title: "Architecture Principles"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.1.1"
+updated: "2026-03-01"
 tier: 1
 scope: "mandatory"
 ---
@@ -118,6 +118,21 @@ const [state, setState] = useState<any>(null);
 - The compiler optimizes automatically — cleaner code, less boilerplate
 - Until adopted: manual memoization only when measurable benefit exists
 
+## 8. Official CLI-First + Impact Preflight
+
+- **Official CLI-First:** if an official CLI exists and official docs
+  recommend it for setup/installation, agents MUST prefer that CLI
+  over manual scaffolding
+- **Impact Preflight (mandatory before CLI):**
+  - Evaluate files likely to be created/modified
+  - Evaluate overwrite risk
+  - Evaluate structural conflicts with current architecture
+  - Evaluate compatibility with current configs/scripts
+- If impact is non-trivial or uncertain, agents MUST ask the developer
+  for confirmation before running the CLI
+- Never manually recreate baseline setup that an official CLI already
+  generates (example: shadcn/ui base init)
+
 ## Rules for Agents (Summary)
 
 1. **Structure by features** — never `components/`, `hooks/` at root
@@ -132,6 +147,8 @@ const [state, setState] = useState<any>(null);
 10. **Handle errors** — Error Boundaries, try/catch, NEVER silent fail
 11. **Use cn()** — always combine Tailwind classes with `cn()`, never template literals
 12. **Use path aliases** — imports with `@/features/...`, never `../../../`
+13. **Official CLI-First** — prefer official docs-recommended CLI over manual setup
+14. **Impact Preflight** — evaluate overwrite/structure/config risk before CLI; if uncertain, ask the developer first
 
 ## Quality Gate: Husky Pre-Commit
 

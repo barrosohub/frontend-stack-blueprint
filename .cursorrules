@@ -42,6 +42,8 @@
 - Define one canonical source of truth for rules and versions
 - Keep manifests/config and docs synchronized after any rule change
 - Classify changes by impact/risk before editing
+- Apply **Official CLI-First** when official docs recommend a CLI
+- Run **Impact Preflight** before any official CLI execution
 - Never silently remove consolidated decisions; deprecate with migration path
 - Use explicit dates and absolute versions for temporal claims
 - If context is ambiguous, ask the developer instead of guessing
@@ -56,6 +58,8 @@
 - ALWAYS use @/* path aliases, never ../../../
 - ALWAYS use React Hook Form + Zod for forms (2+ fields)
 - ALWAYS use Radix/shadcn before custom components
+- ALWAYS prefer official docs-recommended CLI over manual scaffolding
+- ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use Zustand for client state
 - NEVER use `any` — use `unknown` + type guards
 - NEVER put business logic in components

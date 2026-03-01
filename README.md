@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -94,6 +94,16 @@ This repository provides multiple entry points optimized for different coding ag
 **Cursor** — The repo includes `.cursor/rules/*.mdc` (modern) and `.cursorrules` (legacy). Cursor auto-reads project rules from `.cursor/rules/`.
 
 **Any Agent** — Point the agent to `llms-full.txt` for complete context.
+
+### Agent Installation Policy
+
+- **Official CLI-First:** if official docs recommend a CLI, agents must
+  prefer that CLI over manual scaffolding.
+- **Impact Preflight:** before any official CLI execution, agents must
+  evaluate file changes, overwrite risk, structural conflicts, and config
+  compatibility.
+- If impact is non-trivial or uncertain, agents must ask for developer
+  confirmation before running the CLI.
 
 ---
 

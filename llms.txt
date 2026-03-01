@@ -17,6 +17,9 @@
 - Keep one canonical source of truth for rules and versions.
 - Keep machine-readable artifacts and narrative docs synchronized.
 - Classify changes by impact/risk before implementation.
+- Apply **Official CLI-First** when official docs recommend a CLI.
+- Run **Impact Preflight** before any official CLI execution.
+- If Impact Preflight is non-trivial or uncertain, ask developer confirmation before running CLI.
 - Never silently remove consolidated decisions; deprecate with migration path.
 - Use explicit dates and absolute versions for temporal claims.
 - If context is ambiguous, ask the developer instead of guessing.

@@ -1,7 +1,7 @@
 ---
 title: "New Project Setup"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.1.1"
+updated: "2026-03-01"
 tier: 2
 ---
 
@@ -124,14 +124,28 @@ src/
 
 See [guides/project-structure.md](project-structure.md) for full details.
 
-## Step 9: shadcn/ui (Recommended)
+## Step 9: Official CLI-First + Impact Preflight
+
+Before running any official CLI, apply this mandatory checklist:
+
+1. Confirm the official docs recommend the CLI for setup/installation
+2. Identify files likely to be created/modified
+3. Evaluate overwrite risk on existing files/config
+4. Evaluate structural conflicts with blueprint architecture rules
+5. Evaluate compatibility with current scripts/tooling config
+6. If impact is non-trivial or uncertain, ask developer confirmation first
+
+## Step 10: shadcn/ui (Recommended)
+
+Use the official CLI for baseline setup. Do not manually recreate base
+files the CLI already generates.
 
 ```bash
 npx shadcn@latest init
 npx shadcn@latest add button input dialog
 ```
 
-## Step 10: Verify Setup
+## Step 11: Verify Setup
 
 ```bash
 npm run dev        # Should start without errors
