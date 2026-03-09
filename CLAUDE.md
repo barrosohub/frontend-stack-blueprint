@@ -1,4 +1,4 @@
-# Frontend Stack Blueprint v1.1.1
+# Frontend Stack Blueprint v1.2.0
 
 This repository defines the canonical frontend stack for any new
 frontend project. It is platform-agnostic — the same stack applies
@@ -17,6 +17,7 @@ whether the project targets browser, desktop, or anything else.
 - **Styling:** Tailwind CSS ≥4 + clsx + tailwind-merge (no CSS-in-JS ever)
 - **Animations:** Motion (formerly Framer Motion) — `import from 'motion/react'`
 - **Forms:** React Hook Form + Zod
+- **Authentication (optional):** Better Auth ≥1
 - **Dates:** date-fns ≥4.1 (+@date-fns/tz for timezones)
 - **State:** Zustand (no Redux, MobX) — TanStack Store replaces Zustand at v1 GA
 - **Server State:** TanStack Query ≥5.60
@@ -58,6 +59,7 @@ whether the project targets browser, desktop, or anything else.
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
 - ALWAYS use Radix primitives (shadcn/ui) before building custom
+- ALWAYS use Better Auth ≥1 when the project needs authentication
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use TanStack Query for async/server state
@@ -78,6 +80,7 @@ The stack above works as-is for browser projects.
 ## Deep Dive
 
 - Full spec: @stack/STACK.md
+- Authentication: @stack/auth.md
 - Architecture: @stack/architecture.md
 - Build & test: @stack/build-and-test.md
 - Machine-readable versions: @stack.yaml

@@ -21,15 +21,16 @@ frontend stack for any new project. For the complete reference, see:
 5. Use `@/*` path aliases, never `../../../`
 6. Use `cn()` utility for conditional Tailwind classes
 7. Use React Hook Form + Zod for forms with 2+ fields
-8. Use TanStack Query for server state
-9. Use Zustand for client state (no Redux, MobX). TanStack Store replaces Zustand at v1 GA
-10. Use Motion (import from `motion/react`) for animations
-11. Use date-fns ≥4.1 + @date-fns/tz for dates and timezones (no Moment, no Day.js)
-12. Use Radix/shadcn primitives before building custom components
-13. Write tests with Vitest for hooks and utils
-14. Never install packages outside this stack without asking
-15. Apply **Official CLI-First** when official docs recommend a CLI
-16. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
+8. If the project needs authentication, use Better Auth ≥1; do not assume auth is mandatory
+9. Use TanStack Query for server state
+10. Use Zustand for client state (no Redux, MobX). TanStack Store replaces Zustand at v1 GA
+11. Use Motion (import from `motion/react`) for animations
+12. Use date-fns ≥4.1 + @date-fns/tz for dates and timezones (no Moment, no Day.js)
+13. Use Radix/shadcn primitives before building custom components
+14. Write tests with Vitest for hooks and utils
+15. Never install packages outside this stack without asking
+16. Apply **Official CLI-First** when official docs recommend a CLI
+17. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
 
 ## Universal Governance Protocol (technology-agnostic)
 

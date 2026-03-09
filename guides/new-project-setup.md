@@ -1,7 +1,7 @@
 ---
 title: "New Project Setup"
-version: "1.1.1"
-updated: "2026-03-01"
+version: "1.2.0"
+updated: "2026-03-09"
 tier: 2
 ---
 
@@ -152,6 +152,16 @@ npm run dev        # Should start without errors
 npm run build      # Should build without errors
 npx vitest --run   # Tests should pass
 ```
+
+## Step 12: If the Project Needs Authentication
+
+Use Better Auth as the default auth layer only when the project needs login/session management.
+
+- See [stack/auth.md](../stack/auth.md) for the canonical auth rules
+- Install `better-auth` only in projects that actually need authentication
+- Better Auth requires a server-side runtime/auth handler; do not add it to purely static apps
+- If client and server are separate, install Better Auth in both parts as directed by the official docs
+- Apply **Official CLI-First + Impact Preflight** before any Better Auth CLI command
 
 ## Optional: Deployment Target
 

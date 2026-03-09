@@ -1,7 +1,7 @@
 ---
 title: "Frontend Stack Blueprint — Complete Manifesto"
-version: "1.1.1"
-updated: "2026-03-01"
+version: "1.2.0"
+updated: "2026-03-09"
 tier: 1
 tokens: "~3000"
 ---
@@ -19,10 +19,11 @@ This stack is the **reusable base** for any frontend project. It defines:
 1. **How to write** — language, typing, code principles
 2. **How to build UI** — framework, components, styling, animation
 3. **How to manage state and data** — client state, server state, cache
-4. **How to build and test** — build tool, test runner, quality gates
-5. **How to handle content** — rich text, syntax, i18n
-6. **How to observe** — errors, tracing, feature flags
-7. **How to extend** — icons and future complements
+4. **How to authenticate** — session lifecycle and auth boundary when needed
+5. **How to build and test** — build tool, test runner, quality gates
+6. **How to handle content** — rich text, syntax, i18n
+7. **How to observe** — errors, tracing, feature flags
+8. **How to extend** — icons and future complements
 
 What this stack **does NOT define** (project-dependent):
 
@@ -54,6 +55,7 @@ Those are **deployment targets** — optional layers in `targets/`.
 | Animation         | Motion (`motion`)                       | latest  | ✅ Core               |
 | Forms             | React Hook Form                         | latest  | ✅ Core               |
 | Validation        | Zod                                     | latest  | ✅ Core               |
+| Authentication (optional) | Better Auth                    | ≥1.0    | ⭐ Recommended when authentication is needed |
 | Dates             | date-fns                                | ≥4.1    | ✅ Core               |
 | Dates (tz)        | @date-fns/tz                            | latest  | ✅ Core (when needed) |
 | Client State      | Zustand                                 | latest  | ✅ Core               |
@@ -78,6 +80,7 @@ Each layer has its own document:
 - [Build & Test](build-and-test.md) — Vite, Vitest, Quality
 - [UI](ui.md) — Radix, shadcn/ui, Floating UI, Embla, cmdk
 - [Forms](forms.md) — React Hook Form + Zod
+- [Authentication](auth.md) — Better Auth when login/session management is required
 - [Styling](styling.md) — Tailwind, cn(), Motion
 - [State & Data](state-and-data.md) — Zustand + TanStack Query
 - [Dates](dates.md) — date-fns + timezone handling

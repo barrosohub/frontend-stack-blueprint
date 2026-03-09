@@ -1,4 +1,4 @@
-FRONTEND STACK BLUEPRINT v1.1.1 (2026-03-01)
+FRONTEND STACK BLUEPRINT v1.2.0 (2026-03-09)
 Agnostic — applies to ANY frontend project.
 Repository: https://github.com/barrosohub/frontend-stack-blueprint
 Audience: external coding agents consuming this repo as stack reference.
@@ -42,6 +42,12 @@ FORMS & VALIDATION:
   Zod (schema validation with type inference)
   @hookform/resolvers/zod (integration bridge)
   → Required for any form with 2+ fields
+
+AUTHENTICATION (OPTIONAL):
+  Better Auth ≥1 (recommended when the project needs login/session management)
+  → Requires a server-side runtime and auth handler; not mandatory for public/static apps
+  → Use the React client from `better-auth/react` and `useSession()` for auth session state
+  → Do not mirror auth session or tokens into Zustand
 
 DATES & TIME:
   date-fns ≥4.1 (tree-shakable, immutable)
@@ -188,6 +194,7 @@ RULES FOR AGENTS
 14. **Resolve conflicts canonically** — if docs conflict, follow stack.yaml and report drift
 15. **Official CLI-First** — use official docs-recommended CLI over manual scaffolding
 16. **Impact Preflight** — evaluate overwrite/structure/config risk before CLI; ask confirmation if risk is non-trivial or uncertain
+17. **Authentication when needed** — use Better Auth ≥1; do not add auth by default to projects without login
 
 ================================================================================
 BANNED TECHNOLOGIES
@@ -254,5 +261,5 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 ================================================================================
-VERSION: 1.1.1 | DATE: 2026-03-01 | SCHEMA: stack.yaml
+VERSION: 1.2.0 | DATE: 2026-03-09 | SCHEMA: stack.yaml
 ================================================================================

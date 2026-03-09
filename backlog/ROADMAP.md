@@ -1,29 +1,30 @@
 ---
 title: "Roadmap"
-version: "1.1.1"
-updated: "2026-03-01"
+version: "1.2.0"
+updated: "2026-03-09"
 tier: 4
 ---
 
 # Roadmap
 
-## Current: v1.1.1 (2026-03-01)
+## Current: v1.2.0 (2026-03-09)
 
 The complete frontend stack blueprint is defined and documented.
 Zustand is the primary client state manager. TanStack Store succession
 plan is in place for when it reaches v1 GA.
 Official CLI-First and Impact Preflight are now mandatory governance rules.
+Better Auth is now the recommended optional authentication layer.
 
 ## Planned
 
-### v1.2.0 — Quality of Life
+### v1.3.0 — Quality of Life
 
 - [ ] Add E2E testing guidance (Playwright)
 - [ ] Add accessibility testing patterns
 - [ ] Add performance budgets template
 - [ ] Expand migration paths (more legacy stack coverage)
 
-### v1.3.0 — Extended Targets
+### v1.4.0 — Extended Targets
 
 - [ ] Mobile WebView target documentation
 - [ ] React Native / Expo evaluation

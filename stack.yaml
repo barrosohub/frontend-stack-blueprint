@@ -3,8 +3,8 @@
 # This file is the single source of truth for versions.
 
 schema_version: "1.0"
-blueprint_version: "1.1.1"
-updated: "2026-03-01"
+blueprint_version: "1.2.0"
+updated: "2026-03-09"
 
 core:
   typescript:
@@ -85,6 +85,15 @@ forms:
     install: "react-hook-form"
   zod:
     install: "zod @hookform/resolvers"
+
+auth:
+  better_auth:
+    status: "recommended-optional"
+    min: ">=1.0.0"
+    current: "1.5.1"
+    install: "better-auth"
+    tooling: "@better-auth/cli"
+    note: "Recommended when a project needs authentication. Requires a server-side runtime/auth handler and is not mandatory for public or static apps without login."
 
 dates:
   date_fns:

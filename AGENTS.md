@@ -10,6 +10,7 @@ Vite ≥7 (Node.js >=20.19 or >=22.12) · Vitest ≥3.2 · Husky + lint-staged +
 Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
 Tailwind CSS ≥4 + clsx + tailwind-merge · Motion (`import from 'motion/react'`)
 React Hook Form + Zod · date-fns ≥4.1 (+@date-fns/tz)
+Authentication (optional): Better Auth ≥1
 Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
 Lexical (primary) · ProseMirror (fallback) · Shiki
 Format.js · react-intl · Sentry · OpenTelemetry · Statsig
@@ -44,6 +45,7 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
 - ALWAYS use Radix/shadcn primitives before building custom
+- ALWAYS use Better Auth ≥1 when the project needs authentication
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use TanStack Query for async/server state
@@ -65,6 +67,7 @@ Tauri → targets/tauri.md · PWA → targets/pwa.md
 ## References
 
 - Full spec: stack/STACK.md
+- Authentication: stack/auth.md
 - Architecture: stack/architecture.md
 - Versions: stack.yaml
 - New project: guides/new-project-setup.md

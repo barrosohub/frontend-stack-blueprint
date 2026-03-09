@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -48,6 +48,7 @@ A **public repository** that serves as the **single source of truth** for modern
 │  ANIMATION      Motion (`import from 'motion/react'`)        │
 │                                                              │
 │  FORMS          React Hook Form + Zod                        │
+│  AUTH (opt)     Better Auth ≥1                               │
 │  DATES          date-fns ≥4.1 (+@date-fns/tz)               │
 │  STATE          Zustand                                      │
 │  SERVER STATE   TanStack Query ≥5.60                         │
@@ -125,6 +126,7 @@ frontend-stack-blueprint/
 │   ├── build-and-test.md Vite, Vitest, Quality
 │   ├── ui.md             Radix, shadcn/ui, Floating UI
 │   ├── forms.md          RHF + Zod
+│   ├── auth.md           Better Auth (optional)
 │   ├── styling.md        Tailwind, Motion
 │   ├── state-and-data.md Zustand + TanStack Query
 │   ├── dates.md          date-fns

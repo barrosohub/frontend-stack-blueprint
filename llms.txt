@@ -32,6 +32,7 @@
 - [Build & Test](stack/build-and-test.md): Vite (Node.js >=20.19 or >=22.12), Vitest, Husky
 - [UI](stack/ui.md): Radix UI, shadcn/ui, Floating UI, Embla, cmdk
 - [Forms](stack/forms.md): React Hook Form + Zod
+- [Authentication](stack/auth.md): Better Auth ≥1 (recommended when the project needs authentication)
 - [Styling](stack/styling.md): Tailwind CSS, Motion
 - [State](stack/state-and-data.md): Zustand + TanStack Query (TanStack Store replaces Zustand at v1 GA)
 - [Dates](stack/dates.md): date-fns
@@ -66,6 +67,7 @@
 - [Why shadcn/ui](rationale/why-shadcn-ui.md)
 - [Why Tailwind](rationale/why-tailwind.md)
 - [Why RHF + Zod](rationale/why-rhf-zod.md)
+- [Why Better Auth](rationale/why-better-auth.md)
 - [Why date-fns](rationale/why-date-fns.md)
 - [Why Lexical](rationale/why-lexical-over-prosemirror.md)
 - [Electron vs Tauri](rationale/electron-vs-tauri.md)

@@ -5,6 +5,20 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] — 2026-03-09
+
+### Added
+
+- **Authentication:** Better Auth added as the recommended optional authentication layer when a project needs login/session management
+- **Stack docs:** new `stack/auth.md` Tier 1 specification for authentication boundary, React client usage, and Better Auth CLI guidance
+- **Rationale:** `rationale/why-better-auth.md` and `ADR-013` documenting the Better Auth decision
+
+### Changed
+
+- **Machine-readable manifest:** `stack.yaml` now includes `auth.better_auth` and blueprint version `1.2.0`
+- **Entry points:** synced `AGENTS.md`, `CLAUDE.md`, Cursor rules, `llms.txt`, `llms-full.txt`, Copilot instructions, and `README.md` with the new optional auth layer
+- **Setup guide:** `guides/new-project-setup.md` now includes an explicit optional authentication step without making auth part of the base install
+
 ## [1.1.1] — 2026-03-01
 
 ### Added

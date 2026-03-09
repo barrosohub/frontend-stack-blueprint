@@ -20,6 +20,7 @@ the `rationale/` directory.
 | ADR-010 | date-fns for date manipulation         | 2026-02-28 | [why-date-fns.md](rationale/why-date-fns.md)                                 |
 | ADR-011 | Lexical over ProseMirror (primary)     | 2026-02-28 | [why-lexical-over-prosemirror.md](rationale/why-lexical-over-prosemirror.md) |
 | ADR-012 | Electron vs Tauri comparison           | 2026-02-28 | [electron-vs-tauri.md](rationale/electron-vs-tauri.md)                       |
+| ADR-013 | Better Auth for optional authentication | 2026-03-09 | [why-better-auth.md](rationale/why-better-auth.md)                           |
 
 ## Principles
 

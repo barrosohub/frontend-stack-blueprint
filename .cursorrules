@@ -20,6 +20,7 @@
 - Tailwind CSS ≥4 + clsx + tailwind-merge (cn() utility required)
 - Motion (formerly Framer Motion) — `import from 'motion/react'`
 - React Hook Form + Zod
+- Authentication (optional): Better Auth ≥1
 - date-fns ≥4.1 (+@date-fns/tz)
 - Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
 - Lexical (primary) · ProseMirror (fallback) · Shiki
@@ -58,6 +59,7 @@
 - ALWAYS use @/* path aliases, never ../../../
 - ALWAYS use React Hook Form + Zod for forms (2+ fields)
 - ALWAYS use Radix/shadcn before custom components
+- ALWAYS use Better Auth ≥1 when the project needs authentication
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use Zustand for client state
