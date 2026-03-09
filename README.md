@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.4.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -38,6 +38,7 @@ A **public repository** that serves as the **single source of truth** for modern
 │  UI FRAMEWORK   React ≥19.2 (functional only)               │
 │  ROUTING        TanStack Router ≥1 (default)                │
 │                 React Router ≥7.1 (alternative)              │
+│  TOOLING        pnpm (priority) · Bun ≥1 (runtime alt)      │
 │  BUILD          Vite ≥7 (Node.js >=20.19 or >=22.12)          │
 │  TEST           Vitest ≥3.2 (4.x recommended)               │
 │  QUALITY        Husky + lint-staged + ESLint + Prettier      │
@@ -62,7 +63,8 @@ A **public repository** that serves as the **single source of truth** for modern
 │  ICONS          Lucide (default) | Phosphor | Tabler         │
 │                                                              │
 ├──────────────────────────────────────────────────────────────┤
-│  TARGETS (opt)  Browser · Electron · Tauri · PWA             │
+│  TARGETS (opt)  Browser · Cloudflare Pages · Vercel          │
+│                 Electron · Tauri · PWA                       │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -124,6 +126,7 @@ frontend-stack-blueprint/
 │   ├── STACK.md          Full manifesto
 │   ├── architecture.md   Mandatory principles
 │   ├── core.md           TypeScript, React, Routing
+│   ├── tooling.md        pnpm, Node.js, Bun
 │   ├── build-and-test.md Vite, Vitest, Quality
 │   ├── ui.md             Radix, shadcn/ui, Floating UI
 │   ├── forms.md          RHF + Zod
@@ -138,7 +141,8 @@ frontend-stack-blueprint/
 │   └── icons.md          Lucide, Phosphor, Tabler
 │
 ├── 🎯 targets/ (Tier 2 — Optional)
-│   ├── electron.md / tauri.md / pwa.md
+│   ├── cloudflare-pages.md / vercel.md
+│   └── electron.md / tauri.md / pwa.md
 │
 ├── 📖 guides/ (Tier 2)
 │   ├── new-project-setup.md
@@ -151,6 +155,8 @@ frontend-stack-blueprint/
 │   ├── cn-utility.md / zod-form-example.md
 │
 ├── 💡 rationale/ (Tier 3 — Why Each Choice)
+│   ├── why-pnpm.md / why-bun-runtime.md
+│   ├── cloudflare-pages-vs-vercel.md
 │   ├── why-neon.md / why-cloudflare-r2.md / why-resend.md
 │   └── why-*.md files for every technology
 │

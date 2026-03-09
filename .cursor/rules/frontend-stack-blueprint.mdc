@@ -14,6 +14,7 @@ alwaysApply: true
 - TypeScript ≥5.9 (strict mode, no `any`)
 - React ≥19.2 (functional components only)
 - TanStack Router ≥1 (default) or React Router ≥7.1
+- pnpm (priority package manager) · Node.js >=20.19 or >=22.12 · Bun ≥1 (runtime alternative)
 - Vite ≥7 (requires Node.js >=20.19 or >=22.12)
 - Vitest ≥3.2 (4.x recommended)
 - Husky + lint-staged + ESLint + Prettier
@@ -63,6 +64,8 @@ alwaysApply: true
 - ALWAYS use Radix/shadcn before custom components
 - ALWAYS use Better Auth ≥1 when the project needs authentication
 - ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare R2, Resend
+- ALWAYS use pnpm as the default package manager unless the developer explicitly overrides it
+- ALWAYS treat Bun as an alternative runtime only; it does not replace pnpm as package manager default
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use Zustand for client state
@@ -78,6 +81,7 @@ formik, yup, class components, CSS-in-JS, relative deep imports
 ## Deployment Targets (optional)
 
 Browser → default (no extra config)
+Cloud frontend → Cloudflare Pages by default, Vercel when explicitly requested or when Pages is not a fit
 Desktop → Electron ≥33 or Tauri ≥2.10 (see targets/)
 PWA → vite-plugin-pwa (see targets/pwa.md)
 
@@ -86,3 +90,4 @@ PWA → vite-plugin-pwa (see targets/pwa.md)
 See stack/ directory for detailed specs per layer.
 See stack.yaml for machine-readable version manifest.
 See guides/new-project-setup.md for bootstrapping.
+See targets/TARGETS.md for cloud and desktop deployment target policy.

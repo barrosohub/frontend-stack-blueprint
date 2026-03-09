@@ -1,7 +1,7 @@
 ---
 title: "UI Components"
-version: "1.1.1"
-updated: "2026-03-01"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -15,7 +15,7 @@ tier: 1
 | --------- | ----------------------------------------- |
 | Role      | Accessible headless UI primitives         |
 | Status    | ✅ Core                                   |
-| Install   | `npm install @radix-ui/react-<primitive>` |
+| Install   | `pnpm add @radix-ui/react-<primitive>`    |
 
 Install primitives individually as needed:
 
@@ -39,7 +39,7 @@ Install primitives individually as needed:
 | --------- | ------------------------------------ |
 | Role      | Tooltip/popover/dropdown positioning |
 | Status    | ✅ Core                              |
-| Install   | `npm install @floating-ui/react`     |
+| Install   | `pnpm add @floating-ui/react`        |
 
 Use for custom positioning logic when Radix primitives don't cover the case.
 
@@ -49,7 +49,7 @@ Use for custom positioning logic when Radix primitives don't cover the case.
 | --------- | ---------------------------------- |
 | Role      | Carousels and sliders              |
 | Status    | ✅ Core                            |
-| Install   | `npm install embla-carousel-react` |
+| Install   | `pnpm add embla-carousel-react`    |
 
 Lightweight, extensible, and accessible carousel engine. Use for any
 horizontal scrolling, card sliders, or image galleries.
@@ -60,7 +60,7 @@ horizontal scrolling, card sliders, or image galleries.
 | --------- | -------------------- |
 | Role      | Command palette (⌘K) |
 | Status    | ✅ Core              |
-| Install   | `npm install cmdk`   |
+| Install   | `pnpm add cmdk`      |
 
 Use for command palette / search overlay patterns. Accessible, composable,
 and integrates well with Radix.
@@ -75,7 +75,7 @@ and integrates well with Radix.
 | --------- | ------------------------------- |
 | Role      | Radix + Tailwind implementation |
 | Status    | ⭐ Recommended                  |
-| Init      | `npx shadcn@latest init`        |
+| Init      | `pnpm dlx shadcn@latest init`   |
 
 **Important:** shadcn/ui is NOT an npm dependency — it's a collection of
 copy-paste components that combine Radix UI + Tailwind CSS. Components
@@ -92,15 +92,15 @@ out of the box.
 - Follow **Official CLI-First**: use official shadcn CLI for base setup
 - Run **Impact Preflight** before CLI (overwrite + structural compatibility checks)
 - If impact is non-trivial or uncertain, ask developer confirmation before running CLI
-- Never manually recreate shadcn base setup that `npx shadcn@latest init` can generate
+- Never manually recreate shadcn base setup that `pnpm dlx shadcn@latest init` can generate
 - NEVER install a competing UI library (Material UI, Ant Design, Chakra)
 
 **Setup:**
 
 ```bash
-npx shadcn@latest init
+pnpm dlx shadcn@latest init
 # Then add components as needed:
-npx shadcn@latest add button
-npx shadcn@latest add dialog
-npx shadcn@latest add input
+pnpm dlx shadcn@latest add button
+pnpm dlx shadcn@latest add dialog
+pnpm dlx shadcn@latest add input
 ```

@@ -1,7 +1,7 @@
 ---
 title: "State & Data"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -13,7 +13,7 @@ tier: 1
 | --------- | ----------------------- |
 | Role      | Client state management |
 | Status    | ✅ Core                 |
-| Install   | `npm install zustand`   |
+| Install   | `pnpm add zustand`      |
 
 ### Why Zustand
 
@@ -74,7 +74,7 @@ function ThemeToggle(): JSX.Element {
 | Role        | Server state, cache, data fetching                                 |
 | Min Version | ≥5.60                                                              |
 | Status      | ✅ Core                                                            |
-| Install     | `npm install @tanstack/react-query @tanstack/react-query-devtools` |
+| Install     | `pnpm add @tanstack/react-query @tanstack/react-query-devtools`    |
 
 ### Why TanStack Query
 

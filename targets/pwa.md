@@ -1,7 +1,7 @@
 ---
 title: "PWA Target"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 2
 target: "pwa"
 ---
@@ -21,7 +21,7 @@ target: "pwa"
 
 | Technology      | Install                          |
 | --------------- | -------------------------------- |
-| vite-plugin-pwa | `npm install -D vite-plugin-pwa` |
+| vite-plugin-pwa | `pnpm add -D vite-plugin-pwa`    |
 
 ## Configuration
 

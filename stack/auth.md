@@ -1,6 +1,6 @@
 ---
 title: "Authentication (optional)"
-version: "1.2.0"
+version: "1.4.0"
 updated: "2026-03-09"
 tier: 1
 ---
@@ -15,8 +15,8 @@ tier: 1
 | Min Version | ≥1.0                                                            |
 | Current     | 1.5.1                                                           |
 | Status      | ⭐ Recommended optional                                          |
-| Install     | `npm install better-auth`                                       |
-| Tooling     | `npx @better-auth/cli@latest <command>`                         |
+| Install     | `pnpm add better-auth`                                          |
+| Tooling     | `pnpm dlx @better-auth/cli@latest <command>`                    |
 
 ### When to Use
 

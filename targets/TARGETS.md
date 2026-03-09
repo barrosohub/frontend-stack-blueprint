@@ -1,7 +1,7 @@
 ---
 title: "Deployment Targets — Overview"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 2
 ---
 
@@ -10,8 +10,8 @@ tier: 2
 ## Concept
 
 The stack (defined in `stack/`) is the **core**. It works standalone for
-any browser project. When the project requires a specific runtime or
-packaging, attach a **deployment target**.
+any browser project. When the project requires a specific runtime,
+hosting, or packaging, attach a **deployment target**.
 
 ## Agent Instructions
 
@@ -19,8 +19,10 @@ packaging, attach a **deployment target**.
 1. ALWAYS start with the stack core
 2. ONLY consult targets/ if the project requires it
 3. Project doesn't specify where it runs → browser by default
-4. Project asks for desktop/mobile/PWA → consult relevant target
-5. Ambiguous context → ASK the developer. NEVER guess.
+4. Project needs cloud frontend hosting and no provider is specified → use Cloudflare Pages
+5. Project explicitly requests Vercel or Cloudflare Pages is not a fit → use Vercel
+6. Project asks for desktop/mobile/PWA → consult relevant target
+7. Ambiguous context → ASK the developer. NEVER guess.
 ```
 
 ## Available Targets
@@ -28,9 +30,25 @@ packaging, attach a **deployment target**.
 | Target                | When to Use                               | Adds                                    |
 | --------------------- | ----------------------------------------- | --------------------------------------- |
 | **Browser** (default) | Every web project                         | Nothing — stack core is sufficient      |
+| **Cloudflare Pages**  | Cloud frontend hosting, provider unspecified | + Pages hosting, optional Wrangler CLI |
+| **Vercel**            | Cloud frontend hosting, explicit preference or Pages mismatch | + Vercel platform, optional Vercel CLI |
 | **Electron**          | Desktop, JS-only team, max compat         | + Electron ≥33, Forge, electron-updater |
 | **Tauri**             | Desktop lightweight, minimal bundle, Rust | + Tauri ≥2.10, Rust, Tauri plugins      |
 | **PWA**               | Web with offline capability               | + vite-plugin-pwa                       |
+
+## Quick Comparison: Cloudflare Pages vs Vercel
+
+| Dimension | Cloudflare Pages | Vercel |
+| --------- | ---------------- | ------ |
+| Blueprint status | Priority cloud target | Secondary cloud target |
+| Default when unspecified | ✅ | ❌ |
+| Git-connected deploys | ✅ | ✅ |
+| CLI path | Wrangler | Vercel CLI |
+| Best default fit | General cloud frontend hosting | Explicit Vercel preference or Pages mismatch |
+
+If cloud frontend hosting is required and the provider is not specified,
+agent MUST use Cloudflare Pages. If the developer explicitly asks for
+Vercel, or Pages is a poor operational fit, agent MAY use Vercel.
 
 ## Quick Comparison: Electron vs Tauri
 
@@ -51,6 +69,8 @@ this comparison and **ask the developer**.
 
 ## Details
 
+- [Cloudflare Pages](cloudflare-pages.md)
+- [Vercel](vercel.md)
 - [Electron](electron.md)
 - [Tauri](tauri.md)
 - [PWA](pwa.md)

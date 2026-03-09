@@ -1,7 +1,7 @@
 ---
 title: "Observability"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -13,7 +13,7 @@ tier: 1
 | --------- | ---------------------------------- |
 | Role      | Error tracking and crash reporting |
 | Status    | ✅ Core                            |
-| Install   | `npm install @sentry/react`        |
+| Install   | `pnpm add @sentry/react`           |
 
 ### When to Use
 
@@ -46,7 +46,7 @@ Sentry.init({
 | --------- | ------------------------------------------------------------- |
 | Role      | Distributed tracing and metrics                               |
 | Status    | ✅ Core                                                       |
-| Install   | `npm install @opentelemetry/api @opentelemetry/sdk-trace-web` |
+| Install   | `pnpm add @opentelemetry/api @opentelemetry/sdk-trace-web`    |
 
 ### When to Use
 
@@ -69,7 +69,7 @@ Sentry.init({
 | --------- | ------------------------------------- |
 | Role      | Feature flags and experimentation     |
 | Status    | ✅ Core                               |
-| Install   | `npm install @statsig/react-bindings` |
+| Install   | `pnpm add @statsig/react-bindings`    |
 
 ### When to Use
 

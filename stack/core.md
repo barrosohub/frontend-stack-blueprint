@@ -1,7 +1,7 @@
 ---
 title: "Core — TypeScript, React, Routing"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -14,7 +14,7 @@ tier: 1
 | Role        | Primary language for ALL source code |
 | Min Version | ≥5.9                                 |
 | Status      | ✅ Core                              |
-| Install     | `npm install -D typescript`          |
+| Install     | `pnpm add -D typescript`             |
 
 ### Rules
 
@@ -55,8 +55,8 @@ See [templates/tsconfig.json.md](../templates/tsconfig.json.md) for full config.
 | Role        | UI rendering framework                         |
 | Min Version | ≥19.2                                          |
 | Status      | ✅ Core                                        |
-| Install     | `npm install react react-dom`                  |
-| Types       | `npm install -D @types/react @types/react-dom` |
+| Install     | `pnpm add react react-dom`                     |
+| Types       | `pnpm add -D @types/react @types/react-dom`    |
 
 > **⚠️ Security note (React Server Components):** RSC has had critical CVEs
 > in late 2025 ([denial-of-service, source code exposure](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)).
@@ -100,7 +100,7 @@ class Dashboard extends React.Component { ... }
 | --------- | -------------------------------------------------------------- |
 | Role      | Type-safe client-side routing                                  |
 | Status    | ✅ Core (default)                                              |
-| Install   | `npm install @tanstack/react-router @tanstack/router-devtools` |
+| Install   | `pnpm add @tanstack/react-router @tanstack/router-devtools`    |
 
 **Why default:** Superior type-safety, native integration with TanStack
 Query/Store, file-based route generation, built-in search params validation.
@@ -111,7 +111,7 @@ Query/Store, file-based route generation, built-in search params validation.
 | --------- | ------------------------------------- |
 | Role      | Client-side routing with data loaders |
 | Status    | ✅ Core (alternative)                 |
-| Install   | `npm install react-router`            |
+| Install   | `pnpm add react-router`               |
 
 **When to use:** Teams already experienced with React Router, or projects
 requiring SSR via Remix/React Router framework mode.

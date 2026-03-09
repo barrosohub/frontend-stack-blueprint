@@ -1,4 +1,4 @@
-# Frontend Stack Blueprint v1.3.0
+# Frontend Stack Blueprint v1.4.0
 
 This repository defines the canonical frontend stack for any new
 frontend project. It is platform-agnostic — the same stack applies
@@ -9,6 +9,7 @@ whether the project targets browser, desktop, or anything else.
 - **Language:** TypeScript ≥5.9 (strict mode, no `any`)
 - **UI:** React ≥19.2 (functional components only)
 - **Routing:** TanStack Router ≥1 (default) or React Router ≥7.1
+- **Tooling:** pnpm (priority package manager), Node.js >=20.19 or >=22.12, Bun ≥1 (alternative runtime)
 - **Build:** Vite ≥7 (Node.js >=20.19 or >=22.12)
 - **Test:** Vitest ≥3.2 (4.x recommended)
 - **Quality:** Husky + lint-staged + ESLint + Prettier
@@ -62,6 +63,8 @@ whether the project targets browser, desktop, or anything else.
 - ALWAYS use Radix primitives (shadcn/ui) before building custom
 - ALWAYS use Better Auth ≥1 when the project needs authentication
 - ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare R2, Resend
+- ALWAYS use pnpm as the default package manager unless the developer explicitly overrides it
+- ALWAYS treat Bun as an alternative runtime only; it does not replace pnpm as package manager default
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use TanStack Query for async/server state
@@ -76,14 +79,18 @@ The stack above works as-is for browser projects.
 
 - Desktop (Electron): @targets/electron.md
 - Desktop (Tauri): @targets/tauri.md
+- Cloud frontend (default): @targets/cloudflare-pages.md
+- Cloud frontend (secondary): @targets/vercel.md
 - PWA: @targets/pwa.md
 - If desktop needed but target unclear → ASK the developer.
 
 ## Deep Dive
 
 - Full spec: @stack/STACK.md
+- Tooling: @stack/tooling.md
 - Authentication: @stack/auth.md
 - Managed Services: @stack/managed-services.md
+- Targets overview: @targets/TARGETS.md
 - Architecture: @stack/architecture.md
 - Build & test: @stack/build-and-test.md
 - Machine-readable versions: @stack.yaml

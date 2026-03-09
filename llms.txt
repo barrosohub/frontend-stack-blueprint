@@ -29,6 +29,7 @@
 - [Full Spec](stack/STACK.md): Complete manifest
 - [Architecture](stack/architecture.md): Modular, DRY, KISS, YAGNI
 - [Core](stack/core.md): TypeScript, React, TanStack Router / React Router
+- [Tooling](stack/tooling.md): pnpm (priority), Node.js default, Bun alternative
 - [Build & Test](stack/build-and-test.md): Vite (Node.js >=20.19 or >=22.12), Vitest, Husky
 - [UI](stack/ui.md): Radix UI, shadcn/ui, Floating UI, Embla, cmdk
 - [Forms](stack/forms.md): React Hook Form + Zod
@@ -46,6 +47,8 @@
 ## Deployment Targets (optional)
 
 - [Overview](targets/TARGETS.md): When to use each
+- [Cloudflare Pages](targets/cloudflare-pages.md)
+- [Vercel](targets/vercel.md)
 - [Electron](targets/electron.md)
 - [Tauri](targets/tauri.md)
 - [PWA](targets/pwa.md)
@@ -69,6 +72,9 @@
 - [Why Tailwind](rationale/why-tailwind.md)
 - [Why RHF + Zod](rationale/why-rhf-zod.md)
 - [Why Better Auth](rationale/why-better-auth.md)
+- [Why pnpm](rationale/why-pnpm.md)
+- [Why Bun Runtime](rationale/why-bun-runtime.md)
+- [Cloudflare Pages vs Vercel](rationale/cloudflare-pages-vs-vercel.md)
 - [Why Neon](rationale/why-neon.md)
 - [Why Cloudflare R2](rationale/why-cloudflare-r2.md)
 - [Why Resend](rationale/why-resend.md)

@@ -1,6 +1,6 @@
 ---
 title: "New Project Setup"
-version: "1.3.0"
+version: "1.4.0"
 updated: "2026-03-09"
 tier: 2
 ---
@@ -12,59 +12,62 @@ tier: 2
 ## Prerequisites
 
 - **Node.js >=20.19 or >=22.12** (required by Vite 7)
-- npm (comes with Node.js)
+- `pnpm` as the default package manager (provision with Corepack)
+- Bun is optional and runtime-only; Node.js remains the default runtime
 
 ## Step 1: Scaffold with Vite
 
 ```bash
 node --version  # Verify >=20.19 or >=22.12
-npm create vite@latest my-project -- --template react-ts
+corepack enable pnpm
+pnpm --version
+pnpm create vite my-project --template react-ts
 cd my-project
+pnpm install
 ```
 
-## Step 2: Install Core Dependencies
+## Step 2: Add Blueprint Dependencies
 
 ```bash
-# Core
-npm install react react-dom
-npm install -D typescript @types/react @types/react-dom
+# The Vite React + TypeScript template already includes React, TypeScript, and Vite.
+# Add the rest of the blueprint stack:
 
 # Routing (choose one)
-npm install @tanstack/react-router @tanstack/router-devtools
-# OR: npm install react-router
+pnpm add @tanstack/react-router @tanstack/router-devtools
+# OR: pnpm add react-router
 
 # State & Data
-npm install zustand
-npm install @tanstack/react-query @tanstack/react-query-devtools
+pnpm add zustand
+pnpm add @tanstack/react-query @tanstack/react-query-devtools
 
 # UI Components
-npm install @radix-ui/react-dialog @radix-ui/react-popover @radix-ui/react-select
-npm install @floating-ui/react embla-carousel-react cmdk
+pnpm add @radix-ui/react-dialog @radix-ui/react-popover @radix-ui/react-select
+pnpm add @floating-ui/react embla-carousel-react cmdk
 
 # Styling
-npm install -D tailwindcss @tailwindcss/vite
-npm install clsx tailwind-merge motion
+pnpm add -D tailwindcss @tailwindcss/vite
+pnpm add clsx tailwind-merge motion
 
 # Forms
-npm install react-hook-form zod @hookform/resolvers
+pnpm add react-hook-form zod @hookform/resolvers
 
 # Dates
-npm install date-fns @date-fns/tz
+pnpm add date-fns @date-fns/tz
 
 # Icons
-npm install lucide-react
+pnpm add lucide-react
 ```
 
 ## Step 3: Quality Gate
 
 ```bash
 # ESLint + Prettier
-npm install -D eslint @eslint/js typescript-eslint prettier
+pnpm add -D eslint @eslint/js typescript-eslint prettier
 
 # Husky + lint-staged
-npm install -D husky lint-staged
-npx husky init
-echo "npx lint-staged" > .husky/pre-commit
+pnpm add -D husky lint-staged
+pnpm exec husky init
+printf "pnpm exec lint-staged\n" > .husky/pre-commit
 ```
 
 Add to `package.json`:
@@ -89,7 +92,7 @@ See [templates/vite.config.md](../templates/vite.config.md) — add `@/` alias a
 ## Step 6: Configure Vitest
 
 ```bash
-npm install -D vitest @testing-library/react @testing-library/jest-dom
+pnpm add -D vitest @testing-library/react @testing-library/jest-dom
 ```
 
 See [templates/vitest.config.md](../templates/vitest.config.md).
@@ -141,16 +144,16 @@ Use the official CLI for baseline setup. Do not manually recreate base
 files the CLI already generates.
 
 ```bash
-npx shadcn@latest init
-npx shadcn@latest add button input dialog
+pnpm dlx shadcn@latest init
+pnpm dlx shadcn@latest add button input dialog
 ```
 
 ## Step 11: Verify Setup
 
 ```bash
-npm run dev        # Should start without errors
-npm run build      # Should build without errors
-npx vitest --run   # Tests should pass
+pnpm dev              # Should start without errors
+pnpm build            # Should build without errors
+pnpm exec vitest --run  # Tests should pass
 ```
 
 ## Step 12: If the Project Needs Authentication
@@ -158,7 +161,7 @@ npx vitest --run   # Tests should pass
 Use Better Auth as the default auth layer only when the project needs login/session management.
 
 - See [stack/auth.md](../stack/auth.md) for the canonical auth rules
-- Install `better-auth` only in projects that actually need authentication
+- Install `better-auth` with `pnpm add better-auth` only in projects that actually need authentication
 - Better Auth requires a server-side runtime/auth handler; do not add it to purely static apps
 - If client and server are separate, install Better Auth in both parts as directed by the official docs
 - Apply **Official CLI-First + Impact Preflight** before any Better Auth CLI command
@@ -174,9 +177,18 @@ Use managed services only when the project actually needs database, object stora
 - Keep provider SDKs, service tokens, and privileged operations out of the base frontend install unless the capability is in scope
 - Apply **Official CLI-First + Impact Preflight** before Neon or Wrangler commands that modify infrastructure
 
+## Step 14: If the Project Needs Bun Runtime
+
+- Bun is approved as an alternative runtime only; Node.js remains the default runtime baseline
+- Keep `pnpm` as the package manager even when the runtime is Bun
+- Validate CLI, dependency, and deployment compatibility before switching runtime assumptions
+- See [stack/tooling.md](../stack/tooling.md) for the canonical tooling policy
+
 ## Optional: Deployment Target
 
 Only if needed:
 
+- Cloud frontend hosting (default) → see [targets/cloudflare-pages.md](../targets/cloudflare-pages.md)
+- Cloud frontend hosting (secondary) → see [targets/vercel.md](../targets/vercel.md)
 - Desktop → see [targets/electron.md](../targets/electron.md) or [targets/tauri.md](../targets/tauri.md)
 - PWA → see [targets/pwa.md](../targets/pwa.md)

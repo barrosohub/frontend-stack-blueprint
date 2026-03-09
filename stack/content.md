@@ -1,7 +1,7 @@
 ---
 title: "Content & Editing"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -13,7 +13,7 @@ tier: 1
 | --------- | ------------------------------------ |
 | Role      | Rich text editing                    |
 | Status    | ✅ Core (primary)                    |
-| Install   | `npm install lexical @lexical/react` |
+| Install   | `pnpm add lexical @lexical/react`    |
 
 ### Why Lexical
 
@@ -38,7 +38,7 @@ tier: 1
 | --------- | ------------------------------------------------------------------ |
 | Role      | Rich text editing (advanced)                                       |
 | Status    | ⚠️ Secondary                                                       |
-| Install   | `npm install prosemirror-state prosemirror-view prosemirror-model` |
+| Install   | `pnpm add prosemirror-state prosemirror-view prosemirror-model`    |
 
 ### When to Use (instead of Lexical)
 
@@ -59,7 +59,7 @@ that Lexical cannot satisfy.
 | --------- | ------------------- |
 | Role      | Syntax highlighting |
 | Status    | ✅ Core             |
-| Install   | `npm install shiki` |
+| Install   | `pnpm add shiki`    |
 
 ### Why Shiki
 

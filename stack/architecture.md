@@ -1,7 +1,7 @@
 ---
 title: "Architecture Principles"
-version: "1.1.1"
-updated: "2026-03-01"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 scope: "mandatory"
 ---
@@ -154,7 +154,7 @@ const [state, setState] = useState<any>(null);
 
 ```bash
 # .husky/pre-commit
-npx lint-staged
+pnpm exec lint-staged
 ```
 
 ```jsonc

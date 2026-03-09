@@ -1,7 +1,7 @@
 ---
 title: "Package Versions"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 2
 ---
 
@@ -20,12 +20,20 @@ tier: 2
 | Vite            | ≥7.x            | 7.3.1   | `vite`                   |
 | Vitest          | ≥3.2 (4.x rec.) | latest  | `vitest`                 |
 
+## Tooling
+
+| Tool | Policy | Notes |
+| ---- | ------ | ----- |
+| pnpm | Priority | Default package manager; provision with `corepack enable pnpm` |
+| Node.js | Default runtime | `>=20.19` or `>=22.12` |
+| Bun | Alternative runtime | Approved runtime alternative only |
+
 ## UI
 
 | Package        | Install                             |
 | -------------- | ----------------------------------- |
 | Radix UI       | `@radix-ui/react-*` (per primitive) |
-| shadcn/ui      | `npx shadcn@latest init`            |
+| shadcn/ui      | `pnpm dlx shadcn@latest init`       |
 | Floating UI    | `@floating-ui/react`                |
 | Embla Carousel | `embla-carousel-react`              |
 | cmdk           | `cmdk`                              |
@@ -80,7 +88,7 @@ tier: 2
 ## Updating Versions
 
 1. Check `stack.yaml` for current minimums
-2. Run `npm outdated` in your project
+2. Run `pnpm outdated` in your project
 3. Update to latest within the minimum range
 4. Run tests to verify compatibility
 5. If a library update breaks something, pin and report

@@ -1,6 +1,6 @@
 ---
 title: "Frontend Stack Blueprint — Complete Manifesto"
-version: "1.3.0"
+version: "1.4.0"
 updated: "2026-03-09"
 tier: 1
 tokens: "~3000"
@@ -17,26 +17,30 @@ tokens: "~3000"
 This stack is the **reusable base** for any frontend project. It defines:
 
 1. **How to write** — language, typing, code principles
-2. **How to build UI** — framework, components, styling, animation
-3. **How to manage state and data** — client state, server state, cache
-4. **How to authenticate** — session lifecycle and auth boundary when needed
-5. **How to connect managed services** — database, object storage, email when needed
-6. **How to build and test** — build tool, test runner, quality gates
-7. **How to handle content** — rich text, syntax, i18n
-8. **How to observe** — errors, tracing, feature flags
-9. **How to extend** — icons and future complements
+2. **How to install and run** — package manager and runtime defaults
+3. **How to build UI** — framework, components, styling, animation
+4. **How to manage state and data** — client state, server state, cache
+5. **How to authenticate** — session lifecycle and auth boundary when needed
+6. **How to connect managed services** — database, object storage, email when needed
+7. **How to build and test** — build tool, test runner, quality gates
+8. **How to handle content** — rich text, syntax, i18n
+9. **How to observe** — errors, tracing, feature flags
+10. **How to extend** — icons and future complements
 
 What this stack **does NOT define** (project-dependent):
 
 - Where the frontend runs (browser, Electron, Tauri, mobile webview)
 - Whether it needs SSR/SSG
 - Which backend/API it consumes
-- Which hosting/deploy to use
+- Which hosting/deploy to use unless a deployment target is explicitly in scope
 
 Those are **deployment targets** — optional layers in `targets/`.
 When a project needs managed database, object storage, or email, this
 blueprint may recommend optional providers without prescribing the
 backend architecture around them.
+When a project needs cloud frontend hosting and the provider is not
+specified, this blueprint recommends Cloudflare Pages first and Vercel
+second, without making cloud hosting part of the mandatory core stack.
 
 ## Stack Overview
 
@@ -46,6 +50,9 @@ backend architecture around them.
 | UI Framework      | React                                   | ≥19.2   | ✅ Core               |
 | Routing (default) | TanStack Router                         | ≥1.x    | ✅ Core               |
 | Routing (alt)     | React Router                            | ≥7.1    | ✅ Core               |
+| Package Manager   | pnpm                                    | priority | ⭐ Default            |
+| Runtime (default) | Node.js                                 | ≥20.19 or ≥22.12 | ✅ Core     |
+| Runtime (alt)     | Bun                                     | ≥1.0    | ✅ Alternative        |
 | Build             | Vite                                    | ≥7.x    | ✅ Core               |
 | Test              | Vitest                                  | ≥3.2    | ✅ Core               |
 | Quality           | Husky + lint-staged + ESLint + Prettier | latest  | ✅ Core               |
@@ -84,6 +91,7 @@ Each layer has its own document:
 
 - [Architecture](architecture.md) — Mandatory principles
 - [Core](core.md) — TypeScript, React, Routing
+- [Tooling](tooling.md) — pnpm, Node.js, Bun
 - [Build & Test](build-and-test.md) — Vite, Vitest, Quality
 - [UI](ui.md) — Radix, shadcn/ui, Floating UI, Embla, cmdk
 - [Forms](forms.md) — React Hook Form + Zod

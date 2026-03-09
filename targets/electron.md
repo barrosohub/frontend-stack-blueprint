@@ -1,7 +1,7 @@
 ---
 title: "Electron Target"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 2
 target: "electron"
 ---
@@ -21,9 +21,9 @@ target: "electron"
 
 | Technology       | Version | Install                              |
 | ---------------- | ------- | ------------------------------------ |
-| Electron         | ≥33     | `npm install -D electron`            |
-| Electron Forge   | latest  | `npm install -D @electron-forge/cli` |
-| electron-updater | latest  | `npm install electron-updater`       |
+| Electron         | ≥33     | `pnpm add -D electron`               |
+| Electron Forge   | latest  | `pnpm add -D @electron-forge/cli`    |
+| electron-updater | latest  | `pnpm add electron-updater`          |
 
 ## Project Structure
 

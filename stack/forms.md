@@ -1,7 +1,7 @@
 ---
 title: "Forms & Validation"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -13,7 +13,7 @@ tier: 1
 | --------- | ------------------------------------------------ |
 | Role      | Form state management (performant, uncontrolled) |
 | Status    | ✅ Core                                          |
-| Install   | `npm install react-hook-form`                    |
+| Install   | `pnpm add react-hook-form`                       |
 
 ## Zod
 
@@ -21,7 +21,7 @@ tier: 1
 | --------- | ------------------------------------------------ |
 | Role      | Schema validation with TypeScript type inference |
 | Status    | ✅ Core                                          |
-| Install   | `npm install zod @hookform/resolvers`            |
+| Install   | `pnpm add zod @hookform/resolvers`               |
 
 ## Rules
 

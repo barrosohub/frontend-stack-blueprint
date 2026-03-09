@@ -24,6 +24,9 @@ the `rationale/` directory.
 | ADR-014 | Neon for optional managed Postgres     | 2026-03-09 | [why-neon.md](rationale/why-neon.md)                                         |
 | ADR-015 | Cloudflare R2 for optional object storage | 2026-03-09 | [why-cloudflare-r2.md](rationale/why-cloudflare-r2.md)                     |
 | ADR-016 | Resend for optional email delivery     | 2026-03-09 | [why-resend.md](rationale/why-resend.md)                                     |
+| ADR-017 | pnpm as default package manager        | 2026-03-09 | [why-pnpm.md](rationale/why-pnpm.md)                                         |
+| ADR-018 | Bun as alternative JavaScript runtime  | 2026-03-09 | [why-bun-runtime.md](rationale/why-bun-runtime.md)                           |
+| ADR-019 | Cloudflare Pages vs Vercel for cloud frontend deployment | 2026-03-09 | [cloudflare-pages-vs-vercel.md](rationale/cloudflare-pages-vs-vercel.md) |
 
 ## Principles
 

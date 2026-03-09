@@ -1,7 +1,7 @@
 ---
 title: "Icons"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -13,7 +13,7 @@ tier: 1
 | --------- | ----------------------------------- |
 | Role      | Icon library — clean, minimal style |
 | Status    | ⭐ Default                          |
-| Install   | `npm install lucide-react`          |
+| Install   | `pnpm add lucide-react`             |
 | Best for  | Professional apps, dashboards, SaaS |
 
 ### Usage
@@ -43,7 +43,7 @@ use Lucide. It's the default for all projects.
 | --------- | ------------------------------------------ |
 | Role      | Flexible icon library — 6 weight variants  |
 | Status    | ✅ Alternative                             |
-| Install   | `npm install @phosphor-icons/react`        |
+| Install   | `pnpm add @phosphor-icons/react`           |
 | Best for  | Design systems with weight variation needs |
 
 ### When to Use Instead of Lucide
@@ -60,7 +60,7 @@ use Lucide. It's the default for all projects.
 | --------- | --------------------------------------------- |
 | Role      | Large icon catalog — 5400+ stroke-based icons |
 | Status    | ✅ Alternative                                |
-| Install   | `npm install @tabler/icons-react`             |
+| Install   | `pnpm add @tabler/icons-react`                |
 | Best for  | Projects needing maximum icon variety         |
 
 ### When to Use Instead of Lucide

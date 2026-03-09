@@ -1,11 +1,12 @@
 # Frontend Stack Blueprint
 
 > Canonical frontend stack for any new project. Platform-agnostic.
-> Deployment targets (Electron, Tauri, PWA) are optional add-ons.
+> Deployment targets (Cloudflare Pages, Vercel, Electron, Tauri, PWA) are optional add-ons.
 
 ## Stack (ALL projects)
 
 TypeScript ≥5.9 strict · React ≥19.2 · TanStack Router ≥1 (or React Router ≥7.1)
+pnpm (priority) · Node.js >=20.19 or >=22.12 · Bun ≥1 (runtime alternative)
 Vite ≥7 (Node.js >=20.19 or >=22.12) · Vitest ≥3.2 · Husky + lint-staged + ESLint + Prettier
 Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
 Tailwind CSS ≥4 + clsx + tailwind-merge · Motion (`import from 'motion/react'`)
@@ -48,6 +49,8 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - ALWAYS use Radix/shadcn primitives before building custom
 - ALWAYS use Better Auth ≥1 when the project needs authentication
 - ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare R2, Resend
+- ALWAYS use pnpm as the default package manager unless the developer explicitly overrides it
+- ALWAYS treat Bun as an alternative runtime only; it does not replace pnpm as package manager default
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use TanStack Query for async/server state
@@ -63,14 +66,17 @@ formik · yup · class components · CSS-in-JS · deep relative imports
 
 ## Targets (optional)
 
-Browser → default · Electron → targets/electron.md
+Browser → default · Cloudflare Pages → targets/cloudflare-pages.md
+Vercel → targets/vercel.md · Electron → targets/electron.md
 Tauri → targets/tauri.md · PWA → targets/pwa.md
 
 ## References
 
 - Full spec: stack/STACK.md
+- Tooling: stack/tooling.md
 - Authentication: stack/auth.md
 - Managed Services: stack/managed-services.md
 - Architecture: stack/architecture.md
+- Targets: targets/TARGETS.md
 - Versions: stack.yaml
 - New project: guides/new-project-setup.md

@@ -16,22 +16,25 @@ frontend stack for any new project. For the complete reference, see:
 
 1. Use TypeScript ≥5.9 with `strict: true` — no `any`
 2. Use React ≥19.2 functional components only
-3. Use Vite ≥7 with Node.js >=20.19 or >=22.12
-4. Structure by feature (`src/features/`), never by file type
-5. Use `@/*` path aliases, never `../../../`
-6. Use `cn()` utility for conditional Tailwind classes
-7. Use React Hook Form + Zod for forms with 2+ fields
-8. If the project needs authentication, use Better Auth ≥1; do not assume auth is mandatory
-9. If the project needs managed services, prefer Neon Postgres, Cloudflare R2, and Resend by capability; do not assume they are mandatory
-10. Use TanStack Query for server state
-11. Use Zustand for client state (no Redux, MobX). TanStack Store replaces Zustand at v1 GA
-12. Use Motion (import from `motion/react`) for animations
-13. Use date-fns ≥4.1 + @date-fns/tz for dates and timezones (no Moment, no Day.js)
-14. Use Radix/shadcn primitives before building custom components
-15. Write tests with Vitest for hooks and utils
-16. Never install packages outside this stack without asking
-17. Apply **Official CLI-First** when official docs recommend a CLI
-18. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
+3. Use pnpm as the default package manager
+4. Use Vite ≥7 with Node.js >=20.19 or >=22.12
+5. Treat Bun ≥1 as an alternative runtime only
+6. Structure by feature (`src/features/`), never by file type
+7. Use `@/*` path aliases, never `../../../`
+8. Use `cn()` utility for conditional Tailwind classes
+9. Use React Hook Form + Zod for forms with 2+ fields
+10. If the project needs authentication, use Better Auth ≥1; do not assume auth is mandatory
+11. If the project needs managed services, prefer Neon Postgres, Cloudflare R2, and Resend by capability; do not assume they are mandatory
+12. If the project needs cloud frontend hosting and no provider is specified, prefer Cloudflare Pages; use Vercel when explicitly requested or when Pages is not a fit
+13. Use TanStack Query for server state
+14. Use Zustand for client state (no Redux, MobX). TanStack Store replaces Zustand at v1 GA
+15. Use Motion (import from `motion/react`) for animations
+16. Use date-fns ≥4.1 + @date-fns/tz for dates and timezones (no Moment, no Day.js)
+17. Use Radix/shadcn primitives before building custom components
+18. Write tests with Vitest for hooks and utils
+19. Never install packages outside this stack without asking
+20. Apply **Official CLI-First** when official docs recommend a CLI
+21. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
 
 ## Universal Governance Protocol (technology-agnostic)
 

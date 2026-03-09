@@ -3,7 +3,7 @@
 # This file is the single source of truth for versions.
 
 schema_version: "1.0"
-blueprint_version: "1.3.0"
+blueprint_version: "1.4.0"
 updated: "2026-03-09"
 
 core:
@@ -34,6 +34,28 @@ build:
     plugins: "@vitejs/plugin-react"
     node_requires: ">=20.19.0 || >=22.12.0"
 
+tooling:
+  package_manager:
+    default: "pnpm"
+    alternative: "npm"
+    note: "pnpm is the priority package manager. Use Corepack to provision it by default; npm remains compatible but secondary."
+  runtime:
+    default: "node"
+    alternative: "bun"
+    default_requires: ">=20.19.0 || >=22.12.0"
+    note: "Node.js is the default runtime. Bun is an alternative runtime only and does not replace pnpm as the default package manager."
+  pnpm:
+    status: "priority"
+    install: "corepack enable pnpm"
+    add: "pnpm add <package>"
+    add_dev: "pnpm add -D <package>"
+    dlx: "pnpm dlx <package>@latest <command>"
+    exec: "pnpm exec <command>"
+  bun:
+    status: "alternative"
+    min: ">=1.0.0"
+    note: "Alternative JavaScript runtime for projects that validate Bun compatibility."
+
 test:
   vitest:
     min: ">=3.2.0"
@@ -43,7 +65,7 @@ test:
 quality:
   husky:
     install: "husky"
-    init: "npx husky init"
+    init: "pnpm exec husky init"
   lint_staged:
     install: "lint-staged"
   eslint:
@@ -57,7 +79,7 @@ ui:
     note: "Install primitives individually as needed"
   shadcn_ui:
     status: "recommended"
-    init: "npx shadcn@latest init"
+    init: "pnpm dlx shadcn@latest init"
     note: "Copy-paste components, not an npm dependency"
   floating_ui:
     install: "@floating-ui/react"
@@ -171,6 +193,18 @@ icons:
     install: "@tabler/icons-react"
 
 targets:
+  cloudflare_pages:
+    status: "priority-optional"
+    type: "cloud-frontend-hosting"
+    evaluated: "2026-03-09"
+    tooling: "wrangler"
+    note: "Default cloud frontend deployment target when a project needs frontend hosting and no provider is specified."
+  vercel:
+    status: "secondary-optional"
+    type: "cloud-frontend-hosting"
+    evaluated: "2026-03-09"
+    tooling: "vercel"
+    note: "Secondary cloud frontend deployment target when explicitly requested or when Cloudflare Pages is not a fit."
   electron:
     min: ">=33.0.0"
     install: "electron"

@@ -1,6 +1,6 @@
 ---
 title: "Managed Services (optional)"
-version: "1.3.0"
+version: "1.4.0"
 updated: "2026-03-09"
 tier: 1
 ---
@@ -18,7 +18,7 @@ backend-first.
 | Role      | Managed Postgres database |
 | Engine    | PostgreSQL |
 | Status    | ⭐ Recommended optional |
-| Tooling   | `npx neonctl@latest <command>` |
+| Tooling   | `pnpm dlx neonctl@latest <command>` |
 
 ### When to Use
 
@@ -46,7 +46,7 @@ backend-first.
 | Role      | Managed object storage |
 | Access    | S3-compatible API or Cloudflare bindings |
 | Status    | ⭐ Recommended optional |
-| Tooling   | `npx wrangler@latest <command>` |
+| Tooling   | `pnpm dlx wrangler@latest <command>` |
 
 ### When to Use
 

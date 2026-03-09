@@ -1,7 +1,7 @@
 ---
 title: "Build & Test"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -15,7 +15,7 @@ tier: 1
 | Min Version | ≥7.0                                       |
 | Requires    | Node.js >=20.19 or >=22.12                 |
 | Status      | ✅ Core                                    |
-| Install     | `npm install -D vite @vitejs/plugin-react` |
+| Install     | `pnpm add -D vite @vitejs/plugin-react`    |
 
 ### Why Vite
 
@@ -54,7 +54,7 @@ See [templates/vite.config.md](../templates/vite.config.md) for full config.
 | Role        | Unit + integration testing                                               |
 | Min Version | ≥3.2 (4.x recommended)                                                   |
 | Status      | ✅ Core                                                                  |
-| Install     | `npm install -D vitest @testing-library/react @testing-library/jest-dom` |
+| Install     | `pnpm add -D vitest @testing-library/react @testing-library/jest-dom`    |
 
 ### Why Vitest
 
@@ -106,8 +106,8 @@ See [templates/vitest.config.md](../templates/vitest.config.md) for full config.
 | Attribute | Value                  |
 | --------- | ---------------------- |
 | Role      | Pre-commit gate        |
-| Install   | `npm install -D husky` |
-| Init      | `npx husky init`       |
+| Install   | `pnpm add -D husky`    |
+| Init      | `pnpm exec husky init` |
 
 Setup is **mandatory on project init**. No exceptions.
 
@@ -116,14 +116,14 @@ Setup is **mandatory on project init**. No exceptions.
 | Attribute | Value                            |
 | --------- | -------------------------------- |
 | Role      | Run linters only on staged files |
-| Install   | `npm install -D lint-staged`     |
+| Install   | `pnpm add -D lint-staged`        |
 
 ### ESLint (Flat Config)
 
 | Attribute | Value                                                |
 | --------- | ---------------------------------------------------- |
 | Role      | Code linting                                         |
-| Install   | `npm install -D eslint @eslint/js typescript-eslint` |
+| Install   | `pnpm add -D eslint @eslint/js typescript-eslint`    |
 
 Use flat config format (`eslint.config.js`). No legacy `.eslintrc`.
 
@@ -132,13 +132,13 @@ Use flat config format (`eslint.config.js`). No legacy `.eslintrc`.
 | Attribute | Value                     |
 | --------- | ------------------------- |
 | Role      | Code formatting           |
-| Install   | `npm install -D prettier` |
+| Install   | `pnpm add -D prettier`    |
 
 ### Pre-Commit Pipeline
 
 ```bash
 # .husky/pre-commit
-npx lint-staged
+pnpm exec lint-staged
 ```
 
 ```jsonc
@@ -152,3 +152,9 @@ npx lint-staged
 ```
 
 **Code with lint errors NEVER enters the repository.**
+
+## Compatibility Note
+
+The blueprint is `pnpm`-first. `npm` remains compatible, but `pnpm`
+commands are the primary instructions across all setup and maintenance
+docs.

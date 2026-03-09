@@ -1,7 +1,7 @@
 ---
 title: "Dates & Time"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -14,7 +14,7 @@ tier: 1
 | Role        | Date manipulation (lightweight, tree-shakable, immutable) |
 | Min Version | ≥4.1                                                      |
 | Status      | ✅ Core                                                   |
-| Install     | `npm install date-fns`                                    |
+| Install     | `pnpm add date-fns`                                       |
 
 ## @date-fns/tz
 
@@ -22,7 +22,7 @@ tier: 1
 | --------- | ----------------------------------- |
 | Role      | Native timezone handling via TZDate |
 | Status    | ✅ Core (when timezone needed)      |
-| Install   | `npm install @date-fns/tz`          |
+| Install   | `pnpm add @date-fns/tz`             |
 
 ## Why date-fns
 

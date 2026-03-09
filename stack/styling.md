@@ -1,7 +1,7 @@
 ---
 title: "Styling & Animation"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 1
 ---
 
@@ -14,7 +14,7 @@ tier: 1
 | Role        | Utility-first CSS framework                    |
 | Min Version | ≥4.0                                           |
 | Status      | ✅ Core                                        |
-| Install     | `npm install -D tailwindcss @tailwindcss/vite` |
+| Install     | `pnpm add -D tailwindcss @tailwindcss/vite`    |
 
 ### Rules
 
@@ -27,8 +27,8 @@ tier: 1
 
 | Technology         | Role                                     | Install                      |
 | ------------------ | ---------------------------------------- | ---------------------------- |
-| **clsx**           | Conditional class concatenation          | `npm install clsx`           |
-| **tailwind-merge** | Smart Tailwind class conflict resolution | `npm install tailwind-merge` |
+| **clsx**           | Conditional class concatenation          | `pnpm add clsx`             |
+| **tailwind-merge** | Smart Tailwind class conflict resolution | `pnpm add tailwind-merge`   |
 
 ### cn() Helper — Required in Every Project
 
@@ -76,7 +76,7 @@ whenever combining Tailwind classes conditionally.
 | Role      | Declarative animations and gestures     |
 | Status    | ✅ Core                                 |
 | Package   | `motion` (successor to `framer-motion`) |
-| Install   | `npm install motion`                    |
+| Install   | `pnpm add motion`                       |
 
 > **Migration note:** The official package was renamed from `framer-motion`
 > to `motion`. New projects should use `motion` with imports from

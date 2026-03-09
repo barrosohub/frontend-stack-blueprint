@@ -1,7 +1,7 @@
 ---
 title: "Migration Paths"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.4.0"
+updated: "2026-03-09"
 tier: 2
 ---
 
@@ -11,8 +11,8 @@ tier: 2
 
 ## From Create React App (CRA) → Vite
 
-1. Remove `react-scripts`: `npm uninstall react-scripts`
-2. Install Vite: `npm install -D vite @vitejs/plugin-react`
+1. Remove `react-scripts`: `pnpm remove react-scripts`
+2. Install Vite: `pnpm add -D vite @vitejs/plugin-react`
 3. Create `vite.config.ts` (see [templates/vite.config.md](../templates/vite.config.md))
 4. Move `public/index.html` → `index.html` (root)
 5. Add `<script type="module" src="/src/main.tsx"></script>` to `index.html`
@@ -24,8 +24,8 @@ tier: 2
 
 ## From Jest → Vitest
 
-1. Remove Jest: `npm uninstall jest @types/jest ts-jest`
-2. Install Vitest: `npm install -D vitest`
+1. Remove Jest: `pnpm remove jest @types/jest ts-jest`
+2. Install Vitest: `pnpm add -D vitest`
 3. Create `vitest.config.ts` (see [templates/vitest.config.md](../templates/vitest.config.md))
 4. Update test files: replace `jest.fn()` → `vi.fn()`, `jest.mock()` → `vi.mock()`
 5. Most `expect` matchers work identically
@@ -41,8 +41,8 @@ tier: 2
 
 ## From styled-components / Emotion → Tailwind CSS
 
-1. Install Tailwind: `npm install -D tailwindcss @tailwindcss/vite`
-2. Install utilities: `npm install clsx tailwind-merge`
+1. Install Tailwind: `pnpm add -D tailwindcss @tailwindcss/vite`
+2. Install utilities: `pnpm add clsx tailwind-merge`
 3. Create cn() helper (see [templates/cn-utility.md](../templates/cn-utility.md))
 4. Migrate components one by one:
    - Replace `styled.div` → JSX with `className={cn(...)}`
@@ -51,23 +51,23 @@ tier: 2
 
 ## From Moment.js → date-fns
 
-1. Install: `npm install date-fns`
+1. Install: `pnpm add date-fns`
 2. Replace imports:
    - `moment()` → `new Date()`
    - `moment().format('YYYY-MM-DD')` → `format(new Date(), 'yyyy-MM-dd')`
    - `moment().add(7, 'days')` → `addDays(new Date(), 7)`
-3. For timezones: `npm install @date-fns/tz` and use `TZDate`
-4. Remove Moment: `npm uninstall moment`
+3. For timezones: `pnpm add @date-fns/tz` and use `TZDate`
+4. Remove Moment: `pnpm remove moment`
 
 ## From Formik → React Hook Form + Zod
 
-1. Install: `npm install react-hook-form zod @hookform/resolvers`
+1. Install: `pnpm add react-hook-form zod @hookform/resolvers`
 2. Replace Formik components:
    - `<Formik>` → `useForm()`
    - `<Field>` → `register()`
    - `validationSchema` (Yup) → `resolver: zodResolver(schema)`
 3. Migrate one form at a time
-4. Remove Formik: `npm uninstall formik yup`
+4. Remove Formik: `pnpm remove formik yup`
 
 ## Migration Strategy
 

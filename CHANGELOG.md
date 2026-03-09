@@ -5,6 +5,21 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] — 2026-03-09
+
+### Added
+
+- **Tooling:** `pnpm` is now the priority package manager and `Bun` is documented as an alternative runtime in the new `stack/tooling.md` layer
+- **Cloud targets:** `Cloudflare Pages` added as the priority cloud frontend deployment target and `Vercel` as the secondary cloud frontend deployment target
+- **Rationale:** `rationale/why-pnpm.md`, `rationale/why-bun-runtime.md`, `rationale/cloudflare-pages-vs-vercel.md`, plus `ADR-017` through `ADR-019`
+
+### Changed
+
+- **Machine-readable manifest:** `stack.yaml` now includes the top-level `tooling` block, Cloudflare Pages and Vercel target metadata, and blueprint version `1.4.0`
+- **Package manager policy:** operational docs and install guidance are now `pnpm`-first, with `pnpm dlx` / `pnpm exec` replacing `npx` as the primary CLI pattern
+- **Entry points:** synced `AGENTS.md`, `CLAUDE.md`, Cursor rules, `llms.txt`, `llms-full.txt`, Copilot instructions, and `README.md` with tooling defaults and cloud deployment targets
+- **Setup and target docs:** `guides/new-project-setup.md`, `targets/TARGETS.md`, and related operational guides now document Cloudflare Pages first, Vercel second, and Bun as runtime-only alternative
+
 ## [1.3.0] — 2026-03-09
 
 ### Added
