@@ -33,6 +33,7 @@
 - [UI](stack/ui.md): Radix UI, shadcn/ui, Floating UI, Embla, cmdk
 - [Forms](stack/forms.md): React Hook Form + Zod
 - [Authentication](stack/auth.md): Better Auth ≥1 (recommended when the project needs authentication)
+- [Managed Services](stack/managed-services.md): Neon Postgres, Cloudflare R2, Resend (optional, capability-based)
 - [Styling](stack/styling.md): Tailwind CSS, Motion
 - [State](stack/state-and-data.md): Zustand + TanStack Query (TanStack Store replaces Zustand at v1 GA)
 - [Dates](stack/dates.md): date-fns
@@ -68,6 +69,9 @@
 - [Why Tailwind](rationale/why-tailwind.md)
 - [Why RHF + Zod](rationale/why-rhf-zod.md)
 - [Why Better Auth](rationale/why-better-auth.md)
+- [Why Neon](rationale/why-neon.md)
+- [Why Cloudflare R2](rationale/why-cloudflare-r2.md)
+- [Why Resend](rationale/why-resend.md)
 - [Why date-fns](rationale/why-date-fns.md)
 - [Why Lexical](rationale/why-lexical-over-prosemirror.md)
 - [Electron vs Tauri](rationale/electron-vs-tauri.md)

@@ -11,6 +11,7 @@ Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
 Tailwind CSS ≥4 + clsx + tailwind-merge · Motion (`import from 'motion/react'`)
 React Hook Form + Zod · date-fns ≥4.1 (+@date-fns/tz)
 Authentication (optional): Better Auth ≥1
+Managed Services (optional): Neon Postgres | Cloudflare R2 | Resend
 Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
 Lexical (primary) · ProseMirror (fallback) · Shiki
 Format.js · react-intl · Sentry · OpenTelemetry · Statsig
@@ -46,6 +47,7 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
 - ALWAYS use Radix/shadcn primitives before building custom
 - ALWAYS use Better Auth ≥1 when the project needs authentication
+- ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare R2, Resend
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use TanStack Query for async/server state
@@ -68,6 +70,7 @@ Tauri → targets/tauri.md · PWA → targets/pwa.md
 
 - Full spec: stack/STACK.md
 - Authentication: stack/auth.md
+- Managed Services: stack/managed-services.md
 - Architecture: stack/architecture.md
 - Versions: stack.yaml
 - New project: guides/new-project-setup.md

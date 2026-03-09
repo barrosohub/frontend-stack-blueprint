@@ -5,6 +5,21 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] — 2026-03-09
+
+### Added
+
+- **Managed Services:** Neon Postgres, Cloudflare R2, and Resend added as recommended optional providers for database, object storage, and email capabilities
+- **Stack docs:** new `stack/managed-services.md` Tier 1 specification for managed-service boundaries, provider-first policy, and CLI guidance
+- **Rationale:** `rationale/why-neon.md`, `rationale/why-cloudflare-r2.md`, `rationale/why-resend.md`, plus `ADR-014` through `ADR-016`
+
+### Changed
+
+- **Machine-readable manifest:** `stack.yaml` now includes `managed_services` and blueprint version `1.3.0`
+- **Manifest philosophy:** `stack/STACK.md` now explicitly allows optional provider recommendations without prescribing backend architecture
+- **Entry points:** synced `AGENTS.md`, `CLAUDE.md`, Cursor rules, `llms.txt`, `llms-full.txt`, Copilot instructions, and `README.md` with the new optional managed-services layer
+- **Setup guide:** `guides/new-project-setup.md` now includes an explicit optional managed-services step without making providers part of the base install
+
 ## [1.2.0] — 2026-03-09
 
 ### Added

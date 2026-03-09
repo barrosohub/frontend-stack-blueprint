@@ -1,4 +1,4 @@
-FRONTEND STACK BLUEPRINT v1.2.0 (2026-03-09)
+FRONTEND STACK BLUEPRINT v1.3.0 (2026-03-09)
 Agnostic — applies to ANY frontend project.
 Repository: https://github.com/barrosohub/frontend-stack-blueprint
 Audience: external coding agents consuming this repo as stack reference.
@@ -48,6 +48,17 @@ AUTHENTICATION (OPTIONAL):
   → Requires a server-side runtime and auth handler; not mandatory for public/static apps
   → Use the React client from `better-auth/react` and `useSession()` for auth session state
   → Do not mirror auth session or tokens into Zustand
+
+MANAGED SERVICES (OPTIONAL):
+  Neon Postgres (recommended when the project needs managed Postgres)
+  → Use Neon as the default managed Postgres provider
+  → `@neondatabase/serverless` is the preferred JS/edge integration only when direct JS access is required
+  Cloudflare R2 (recommended when the project needs object storage)
+  → Use S3-compatible APIs or Cloudflare bindings
+  → Do not add storage credentials directly to client-side code
+  Resend (recommended when the project needs transactional or broadcast-style email)
+  → Use from trusted backend/serverless code, not from presentation components
+  → Do not add provider SDKs by default when the project does not need the capability
 
 DATES & TIME:
   date-fns ≥4.1 (tree-shakable, immutable)
@@ -195,6 +206,7 @@ RULES FOR AGENTS
 15. **Official CLI-First** — use official docs-recommended CLI over manual scaffolding
 16. **Impact Preflight** — evaluate overwrite/structure/config risk before CLI; ask confirmation if risk is non-trivial or uncertain
 17. **Authentication when needed** — use Better Auth ≥1; do not add auth by default to projects without login
+18. **Managed services when needed** — use Neon Postgres, Cloudflare R2, and Resend by capability; do not add them by default to every project
 
 ================================================================================
 BANNED TECHNOLOGIES
@@ -261,5 +273,5 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 ================================================================================
-VERSION: 1.2.0 | DATE: 2026-03-09 | SCHEMA: stack.yaml
+VERSION: 1.3.0 | DATE: 2026-03-09 | SCHEMA: stack.yaml
 ================================================================================

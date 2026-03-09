@@ -1,6 +1,6 @@
 ---
 title: "New Project Setup"
-version: "1.2.0"
+version: "1.3.0"
 updated: "2026-03-09"
 tier: 2
 ---
@@ -162,6 +162,17 @@ Use Better Auth as the default auth layer only when the project needs login/sess
 - Better Auth requires a server-side runtime/auth handler; do not add it to purely static apps
 - If client and server are separate, install Better Auth in both parts as directed by the official docs
 - Apply **Official CLI-First + Impact Preflight** before any Better Auth CLI command
+
+## Step 13: If the Project Needs Managed Services
+
+Use managed services only when the project actually needs database, object storage, or email delivery capabilities.
+
+- See [stack/managed-services.md](../stack/managed-services.md) for the canonical provider rules
+- Use Neon when the project needs managed Postgres
+- Use Cloudflare R2 when the project needs object storage
+- Use Resend when the project needs transactional email or audience/broadcast workflows
+- Keep provider SDKs, service tokens, and privileged operations out of the base frontend install unless the capability is in scope
+- Apply **Official CLI-First + Impact Preflight** before Neon or Wrangler commands that modify infrastructure
 
 ## Optional: Deployment Target
 

@@ -21,6 +21,9 @@ the `rationale/` directory.
 | ADR-011 | Lexical over ProseMirror (primary)     | 2026-02-28 | [why-lexical-over-prosemirror.md](rationale/why-lexical-over-prosemirror.md) |
 | ADR-012 | Electron vs Tauri comparison           | 2026-02-28 | [electron-vs-tauri.md](rationale/electron-vs-tauri.md)                       |
 | ADR-013 | Better Auth for optional authentication | 2026-03-09 | [why-better-auth.md](rationale/why-better-auth.md)                           |
+| ADR-014 | Neon for optional managed Postgres     | 2026-03-09 | [why-neon.md](rationale/why-neon.md)                                         |
+| ADR-015 | Cloudflare R2 for optional object storage | 2026-03-09 | [why-cloudflare-r2.md](rationale/why-cloudflare-r2.md)                     |
+| ADR-016 | Resend for optional email delivery     | 2026-03-09 | [why-resend.md](rationale/why-resend.md)                                     |
 
 ## Principles
 

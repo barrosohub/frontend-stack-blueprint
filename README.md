@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -49,6 +49,7 @@ A **public repository** that serves as the **single source of truth** for modern
 │                                                              │
 │  FORMS          React Hook Form + Zod                        │
 │  AUTH (opt)     Better Auth ≥1                               │
+│  MANAGED (opt)  Neon Postgres · Cloudflare R2 · Resend       │
 │  DATES          date-fns ≥4.1 (+@date-fns/tz)               │
 │  STATE          Zustand                                      │
 │  SERVER STATE   TanStack Query ≥5.60                         │
@@ -127,6 +128,7 @@ frontend-stack-blueprint/
 │   ├── ui.md             Radix, shadcn/ui, Floating UI
 │   ├── forms.md          RHF + Zod
 │   ├── auth.md           Better Auth (optional)
+│   ├── managed-services.md Managed Services (optional)
 │   ├── styling.md        Tailwind, Motion
 │   ├── state-and-data.md Zustand + TanStack Query
 │   ├── dates.md          date-fns
@@ -149,6 +151,7 @@ frontend-stack-blueprint/
 │   ├── cn-utility.md / zod-form-example.md
 │
 ├── 💡 rationale/ (Tier 3 — Why Each Choice)
+│   ├── why-neon.md / why-cloudflare-r2.md / why-resend.md
 │   └── why-*.md files for every technology
 │
 └── 🔮 backlog/ (Tier 4 — Evolution)
