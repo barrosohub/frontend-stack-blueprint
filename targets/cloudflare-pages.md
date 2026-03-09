@@ -1,6 +1,6 @@
 ---
 title: "Cloudflare Pages Target"
-version: "1.4.0"
+version: "1.5.0"
 updated: "2026-03-09"
 tier: 2
 target: "cloudflare-pages"
@@ -37,6 +37,8 @@ target: "cloudflare-pages"
 - Frontend hosting does not force a backend architecture
 - Environment variables, preview environments, and custom domains should be configured per project
 - If the project also uses Cloudflare R2, Pages keeps the provider surface more consistent
+- Cloudflare D1, Cloudflare KV, and Cloudflare R2 remain optional service choices; do not infer them for purely static Pages projects
+- Only add Cloudflare data services when the project also has Functions, Workers, or other server-side/edge runtime needs
 
 ## Agent Rule
 

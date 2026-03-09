@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.4.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.5.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -49,8 +49,10 @@ A **public repository** that serves as the **single source of truth** for modern
 │  ANIMATION      Motion (`import from 'motion/react'`)        │
 │                                                              │
 │  FORMS          React Hook Form + Zod                        │
+│  DATA ACCESS    Prisma ≥6 (optional)                         │
 │  AUTH (opt)     Better Auth ≥1                               │
-│  MANAGED (opt)  Neon Postgres · Cloudflare R2 · Resend       │
+│  MANAGED (opt)  Neon Postgres · Cloudflare D1                │
+│                 Cloudflare R2 · Cloudflare KV · Resend       │
 │  DATES          date-fns ≥4.1 (+@date-fns/tz)               │
 │  STATE          Zustand                                      │
 │  SERVER STATE   TanStack Query ≥5.60                         │
@@ -130,6 +132,7 @@ frontend-stack-blueprint/
 │   ├── build-and-test.md Vite, Vitest, Quality
 │   ├── ui.md             Radix, shadcn/ui, Floating UI
 │   ├── forms.md          RHF + Zod
+│   ├── data-access.md    Data Access (optional)
 │   ├── auth.md           Better Auth (optional)
 │   ├── managed-services.md Managed Services (optional)
 │   ├── styling.md        Tailwind, Motion
@@ -157,6 +160,7 @@ frontend-stack-blueprint/
 ├── 💡 rationale/ (Tier 3 — Why Each Choice)
 │   ├── why-pnpm.md / why-bun-runtime.md
 │   ├── cloudflare-pages-vs-vercel.md
+│   ├── why-prisma.md / why-cloudflare-d1.md / why-cloudflare-kv.md
 │   ├── why-neon.md / why-cloudflare-r2.md / why-resend.md
 │   └── why-*.md files for every technology
 │

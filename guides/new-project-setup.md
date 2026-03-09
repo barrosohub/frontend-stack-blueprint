@@ -1,6 +1,6 @@
 ---
 title: "New Project Setup"
-version: "1.4.0"
+version: "1.5.0"
 updated: "2026-03-09"
 tier: 2
 ---
@@ -166,18 +166,31 @@ Use Better Auth as the default auth layer only when the project needs login/sess
 - If client and server are separate, install Better Auth in both parts as directed by the official docs
 - Apply **Official CLI-First + Impact Preflight** before any Better Auth CLI command
 
-## Step 13: If the Project Needs Managed Services
+## Step 13: If the Project Needs Data Access / ORM
+
+Use Prisma only when the project has backend, server-side, or edge runtime and actually needs ORM-backed relational data access.
+
+- See [stack/data-access.md](../stack/data-access.md) for the canonical data-access rules
+- Install Prisma with `pnpm add prisma @prisma/client` only when the project has trusted runtime for relational data access
+- Do NOT add Prisma to purely static frontend apps
+- If the project pairs Prisma with Cloudflare D1, follow the official Prisma + D1 guide and do not assume `prisma migrate dev` as the default workflow
+- Apply **Official CLI-First + Impact Preflight** before Prisma CLI commands that initialize schema, generate clients, or alter database state
+
+## Step 14: If the Project Needs Managed Services
 
 Use managed services only when the project actually needs database, object storage, or email delivery capabilities.
 
 - See [stack/managed-services.md](../stack/managed-services.md) for the canonical provider rules
 - Use Neon when the project needs managed Postgres
+- Use Cloudflare D1 when the project needs Cloudflare-native serverless SQL and SQLite semantics are acceptable
 - Use Cloudflare R2 when the project needs object storage
+- Use Cloudflare KV when the project needs key-value storage for read-heavy or eventually consistent workloads
 - Use Resend when the project needs transactional email or audience/broadcast workflows
 - Keep provider SDKs, service tokens, and privileged operations out of the base frontend install unless the capability is in scope
-- Apply **Official CLI-First + Impact Preflight** before Neon or Wrangler commands that modify infrastructure
+- D1, KV, and R2 should only be added when the project also has Functions, Workers, or another server-side/edge runtime surface
+- Apply **Official CLI-First + Impact Preflight** before Neon, Prisma, or Wrangler commands that modify infrastructure or schema
 
-## Step 14: If the Project Needs Bun Runtime
+## Step 15: If the Project Needs Bun Runtime
 
 - Bun is approved as an alternative runtime only; Node.js remains the default runtime baseline
 - Keep `pnpm` as the package manager even when the runtime is Bun
@@ -190,5 +203,6 @@ Only if needed:
 
 - Cloud frontend hosting (default) → see [targets/cloudflare-pages.md](../targets/cloudflare-pages.md)
 - Cloud frontend hosting (secondary) → see [targets/vercel.md](../targets/vercel.md)
+- Cloudflare Pages alone does not imply D1, KV, or R2 for purely static frontend hosting
 - Desktop → see [targets/electron.md](../targets/electron.md) or [targets/tauri.md](../targets/tauri.md)
 - PWA → see [targets/pwa.md](../targets/pwa.md)

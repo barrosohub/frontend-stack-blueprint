@@ -1,6 +1,6 @@
 ---
 title: "Deployment Targets — Overview"
-version: "1.4.0"
+version: "1.5.0"
 updated: "2026-03-09"
 tier: 2
 ---
@@ -49,6 +49,10 @@ hosting, or packaging, attach a **deployment target**.
 If cloud frontend hosting is required and the provider is not specified,
 agent MUST use Cloudflare Pages. If the developer explicitly asks for
 Vercel, or Pages is a poor operational fit, agent MAY use Vercel.
+Cloudflare Pages alone does NOT imply Cloudflare D1, Cloudflare KV, or
+Cloudflare R2. Those data services remain optional and should only be
+added when the project also has Functions, Workers, or another
+server-side/edge runtime in scope.
 
 ## Quick Comparison: Electron vs Tauri
 

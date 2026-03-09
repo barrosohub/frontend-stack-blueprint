@@ -1,6 +1,6 @@
 ---
 title: "Package Versions"
-version: "1.4.0"
+version: "1.5.0"
 updated: "2026-03-09"
 tier: 2
 ---
@@ -46,6 +46,16 @@ tier: 2
 | clsx           | latest      | `clsx`                          |
 | tailwind-merge | latest      | `tailwind-merge`                |
 | Motion         | latest      | `motion`                        |
+
+## Data Access
+
+| Package        | Min Version | Current | Install                  |
+| -------------- | ----------- | ------- | ------------------------ |
+| Prisma ORM     | ≥6.0        | 6.18.0  | `prisma @prisma/client`  |
+
+> **Note:** Prisma is approved only for projects that actually have
+> backend, server-side, or edge runtime. Drizzle ORM remains under
+> evaluation until it reaches v1 GA.
 
 ## Data & State
 

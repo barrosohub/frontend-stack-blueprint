@@ -5,6 +5,22 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] — 2026-03-09
+
+### Added
+
+- **Data Access:** `Prisma` added as the recommended optional TypeScript ORM for projects that need ORM-backed server-side or edge data access
+- **Managed Services:** `Cloudflare D1` and `Cloudflare KV` added as optional Cloudflare-specific managed data services
+- **Stack docs:** new `stack/data-access.md` Tier 1 specification for ORM boundary, Prisma usage, and the D1-specific caveat
+- **Rationale:** `rationale/why-prisma.md`, `rationale/why-cloudflare-d1.md`, `rationale/why-cloudflare-kv.md`, plus `ADR-020` through `ADR-022`
+
+### Changed
+
+- **Machine-readable manifest:** `stack.yaml` now includes `data_access`, `cloudflare_d1`, `cloudflare_kv`, and blueprint version `1.5.0`
+- **Managed service policy:** `stack/managed-services.md` now distinguishes Neon as the default for Postgres, D1 as Cloudflare-specific serverless SQL, and KV as key-value storage rather than relational storage
+- **Evaluation policy:** `Drizzle ORM` moved into `backlog/under-evaluation.md` instead of being promoted into the approved stack because it is still on a pre-`v1` track in the official docs
+- **Cloudflare target guidance:** `targets/cloudflare-pages.md` and `targets/TARGETS.md` now explicitly separate frontend hosting from optional Cloudflare data services
+
 ## [1.4.0] — 2026-03-09
 
 ### Added

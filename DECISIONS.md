@@ -27,6 +27,9 @@ the `rationale/` directory.
 | ADR-017 | pnpm as default package manager        | 2026-03-09 | [why-pnpm.md](rationale/why-pnpm.md)                                         |
 | ADR-018 | Bun as alternative JavaScript runtime  | 2026-03-09 | [why-bun-runtime.md](rationale/why-bun-runtime.md)                           |
 | ADR-019 | Cloudflare Pages vs Vercel for cloud frontend deployment | 2026-03-09 | [cloudflare-pages-vs-vercel.md](rationale/cloudflare-pages-vs-vercel.md) |
+| ADR-020 | Prisma as optional TypeScript ORM      | 2026-03-09 | [why-prisma.md](rationale/why-prisma.md)                                     |
+| ADR-021 | Cloudflare D1 as Cloudflare-specific serverless database option | 2026-03-09 | [why-cloudflare-d1.md](rationale/why-cloudflare-d1.md) |
+| ADR-022 | Cloudflare KV for optional key-value storage | 2026-03-09 | [why-cloudflare-kv.md](rationale/why-cloudflare-kv.md)                   |
 
 ## Principles
 

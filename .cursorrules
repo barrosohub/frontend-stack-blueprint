@@ -21,8 +21,9 @@
 - Tailwind CSS ≥4 + clsx + tailwind-merge (cn() utility required)
 - Motion (formerly Framer Motion) — `import from 'motion/react'`
 - React Hook Form + Zod
+- Data Access (optional): Prisma ≥6
 - Authentication (optional): Better Auth ≥1
-- Managed Services (optional): Neon Postgres | Cloudflare R2 | Resend
+- Managed Services (optional): Neon Postgres | Cloudflare D1 | Cloudflare R2 | Cloudflare KV | Resend
 - date-fns ≥4.1 (+@date-fns/tz)
 - Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
 - Lexical (primary) · ProseMirror (fallback) · Shiki
@@ -61,8 +62,9 @@
 - ALWAYS use @/* path aliases, never ../../../
 - ALWAYS use React Hook Form + Zod for forms (2+ fields)
 - ALWAYS use Radix/shadcn before custom components
+- ALWAYS use Prisma ≥6 when the project needs ORM-backed server-side or edge relational data access
 - ALWAYS use Better Auth ≥1 when the project needs authentication
-- ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare R2, Resend
+- ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, Resend
 - ALWAYS use pnpm as the default package manager unless the developer explicitly overrides it
 - ALWAYS treat Bun as an alternative runtime only; it does not replace pnpm as package manager default
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding

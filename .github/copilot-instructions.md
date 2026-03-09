@@ -23,18 +23,19 @@ frontend stack for any new project. For the complete reference, see:
 7. Use `@/*` path aliases, never `../../../`
 8. Use `cn()` utility for conditional Tailwind classes
 9. Use React Hook Form + Zod for forms with 2+ fields
-10. If the project needs authentication, use Better Auth ≥1; do not assume auth is mandatory
-11. If the project needs managed services, prefer Neon Postgres, Cloudflare R2, and Resend by capability; do not assume they are mandatory
-12. If the project needs cloud frontend hosting and no provider is specified, prefer Cloudflare Pages; use Vercel when explicitly requested or when Pages is not a fit
-13. Use TanStack Query for server state
-14. Use Zustand for client state (no Redux, MobX). TanStack Store replaces Zustand at v1 GA
-15. Use Motion (import from `motion/react`) for animations
-16. Use date-fns ≥4.1 + @date-fns/tz for dates and timezones (no Moment, no Day.js)
-17. Use Radix/shadcn primitives before building custom components
-18. Write tests with Vitest for hooks and utils
-19. Never install packages outside this stack without asking
-20. Apply **Official CLI-First** when official docs recommend a CLI
-21. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
+10. If the project needs ORM-backed server-side or edge relational data access, use Prisma ≥6; do not add ORM to purely static apps
+11. If the project needs authentication, use Better Auth ≥1; do not assume auth is mandatory
+12. If the project needs managed services, prefer Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, and Resend by capability; do not assume they are mandatory
+13. If the project needs cloud frontend hosting and no provider is specified, prefer Cloudflare Pages; use Vercel when explicitly requested or when Pages is not a fit
+14. Use TanStack Query for server state
+15. Use Zustand for client state (no Redux, MobX). TanStack Store replaces Zustand at v1 GA
+16. Use Motion (import from `motion/react`) for animations
+17. Use date-fns ≥4.1 + @date-fns/tz for dates and timezones (no Moment, no Day.js)
+18. Use Radix/shadcn primitives before building custom components
+19. Write tests with Vitest for hooks and utils
+20. Never install packages outside this stack without asking
+21. Apply **Official CLI-First** when official docs recommend a CLI
+22. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
 
 ## Universal Governance Protocol (technology-agnostic)
 

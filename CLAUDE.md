@@ -1,4 +1,4 @@
-# Frontend Stack Blueprint v1.4.0
+# Frontend Stack Blueprint v1.5.0
 
 This repository defines the canonical frontend stack for any new
 frontend project. It is platform-agnostic — the same stack applies
@@ -18,8 +18,9 @@ whether the project targets browser, desktop, or anything else.
 - **Styling:** Tailwind CSS ≥4 + clsx + tailwind-merge (no CSS-in-JS ever)
 - **Animations:** Motion (formerly Framer Motion) — `import from 'motion/react'`
 - **Forms:** React Hook Form + Zod
+- **Data Access (optional):** Prisma ≥6
 - **Authentication (optional):** Better Auth ≥1
-- **Managed Services (optional):** Neon Postgres, Cloudflare R2, Resend
+- **Managed Services (optional):** Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, Resend
 - **Dates:** date-fns ≥4.1 (+@date-fns/tz for timezones)
 - **State:** Zustand (no Redux, MobX) — TanStack Store replaces Zustand at v1 GA
 - **Server State:** TanStack Query ≥5.60
@@ -61,8 +62,9 @@ whether the project targets browser, desktop, or anything else.
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
 - ALWAYS use Radix primitives (shadcn/ui) before building custom
+- ALWAYS use Prisma ≥6 when the project needs ORM-backed server-side or edge relational data access
 - ALWAYS use Better Auth ≥1 when the project needs authentication
-- ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare R2, Resend
+- ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, Resend
 - ALWAYS use pnpm as the default package manager unless the developer explicitly overrides it
 - ALWAYS treat Bun as an alternative runtime only; it does not replace pnpm as package manager default
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
@@ -88,6 +90,7 @@ The stack above works as-is for browser projects.
 
 - Full spec: @stack/STACK.md
 - Tooling: @stack/tooling.md
+- Data access: @stack/data-access.md
 - Authentication: @stack/auth.md
 - Managed Services: @stack/managed-services.md
 - Targets overview: @targets/TARGETS.md

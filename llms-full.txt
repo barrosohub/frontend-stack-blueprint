@@ -1,4 +1,4 @@
-FRONTEND STACK BLUEPRINT v1.4.0 (2026-03-09)
+FRONTEND STACK BLUEPRINT v1.5.0 (2026-03-09)
 Agnostic — applies to ANY frontend project.
 Repository: https://github.com/barrosohub/frontend-stack-blueprint
 Audience: external coding agents consuming this repo as stack reference.
@@ -48,6 +48,13 @@ FORMS & VALIDATION:
   @hookform/resolvers/zod (integration bridge)
   → Required for any form with 2+ fields
 
+DATA ACCESS (OPTIONAL):
+  Prisma ORM ≥6 (recommended when the project needs ORM-backed relational data access)
+  → Only use when the project has backend, server-side, or edge runtime
+  → Do not add an ORM to purely static apps
+  → If paired with Cloudflare D1, follow the official Prisma + D1 guide
+  → Do not treat Prisma Migrate as the default D1 workflow
+
 AUTHENTICATION (OPTIONAL):
   Better Auth ≥1 (recommended when the project needs login/session management)
   → Requires a server-side runtime and auth handler; not mandatory for public/static apps
@@ -58,9 +65,15 @@ MANAGED SERVICES (OPTIONAL):
   Neon Postgres (recommended when the project needs managed Postgres)
   → Use Neon as the default managed Postgres provider
   → `@neondatabase/serverless` is the preferred JS/edge integration only when direct JS access is required
+  Cloudflare D1 (recommended when the project needs Cloudflare-native serverless SQL)
+  → SQLite semantics; not a replacement for Postgres
+  → Only use when Cloudflare worker, function, or edge runtime is in scope
   Cloudflare R2 (recommended when the project needs object storage)
   → Use S3-compatible APIs or Cloudflare bindings
   → Do not add storage credentials directly to client-side code
+  Cloudflare KV (recommended when the project needs key-value storage)
+  → Read-heavy / eventually consistent workloads only
+  → Not a relational or strongly consistent transactional store
   Resend (recommended when the project needs transactional or broadcast-style email)
   → Use from trusted backend/serverless code, not from presentation components
   → Do not add provider SDKs by default when the project does not need the capability
@@ -210,10 +223,11 @@ RULES FOR AGENTS
 14. **Resolve conflicts canonically** — if docs conflict, follow stack.yaml and report drift
 15. **Official CLI-First** — use official docs-recommended CLI over manual scaffolding
 16. **Impact Preflight** — evaluate overwrite/structure/config risk before CLI; ask confirmation if risk is non-trivial or uncertain
-17. **Authentication when needed** — use Better Auth ≥1; do not add auth by default to projects without login
-18. **Managed services when needed** — use Neon Postgres, Cloudflare R2, and Resend by capability; do not add them by default to every project
-19. **Tooling default** — use pnpm unless the developer explicitly overrides the package manager
-20. **Runtime optionality** — Bun is runtime-only alternative; Node.js remains the default runtime
+17. **Data access when needed** — use Prisma ≥6 for ORM-backed server-side or edge relational data access; do not add ORM to purely static apps
+18. **Authentication when needed** — use Better Auth ≥1; do not add auth by default to projects without login
+19. **Managed services when needed** — use Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, and Resend by capability; do not add them by default to every project
+20. **Tooling default** — use pnpm unless the developer explicitly overrides the package manager
+21. **Runtime optionality** — Bun is runtime-only alternative; Node.js remains the default runtime
 
 ================================================================================
 BANNED TECHNOLOGIES
@@ -251,6 +265,7 @@ BROWSER (default):
 CLOUDFLARE PAGES (priority cloud frontend target):
   Deploy built frontend output when cloud hosting is needed and provider is unspecified.
   Typical CLI path: `pnpm dlx wrangler@latest pages deploy dist`
+  Does not automatically imply D1, KV, or R2 for static frontend hosting.
 
 VERCEL (secondary cloud frontend target):
   Use when explicitly requested or when Cloudflare Pages is not the right fit.
@@ -290,5 +305,5 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 ================================================================================
-VERSION: 1.4.0 | DATE: 2026-03-09 | SCHEMA: stack.yaml
+VERSION: 1.5.0 | DATE: 2026-03-09 | SCHEMA: stack.yaml
 ================================================================================

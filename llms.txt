@@ -33,8 +33,9 @@
 - [Build & Test](stack/build-and-test.md): Vite (Node.js >=20.19 or >=22.12), Vitest, Husky
 - [UI](stack/ui.md): Radix UI, shadcn/ui, Floating UI, Embla, cmdk
 - [Forms](stack/forms.md): React Hook Form + Zod
+- [Data Access](stack/data-access.md): Prisma ≥6 (recommended when ORM-backed server-side or edge data access is needed)
 - [Authentication](stack/auth.md): Better Auth ≥1 (recommended when the project needs authentication)
-- [Managed Services](stack/managed-services.md): Neon Postgres, Cloudflare R2, Resend (optional, capability-based)
+- [Managed Services](stack/managed-services.md): Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, Resend (optional, capability-based)
 - [Styling](stack/styling.md): Tailwind CSS, Motion
 - [State](stack/state-and-data.md): Zustand + TanStack Query (TanStack Store replaces Zustand at v1 GA)
 - [Dates](stack/dates.md): date-fns
@@ -72,9 +73,12 @@
 - [Why Tailwind](rationale/why-tailwind.md)
 - [Why RHF + Zod](rationale/why-rhf-zod.md)
 - [Why Better Auth](rationale/why-better-auth.md)
+- [Why Prisma](rationale/why-prisma.md)
 - [Why pnpm](rationale/why-pnpm.md)
 - [Why Bun Runtime](rationale/why-bun-runtime.md)
 - [Cloudflare Pages vs Vercel](rationale/cloudflare-pages-vs-vercel.md)
+- [Why Cloudflare D1](rationale/why-cloudflare-d1.md)
+- [Why Cloudflare KV](rationale/why-cloudflare-kv.md)
 - [Why Neon](rationale/why-neon.md)
 - [Why Cloudflare R2](rationale/why-cloudflare-r2.md)
 - [Why Resend](rationale/why-resend.md)

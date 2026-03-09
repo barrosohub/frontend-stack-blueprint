@@ -1,7 +1,7 @@
 ---
 title: "Under Evaluation"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.5.0"
+updated: "2026-03-09"
 tier: 4
 ---
 
@@ -15,6 +15,7 @@ Technologies being actively evaluated for potential inclusion in the stack.
 | **Biome**          | Replace ESLint + Prettier (Husky stays)                      | Plugin ecosystem maturity          | Q2 2026  |
 | **TanStack Start** | Full-stack framework (SSR/streaming with TanStack Router)    | v1 RC → stable                     | Q2 2026  |
 | **TanStack Store** | Priority successor to Zustand (reactive, framework-agnostic) | Reach v1 GA (currently alpha v0.x) | Watching |
+| **Drizzle ORM**    | TypeScript ORM / SQL-first data access                       | Reach v1 GA (official docs still indicate pre-v1 track) | Watching |
 | **Temporal API**   | Replace date-fns with native date handling                   | Safari support + polyfill maturity | Q3 2026  |
 | **Signals (TC39)** | Potential reactive primitive for state management            | Specification stage                | Watching |
 

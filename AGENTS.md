@@ -11,8 +11,9 @@ Vite ≥7 (Node.js >=20.19 or >=22.12) · Vitest ≥3.2 · Husky + lint-staged +
 Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
 Tailwind CSS ≥4 + clsx + tailwind-merge · Motion (`import from 'motion/react'`)
 React Hook Form + Zod · date-fns ≥4.1 (+@date-fns/tz)
+Data Access (optional): Prisma ≥6
 Authentication (optional): Better Auth ≥1
-Managed Services (optional): Neon Postgres | Cloudflare R2 | Resend
+Managed Services (optional): Neon Postgres | Cloudflare D1 | Cloudflare R2 | Cloudflare KV | Resend
 Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
 Lexical (primary) · ProseMirror (fallback) · Shiki
 Format.js · react-intl · Sentry · OpenTelemetry · Statsig
@@ -47,8 +48,9 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
 - ALWAYS use Radix/shadcn primitives before building custom
+- ALWAYS use Prisma ≥6 when the project needs ORM-backed server-side or edge relational data access
 - ALWAYS use Better Auth ≥1 when the project needs authentication
-- ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare R2, Resend
+- ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, Resend
 - ALWAYS use pnpm as the default package manager unless the developer explicitly overrides it
 - ALWAYS treat Bun as an alternative runtime only; it does not replace pnpm as package manager default
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
@@ -74,6 +76,7 @@ Tauri → targets/tauri.md · PWA → targets/pwa.md
 
 - Full spec: stack/STACK.md
 - Tooling: stack/tooling.md
+- Data Access: stack/data-access.md
 - Authentication: stack/auth.md
 - Managed Services: stack/managed-services.md
 - Architecture: stack/architecture.md

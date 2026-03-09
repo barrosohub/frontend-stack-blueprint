@@ -3,7 +3,7 @@
 # This file is the single source of truth for versions.
 
 schema_version: "1.0"
-blueprint_version: "1.4.0"
+blueprint_version: "1.5.0"
 updated: "2026-03-09"
 
 core:
@@ -108,6 +108,17 @@ forms:
   zod:
     install: "zod @hookform/resolvers"
 
+data_access:
+  default: "prisma"
+  note: "Prisma is the approved ORM default when server-side or edge data access is needed. Drizzle ORM remains under evaluation until it reaches v1 GA."
+  prisma:
+    status: "recommended-optional"
+    min: ">=6.0.0"
+    current: "6.18.0"
+    install: "prisma @prisma/client"
+    tooling: "prisma"
+    note: "Recommended only when a project has backend, server-side, or edge runtime and needs ORM-backed relational data access. Do not install for purely static frontend apps. Cloudflare D1 is supported via the official Prisma D1 guide, but Prisma Migrate is not the default D1 workflow."
+
 auth:
   better_auth:
     status: "recommended-optional"
@@ -126,6 +137,14 @@ managed_services:
     evaluated: "2026-03-09"
     tooling: "neonctl"
     note: "Recommended when a project needs managed Postgres. `@neondatabase/serverless` is the preferred JS/edge integration only when the project actually needs direct JavaScript, serverless, or edge access."
+  cloudflare_d1:
+    provider: "Cloudflare D1"
+    role: "database"
+    engine: "sqlite"
+    status: "recommended-optional"
+    evaluated: "2026-03-09"
+    tooling: "wrangler"
+    note: "Recommended when a project needs Cloudflare-native serverless SQL with Workers or edge runtime. D1 has SQLite semantics, does not replace Postgres, and should not be added to purely static frontend apps."
   cloudflare_r2:
     provider: "Cloudflare R2"
     role: "object-storage"
@@ -133,6 +152,13 @@ managed_services:
     evaluated: "2026-03-09"
     tooling: "wrangler"
     note: "Recommended when a project needs object storage. Integrate via the S3-compatible API or Cloudflare bindings; no default npm package is mandated by this blueprint."
+  cloudflare_kv:
+    provider: "Cloudflare KV"
+    role: "key-value-storage"
+    status: "recommended-optional"
+    evaluated: "2026-03-09"
+    tooling: "wrangler"
+    note: "Recommended when a project needs key-value storage for read-heavy or eventually consistent workloads in the Cloudflare ecosystem. It is not a relational or strongly consistent transactional store."
   resend:
     provider: "Resend"
     role: "transactional-and-marketing-email"
@@ -198,7 +224,7 @@ targets:
     type: "cloud-frontend-hosting"
     evaluated: "2026-03-09"
     tooling: "wrangler"
-    note: "Default cloud frontend deployment target when a project needs frontend hosting and no provider is specified."
+    note: "Default cloud frontend deployment target when a project needs frontend hosting and no provider is specified. Cloudflare data services such as D1, KV, or R2 remain optional and should only be added when the project also has edge or server-side runtime needs."
   vercel:
     status: "secondary-optional"
     type: "cloud-frontend-hosting"
