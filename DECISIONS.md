@@ -31,6 +31,7 @@ the `rationale/` directory.
 | ADR-021 | Cloudflare D1 as Cloudflare-specific serverless database option | 2026-03-09 | [why-cloudflare-d1.md](rationale/why-cloudflare-d1.md)                       |
 | ADR-022 | Cloudflare KV for optional key-value storage                    | 2026-03-09 | [why-cloudflare-kv.md](rationale/why-cloudflare-kv.md)                       |
 | ADR-023 | Capability-gated advanced frontend libraries                    | 2026-07-13 | [why-advanced-capabilities.md](rationale/why-advanced-capabilities.md)       |
+| ADR-024 | DESIGN.md as provisional optional design contract               | 2026-07-13 | [why-design-md.md](rationale/why-design-md.md)                               |
 
 ## Principles
 

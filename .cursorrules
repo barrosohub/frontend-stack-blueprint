@@ -20,6 +20,7 @@
 - Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
 - Tailwind CSS ≥4 + clsx + tailwind-merge (cn() utility required)
 - Motion (formerly Framer Motion) — `import from 'motion/react'`
+- DESIGN.md Design Contract (provisional, optional): root `DESIGN.md` → generated Tailwind 4 tokens
 - React Hook Form + Zod
 - Data Access (optional): Prisma ≥6
 - Authentication (optional): Better Auth ≥1
@@ -75,6 +76,7 @@
 - NEVER put business logic in components
 - NEVER install packages outside this stack without asking
 - ONLY install Advanced Capabilities when an explicit product requirement activates them
+- WHEN root `DESIGN.md` exists, ALWAYS read it before UI work and regenerate tokens after intentional contract changes
 
 ## Banned Technologies
 
@@ -92,6 +94,7 @@ PWA → vite-plugin-pwa (see targets/pwa.md)
 
 See stack/ directory for detailed specs per layer.
 See stack/advanced-capabilities.md for capability-gated workbench surfaces.
+See stack/design-system.md for the DESIGN.md Design Contract.
 See stack.yaml for machine-readable version manifest.
 See guides/new-project-setup.md for bootstrapping.
 See targets/TARGETS.md for cloud and desktop deployment target policy.

@@ -1,7 +1,7 @@
 ---
 title: "Template: Project Structure"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.7.0"
+updated: "2026-07-13"
 tier: 2
 ---
 
@@ -21,7 +21,8 @@ my-project/
 │   │   ├── App.tsx              # Root component
 │   │   ├── providers.tsx        # QueryClient, IntlProvider, etc.
 │   │   ├── router.tsx           # Route tree
-│   │   └── app.css              # @import "tailwindcss" + @theme
+│   │   ├── design-tokens.css    # Generated from DESIGN.md (optional)
+│   │   └── app.css              # Tailwind + generated token imports
 │   │
 │   ├── features/                # One folder per domain
 │   │   └── <feature>/
@@ -50,8 +51,9 @@ my-project/
 │   └── main.tsx                 # Entry point
 │
 ├── .husky/
-│   └── pre-commit               # npx lint-staged
+│   └── pre-commit               # pnpm exec lint-staged
 │
+├── DESIGN.md                     # Optional product design contract
 ├── index.html
 ├── tsconfig.json
 ├── vite.config.ts
@@ -69,3 +71,5 @@ my-project/
 - Every feature has an `index.ts` barrel file
 - All imports use `@/` path aliases
 - `cn.ts` is always at `src/shared/utils/cn.ts`
+- Root `DESIGN.md` is opt-in and must be customized before use
+- `src/app/design-tokens.css` is generated and must not be hand-edited

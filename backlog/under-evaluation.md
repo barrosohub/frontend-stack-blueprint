@@ -1,6 +1,6 @@
 ---
 title: "Under Evaluation"
-version: "1.6.0"
+version: "1.7.0"
 updated: "2026-07-13"
 tier: 4
 ---
@@ -19,6 +19,7 @@ Technologies being actively evaluated for potential inclusion in the stack.
 | **Temporal API**   | Replace date-fns with native date handling                   | Safari support + polyfill maturity                                                     | Q3 2026  |
 | **Signals (TC39)** | Potential reactive primitive for state management            | Specification stage                                                                    | Watching |
 | **better-sqlite3** | Electron-local SQLite persistence                            | Native ABI/prebuild compatibility must be proven for the exact Electron release matrix | Watching |
+| **DESIGN.md**      | Promotion from provisional to recommended design contract    | Alpha specification and pre-1.0 CLI must demonstrate migration compatibility           | Watching |
 
 ## Evaluation Criteria
 

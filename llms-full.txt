@@ -1,4 +1,4 @@
-FRONTEND STACK BLUEPRINT v1.6.0 (2026-07-13)
+FRONTEND STACK BLUEPRINT v1.7.0 (2026-07-13)
 Agnostic — applies to ANY frontend project.
 Repository: https://github.com/barrosohub/frontend-stack-blueprint
 Audience: external coding agents consuming this repo as stack reference.
@@ -92,6 +92,17 @@ STYLING & ANIMATION:
   → Package: motion (successor to framer-motion)
   → Import: import { motion } from 'motion/react'
   → No CSS-in-JS ever (no styled-components, no emotion)
+
+DESIGN.md DESIGN CONTRACT (PROVISIONAL, OPTIONAL):
+  Canonical term: DESIGN.md Design Contract
+  Root DESIGN.md carries product visual intent and source token values
+  → Activate only for an explicit brand, multi-screen consistency, or agent-generated UI need
+  → Specification is alpha; pin @google/design.md exactly to 0.3.0
+  → Use the cross-platform `designmd` binary in package scripts
+  → Validate before exporting Tailwind 4 tokens to src/app/design-tokens.css
+  → Never hand-edit generated design-tokens.css or ship the starter template unchanged
+  → When root DESIGN.md exists, read it before creating or restyling UI
+  → See stack/design-system.md for precedence, lifecycle, and CI rules
 
 STATE & DATA:
   Zustand (client state, lightweight, minimal boilerplate)
@@ -242,6 +253,7 @@ RULES FOR AGENTS
 20. **Tooling default** — use pnpm unless the developer explicitly overrides the package manager
 21. **Runtime optionality** — Bun is runtime-only alternative; Node.js remains the default runtime
 22. **Advanced Capabilities only when needed** — never install the optional workbench suite as a blanket dependency set
+23. **Honor DESIGN.md when present** — read the root contract before UI work; update it before intentional token changes and regenerate Tailwind tokens
 
 ================================================================================
 BANNED TECHNOLOGIES
@@ -321,5 +333,5 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 ================================================================================
-VERSION: 1.6.0 | DATE: 2026-07-13 | SCHEMA: stack.yaml
+VERSION: 1.7.0 | DATE: 2026-07-13 | SCHEMA: stack.yaml
 ================================================================================

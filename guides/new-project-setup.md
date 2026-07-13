@@ -1,6 +1,6 @@
 ---
 title: "New Project Setup"
-version: "1.6.0"
+version: "1.7.0"
 updated: "2026-07-13"
 tier: 2
 ---
@@ -148,7 +148,50 @@ pnpm dlx shadcn@latest init
 pnpm dlx shadcn@latest add button input dialog
 ```
 
-## Step 11: Verify Setup
+## Step 11: DESIGN.md Design Contract (Optional, Provisional)
+
+Activate this step only when the product has an agreed visual identity, needs
+cross-screen consistency, or will use agents to generate and modify UI.
+
+1. Copy [the example contract](../templates/DESIGN.example.md) to the project
+   root as `DESIGN.md`.
+2. Replace the starter narrative and tokens with product-approved direction.
+3. Pin the alpha CLI exactly:
+
+```bash
+pnpm add -D @google/design.md@0.3.0
+```
+
+4. Add scripts to `package.json`:
+
+```json
+{
+  "scripts": {
+    "design:lint": "designmd lint DESIGN.md",
+    "design:tokens": "designmd export --format css-tailwind DESIGN.md > src/app/design-tokens.css",
+    "design:check": "pnpm design:lint && pnpm design:tokens && git diff --exit-code -- src/app/design-tokens.css"
+  }
+}
+```
+
+5. Generate and import the Tailwind 4 tokens:
+
+```bash
+pnpm design:lint
+pnpm design:tokens
+```
+
+```css
+/* src/app/app.css */
+@import "tailwindcss";
+@import "./design-tokens.css";
+```
+
+Do not ship the example unchanged or hand-edit the generated token file. See
+[stack/design-system.md](../stack/design-system.md) for precedence, agent rules,
+CI guidance, and the alpha stability policy.
+
+## Step 12: Verify Setup
 
 ```bash
 pnpm dev              # Should start without errors
@@ -156,7 +199,7 @@ pnpm build            # Should build without errors
 pnpm exec vitest --run  # Tests should pass
 ```
 
-## Step 12: If the Project Needs Authentication
+## Step 13: If the Project Needs Authentication
 
 Use Better Auth as the default auth layer only when the project needs login/session management.
 
@@ -166,7 +209,7 @@ Use Better Auth as the default auth layer only when the project needs login/sess
 - If client and server are separate, install Better Auth in both parts as directed by the official docs
 - Apply **Official CLI-First + Impact Preflight** before any Better Auth CLI command
 
-## Step 13: If the Project Needs Data Access / ORM
+## Step 14: If the Project Needs Data Access / ORM
 
 Use Prisma only when the project has backend, server-side, or edge runtime and actually needs ORM-backed relational data access.
 
@@ -176,7 +219,7 @@ Use Prisma only when the project has backend, server-side, or edge runtime and a
 - If the project pairs Prisma with Cloudflare D1, follow the official Prisma + D1 guide and do not assume `prisma migrate dev` as the default workflow
 - Apply **Official CLI-First + Impact Preflight** before Prisma CLI commands that initialize schema, generate clients, or alter database state
 
-## Step 14: If the Project Needs Managed Services
+## Step 15: If the Project Needs Managed Services
 
 Use managed services only when the project actually needs database, object storage, or email delivery capabilities.
 
@@ -190,14 +233,14 @@ Use managed services only when the project actually needs database, object stora
 - D1, KV, and R2 should only be added when the project also has Functions, Workers, or another server-side/edge runtime surface
 - Apply **Official CLI-First + Impact Preflight** before Neon, Prisma, or Wrangler commands that modify infrastructure or schema
 
-## Step 15: If the Project Needs Bun Runtime
+## Step 16: If the Project Needs Bun Runtime
 
 - Bun is approved as an alternative runtime only; Node.js remains the default runtime baseline
 - Keep `pnpm` as the package manager even when the runtime is Bun
 - Validate CLI, dependency, and deployment compatibility before switching runtime assumptions
 - See [stack/tooling.md](../stack/tooling.md) for the canonical tooling policy
 
-## Step 16: If the Project Needs Advanced Capabilities
+## Step 17: If the Project Needs Advanced Capabilities
 
 Do not add workbench-style dependencies during the base setup. If the product
 explicitly needs Markdown, interactive tables, charts, diagrams, code editing,

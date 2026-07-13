@@ -1,7 +1,7 @@
 ---
 title: "Template: Tailwind CSS v4"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.7.0"
+updated: "2026-07-13"
 tier: 2
 ---
 
@@ -14,7 +14,7 @@ Tailwind CSS v4 uses CSS-first configuration. No `tailwind.config.js` needed.
 ### Install
 
 ```bash
-npm install -D tailwindcss @tailwindcss/vite
+pnpm add -D tailwindcss @tailwindcss/vite
 ```
 
 ### Vite Plugin
@@ -51,6 +51,25 @@ Tailwind CSS v4 uses `@theme` directive in CSS instead of a config file:
   --breakpoint-3xl: 1920px;
 }
 ```
+
+## With an Active DESIGN.md Contract
+
+When the project has a root `DESIGN.md`, generate the `@theme` block instead of
+maintaining it by hand:
+
+```bash
+pnpm design:lint
+pnpm design:tokens
+```
+
+```css
+/* src/app/app.css */
+@import "tailwindcss";
+@import "./design-tokens.css";
+```
+
+`src/app/design-tokens.css` is generated from `DESIGN.md` and must not be
+hand-edited. See [DESIGN.md Design Contract](../stack/design-system.md).
 
 ## Key Changes from v3
 

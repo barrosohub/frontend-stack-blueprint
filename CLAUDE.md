@@ -1,4 +1,4 @@
-# Frontend Stack Blueprint v1.6.0
+# Frontend Stack Blueprint v1.7.0
 
 This repository defines the canonical frontend stack for any new
 frontend project. It is platform-agnostic — the same stack applies
@@ -17,6 +17,7 @@ whether the project targets browser, desktop, or anything else.
 - **Pre-styled UI:** shadcn/ui (recommended — Radix + Tailwind)
 - **Styling:** Tailwind CSS ≥4 + clsx + tailwind-merge (no CSS-in-JS ever)
 - **Animations:** Motion (formerly Framer Motion) — `import from 'motion/react'`
+- **DESIGN.md Design Contract (provisional, optional):** root `DESIGN.md` for product visual intent and source tokens
 - **Forms:** React Hook Form + Zod
 - **Data Access (optional):** Prisma ≥6
 - **Authentication (optional):** Better Auth ≥1
@@ -76,6 +77,7 @@ whether the project targets browser, desktop, or anything else.
 - NEVER put business logic in components — extract to hooks
 - NEVER install packages outside this stack without asking
 - ONLY install Advanced Capabilities when an explicit product requirement activates them
+- WHEN root `DESIGN.md` exists, ALWAYS read it before UI work, update it before intentional token changes, and regenerate `design-tokens.css`
 
 ## Banned Technologies
 
@@ -101,6 +103,7 @@ The stack above works as-is for browser projects.
 - Authentication: @stack/auth.md
 - Managed Services: @stack/managed-services.md
 - Advanced Capabilities: @stack/advanced-capabilities.md
+- DESIGN.md Design Contract: @stack/design-system.md
 - Targets overview: @targets/TARGETS.md
 - Architecture: @stack/architecture.md
 - Build & test: @stack/build-and-test.md
