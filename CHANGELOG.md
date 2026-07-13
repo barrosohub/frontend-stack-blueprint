@@ -5,6 +5,22 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] — 2026-07-13
+
+### Added
+
+- **Advanced capabilities:** capability-gated defaults for secure Markdown, data tables, business charts, Mermaid diagrams, CodeMirror editing, xterm.js/node-pty terminals, Yjs collaboration, and PDF.js viewing
+- **Decision record:** `rationale/why-advanced-capabilities.md` and `ADR-023` document the selection criteria, boundaries, and rejected blanket-install approach
+- **Integrity CI:** dependency-free `scripts/check-blueprint.mjs` validates version markers, entry-point parity, banned-list parity, required files, and internal Markdown links
+- **GitHub Actions:** `blueprint-integrity.yml` runs the drift audit on pull requests and pushes to `main`
+
+### Changed
+
+- **Electron target:** expanded process isolation, typed IPC, CSP/navigation/permission controls, native-module release gates, signed updates, and packaged-build validation
+- **Machine-readable manifest:** `stack.yaml` now includes the optional `advanced_capabilities` decision matrix and version `1.6.0`
+- **Entry points:** synchronized all agent-facing surfaces with the optional capability layer
+- **Evaluation backlog:** `better-sqlite3` remains under evaluation until native Electron ABI/prebuild compatibility is proven for the chosen release matrix
+
 ## [1.5.0] — 2026-03-09
 
 ### Added

@@ -1,13 +1,13 @@
 ---
 title: "Roadmap"
-version: "1.5.0"
-updated: "2026-03-09"
+version: "1.6.0"
+updated: "2026-07-13"
 tier: 4
 ---
 
 # Roadmap
 
-## Current: v1.5.0 (2026-03-09)
+## Current: v1.6.0 (2026-07-13)
 
 The complete frontend stack blueprint is defined and documented.
 Zustand is the primary client state manager. TanStack Store succession
@@ -19,17 +19,21 @@ Managed services defaults now cover Neon Postgres, Cloudflare D1, Cloudflare R2,
 pnpm is now the priority package manager, Bun is the alternative runtime,
 and Cloudflare Pages / Vercel are approved cloud frontend targets.
 Drizzle ORM remains under evaluation until it reaches v1 GA.
+Advanced technical surfaces now have capability-gated defaults for Markdown,
+tables, charts, diagrams, code editing, terminal UI/PTY hosting,
+collaboration, and PDF viewing. The Electron target now defines a hardened
+process, IPC, packaging, and release boundary. Blueprint drift is checked in CI.
 
 ## Planned
 
-### v1.6.0 — Quality of Life
+### v1.7.0 — Quality of Life
 
 - [ ] Add E2E testing guidance (Playwright)
 - [ ] Add accessibility testing patterns
 - [ ] Add performance budgets template
 - [ ] Expand migration paths (more legacy stack coverage)
 
-### v1.7.0 — Extended Targets
+### v1.8.0 — Extended Targets
 
 - [ ] Mobile WebView target documentation
 - [ ] React Native / Expo evaluation

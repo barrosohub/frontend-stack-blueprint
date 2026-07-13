@@ -10,7 +10,7 @@ compatibility: Designed for Claude Code, VSCode Copilot, Codex, and Antigravity.
 license: MIT
 metadata:
   author: barrosohub
-  version: "1.0"
+  version: "1.1"
   scope: internal
 ---
 
@@ -107,6 +107,15 @@ Before editing, ALWAYS:
 | Cursor rules         | https://docs.cursor.com/context/rules                                               |
 | Claude Code          | https://docs.anthropic.com/en/docs/claude-code                                      |
 | Copilot instructions | https://docs.github.com/en/copilot                                                  |
+| react-markdown       | https://github.com/remarkjs/react-markdown                                          |
+| TanStack Table       | https://tanstack.com/table/latest                                                   |
+| Recharts             | https://recharts.github.io/                                                         |
+| Mermaid              | https://mermaid.js.org/                                                             |
+| CodeMirror           | https://codemirror.net/docs/                                                        |
+| xterm.js             | https://github.com/xtermjs/xterm.js                                                 |
+| node-pty             | https://github.com/microsoft/node-pty                                               |
+| Yjs                  | https://docs.yjs.dev/                                                               |
+| PDF.js               | https://mozilla.github.io/pdf.js/                                                   |
 
 ---
 
@@ -217,6 +226,16 @@ IF technology added/removed:
 
 ## Mandatory Drift Audit (Before Merge)
 
+Run the automated integrity gate first:
+
+```bash
+node scripts/check-blueprint.mjs
+```
+
+It validates release markers, agent entry-point parity, banned-list parity,
+required canonical files, and local Markdown links. The following manual checks
+remain useful for reviewing the semantic intent of a change:
+
 Run these checks whenever stack rules, versions, or entry points changed:
 
 ```
@@ -230,8 +249,8 @@ Run these checks whenever stack rules, versions, or entry points changed:
    Compare stack.yaml banned entries with AGENTS.md / CLAUDE.md /
    .cursor/rules/*.mdc / .cursorrules / .github/copilot-instructions.md / llms-full.txt
 
-4. Link integrity:
-   Validate internal markdown links after structural edits.
+4. Automated integrity:
+   node scripts/check-blueprint.mjs
 ```
 
 If any mismatch appears, do not finalize the change until drift is resolved.
@@ -272,6 +291,7 @@ removed previously. In this case you MUST:
 5. **Always preserve markdown frontmatter** (title, version, updated, tier)
 6. **Always update the `updated` field** in YAML frontmatter of modified files
 7. **Always test relative links** between documents after structural changes
+8. **Always run `node scripts/check-blueprint.mjs`** before finalizing a change
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "New Project Setup"
-version: "1.5.0"
-updated: "2026-03-09"
+version: "1.6.0"
+updated: "2026-07-13"
 tier: 2
 ---
 
@@ -196,6 +196,18 @@ Use managed services only when the project actually needs database, object stora
 - Keep `pnpm` as the package manager even when the runtime is Bun
 - Validate CLI, dependency, and deployment compatibility before switching runtime assumptions
 - See [stack/tooling.md](../stack/tooling.md) for the canonical tooling policy
+
+## Step 16: If the Project Needs Advanced Capabilities
+
+Do not add workbench-style dependencies during the base setup. If the product
+explicitly needs Markdown, interactive tables, charts, diagrams, code editing,
+a terminal, collaborative state, or PDF viewing:
+
+- Follow [stack/advanced-capabilities.md](../stack/advanced-capabilities.md)
+- Install only the package set for the required capability
+- Define its security, accessibility, performance, lifecycle, and test boundary
+- For terminals or native modules, verify the exact desktop/server runtime and
+  release matrix before installation
 
 ## Optional: Deployment Target
 

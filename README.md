@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.5.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.6.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -59,6 +59,8 @@ A **public repository** that serves as the **single source of truth** for modern
 │                                                              │
 │  RICH TEXT      Lexical (primary) · ProseMirror (fallback)   │
 │  SYNTAX         Shiki                                        │
+│  ADVANCED (opt) Markdown · Tables · Charts · Mermaid         │
+│                 CodeMirror · Terminal · Yjs · PDF.js         │
 │  I18N           Format.js + react-intl                       │
 │                                                              │
 │  OBSERVABILITY  Sentry · OpenTelemetry · Statsig             │
@@ -139,6 +141,7 @@ frontend-stack-blueprint/
 │   ├── state-and-data.md Zustand + TanStack Query
 │   ├── dates.md          date-fns
 │   ├── content.md        Lexical, ProseMirror, Shiki
+│   ├── advanced-capabilities.md Capability-gated workbench surfaces
 │   ├── i18n.md           Format.js
 │   ├── observability.md  Sentry, OTel, Statsig
 │   └── icons.md          Lucide, Phosphor, Tabler
@@ -162,6 +165,7 @@ frontend-stack-blueprint/
 │   ├── cloudflare-pages-vs-vercel.md
 │   ├── why-prisma.md / why-cloudflare-d1.md / why-cloudflare-kv.md
 │   ├── why-neon.md / why-cloudflare-r2.md / why-resend.md
+│   ├── why-advanced-capabilities.md
 │   └── why-*.md files for every technology
 │
 └── 🔮 backlog/ (Tier 4 — Evolution)

@@ -27,6 +27,7 @@
 - date-fns ≥4.1 (+@date-fns/tz)
 - Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
 - Lexical (primary) · ProseMirror (fallback) · Shiki
+- Advanced Capabilities (optional): Markdown · TanStack Table · Recharts · Mermaid · CodeMirror · xterm/node-pty · Yjs · PDF.js
 - Format.js · react-intl
 - Sentry · OpenTelemetry · Statsig
 - Lucide (default icon library)
@@ -73,6 +74,7 @@
 - NEVER use `any` — use `unknown` + type guards
 - NEVER put business logic in components
 - NEVER install packages outside this stack without asking
+- ONLY install Advanced Capabilities when an explicit product requirement activates them
 
 ## Banned Technologies
 
@@ -89,6 +91,7 @@ PWA → vite-plugin-pwa (see targets/pwa.md)
 ## Deep Dive
 
 See stack/ directory for detailed specs per layer.
+See stack/advanced-capabilities.md for capability-gated workbench surfaces.
 See stack.yaml for machine-readable version manifest.
 See guides/new-project-setup.md for bootstrapping.
 See targets/TARGETS.md for cloud and desktop deployment target policy.

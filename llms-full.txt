@@ -1,4 +1,4 @@
-FRONTEND STACK BLUEPRINT v1.5.0 (2026-03-09)
+FRONTEND STACK BLUEPRINT v1.6.0 (2026-07-13)
 Agnostic — applies to ANY frontend project.
 Repository: https://github.com/barrosohub/frontend-stack-blueprint
 Audience: external coding agents consuming this repo as stack reference.
@@ -105,6 +105,19 @@ CONTENT & EDITING:
   Lexical (rich text, primary — Meta-backed)
   ProseMirror (rich text, fallback for complex collab only)
   Shiki (syntax highlighting with themes)
+
+ADVANCED CAPABILITIES (OPTIONAL — INSTALL ONLY WHEN REQUIRED):
+  Markdown → react-markdown + remark-gfm + rehype-sanitize
+  Data tables → @tanstack/react-table
+  Business charts → Recharts
+  Technical diagrams → Mermaid (strict/sandbox security level)
+  Code editing → CodeMirror 6; keep Shiki for read-only highlighting
+  Terminal → @xterm/xterm in UI + node-pty in trusted host only
+  Collaboration → Yjs for explicit concurrent/offline-first requirements
+  PDF viewing → PDF.js worker path
+  → Activate only the capability the product actually needs
+  → Define security, accessibility, performance, lifecycle, and tests
+  → See stack/advanced-capabilities.md for mandatory boundaries
 
 INTERNATIONALIZATION:
   Format.js (runtime formatting: numbers, dates, plurals)
@@ -228,6 +241,7 @@ RULES FOR AGENTS
 19. **Managed services when needed** — use Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, and Resend by capability; do not add them by default to every project
 20. **Tooling default** — use pnpm unless the developer explicitly overrides the package manager
 21. **Runtime optionality** — Bun is runtime-only alternative; Node.js remains the default runtime
+22. **Advanced Capabilities only when needed** — never install the optional workbench suite as a blanket dependency set
 
 ================================================================================
 BANNED TECHNOLOGIES
@@ -273,6 +287,8 @@ VERCEL (secondary cloud frontend target):
 
 ELECTRON (desktop — JS-only team, max compatibility):
   + Electron ≥33 + Forge + electron-updater
+  Renderer stays unprivileged; preload exposes narrow typed APIs; main/utility owns privileged work
+  Terminal: xterm.js in renderer, node-pty only in trusted main/utility process via validated IPC
   Bundle: 80–150 MB | RAM: 200–300 MB | Startup: 1–2s
 
 TAURI (desktop — lightweight, future mobile):
@@ -305,5 +321,5 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 ================================================================================
-VERSION: 1.5.0 | DATE: 2026-03-09 | SCHEMA: stack.yaml
+VERSION: 1.6.0 | DATE: 2026-07-13 | SCHEMA: stack.yaml
 ================================================================================

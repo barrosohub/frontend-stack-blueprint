@@ -6,30 +6,31 @@ the `rationale/` directory.
 
 ## Active Decisions
 
-| #       | Decision                               | Date       | Rationale                                                                    |
-| ------- | -------------------------------------- | ---------- | ---------------------------------------------------------------------------- |
-| ADR-001 | React as UI framework                  | 2026-02-28 | [why-react.md](rationale/why-react.md)                                       |
-| ADR-002 | Vite as build tool                     | 2026-02-28 | [why-vite.md](rationale/why-vite.md)                                         |
-| ADR-003 | Vitest as test runner                  | 2026-02-28 | [why-vitest.md](rationale/why-vitest.md)                                     |
-| ADR-004 | Zustand + TanStack Query for state     | 2026-02-28 | [why-tanstack.md](rationale/why-tanstack.md)                                 |
-| ADR-005 | TanStack Router as default router      | 2026-02-28 | [why-tanstack-router.md](rationale/why-tanstack-router.md)                   |
-| ADR-006 | Radix UI for headless components       | 2026-02-28 | [why-radix.md](rationale/why-radix.md)                                       |
-| ADR-007 | shadcn/ui as recommended pre-styled UI | 2026-02-28 | [why-shadcn-ui.md](rationale/why-shadcn-ui.md)                               |
-| ADR-008 | Tailwind CSS for styling               | 2026-02-28 | [why-tailwind.md](rationale/why-tailwind.md)                                 |
-| ADR-009 | React Hook Form + Zod for forms        | 2026-02-28 | [why-rhf-zod.md](rationale/why-rhf-zod.md)                                   |
-| ADR-010 | date-fns for date manipulation         | 2026-02-28 | [why-date-fns.md](rationale/why-date-fns.md)                                 |
-| ADR-011 | Lexical over ProseMirror (primary)     | 2026-02-28 | [why-lexical-over-prosemirror.md](rationale/why-lexical-over-prosemirror.md) |
-| ADR-012 | Electron vs Tauri comparison           | 2026-02-28 | [electron-vs-tauri.md](rationale/electron-vs-tauri.md)                       |
-| ADR-013 | Better Auth for optional authentication | 2026-03-09 | [why-better-auth.md](rationale/why-better-auth.md)                           |
-| ADR-014 | Neon for optional managed Postgres     | 2026-03-09 | [why-neon.md](rationale/why-neon.md)                                         |
-| ADR-015 | Cloudflare R2 for optional object storage | 2026-03-09 | [why-cloudflare-r2.md](rationale/why-cloudflare-r2.md)                     |
-| ADR-016 | Resend for optional email delivery     | 2026-03-09 | [why-resend.md](rationale/why-resend.md)                                     |
-| ADR-017 | pnpm as default package manager        | 2026-03-09 | [why-pnpm.md](rationale/why-pnpm.md)                                         |
-| ADR-018 | Bun as alternative JavaScript runtime  | 2026-03-09 | [why-bun-runtime.md](rationale/why-bun-runtime.md)                           |
-| ADR-019 | Cloudflare Pages vs Vercel for cloud frontend deployment | 2026-03-09 | [cloudflare-pages-vs-vercel.md](rationale/cloudflare-pages-vs-vercel.md) |
-| ADR-020 | Prisma as optional TypeScript ORM      | 2026-03-09 | [why-prisma.md](rationale/why-prisma.md)                                     |
-| ADR-021 | Cloudflare D1 as Cloudflare-specific serverless database option | 2026-03-09 | [why-cloudflare-d1.md](rationale/why-cloudflare-d1.md) |
-| ADR-022 | Cloudflare KV for optional key-value storage | 2026-03-09 | [why-cloudflare-kv.md](rationale/why-cloudflare-kv.md)                   |
+| #       | Decision                                                        | Date       | Rationale                                                                    |
+| ------- | --------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------- |
+| ADR-001 | React as UI framework                                           | 2026-02-28 | [why-react.md](rationale/why-react.md)                                       |
+| ADR-002 | Vite as build tool                                              | 2026-02-28 | [why-vite.md](rationale/why-vite.md)                                         |
+| ADR-003 | Vitest as test runner                                           | 2026-02-28 | [why-vitest.md](rationale/why-vitest.md)                                     |
+| ADR-004 | Zustand + TanStack Query for state                              | 2026-02-28 | [why-tanstack.md](rationale/why-tanstack.md)                                 |
+| ADR-005 | TanStack Router as default router                               | 2026-02-28 | [why-tanstack-router.md](rationale/why-tanstack-router.md)                   |
+| ADR-006 | Radix UI for headless components                                | 2026-02-28 | [why-radix.md](rationale/why-radix.md)                                       |
+| ADR-007 | shadcn/ui as recommended pre-styled UI                          | 2026-02-28 | [why-shadcn-ui.md](rationale/why-shadcn-ui.md)                               |
+| ADR-008 | Tailwind CSS for styling                                        | 2026-02-28 | [why-tailwind.md](rationale/why-tailwind.md)                                 |
+| ADR-009 | React Hook Form + Zod for forms                                 | 2026-02-28 | [why-rhf-zod.md](rationale/why-rhf-zod.md)                                   |
+| ADR-010 | date-fns for date manipulation                                  | 2026-02-28 | [why-date-fns.md](rationale/why-date-fns.md)                                 |
+| ADR-011 | Lexical over ProseMirror (primary)                              | 2026-02-28 | [why-lexical-over-prosemirror.md](rationale/why-lexical-over-prosemirror.md) |
+| ADR-012 | Electron vs Tauri comparison                                    | 2026-02-28 | [electron-vs-tauri.md](rationale/electron-vs-tauri.md)                       |
+| ADR-013 | Better Auth for optional authentication                         | 2026-03-09 | [why-better-auth.md](rationale/why-better-auth.md)                           |
+| ADR-014 | Neon for optional managed Postgres                              | 2026-03-09 | [why-neon.md](rationale/why-neon.md)                                         |
+| ADR-015 | Cloudflare R2 for optional object storage                       | 2026-03-09 | [why-cloudflare-r2.md](rationale/why-cloudflare-r2.md)                       |
+| ADR-016 | Resend for optional email delivery                              | 2026-03-09 | [why-resend.md](rationale/why-resend.md)                                     |
+| ADR-017 | pnpm as default package manager                                 | 2026-03-09 | [why-pnpm.md](rationale/why-pnpm.md)                                         |
+| ADR-018 | Bun as alternative JavaScript runtime                           | 2026-03-09 | [why-bun-runtime.md](rationale/why-bun-runtime.md)                           |
+| ADR-019 | Cloudflare Pages vs Vercel for cloud frontend deployment        | 2026-03-09 | [cloudflare-pages-vs-vercel.md](rationale/cloudflare-pages-vs-vercel.md)     |
+| ADR-020 | Prisma as optional TypeScript ORM                               | 2026-03-09 | [why-prisma.md](rationale/why-prisma.md)                                     |
+| ADR-021 | Cloudflare D1 as Cloudflare-specific serverless database option | 2026-03-09 | [why-cloudflare-d1.md](rationale/why-cloudflare-d1.md)                       |
+| ADR-022 | Cloudflare KV for optional key-value storage                    | 2026-03-09 | [why-cloudflare-kv.md](rationale/why-cloudflare-kv.md)                       |
+| ADR-023 | Capability-gated advanced frontend libraries                    | 2026-07-13 | [why-advanced-capabilities.md](rationale/why-advanced-capabilities.md)       |
 
 ## Principles
 

@@ -1,4 +1,4 @@
-# Frontend Stack Blueprint v1.5.0
+# Frontend Stack Blueprint v1.6.0
 
 This repository defines the canonical frontend stack for any new
 frontend project. It is platform-agnostic — the same stack applies
@@ -26,6 +26,7 @@ whether the project targets browser, desktop, or anything else.
 - **Server State:** TanStack Query ≥5.60
 - **Rich Text:** Lexical (primary), ProseMirror (fallback only)
 - **Syntax:** Shiki
+- **Advanced Capabilities (optional):** secure Markdown, TanStack Table, Recharts, Mermaid, CodeMirror, xterm.js/node-pty, Yjs, PDF.js
 - **i18n:** Format.js + react-intl
 - **Observability:** Sentry + OpenTelemetry + Statsig
 - **Icons:** Lucide (default), Phosphor or Tabler as alternatives
@@ -74,6 +75,12 @@ whether the project targets browser, desktop, or anything else.
 - NEVER use `any` — use `unknown` + type guards
 - NEVER put business logic in components — extract to hooks
 - NEVER install packages outside this stack without asking
+- ONLY install Advanced Capabilities when an explicit product requirement activates them
+
+## Banned Technologies
+
+redux, mobx, styled-components, emotion, jest, moment, dayjs,
+formik, yup, class components, CSS-in-JS, deep relative imports
 
 ## Deployment Targets (ONLY if the project needs one)
 
@@ -93,6 +100,7 @@ The stack above works as-is for browser projects.
 - Data access: @stack/data-access.md
 - Authentication: @stack/auth.md
 - Managed Services: @stack/managed-services.md
+- Advanced Capabilities: @stack/advanced-capabilities.md
 - Targets overview: @targets/TARGETS.md
 - Architecture: @stack/architecture.md
 - Build & test: @stack/build-and-test.md

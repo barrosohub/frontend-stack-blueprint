@@ -1,7 +1,7 @@
 ---
 title: "Package Versions"
-version: "1.5.0"
-updated: "2026-03-09"
+version: "1.6.0"
+updated: "2026-07-13"
 tier: 2
 ---
 
@@ -22,11 +22,11 @@ tier: 2
 
 ## Tooling
 
-| Tool | Policy | Notes |
-| ---- | ------ | ----- |
-| pnpm | Priority | Default package manager; provision with `corepack enable pnpm` |
-| Node.js | Default runtime | `>=20.19` or `>=22.12` |
-| Bun | Alternative runtime | Approved runtime alternative only |
+| Tool    | Policy              | Notes                                                          |
+| ------- | ------------------- | -------------------------------------------------------------- |
+| pnpm    | Priority            | Default package manager; provision with `corepack enable pnpm` |
+| Node.js | Default runtime     | `>=20.19` or `>=22.12`                                         |
+| Bun     | Alternative runtime | Approved runtime alternative only                              |
 
 ## UI
 
@@ -49,9 +49,9 @@ tier: 2
 
 ## Data Access
 
-| Package        | Min Version | Current | Install                  |
-| -------------- | ----------- | ------- | ------------------------ |
-| Prisma ORM     | ≥6.0        | 6.18.0  | `prisma @prisma/client`  |
+| Package    | Min Version | Current | Install                 |
+| ---------- | ----------- | ------- | ----------------------- |
+| Prisma ORM | ≥6.0        | 6.18.0  | `prisma @prisma/client` |
 
 > **Note:** Prisma is approved only for projects that actually have
 > backend, server-side, or edge runtime. Drizzle ORM remains under
@@ -86,6 +86,27 @@ tier: 2
 | Sentry        | `@sentry/react`                                   |
 | OpenTelemetry | `@opentelemetry/api @opentelemetry/sdk-trace-web` |
 | Statsig       | `@statsig/react-bindings`                         |
+
+## Advanced Capabilities (optional)
+
+Install only the row required by an explicit product capability.
+
+| Capability    | Package                 | Min | Current (2026-07-13)      |
+| ------------- | ----------------------- | --- | ------------------------- |
+| Markdown      | `react-markdown`        | ≥10 | 10.1.0                    |
+| GFM           | `remark-gfm`            | ≥4  | 4.0.1                     |
+| Sanitization  | `rehype-sanitize`       | ≥6  | 6.0.0                     |
+| Data tables   | `@tanstack/react-table` | ≥8  | 8.21.3                    |
+| Charts        | `recharts`              | ≥3  | 3.9.2                     |
+| Diagrams      | `mermaid`               | ≥11 | 11.16.0                   |
+| Code editor   | `@codemirror/*`         | ≥6  | `@codemirror/view` 6.43.6 |
+| Terminal UI   | `@xterm/xterm`          | ≥6  | 6.0.0                     |
+| PTY host      | `node-pty`              | ≥1  | 1.1.0                     |
+| Collaboration | `yjs`                   | ≥13 | 13.6.31                   |
+| PDF viewing   | `pdfjs-dist`            | ≥6  | 6.1.200                   |
+
+See [Advanced Capabilities](../stack/advanced-capabilities.md) for activation
+gates and security/runtime boundaries.
 
 ## Icons
 

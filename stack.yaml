@@ -3,8 +3,8 @@
 # This file is the single source of truth for versions.
 
 schema_version: "1.0"
-blueprint_version: "1.5.0"
-updated: "2026-03-09"
+blueprint_version: "1.6.0"
+updated: "2026-07-13"
 
 core:
   typescript:
@@ -196,6 +196,64 @@ content:
     install: "prosemirror-state prosemirror-view prosemirror-model"
   shiki:
     install: "shiki"
+
+advanced_capabilities:
+  policy: "optional-capability-gated"
+  evaluated: "2026-07-13"
+  note: "Install only the packages required by an explicit product capability. These packages are not part of the base stack."
+  markdown:
+    react_markdown:
+      min: ">=10.0.0"
+      current: "10.1.0"
+      install: "react-markdown"
+    remark_gfm:
+      min: ">=4.0.0"
+      current: "4.0.1"
+      install: "remark-gfm"
+    rehype_sanitize:
+      min: ">=6.0.0"
+      current: "6.0.0"
+      install: "rehype-sanitize"
+  data_table:
+    tanstack_table:
+      min: ">=8.0.0"
+      current: "8.21.3"
+      install: "@tanstack/react-table"
+  charts:
+    recharts:
+      min: ">=3.0.0"
+      current: "3.9.2"
+      install: "recharts"
+  diagrams:
+    mermaid:
+      min: ">=11.0.0"
+      current: "11.16.0"
+      install: "mermaid"
+  code_editor:
+    codemirror:
+      min: ">=6.0.0"
+      current_view: "6.43.6"
+      install: "@codemirror/state @codemirror/view @codemirror/commands @codemirror/language"
+  terminal:
+    xterm:
+      min: ">=6.0.0"
+      current: "6.0.0"
+      install: "@xterm/xterm"
+    node_pty:
+      min: ">=1.0.0"
+      current: "1.1.0"
+      install: "node-pty"
+      note: "Trusted desktop/server host only. Validate native ABI compatibility for every target."
+  collaboration:
+    yjs:
+      min: ">=13.0.0"
+      current: "13.6.31"
+      install: "yjs"
+  pdf:
+    pdfjs:
+      min: ">=6.0.0"
+      current: "6.1.200"
+      install: "pdfjs-dist"
 
 i18n:
   formatjs:

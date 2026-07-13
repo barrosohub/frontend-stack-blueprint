@@ -16,6 +16,7 @@ Authentication (optional): Better Auth ≥1
 Managed Services (optional): Neon Postgres | Cloudflare D1 | Cloudflare R2 | Cloudflare KV | Resend
 Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
 Lexical (primary) · ProseMirror (fallback) · Shiki
+Advanced Capabilities (optional): Markdown · TanStack Table · Recharts · Mermaid · CodeMirror · xterm/node-pty · Yjs · PDF.js
 Format.js · react-intl · Sentry · OpenTelemetry · Statsig
 Icons: Lucide (default) | Phosphor | Tabler
 
@@ -60,6 +61,7 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - NEVER use `any` — use `unknown` + type guards
 - NEVER put business logic in components — extract to hooks
 - NEVER install packages outside this stack without asking
+- ONLY install Advanced Capabilities when an explicit product requirement activates them
 
 ## Banned
 
@@ -79,6 +81,7 @@ Tauri → targets/tauri.md · PWA → targets/pwa.md
 - Data Access: stack/data-access.md
 - Authentication: stack/auth.md
 - Managed Services: stack/managed-services.md
+- Advanced Capabilities: stack/advanced-capabilities.md
 - Architecture: stack/architecture.md
 - Targets: targets/TARGETS.md
 - Versions: stack.yaml
