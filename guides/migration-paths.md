@@ -1,7 +1,7 @@
 ---
 title: "Migration Paths"
-version: "1.4.0"
-updated: "2026-03-09"
+version: "1.8.0"
+updated: "2026-07-13"
 tier: 2
 ---
 
@@ -68,6 +68,54 @@ tier: 2
    - `validationSchema` (Yup) → `resolver: zodResolver(schema)`
 3. Migrate one form at a time
 4. Remove Formik: `pnpm remove formik yup`
+
+## From Cypress → Playwright
+
+1. Preserve the stable Cypress suite while creating `playwright.config.ts` from
+   [the template](../templates/playwright.config.md)
+2. Migrate the smallest critical journey first and run it against the production build
+3. Replace implementation selectors with role, label, and visible-name locators
+4. Add Chromium, Firefox, and WebKit according to the documented browser target
+5. Add axe checks and retain traces on first CI retry
+6. Remove Cypress only after equivalent critical coverage passes reliably
+
+## From Ad Hoc fetch/Axios Calls → Typed API Boundary
+
+1. Inventory base URLs, headers, timeouts, retries, errors, and response assumptions
+2. Create `src/shared/api/request.ts` from
+   [templates/api-client.md](../templates/api-client.md)
+3. Add Zod schemas at each external response boundary
+4. Move caching, invalidation, and mutation lifecycle to TanStack Query
+5. Add MSW scenarios for success, latency, cancellation, authorization, rate limit,
+   server failure, and malformed payloads
+6. Migrate one feature at a time; remove the old client only when no call sites remain
+
+## From Raw import.meta.env → Typed Environment Contract
+
+1. Inventory every environment variable and classify public versus server-only
+2. Remove secrets from all `VITE_*` variables and rotate any previously exposed value
+3. Create `src/config/env.ts` from
+   [templates/env-contract.md](../templates/env-contract.md)
+4. Replace feature-level `import.meta.env` reads with the typed `env` export
+5. Add safe names/examples to `.env.example` and validate each deployment environment
+
+## From Pre-Commit-Only Checks → Production CI
+
+1. Keep Husky for local speed and add the
+   [GitHub Actions CI baseline](../templates/github-actions-ci.md)
+2. Make clean frozen install, typecheck, lint, unit/integration, and production build required
+3. Add critical Playwright/accessibility journeys for deployed UI
+4. Define route performance budgets and dependency review
+5. Protect the default branch and preserve failure reports/traces
+6. Add preview smoke, immutable release identity, rollout, and rollback before launch
+
+## From “Modern Browsers” → Explicit Support Contract
+
+1. Use Baseline Widely Available as the initial platform policy
+2. Compare it with product analytics, contracts, WebViews, and assistive-technology needs
+3. Document actual browser families/versions and the Playwright/runtime matrix
+4. Add feature detection, progressive enhancement, fallbacks, and tests for exceptions
+5. Review the policy on a scheduled cadence and before removing support
 
 ## Migration Strategy
 

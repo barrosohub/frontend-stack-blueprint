@@ -31,6 +31,9 @@
 - [Core](stack/core.md): TypeScript, React, TanStack Router / React Router
 - [Tooling](stack/tooling.md): pnpm (priority), Node.js default, Bun alternative
 - [Build & Test](stack/build-and-test.md): Vite (Node.js >=20.19 or >=22.12), Vitest, Husky
+- [Production Reliability](stack/reliability.md): CI, Playwright, WCAG 2.2, Web Vitals, rollout and rollback
+- [Frontend Security](stack/security.md): Typed environment, supply chain, CSP, privacy
+- [API Boundaries](stack/api-boundaries.md): fetch, Zod, cancellation, retry, MSW
 - [UI](stack/ui.md): Radix UI, shadcn/ui, Floating UI, Embla, cmdk
 - [Forms](stack/forms.md): React Hook Form + Zod
 - [Data Access](stack/data-access.md): Prisma ≥6 (recommended when ORM-backed server-side or edge data access is needed)
@@ -50,6 +53,7 @@
 ## Deployment Targets (optional)
 
 - [Overview](targets/TARGETS.md): When to use each
+- [Browser](targets/browser.md)
 - [Cloudflare Pages](targets/cloudflare-pages.md)
 - [Vercel](targets/vercel.md)
 - [Electron](targets/electron.md)
@@ -86,6 +90,7 @@
 - [Why Resend](rationale/why-resend.md)
 - [Why Advanced Capabilities](rationale/why-advanced-capabilities.md)
 - [Why DESIGN.md](rationale/why-design-md.md)
+- [Why Production Reliability](rationale/why-production-reliability.md)
 - [Why date-fns](rationale/why-date-fns.md)
 - [Why Lexical](rationale/why-lexical-over-prosemirror.md)
 - [Electron vs Tauri](rationale/electron-vs-tauri.md)

@@ -1,6 +1,6 @@
 ---
 title: "Frontend Stack Blueprint — Complete Manifesto"
-version: "1.7.0"
+version: "1.8.0"
 updated: "2026-07-13"
 tier: 1
 tokens: "~3000"
@@ -24,12 +24,14 @@ This stack is the **reusable base** for any frontend project. It defines:
 6. **How to authenticate** — session lifecycle and auth boundary when needed
 7. **How to access application data** — ORM and relational data access when needed
 8. **How to connect managed services** — database, key-value, object storage, email when needed
-9. **How to build and test** — build tool, test runner, quality gates
-10. **How to handle content** — rich text, syntax, i18n
-11. **How to add advanced surfaces** — capability-gated tables, charts,
+9. **How to prove production readiness** — CI, E2E, accessibility, performance, recovery
+10. **How to secure boundaries** — environment, supply chain, browser, API contracts
+11. **How to build and test** — build tool, test runners, quality gates
+12. **How to handle content** — rich text, syntax, i18n
+13. **How to add advanced surfaces** — capability-gated tables, charts,
     diagrams, editors, terminals, collaboration, and document viewers
-12. **How to observe** — errors, tracing, feature flags
-13. **How to extend** — icons and future complements
+14. **How to observe** — capability-gated errors, tracing, feature flags
+15. **How to extend** — icons and future complements
 
 What this stack **does NOT define** (project-dependent):
 
@@ -58,8 +60,14 @@ second, without making cloud hosting part of the mandatory core stack.
 | Runtime (default)                          | Node.js                                                                  | ≥20.19 or ≥22.12  | ✅ Core                                                              |
 | Runtime (alt)                              | Bun                                                                      | ≥1.0              | ✅ Alternative                                                       |
 | Build                                      | Vite                                                                     | ≥7.x              | ✅ Core                                                              |
-| Test                                       | Vitest                                                                   | ≥3.2              | ✅ Core                                                              |
-| Quality                                    | Husky + lint-staged + ESLint + Prettier                                  | latest            | ✅ Core                                                              |
+| Unit/integration test                      | Vitest                                                                   | ≥3.2              | ✅ Core                                                              |
+| Production E2E                             | Playwright                                                               | ≥1.61             | ✅ Required for deployed user-facing apps                            |
+| Accessibility                              | WCAG 2.2 AA + axe + manual evaluation                                    | current standard  | ✅ Required by applicable profile                                    |
+| Quality                                    | Protected CI + Husky + lint-staged + ESLint + Prettier                   | policy            | ✅ Core                                                              |
+| Browser policy                             | Baseline Widely Available + explicit exceptions                          | current baseline  | ✅ Core                                                              |
+| API boundary                               | fetch + AbortSignal + Zod + MSW                                          | capability-gated  | ✅ Required when networked                                           |
+| Performance                                | Core Web Vitals + route budgets                                          | field + lab       | ✅ Required for production services                                  |
+| Security                                   | Typed env + supply-chain gates + CSP                                     | policy            | ✅ Core                                                              |
 | UI (headless)                              | Radix UI                                                                 | latest            | ✅ Core                                                              |
 | UI (headless)                              | Floating UI                                                              | latest            | ✅ Core                                                              |
 | UI (headless)                              | Embla Carousel                                                           | latest            | ✅ Core                                                              |
@@ -87,9 +95,9 @@ second, without making cloud hosting part of the mandatory core stack.
 | Syntax                                     | Shiki                                                                    | latest            | ✅ Core                                                              |
 | Advanced capabilities                      | Markdown, tables, charts, diagrams, editor, terminal, collaboration, PDF | capability-gated  | ✅ Optional                                                          |
 | i18n                                       | Format.js + react-intl                                                   | latest            | ✅ Core                                                              |
-| Error Tracking                             | Sentry                                                                   | latest            | ✅ Core                                                              |
-| Tracing                                    | OpenTelemetry                                                            | latest            | ✅ Core                                                              |
-| Feature Flags                              | Statsig                                                                  | latest            | ✅ Core                                                              |
+| Error Tracking                             | Sentry                                                                   | latest            | ⭐ Recommended when operated                                         |
+| Tracing                                    | OpenTelemetry                                                            | latest            | ✅ Capability-gated                                                  |
+| Feature Flags                              | Statsig                                                                  | latest            | ✅ Capability-gated                                                  |
 | Icons (default)                            | Lucide                                                                   | latest            | ⭐ Default                                                           |
 | Icons (alt)                                | Phosphor                                                                 | latest            | ✅ Alternative                                                       |
 | Icons (alt)                                | Tabler                                                                   | latest            | ✅ Alternative                                                       |
@@ -102,6 +110,9 @@ Each layer has its own document:
 - [Core](core.md) — TypeScript, React, Routing
 - [Tooling](tooling.md) — pnpm, Node.js, Bun
 - [Build & Test](build-and-test.md) — Vite, Vitest, Quality
+- [Production Reliability](reliability.md) — Definition of Done, E2E, accessibility, performance, release recovery
+- [Frontend Security](security.md) — Environment, supply chain, CSP, privacy
+- [API Boundaries](api-boundaries.md) — fetch, runtime validation, cancellation, retry, MSW
 - [UI](ui.md) — Radix, shadcn/ui, Floating UI, Embla, cmdk
 - [Forms](forms.md) — React Hook Form + Zod
 - [Data Access](data-access.md) — Prisma when ORM-backed server-side or edge data access is required
@@ -116,6 +127,17 @@ Each layer has its own document:
 - [i18n](i18n.md) — Format.js + react-intl
 - [Observability](observability.md) — Sentry, OTel, Statsig
 - [Icons](icons.md) — Lucide, Phosphor, Tabler
+
+## Production Reliability Contract
+
+- CI is the authoritative merge gate; local hooks are fast feedback only.
+- User-facing deployed applications test critical journeys against the production artifact.
+- WCAG 2.2 AA is the accessibility target, with automation plus manual evaluation.
+- Field targets are LCP ≤2.5 s, INP ≤200 ms, and CLS ≤0.1 at the 75th percentile.
+- Networked products validate external data, cancel obsolete requests, and test degraded states.
+- Browser/runtime support, preview smoke, release identity, rollout, and rollback are explicit.
+- Sentry, OpenTelemetry, Statsig, Storybook, MSW, and similar tools are activated
+  only when their product capability applies.
 
 ## Installation Policy (Official CLI-First + Impact Preflight)
 

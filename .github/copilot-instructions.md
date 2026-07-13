@@ -32,12 +32,15 @@ frontend stack for any new project. For the complete reference, see:
 16. Use Motion (import from `motion/react`) for animations
 17. Use date-fns ≥4.1 + @date-fns/tz for dates and timezones (no Moment, no Day.js)
 18. Use Radix/shadcn primitives before building custom components
-19. Write tests with Vitest for hooks and utils
+19. Write tests with Vitest; use Playwright for critical deployed-UI journeys
 20. Never install packages outside this stack without asking
 21. Use [Advanced Capabilities](../stack/advanced-capabilities.md) only when an explicit product requirement activates Markdown, tables, charts, diagrams, code editing, terminal, collaboration, or PDF viewing
 22. If root `DESIGN.md` exists, treat it as the provisional DESIGN.md Design Contract: read it before UI work and regenerate Tailwind tokens after intentional changes
 23. Apply **Official CLI-First** when official docs recommend a CLI
 24. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
+25. Apply [Production Reliability](../stack/reliability.md): authoritative CI, WCAG 2.2 AA, Core Web Vitals budgets, browser matrix, preview smoke, and rollback
+26. Validate public environment and API responses at runtime; use fetch cancellation/timeout and MSW degraded scenarios when networked
+27. Activate Sentry, OpenTelemetry, Statsig, and Storybook only when their operational capability applies
 
 ## Universal Governance Protocol (technology-agnostic)
 
@@ -49,7 +52,15 @@ frontend stack for any new project. For the complete reference, see:
 6. If Impact Preflight is non-trivial or uncertain, ask developer confirmation before running CLI.
 7. Never silently remove consolidated decisions; deprecate with migration path.
 8. Use explicit dates and absolute versions for temporal claims.
-9. Run verification gate before merge (`typecheck`, `test`, `lint`, `build`).
+9. Run the applicable Production Reliability gate before merge.
+
+## Production Reliability
+
+- CI uses the frozen lockfile and verifies typecheck, lint, unit/integration, production build, and critical E2E.
+- Accessibility targets WCAG 2.2 AA with automation plus manual evaluation.
+- Field targets are LCP ≤2.5 s, INP ≤200 ms, and CLS ≤0.1 at p75 with route-aware budgets.
+- Browser support defaults to Baseline Widely Available with an explicit tested matrix and fallbacks.
+- Production releases define immutable identity, privacy/telemetry ownership, rollout, and rollback.
 
 ## Banned
 

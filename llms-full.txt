@@ -1,4 +1,4 @@
-FRONTEND STACK BLUEPRINT v1.7.0 (2026-07-13)
+FRONTEND STACK BLUEPRINT v1.8.0 (2026-07-13)
 Agnostic — applies to ANY frontend project.
 Repository: https://github.com/barrosohub/frontend-stack-blueprint
 Audience: external coding agents consuming this repo as stack reference.
@@ -27,8 +27,45 @@ ROUTING:
 BUILD & TEST:
   Vite ≥7 (dev server + production build)
   Vitest ≥3.2 (unit + integration testing, 4.x recommended)
+  Playwright ≥1.61 (critical E2E against production artifact)
+  @axe-core/playwright (automated accessibility smoke)
+  MSW (capability-gated network mocks when APIs are consumed)
   Husky + lint-staged (pre-commit gate, mandatory on all projects)
   ESLint (flat config) + Prettier (formatting)
+  → CI with frozen lockfile is the authoritative protected-branch gate
+
+PRODUCTION RELIABILITY (MANDATORY BY APPLICABLE PROFILE):
+  Core → frozen install + typecheck + lint + unit/integration + production build
+  Deployed UI → critical Playwright journeys + accessibility + target matrix
+  Networked UI → typed env + fetch cancellation/timeout + Zod responses + MSW scenarios
+  Production service → field/lab budgets + preview smoke + release identity + rollback
+  Component platform → isolated interaction + accessibility + visual regression
+  → Default accessibility target: WCAG 2.2 Level AA
+  → Field targets at p75: LCP ≤2.5 s, INP ≤200 ms, CLS ≤0.1
+  → Use Baseline Widely Available by default; document actual engines and fallbacks
+  → Test slow, offline, cancelled, unauthorized, rate-limited, 5xx, and malformed data
+  → Storybook is optional for reusable component platforms, never a base dependency
+  → See stack/reliability.md
+
+SECURITY & SUPPLY CHAIN:
+  Validate public config once in src/config/env.ts
+  → Every VITE_* value is client-visible and MUST NOT contain secrets
+  → Commit one lockfile and use pnpm install --frozen-lockfile in CI
+  → Enable Dependabot, Dependency Review, CodeQL, and secret scanning where available
+  → Pin GitHub Actions to verified full commit SHAs with minimum permissions
+  → Roll CSP from report-only to enforced; avoid injection sinks and unsafe eval/inline
+  → Use Trusted Types when the browser matrix supports it
+  → Telemetry requires PII denylist, sampling, consent, retention, and cost ownership
+  → See stack/security.md
+
+API & NETWORK BOUNDARIES (WHEN NETWORKED):
+  Platform fetch is the default; do not add Axios without a concrete unmet requirement
+  → Validate every external response with Zod before domain code
+  → Accept AbortSignal and apply a finite timeout to every request
+  → Normalize cancelled, timeout, network, HTTP, decode, and domain errors
+  → Retry bounded idempotent operations only; TanStack Query normally owns retry
+  → Reuse MSW handlers across integration and deterministic browser scenarios
+  → See stack/api-boundaries.md
 
 UI COMPONENTS (headless):
   Radix UI (Dialog, Popover, Select, Tabs, etc.)
@@ -135,9 +172,11 @@ INTERNATIONALIZATION:
   react-intl (React bindings for Format.js)
 
 OBSERVABILITY:
-  Sentry (error tracking and crash reporting)
-  OpenTelemetry (distributed tracing and metrics)
-  Statsig (feature flags and experimentation)
+  Sentry (recommended when production error operations apply)
+  OpenTelemetry (capability-gated distributed tracing)
+  Statsig (capability-gated feature flags and experimentation)
+  → Do not install all three on project initialization
+  → Every activated tool needs owner, release ID, sampling, privacy, retention, and cost policy
 
 ICONS:
   Lucide (default — clean, minimal)
@@ -189,6 +228,22 @@ ARCHITECTURE (MANDATORY — these are RULES, not suggestions)
    Use when available and stable.
    Eliminates need for useMemo, useCallback, React.memo.
    Until adopted: manual memoization only when measurable.
+
+8. VALIDATE BOUNDARIES AT RUNTIME
+   Validate environment configuration once and all external API responses.
+   Keep public browser config separate from trusted server secrets.
+
+9. CONTROL ASYNC LIFECYCLE
+   Cancellation, finite timeout, stale-response protection, bounded safe retries,
+   explicit loading/empty/offline/error states, and useful recovery are required.
+
+10. DECLARE COMPATIBILITY
+   Document browser/runtime support. Use Baseline Widely Available by default.
+   Exceptions require feature detection, progressive enhancement, fallback, and tests.
+
+11. PROVE PRODUCTION READINESS
+   CI, production-artifact E2E, accessibility, performance, security, release identity,
+   rollout, and rollback are evidence, not optional polish.
 
 ================================================================================
 UNIVERSAL GOVERNANCE PROTOCOL (TECHNOLOGY-AGNOSTIC)
@@ -243,7 +298,7 @@ RULES FOR AGENTS
 10. **Handle errors** — Error Boundaries, try/catch, NEVER silent fail
 11. **Use cn()** — always combine Tailwind classes with cn(), never template literals
 12. **Use path aliases** — imports with `@/features/...`, never `../../../`
-13. **Run verification gate** — before final handoff, run typecheck, test, lint, build
+13. **Run Production Reliability gate** — execute every check required by the applicable profile
 14. **Resolve conflicts canonically** — if docs conflict, follow stack.yaml and report drift
 15. **Official CLI-First** — use official docs-recommended CLI over manual scaffolding
 16. **Impact Preflight** — evaluate overwrite/structure/config risk before CLI; ask confirmation if risk is non-trivial or uncertain
@@ -254,6 +309,10 @@ RULES FOR AGENTS
 21. **Runtime optionality** — Bun is runtime-only alternative; Node.js remains the default runtime
 22. **Advanced Capabilities only when needed** — never install the optional workbench suite as a blanket dependency set
 23. **Honor DESIGN.md when present** — read the root contract before UI work; update it before intentional token changes and regenerate Tailwind tokens
+24. **Validate boundaries** — typed environment and Zod-validated external responses
+25. **Control async lifecycle** — cancellation, timeout, bounded retry, recovery
+26. **Declare compatibility** — explicit browser/runtime matrix and progressive fallbacks
+27. **Operate releases** — preview smoke, immutable release identity, privacy, rollout, rollback
 
 ================================================================================
 BANNED TECHNOLOGIES
@@ -279,14 +338,18 @@ DEPLOYMENT TARGETS (optional — only when project requires)
 
 1. ALWAYS start with the stack core
 2. ONLY consult targets/ if the project requires it
-3. Project doesn't specify where it runs → browser by default
-4. Project needs cloud frontend hosting and no provider is specified → use Cloudflare Pages
-5. Project explicitly requests Vercel or Cloudflare Pages is not a fit → use Vercel
-6. Project asks for desktop/mobile/PWA → consult relevant target
-7. Ambiguous context → ASK the developer. NEVER guess.
+3. Project doesn't specify where it runs → Browser target by default
+4. Every target inherits the applicable Production Reliability profile
+5. Project needs cloud frontend hosting and no provider is specified → use Cloudflare Pages
+6. Project explicitly requests Vercel or Cloudflare Pages is not a fit → use Vercel
+7. Project asks for desktop/mobile/PWA → consult relevant target
+8. Ambiguous context → ASK the developer. NEVER guess.
 
 BROWSER (default):
-  No extra config needed. Stack core is sufficient.
+  Baseline Widely Available is the default platform policy.
+  Document actual browser families/versions, mobile/desktop scope, and fallbacks.
+  Test Chromium, Firefox, and WebKit unless the product contract defines another matrix.
+  Require preview smoke, security/cache headers, release identity, and rollback.
 
 CLOUDFLARE PAGES (priority cloud frontend target):
   Deploy built frontend output when cloud hosting is needed and provider is unspecified.
@@ -320,6 +383,17 @@ Pre-commit (Husky + lint-staged):
 
 Code with lint errors NEVER enters the repo.
 
+Authoritative CI (applicable checks):
+  pnpm install --frozen-lockfile
+  pnpm typecheck
+  pnpm lint
+  pnpm test:unit
+  pnpm build
+  pnpm test:e2e
+
+Protect the default branch with required checks. Preserve useful failure reports
+without secrets. Local hooks do not replace CI.
+
 ================================================================================
 cn() UTILITY (required in every project)
 ================================================================================
@@ -333,5 +407,5 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 ================================================================================
-VERSION: 1.7.0 | DATE: 2026-07-13 | SCHEMA: stack.yaml
+VERSION: 1.8.0 | DATE: 2026-07-13 | SCHEMA: stack.yaml
 ================================================================================

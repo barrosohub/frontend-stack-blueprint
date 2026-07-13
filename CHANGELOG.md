@@ -5,6 +5,25 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] — 2026-07-13
+
+### Added
+
+- **Production Reliability:** profile-based Definition of Done covering deterministic CI, critical-path E2E, accessibility, performance, compatibility, release identity, rollout, and rollback
+- **Security and API boundaries:** typed public environment contract, supply-chain controls, CSP/Trusted Types guidance, fetch cancellation/timeout, Zod response validation, error taxonomy, retry rules, and MSW scenarios
+- **Browser target:** Baseline Widely Available default with explicit engine matrix, progressive enhancement, preview smoke, cache/security headers, and rollback requirements
+- **Templates:** production GitHub Actions CI, Playwright + axe, typed environment, typed fetch client, and field/lab performance budgets
+- **Decision record:** ADR-025 documents the reliability profiles, selected defaults, alternatives, and operational tradeoffs
+
+### Changed
+
+- **Build and test:** Playwright ≥1.61 and WCAG 2.2 AA evidence join Vitest; CI is now authoritative while Husky remains local feedback
+- **Observability:** Sentry, OpenTelemetry, and Statsig are capability-gated with privacy, sampling, retention, ownership, and cost requirements
+- **Machine-readable manifest:** `stack.yaml` records reliability, security, API, browser, package, and activation policies and bumps the blueprint to 1.8.0
+- **Agent entry points:** all seven surfaces now apply the Production Reliability contract and explicit trusted-boundary rules
+- **Migration guide:** adds Cypress, request client, environment, CI, and browser-support migration paths
+- **Roadmap:** Production Reliability replaces the former Quality of Life milestone; extended targets remain planned for 1.9.0
+
 ## [1.7.0] — 2026-07-13
 
 ### Added

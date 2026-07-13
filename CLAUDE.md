@@ -1,4 +1,4 @@
-# Frontend Stack Blueprint v1.7.0
+# Frontend Stack Blueprint v1.8.0
 
 This repository defines the canonical frontend stack for any new
 frontend project. It is platform-agnostic — the same stack applies
@@ -11,8 +11,8 @@ whether the project targets browser, desktop, or anything else.
 - **Routing:** TanStack Router ≥1 (default) or React Router ≥7.1
 - **Tooling:** pnpm (priority package manager), Node.js >=20.19 or >=22.12, Bun ≥1 (alternative runtime)
 - **Build:** Vite ≥7 (Node.js >=20.19 or >=22.12)
-- **Test:** Vitest ≥3.2 (4.x recommended)
-- **Quality:** Husky + lint-staged + ESLint + Prettier
+- **Test:** Vitest ≥3.2; Playwright ≥1.61 for user-facing deployed applications
+- **Quality:** protected CI merge gate + Husky + lint-staged + ESLint + Prettier
 - **Components:** Radix UI, Floating UI, Embla Carousel, cmdk
 - **Pre-styled UI:** shadcn/ui (recommended — Radix + Tailwind)
 - **Styling:** Tailwind CSS ≥4 + clsx + tailwind-merge (no CSS-in-JS ever)
@@ -29,7 +29,7 @@ whether the project targets browser, desktop, or anything else.
 - **Syntax:** Shiki
 - **Advanced Capabilities (optional):** secure Markdown, TanStack Table, Recharts, Mermaid, CodeMirror, xterm.js/node-pty, Yjs, PDF.js
 - **i18n:** Format.js + react-intl
-- **Observability:** Sentry + OpenTelemetry + Statsig
+- **Observability:** Sentry, OpenTelemetry, and Statsig only when their operational capability applies
 - **Icons:** Lucide (default), Phosphor or Tabler as alternatives
 
 ## Architecture (MANDATORY — apply to ALL code)
@@ -54,11 +54,20 @@ whether the project targets browser, desktop, or anything else.
 - Keep terminology canonical and stable across all agent entry points.
 - If context is ambiguous, ask the developer instead of guessing.
 
+## Production Reliability (MANDATORY by applicable profile)
+
+- CI is authoritative: frozen lockfile, typecheck, lint, unit/integration, production build, and critical E2E
+- Target WCAG 2.2 AA with axe automation plus manual keyboard, focus, zoom/reflow, and screen-reader evaluation
+- Track field LCP ≤2.5 s, INP ≤200 ms, and CLS ≤0.1 at p75; enforce route-aware asset budgets
+- Use Baseline Widely Available by default and document the actual browser/runtime matrix and fallbacks
+- Networked products use typed environment config, fetch cancellation/timeout, Zod responses, and MSW degraded scenarios
+- Production releases require preview smoke, immutable release identity, telemetry/privacy ownership, rollout, and rollback
+
 ## Rules
 
 - ALWAYS setup Husky + lint-staged on project init
 - ALWAYS write tests (Vitest) for hooks and utils
-- ALWAYS run verification gate before merge (`typecheck`, `test`, `lint`, `build`)
+- ALWAYS run the applicable Production Reliability gate before merge
 - ALWAYS structure code by feature (`src/features/`)
 - ALWAYS use cn() helper for conditional Tailwind classes
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
@@ -72,6 +81,9 @@ whether the project targets browser, desktop, or anything else.
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use TanStack Query for async/server state
+- ALWAYS validate environment configuration and external API data at runtime
+- ALWAYS cancel or safely ignore obsolete async work and provide recovery states
+- ALWAYS document browser/runtime support, performance budgets, and rollback before production
 - ALWAYS use Zustand for client state
 - NEVER use `any` — use `unknown` + type guards
 - NEVER put business logic in components — extract to hooks
@@ -104,6 +116,10 @@ The stack above works as-is for browser projects.
 - Managed Services: @stack/managed-services.md
 - Advanced Capabilities: @stack/advanced-capabilities.md
 - DESIGN.md Design Contract: @stack/design-system.md
+- Production Reliability: @stack/reliability.md
+- Frontend Security: @stack/security.md
+- API Boundaries: @stack/api-boundaries.md
+- Browser target: @targets/browser.md
 - Targets overview: @targets/TARGETS.md
 - Architecture: @stack/architecture.md
 - Build & test: @stack/build-and-test.md

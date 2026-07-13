@@ -1,7 +1,7 @@
 ---
 title: "Deployment Targets — Overview"
-version: "1.5.0"
-updated: "2026-03-09"
+version: "1.8.0"
+updated: "2026-07-13"
 tier: 2
 ---
 
@@ -18,33 +18,34 @@ hosting, or packaging, attach a **deployment target**.
 ```
 1. ALWAYS start with the stack core
 2. ONLY consult targets/ if the project requires it
-3. Project doesn't specify where it runs → browser by default
-4. Project needs cloud frontend hosting and no provider is specified → use Cloudflare Pages
-5. Project explicitly requests Vercel or Cloudflare Pages is not a fit → use Vercel
-6. Project asks for desktop/mobile/PWA → consult relevant target
-7. Ambiguous context → ASK the developer. NEVER guess.
+3. Project doesn't specify where it runs → use the Browser target and document support policy
+4. Every target inherits the applicable Production Reliability profile
+5. Project needs cloud frontend hosting and no provider is specified → use Cloudflare Pages
+6. Project explicitly requests Vercel or Cloudflare Pages is not a fit → use Vercel
+7. Project asks for desktop/mobile/PWA → consult relevant target
+8. Ambiguous context → ASK the developer. NEVER guess.
 ```
 
 ## Available Targets
 
-| Target                | When to Use                               | Adds                                    |
-| --------------------- | ----------------------------------------- | --------------------------------------- |
-| **Browser** (default) | Every web project                         | Nothing — stack core is sufficient      |
-| **Cloudflare Pages**  | Cloud frontend hosting, provider unspecified | + Pages hosting, optional Wrangler CLI |
-| **Vercel**            | Cloud frontend hosting, explicit preference or Pages mismatch | + Vercel platform, optional Vercel CLI |
-| **Electron**          | Desktop, JS-only team, max compat         | + Electron ≥33, Forge, electron-updater |
-| **Tauri**             | Desktop lightweight, minimal bundle, Rust | + Tauri ≥2.10, Rust, Tauri plugins      |
-| **PWA**               | Web with offline capability               | + vite-plugin-pwa                       |
+| Target                | When to Use                                                   | Adds                                                      |
+| --------------------- | ------------------------------------------------------------- | --------------------------------------------------------- |
+| **Browser** (default) | Every web project                                             | + Baseline policy, browser matrix, preview/smoke/rollback |
+| **Cloudflare Pages**  | Cloud frontend hosting, provider unspecified                  | + Pages hosting, optional Wrangler CLI                    |
+| **Vercel**            | Cloud frontend hosting, explicit preference or Pages mismatch | + Vercel platform, optional Vercel CLI                    |
+| **Electron**          | Desktop, JS-only team, max compat                             | + Electron ≥33, Forge, electron-updater                   |
+| **Tauri**             | Desktop lightweight, minimal bundle, Rust                     | + Tauri ≥2.10, Rust, Tauri plugins                        |
+| **PWA**               | Web with offline capability                                   | + vite-plugin-pwa                                         |
 
 ## Quick Comparison: Cloudflare Pages vs Vercel
 
-| Dimension | Cloudflare Pages | Vercel |
-| --------- | ---------------- | ------ |
-| Blueprint status | Priority cloud target | Secondary cloud target |
-| Default when unspecified | ✅ | ❌ |
-| Git-connected deploys | ✅ | ✅ |
-| CLI path | Wrangler | Vercel CLI |
-| Best default fit | General cloud frontend hosting | Explicit Vercel preference or Pages mismatch |
+| Dimension                | Cloudflare Pages               | Vercel                                       |
+| ------------------------ | ------------------------------ | -------------------------------------------- |
+| Blueprint status         | Priority cloud target          | Secondary cloud target                       |
+| Default when unspecified | ✅                             | ❌                                           |
+| Git-connected deploys    | ✅                             | ✅                                           |
+| CLI path                 | Wrangler                       | Vercel CLI                                   |
+| Best default fit         | General cloud frontend hosting | Explicit Vercel preference or Pages mismatch |
 
 If cloud frontend hosting is required and the provider is not specified,
 agent MUST use Cloudflare Pages. If the developer explicitly asks for
@@ -73,6 +74,7 @@ this comparison and **ask the developer**.
 
 ## Details
 
+- [Browser](browser.md)
 - [Cloudflare Pages](cloudflare-pages.md)
 - [Vercel](vercel.md)
 - [Electron](electron.md)

@@ -1,6 +1,6 @@
 ---
 title: "Template: Project Structure"
-version: "1.7.0"
+version: "1.8.0"
 updated: "2026-07-13"
 tier: 2
 ---
@@ -24,6 +24,9 @@ my-project/
 │   │   ├── design-tokens.css    # Generated from DESIGN.md (optional)
 │   │   └── app.css              # Tailwind + generated token imports
 │   │
+│   ├── config/
+│   │   └── env.ts               # Validated public configuration
+│   │
 │   ├── features/                # One folder per domain
 │   │   └── <feature>/
 │   │       ├── components/      # UI for this feature
@@ -34,6 +37,9 @@ my-project/
 │   │       └── index.ts         # Barrel exports
 │   │
 │   ├── shared/
+│   │   ├── api/                 # Typed network boundary (when applicable)
+│   │   │   ├── request.ts
+│   │   │   └── request.test.ts
 │   │   ├── components/
 │   │   │   └── ui/              # shadcn/ui components
 │   │   ├── hooks/               # Cross-feature hooks
@@ -50,11 +56,23 @@ my-project/
 │   │
 │   └── main.tsx                 # Entry point
 │
+├── e2e/
+│   ├── primary-journey.spec.ts
+│   └── accessibility.spec.ts
+│
+├── .github/
+│   ├── dependabot.yml
+│   └── workflows/
+│       └── ci.yml
+│
 ├── .husky/
 │   └── pre-commit               # pnpm exec lint-staged
 │
 ├── DESIGN.md                     # Optional product design contract
+├── .env.example                  # Safe public names/examples only
+├── .nvmrc                        # Maintained Node release used by CI
 ├── index.html
+├── playwright.config.ts
 ├── tsconfig.json
 ├── vite.config.ts
 ├── vitest.config.ts
@@ -73,3 +91,7 @@ my-project/
 - `cn.ts` is always at `src/shared/utils/cn.ts`
 - Root `DESIGN.md` is opt-in and must be customized before use
 - `src/app/design-tokens.css` is generated and must not be hand-edited
+- Features import typed `env`; they never read raw `import.meta.env`
+- Network transport stays in `shared/api`; domain usage stays in features
+- Critical E2E and accessibility journeys stay in top-level `e2e/`
+- Protected CI, not Husky, is the authoritative merge gate

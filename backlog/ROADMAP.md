@@ -1,13 +1,13 @@
 ---
 title: "Roadmap"
-version: "1.7.0"
+version: "1.8.0"
 updated: "2026-07-13"
 tier: 4
 ---
 
 # Roadmap
 
-## Current: v1.7.0 (2026-07-13)
+## Current: v1.8.0 (2026-07-13)
 
 The complete frontend stack blueprint is defined and documented.
 Zustand is the primary client state manager. TanStack Store succession
@@ -27,20 +27,26 @@ The provisional DESIGN.md Design Contract now provides an opt-in, agent-readable
 source of visual intent and design tokens, with a pinned alpha CLI, Tailwind 4
 export, template, and drift validation guidance.
 
+Production Reliability now defines when the approved stack is ready to ship:
+protected deterministic CI, Playwright critical journeys, WCAG 2.2 AA evaluation,
+field and lab performance budgets, typed environment and API boundaries, MSW
+network scenarios, explicit browser support, supply-chain controls, preview smoke,
+release identity, rollout, and rollback. Observability and component-platform
+tooling are capability-gated instead of blanket project-init dependencies.
+
 ## Planned
-
-### v1.8.0 — Quality of Life
-
-- [ ] Add E2E testing guidance (Playwright)
-- [ ] Add accessibility testing patterns
-- [ ] Add performance budgets template
-- [ ] Expand migration paths (more legacy stack coverage)
 
 ### v1.9.0 — Extended Targets
 
 - [ ] Mobile WebView target documentation
 - [ ] React Native / Expo evaluation
 - [ ] Capacitor evaluation
+
+### Continuous Maintenance
+
+- [ ] Add field evidence and migration guidance as browser/runtime support changes
+- [ ] Re-verify pinned GitHub Actions and reliability package versions quarterly
+- [ ] Expand provider-specific preview, rollout, and rollback examples
 
 ### v2.0.0 — Potential Major Changes
 
