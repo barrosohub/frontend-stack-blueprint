@@ -1,7 +1,7 @@
 ---
 title: "Observability"
-version: "1.4.0"
-updated: "2026-03-09"
+version: "1.8.0"
+updated: "2026-07-13"
 tier: 1
 ---
 
@@ -9,11 +9,11 @@ tier: 1
 
 ## Sentry
 
-| Attribute | Value                              |
-| --------- | ---------------------------------- |
-| Role      | Error tracking and crash reporting |
-| Status    | ✅ Core                            |
-| Install   | `pnpm add @sentry/react`           |
+| Attribute | Value                                                               |
+| --------- | ------------------------------------------------------------------- |
+| Role      | Error tracking and crash reporting                                  |
+| Status    | ⭐ Recommended when a production application needs error operations |
+| Install   | `pnpm add @sentry/react`                                            |
 
 ### When to Use
 
@@ -27,14 +27,13 @@ tier: 1
 ```typescript
 import * as Sentry from "@sentry/react";
 
+import { env } from "@/config/env";
+
 Sentry.init({
-  dsn: process.env.VITE_SENTRY_DSN,
-  integrations: [
-    Sentry.browserTracingIntegration(),
-    Sentry.replayIntegration(),
-  ],
+  dsn: env.VITE_SENTRY_DSN,
+  integrations: [Sentry.browserTracingIntegration()],
   tracesSampleRate: 0.1,
-  replaysSessionSampleRate: 0.1,
+  release: env.VITE_APP_RELEASE,
 });
 ```
 
@@ -42,11 +41,11 @@ Sentry.init({
 
 ## OpenTelemetry
 
-| Attribute | Value                                                         |
-| --------- | ------------------------------------------------------------- |
-| Role      | Distributed tracing and metrics                               |
-| Status    | ✅ Core                                                       |
-| Install   | `pnpm add @opentelemetry/api @opentelemetry/sdk-trace-web`    |
+| Attribute | Value                                                      |
+| --------- | ---------------------------------------------------------- |
+| Role      | Distributed tracing and metrics                            |
+| Status    | ⭐ Capability-gated                                        |
+| Install   | `pnpm add @opentelemetry/api @opentelemetry/sdk-trace-web` |
 
 ### When to Use
 
@@ -54,22 +53,24 @@ Sentry.init({
 - Performance metrics collection
 - Custom instrumentation
 - Vendor-neutral observability
+- A backend or collector can preserve cross-service trace context
 
 ### Rules
 
-- Use OpenTelemetry for tracing, Sentry for error tracking
-- They complement each other — not alternatives
+- Use OpenTelemetry for vendor-neutral tracing when distributed correlation is required
+- Do not add it only to duplicate telemetry already owned by another approved provider
 - Custom spans for critical user flows
+- Apply sampling and attribute allowlists before export
 
 ---
 
 ## Statsig
 
-| Attribute | Value                                 |
-| --------- | ------------------------------------- |
-| Role      | Feature flags and experimentation     |
-| Status    | ✅ Core                               |
-| Install   | `pnpm add @statsig/react-bindings`    |
+| Attribute | Value                              |
+| --------- | ---------------------------------- |
+| Role      | Feature flags and experimentation  |
+| Status    | ⭐ Capability-gated                |
+| Install   | `pnpm add @statsig/react-bindings` |
 
 ### When to Use
 
@@ -96,10 +97,30 @@ function FeatureComponent(): JSX.Element | null {
 
 ## Observability Strategy
 
-| Concern           | Tool          | Purpose               |
-| ----------------- | ------------- | --------------------- |
-| Errors & Crashes  | Sentry        | Capture, alert, debug |
-| Tracing & Metrics | OpenTelemetry | E2E performance       |
-| Feature Flags     | Statsig       | Controlled rollouts   |
+| Capability          | Default       | Activate When                                                             |
+| ------------------- | ------------- | ------------------------------------------------------------------------- |
+| Errors & crashes    | Sentry        | A deployed application needs alerting, diagnosis, and release correlation |
+| Distributed tracing | OpenTelemetry | Frontend spans must correlate with backend/edge services                  |
+| Feature flags       | Statsig       | The product needs staged rollout, experiments, or dynamic configuration   |
 
-All three are complementary. Set up all three on project init.
+These tools may complement one another, but **none is installed merely because a
+project was initialized**. Apply YAGNI and activate only the capability the product
+will operate.
+
+## Operational Contract
+
+Every activated telemetry tool MUST define:
+
+- immutable release identifier and deployment environment
+- owner, alert thresholds, escalation path, and dashboard/runbook link
+- sampling strategy and cost ceiling
+- allowed attributes and explicit PII/secrets denylist
+- retention, region, access, and deletion policy
+- behavior when consent is absent or the provider is unavailable
+
+Session replay is separately opt-in. It requires masking, low sampling, product/legal
+approval, and verification that user text, credentials, and sensitive screens cannot
+be captured.
+
+Core Web Vitals field collection follows [Production Reliability](reliability.md).
+Security and privacy requirements live in [Frontend Security](security.md).

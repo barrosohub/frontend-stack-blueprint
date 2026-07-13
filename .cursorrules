@@ -15,8 +15,8 @@
 - TanStack Router ≥1 (default) or React Router ≥7.1
 - pnpm (priority package manager) · Node.js >=20.19 or >=22.12 · Bun ≥1 (runtime alternative)
 - Vite ≥7 (requires Node.js >=20.19 or >=22.12)
-- Vitest ≥3.2 (4.x recommended)
-- Husky + lint-staged + ESLint + Prettier
+- Vitest ≥3.2 (4.x recommended) + Playwright ≥1.61 for deployed UI
+- Protected CI merge gate + Husky + lint-staged + ESLint + Prettier
 - Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
 - Tailwind CSS ≥4 + clsx + tailwind-merge (cn() utility required)
 - Motion (formerly Framer Motion) — `import from 'motion/react'`
@@ -30,7 +30,7 @@
 - Lexical (primary) · ProseMirror (fallback) · Shiki
 - Advanced Capabilities (optional): Markdown · TanStack Table · Recharts · Mermaid · CodeMirror · xterm/node-pty · Yjs · PDF.js
 - Format.js · react-intl
-- Sentry · OpenTelemetry · Statsig
+- Sentry · OpenTelemetry · Statsig (capability-gated)
 - Lucide (default icon library)
 
 ## Architecture (MANDATORY)
@@ -54,14 +54,23 @@
 - Use explicit dates and absolute versions for temporal claims
 - If context is ambiguous, ask the developer instead of guessing
 
+## Production Reliability (MANDATORY by applicable profile)
+
+- CI: frozen lockfile, typecheck, lint, unit/integration, production build, critical E2E
+- WCAG 2.2 AA: axe automation plus manual keyboard/focus/zoom/screen-reader checks
+- Field targets: LCP ≤2.5 s, INP ≤200 ms, CLS ≤0.1 at p75 plus route budgets
+- Baseline Widely Available by default; document actual browser/runtime matrix and fallbacks
+- Networked UI: typed env, fetch cancellation/timeout, Zod responses, MSW degraded scenarios
+- Production: preview smoke, immutable release ID, telemetry/privacy policy, rollout and rollback
+
 ## Rules
 
 - ALWAYS setup Husky + lint-staged on project init
 - ALWAYS write tests (Vitest) for hooks and utils
-- ALWAYS run verification gate before merge (`typecheck`, `test`, `lint`, `build`)
+- ALWAYS run the applicable Production Reliability gate before merge
 - ALWAYS structure code by feature (`src/features/`)
 - ALWAYS use cn() for conditional Tailwind classes
-- ALWAYS use @/* path aliases, never ../../../
+- ALWAYS use @/\* path aliases, never ../../../
 - ALWAYS use React Hook Form + Zod for forms (2+ fields)
 - ALWAYS use Radix/shadcn before custom components
 - ALWAYS use Prisma ≥6 when the project needs ORM-backed server-side or edge relational data access
@@ -72,6 +81,8 @@
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use Zustand for client state
+- ALWAYS validate environment configuration and external API data at runtime
+- ALWAYS document browser/runtime support, performance budgets, and rollback before production
 - NEVER use `any` — use `unknown` + type guards
 - NEVER put business logic in components
 - NEVER install packages outside this stack without asking
@@ -85,7 +96,7 @@ formik, yup, class components, CSS-in-JS, relative deep imports
 
 ## Deployment Targets (optional)
 
-Browser → default (no extra config)
+Browser → Baseline support policy + Playwright matrix + preview/smoke/rollback
 Cloud frontend → Cloudflare Pages by default, Vercel when explicitly requested or when Pages is not a fit
 Desktop → Electron ≥33 or Tauri ≥2.10 (see targets/)
 PWA → vite-plugin-pwa (see targets/pwa.md)
@@ -95,6 +106,8 @@ PWA → vite-plugin-pwa (see targets/pwa.md)
 See stack/ directory for detailed specs per layer.
 See stack/advanced-capabilities.md for capability-gated workbench surfaces.
 See stack/design-system.md for the DESIGN.md Design Contract.
+See stack/reliability.md for the Production Reliability contract.
+See stack/security.md and stack/api-boundaries.md for trusted boundaries.
 See stack.yaml for machine-readable version manifest.
 See guides/new-project-setup.md for bootstrapping.
 See targets/TARGETS.md for cloud and desktop deployment target policy.

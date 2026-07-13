@@ -1,7 +1,7 @@
 ---
 title: "Architecture Principles"
-version: "1.4.0"
-updated: "2026-03-09"
+version: "1.8.0"
+updated: "2026-07-13"
 tier: 1
 scope: "mandatory"
 ---
@@ -133,6 +133,44 @@ const [state, setState] = useState<any>(null);
 - Never manually recreate baseline setup that an official CLI already
   generates (example: shadcn/ui base init)
 
+## 9. Boundaries Validate at Runtime
+
+- Validate environment configuration once and fail fast
+- Validate every external API response before it reaches domain code
+- Keep transport DTOs, domain models, and view models distinct when they differ
+- Browser-delivered configuration is public; secrets stay in trusted runtimes
+- Expose typed, feature-neutral boundaries from `src/config/` and `src/shared/api/`
+
+See [security.md](security.md) and [api-boundaries.md](api-boundaries.md).
+
+## 10. Async Work Has a Lifecycle
+
+- Every network request accepts cancellation and a finite timeout
+- Prevent obsolete responses from overwriting newer state
+- Model idle, loading, empty, success, stale, offline, and error explicitly
+- Retry only safe/idempotent operations with bounded backoff
+- Roll back rejected optimistic updates
+- Every error state provides a useful recovery path; never fail silently
+
+## 11. Compatibility Is Explicit
+
+- Document the browser/runtime support policy; never say only “modern browsers”
+- Use Baseline Widely Available as the default web-platform policy
+- Require feature detection, progressive enhancement, and fallback for exceptions
+- Test the actual engine matrix defined by Browser, Electron, Tauri, PWA, or WebView targets
+
+See [targets/browser.md](../targets/browser.md).
+
+## 12. Production Readiness Is Evidence
+
+- CI, not a developer workstation, is the authoritative merge gate
+- Test the production artifact and the product's critical journeys
+- Enforce accessibility, performance, security, and supply-chain policies
+- Correlate releases with telemetry and document rollout and rollback
+- Capability-specific tooling is required only after its profile applies
+
+See [reliability.md](reliability.md).
+
 ## Rules for Agents (Summary)
 
 1. **Structure by features** — never `components/`, `hooks/` at root
@@ -149,8 +187,14 @@ const [state, setState] = useState<any>(null);
 12. **Use path aliases** — imports with `@/features/...`, never `../../../`
 13. **Official CLI-First** — prefer official docs-recommended CLI over manual setup
 14. **Impact Preflight** — evaluate overwrite/structure/config risk before CLI; if uncertain, ask the developer first
+15. **Validate boundaries** — typed environment and runtime schemas for all external data
+16. **Control async lifecycle** — cancellation, timeout, bounded retry, recovery
+17. **Declare compatibility** — explicit browser/runtime matrix and fallbacks
+18. **Prove production readiness** — CI, E2E, accessibility, performance, security, rollback
 
-## Quality Gate: Husky Pre-Commit
+## Quality Gates
+
+### Local: Husky Pre-Commit
 
 ```bash
 # .husky/pre-commit
@@ -168,3 +212,10 @@ pnpm exec lint-staged
 ```
 
 Setup mandatory on project init. Code with lint errors **never enters the repo**.
+
+### Authoritative: CI
+
+Every applicable pull request MUST pass clean lockfile installation, typecheck,
+lint, unit/integration tests, production build, critical E2E, automated
+accessibility, dependency review, and documented performance budgets. Protect
+the default branch with these checks. See [build-and-test.md](build-and-test.md).

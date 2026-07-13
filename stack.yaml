@@ -3,7 +3,7 @@
 # This file is the single source of truth for versions.
 
 schema_version: "1.0"
-blueprint_version: "1.7.0"
+blueprint_version: "1.8.0"
 updated: "2026-07-13"
 
 core:
@@ -61,6 +61,30 @@ test:
     min: ">=3.2.0"
     recommended: ">=4.0.0"
     install: "vitest @testing-library/react @testing-library/jest-dom"
+  playwright:
+    status: "required-for-user-facing-deployed-apps"
+    min: ">=1.61.0"
+    current: "1.61.1"
+    install: "@playwright/test"
+    note: "Run critical journeys against the production build. Match projects to the declared browser/runtime matrix and retain traces on first retry in CI."
+  accessibility:
+    target: "WCAG 2.2 Level AA"
+    axe_playwright:
+      current: "4.12.1"
+      install: "@axe-core/playwright"
+      note: "Automated checks are required for representative routes and states but never establish conformance without manual evaluation."
+  network_mocking:
+    msw:
+      status: "capability-gated"
+      current: "2.15.0"
+      install: "msw"
+      note: "Activate when the project consumes HTTP or GraphQL APIs. Reuse canonical handlers across integration and browser scenarios."
+  component_platform:
+    storybook:
+      status: "optional-capability-gated"
+      current: "10.5.0"
+      install: "storybook @storybook/react-vite @storybook/addon-a11y"
+      note: "Activate for shared design systems, reusable component platforms, or complex state matrices; not a base dependency."
 
 quality:
   husky:
@@ -72,6 +96,54 @@ quality:
     install: "eslint @eslint/js typescript-eslint"
   prettier:
     install: "prettier"
+  ci:
+    status: "mandatory"
+    install: "pnpm install --frozen-lockfile"
+    required_checks: "typecheck lint test:unit build; test:e2e when the deployed-UI profile applies"
+    note: "Husky is local feedback. CI is the authoritative protected-branch merge gate."
+
+reliability:
+  status: "mandatory-by-applicable-profile"
+  policy: "stack/reliability.md"
+  core_web_vitals:
+    percentile: 75
+    lcp_good_ms: 2500
+    inp_good_ms: 200
+    cls_good: 0.1
+    note: "Evaluate mobile and desktop field data separately. Lab tools are regression signals, not field SLO proof."
+  tooling:
+    web_vitals:
+      status: "optional-when-provider-does-not-collect"
+      current: "5.3.0"
+      install: "web-vitals"
+    lighthouse_ci:
+      status: "optional-budget-implementation"
+      current: "0.15.1"
+      install: "@lhci/cli"
+  release:
+    requirements: "immutable release identifier, preview smoke test, rollout plan, rollback runbook, owner"
+  browser_policy:
+    default: "Baseline Widely Available"
+    exceptions: "feature detection, progressive enhancement, fallback, tests, documented rationale"
+
+security:
+  status: "mandatory"
+  environment:
+    public_prefix: "VITE_"
+    validation: "Zod in src/config/env.ts"
+    note: "All VITE_* values are client-visible and must never contain secrets."
+  supply_chain:
+    requirements: "single lockfile, frozen CI install, Dependabot, Dependency Review, CodeQL, secret scanning, minimum permissions, Actions pinned to full commit SHAs"
+  browser:
+    requirements: "CSP rollout, avoid injection sinks, sanitize untrusted rich content, Trusted Types when compatible"
+
+api_boundaries:
+  status: "mandatory-when-networked"
+  client: "platform fetch"
+  validation: "Zod"
+  lifecycle: "AbortSignal plus finite timeout"
+  retry: "bounded, idempotent operations only, normally owned by TanStack Query"
+  note: "Do not add Axios without a concrete requirement that the platform fetch boundary cannot meet."
 
 ui:
   radix:
@@ -273,11 +345,17 @@ i18n:
 
 observability:
   sentry:
+    status: "recommended-optional"
     install: "@sentry/react"
+    note: "Activate when a deployed application needs error operations and release correlation."
   opentelemetry:
+    status: "capability-gated"
     install: "@opentelemetry/api @opentelemetry/sdk-trace-web"
+    note: "Activate when frontend telemetry must correlate with distributed backend or edge traces."
   statsig:
+    status: "capability-gated"
     install: "@statsig/react-bindings"
+    note: "Activate for staged rollouts, experimentation, or dynamic configuration."
 
 icons:
   default: "lucide"
@@ -289,6 +367,10 @@ icons:
     install: "@tabler/icons-react"
 
 targets:
+  browser:
+    status: "default"
+    policy: "Baseline Widely Available unless product evidence requires another matrix"
+    note: "Document browser families/versions, mobile/desktop scope, progressive enhancement, test matrix, preview smoke, and rollback."
   cloudflare_pages:
     status: "priority-optional"
     type: "cloud-frontend-hosting"

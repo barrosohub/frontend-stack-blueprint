@@ -7,7 +7,8 @@
 
 TypeScript ≥5.9 strict · React ≥19.2 · TanStack Router ≥1 (or React Router ≥7.1)
 pnpm (priority) · Node.js >=20.19 or >=22.12 · Bun ≥1 (runtime alternative)
-Vite ≥7 (Node.js >=20.19 or >=22.12) · Vitest ≥3.2 · Husky + lint-staged + ESLint + Prettier
+Vite ≥7 · Vitest ≥3.2 · Playwright ≥1.61 for deployed UI · protected CI merge gate
+Husky + lint-staged + ESLint + Prettier
 Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
 Tailwind CSS ≥4 + clsx + tailwind-merge · Motion (`import from 'motion/react'`)
 DESIGN.md Design Contract (provisional, optional): root DESIGN.md → generated Tailwind 4 tokens
@@ -18,7 +19,7 @@ Managed Services (optional): Neon Postgres | Cloudflare D1 | Cloudflare R2 | Clo
 Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
 Lexical (primary) · ProseMirror (fallback) · Shiki
 Advanced Capabilities (optional): Markdown · TanStack Table · Recharts · Mermaid · CodeMirror · xterm/node-pty · Yjs · PDF.js
-Format.js · react-intl · Sentry · OpenTelemetry · Statsig
+Format.js · react-intl · Sentry / OpenTelemetry / Statsig (capability-gated)
 Icons: Lucide (default) | Phosphor | Tabler
 
 ## Architecture (MANDATORY)
@@ -27,6 +28,15 @@ Feature-based modules · Strong typing (no `any`) · DRY · KISS · YAGNI
 Composition > inheritance · Logic in hooks · Tests required (Vitest)
 Husky pre-commit required · React Compiler when available
 Always cn() for Tailwind classes · Always `@/*` path aliases
+
+## Production Reliability (MANDATORY by applicable profile)
+
+CI is authoritative: frozen lockfile · typecheck · lint · unit/integration · production build · critical E2E
+WCAG 2.2 AA: axe automation + keyboard/focus/zoom/reflow + manual screen-reader journey
+Field targets: LCP ≤2.5s · INP ≤200ms · CLS ≤0.1 at p75; route-aware asset budgets required
+Browser target: Baseline Widely Available by default + explicit matrix and progressive enhancement
+Networked UI: typed env · fetch + AbortSignal/timeout · Zod responses · MSW degraded scenarios
+Production operation: preview smoke · immutable release ID · privacy policy · rollout + rollback runbook
 
 ## Universal Foundations (MANDATORY)
 
@@ -45,7 +55,7 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - ALWAYS structure by feature (`src/features/`), NEVER by file type
 - ALWAYS setup Husky + lint-staged on project init
 - ALWAYS write tests (Vitest) for hooks and utils
-- ALWAYS run verification gate before merge (`typecheck`, `test`, `lint`, `build`)
+- ALWAYS run the applicable Production Reliability gate before merge
 - ALWAYS use cn() helper for conditional Tailwind classes
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
@@ -58,6 +68,9 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - ALWAYS prefer official docs-recommended CLI over manual scaffolding
 - ALWAYS ask developer confirmation before running CLI when Impact Preflight is non-trivial/uncertain
 - ALWAYS use TanStack Query for async/server state
+- ALWAYS validate public environment and external API data at runtime
+- ALWAYS cancel or safely ignore obsolete async work and provide recovery states
+- ALWAYS document browser/runtime support, performance budgets, and rollback before production
 - ALWAYS use Zustand for client state
 - NEVER use `any` — use `unknown` + type guards
 - NEVER put business logic in components — extract to hooks
@@ -85,6 +98,10 @@ Tauri → targets/tauri.md · PWA → targets/pwa.md
 - Managed Services: stack/managed-services.md
 - Advanced Capabilities: stack/advanced-capabilities.md
 - DESIGN.md Design Contract: stack/design-system.md
+- Production Reliability: stack/reliability.md
+- Frontend Security: stack/security.md
+- API Boundaries: stack/api-boundaries.md
+- Browser target: targets/browser.md
 - Architecture: stack/architecture.md
 - Targets: targets/TARGETS.md
 - Versions: stack.yaml

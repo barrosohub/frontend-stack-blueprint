@@ -46,7 +46,11 @@ const agentEntryPoints = [
   "llms-full.txt",
 ];
 
-const parityTerms = ["Advanced Capabilities", "DESIGN.md Design Contract"];
+const parityTerms = [
+  "Advanced Capabilities",
+  "DESIGN.md Design Contract",
+  "Production Reliability",
+];
 
 for (const path of agentEntryPoints) {
   for (const term of parityTerms) {
@@ -62,6 +66,8 @@ const operationalParityTerms = [
   "motion/react",
   "@date-fns/tz",
   "TanStack Store",
+  "WCAG 2.2",
+  "Baseline Widely Available",
 ];
 
 for (const path of operationalEntryPoints) {
@@ -97,6 +103,17 @@ const requiredFiles = [
   "stack/design-system.md",
   "rationale/why-design-md.md",
   "templates/DESIGN.example.md",
+  "stack/reliability.md",
+  "stack/security.md",
+  "stack/api-boundaries.md",
+  "rationale/why-production-reliability.md",
+  "targets/browser.md",
+  "templates/github-actions-ci.md",
+  "templates/playwright.config.md",
+  "templates/env-contract.md",
+  "templates/api-client.md",
+  "templates/performance-budgets.md",
+  "templates/dependabot.yml.md",
   ".github/workflows/blueprint-integrity.yml",
 ];
 

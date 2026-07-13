@@ -36,6 +36,11 @@ labels: ["proposal", "addition"]
 
 <!-- What are the downsides? Bundle size? Learning curve? -->
 
+## Production Reliability Impact
+
+<!-- Which profile activates it? Cover CI/testing, accessibility, performance,
+security/privacy, browser/runtime compatibility, observability, and rollback. -->
+
 ## Proposed Placement
 
 <!-- Where in the stack does this go? Core, optional, or alternative? -->

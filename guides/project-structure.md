@@ -1,6 +1,6 @@
 ---
 title: "Project Structure"
-version: "1.7.0"
+version: "1.8.0"
 updated: "2026-07-13"
 tier: 2
 ---
@@ -23,6 +23,9 @@ my-project/
 │   │   ├── router.tsx              # Route definitions
 │   │   ├── design-tokens.css       # Generated from DESIGN.md (when activated)
 │   │   └── app.css                 # Global styles (Tailwind imports)
+│   │
+│   ├── config/
+│   │   └── env.ts                  # Validated public environment contract
 │   │
 │   ├── features/                   # ⭐ Feature modules (core pattern)
 │   │   ├── auth/
@@ -51,6 +54,9 @@ my-project/
 │   │       └── index.ts
 │   │
 │   ├── shared/                     # Shared across features
+│   │   ├── api/                    # Network boundary (when applicable)
+│   │   │   ├── request.ts
+│   │   │   └── request.test.ts
 │   │   ├── components/
 │   │   │   ├── ui/                 # shadcn/ui components
 │   │   │   │   ├── button.tsx
@@ -62,8 +68,7 @@ my-project/
 │   │   │   ├── useMediaQuery.ts
 │   │   │   └── useDebounce.ts
 │   │   ├── utils/
-│   │   │   ├── cn.ts               # ⭐ cn() utility (required)
-│   │   │   └── api.ts
+│   │   │   └── cn.ts               # ⭐ cn() utility (required)
 │   │   └── types/
 │   │       └── common.ts
 │   │
@@ -76,9 +81,19 @@ my-project/
 │   │
 │   └── main.tsx                    # Entry point
 │
+├── e2e/                            # Critical Playwright journeys
+│   ├── primary-journey.spec.ts
+│   └── accessibility.spec.ts
+├── .github/
+│   ├── dependabot.yml
+│   └── workflows/
+│       └── ci.yml
 ├── .husky/
 │   └── pre-commit
 ├── DESIGN.md                        # Optional product design contract
+├── .env.example                     # Safe names/examples, never secrets
+├── .nvmrc                           # Maintained Node release used by CI
+├── playwright.config.ts
 ├── tsconfig.json
 ├── vite.config.ts
 ├── vitest.config.ts
@@ -98,6 +113,10 @@ my-project/
 6. **No orphans** — Every file belongs to a feature or shared
 7. **Design contract** — When root `DESIGN.md` exists, read it before UI work
 8. **Generated tokens** — Never hand-edit `src/app/design-tokens.css`
+9. **Environment boundary** — Features import typed `env`, never raw `import.meta.env`
+10. **API boundary** — Transport code lives in `shared/api`; domain usage stays in features
+11. **E2E boundary** — Critical journeys and accessibility live in top-level `e2e/`
+12. **CI authority** — The protected-branch workflow verifies the production artifact
 
 ## Import Examples
 

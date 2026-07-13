@@ -1,6 +1,6 @@
 ---
 title: "Package Versions"
-version: "1.7.0"
+version: "1.8.0"
 updated: "2026-07-13"
 tier: 2
 ---
@@ -19,6 +19,22 @@ tier: 2
 | React Router    | ≥7.1            | latest  | `react-router`           |
 | Vite            | ≥7.x            | 7.3.1   | `vite`                   |
 | Vitest          | ≥3.2 (4.x rec.) | latest  | `vitest`                 |
+
+## Production Reliability
+
+| Capability              | Package                                           | Policy                                                     | Current (2026-07-13) |
+| ----------------------- | ------------------------------------------------- | ---------------------------------------------------------- | -------------------- |
+| E2E                     | `@playwright/test`                                | Required for user-facing deployed apps                     | 1.61.1               |
+| Automated accessibility | `@axe-core/playwright`                            | Required with Playwright                                   | 4.12.1               |
+| Network mocks           | `msw`                                             | Required when deterministic API scenarios apply            | 2.15.0               |
+| Field Web Vitals        | `web-vitals`                                      | Optional when the telemetry provider does not collect them | 5.3.0                |
+| Lab performance         | `@lhci/cli`                                       | Optional CI implementation for documented budgets          | 0.15.1               |
+| Component platform      | `@storybook/react-vite` + `@storybook/addon-a11y` | Optional, capability-gated                                 | 10.5.0               |
+
+Playwright, axe, MSW, and performance tooling are development dependencies.
+Storybook is activated only for a shared design system, reusable component
+platform, or complex state matrix. See
+[Production Reliability](../stack/reliability.md).
 
 ## Tooling
 
@@ -91,11 +107,14 @@ a root `DESIGN.md`. See [DESIGN.md Design Contract](../stack/design-system.md).
 
 ## Observability
 
-| Package       | Install                                           |
-| ------------- | ------------------------------------------------- |
-| Sentry        | `@sentry/react`                                   |
-| OpenTelemetry | `@opentelemetry/api @opentelemetry/sdk-trace-web` |
-| Statsig       | `@statsig/react-bindings`                         |
+| Package       | Policy                                             | Install                                           |
+| ------------- | -------------------------------------------------- | ------------------------------------------------- |
+| Sentry        | Recommended when production error operations apply | `@sentry/react`                                   |
+| OpenTelemetry | Capability-gated distributed tracing               | `@opentelemetry/api @opentelemetry/sdk-trace-web` |
+| Statsig       | Capability-gated rollouts/experiments              | `@statsig/react-bindings`                         |
+
+Do not install all three during base setup. Activate only the operational
+capability the product owns, with sampling, privacy, retention, and cost policy.
 
 ## Advanced Capabilities (optional)
 

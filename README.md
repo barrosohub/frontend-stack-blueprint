@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.7.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.8.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -40,8 +40,10 @@ A **public repository** that serves as the **single source of truth** for modern
 │                 React Router ≥7.1 (alternative)              │
 │  TOOLING        pnpm (priority) · Bun ≥1 (runtime alt)      │
 │  BUILD          Vite ≥7 (Node.js >=20.19 or >=22.12)          │
-│  TEST           Vitest ≥3.2 (4.x recommended)               │
-│  QUALITY        Husky + lint-staged + ESLint + Prettier      │
+│  TEST           Vitest ≥3.2 · Playwright ≥1.61              │
+│  QUALITY        CI merge gate · Husky · ESLint · Prettier   │
+│  RELIABILITY    WCAG 2.2 AA · Web Vitals · rollback         │
+│  SECURITY       typed env · supply chain · CSP              │
 │                                                              │
 │  COMPONENTS     Radix UI · Floating UI · Embla · cmdk        │
 │  UI PRE-STYLED  shadcn/ui (recommended)                      │
@@ -64,7 +66,7 @@ A **public repository** that serves as the **single source of truth** for modern
 │                 CodeMirror · Terminal · Yjs · PDF.js         │
 │  I18N           Format.js + react-intl                       │
 │                                                              │
-│  OBSERVABILITY  Sentry · OpenTelemetry · Statsig             │
+│  OBSERVABILITY  Sentry · OpenTelemetry · Statsig (gated)     │
 │  ICONS          Lucide (default) | Phosphor | Tabler         │
 │                                                              │
 ├──────────────────────────────────────────────────────────────┤
@@ -133,6 +135,9 @@ frontend-stack-blueprint/
 │   ├── core.md           TypeScript, React, Routing
 │   ├── tooling.md        pnpm, Node.js, Bun
 │   ├── build-and-test.md Vite, Vitest, Quality
+│   ├── reliability.md    Production Definition of Done
+│   ├── security.md       Environment, browser, supply chain
+│   ├── api-boundaries.md Fetch, validation, cancellation, MSW
 │   ├── ui.md             Radix, shadcn/ui, Floating UI
 │   ├── forms.md          RHF + Zod
 │   ├── data-access.md    Data Access (optional)
@@ -149,7 +154,7 @@ frontend-stack-blueprint/
 │   └── icons.md          Lucide, Phosphor, Tabler
 │
 ├── 🎯 targets/ (Tier 2 — Optional)
-│   ├── cloudflare-pages.md / vercel.md
+│   ├── browser.md / cloudflare-pages.md / vercel.md
 │   └── electron.md / tauri.md / pwa.md
 │
 ├── 📖 guides/ (Tier 2)
@@ -159,7 +164,9 @@ frontend-stack-blueprint/
 │   └── migration-paths.md
 │
 ├── 🔧 templates/ (Tier 2)
-│   ├── tsconfig / vite / vitest / tailwind / eslint configs
+│   ├── tsconfig / vite / vitest / Playwright / CI configs
+│   ├── env / API boundary / performance budgets
+│   ├── Dependabot supply-chain updates
 │   ├── cn-utility.md / zod-form-example.md
 │   └── DESIGN.example.md
 │
@@ -170,6 +177,7 @@ frontend-stack-blueprint/
 │   ├── why-neon.md / why-cloudflare-r2.md / why-resend.md
 │   ├── why-advanced-capabilities.md
 │   ├── why-design-md.md
+│   ├── why-production-reliability.md
 │   └── why-*.md files for every technology
 │
 └── 🔮 backlog/ (Tier 4 — Evolution)

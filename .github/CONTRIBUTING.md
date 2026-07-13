@@ -30,17 +30,22 @@ For typos, clarity improvements, or broken links — open a PR directly.
 3. **Ecosystem fit** — Technology must work with the existing stack
 4. **AI-friendly** — Sufficient LLM training data for quality code generation
 5. **One change per PR** — Keep changes focused and reviewable
+6. **Reliability impact** — State activation profile, CI/test evidence, accessibility,
+   performance, security/privacy, compatibility, and recovery implications
+7. **Capability-gated by default** — New dependencies need a concrete product
+   capability unless they are essential to every project
 
 ## Versioning Impact
 
-| Change Type                  | Version Bump |
-| ---------------------------- | ------------ |
-| New technology in stack      | MINOR        |
-| Remove technology from stack | MAJOR        |
-| New deployment target        | MINOR        |
-| Minimum version bump         | PATCH        |
-| Documentation fix            | PATCH        |
-| New architectural principle  | MAJOR        |
+| Change Type                             | Version Bump |
+| --------------------------------------- | ------------ |
+| New technology in stack                 | MINOR        |
+| Remove technology from stack            | MAJOR        |
+| New deployment target                   | MINOR        |
+| Minimum version bump                    | PATCH        |
+| Documentation fix                       | PATCH        |
+| New backward-compatible category/policy | MINOR        |
+| Breaking mandatory rule or core swap    | MAJOR        |
 
 ## Code of Conduct
 

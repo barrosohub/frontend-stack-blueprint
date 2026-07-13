@@ -1,6 +1,6 @@
 ---
 title: "New Project Setup"
-version: "1.7.0"
+version: "1.8.0"
 updated: "2026-07-13"
 tier: 2
 ---
@@ -25,6 +25,9 @@ pnpm create vite my-project --template react-ts
 cd my-project
 pnpm install
 ```
+
+Create `.nvmrc` with a maintained Node.js release satisfying the Vite constraint
+(for example `22.12`). CI reads this file instead of duplicating a Node version.
 
 ## Step 2: Add Blueprint Dependencies
 
@@ -114,8 +117,11 @@ export function cn(...inputs: ClassValue[]): string {
 
 ```
 src/
+  config/
+    env.ts              # Typed public environment contract
   features/           # Feature modules (co-located)
   shared/
+    api/                # Network boundary (when applicable)
     components/       # Shared UI components
     hooks/            # Shared hooks
     utils/
@@ -123,6 +129,7 @@ src/
     types/            # Global types
   App.tsx
   main.tsx
+e2e/                    # Critical Playwright journeys
 ```
 
 See [guides/project-structure.md](project-structure.md) for full details.
@@ -191,15 +198,63 @@ Do not ship the example unchanged or hand-edit the generated token file. See
 [stack/design-system.md](../stack/design-system.md) for precedence, agent rules,
 CI guidance, and the alpha stability policy.
 
-## Step 12: Verify Setup
+## Step 12: Configure Production Reliability
+
+Apply the profiles in [stack/reliability.md](../stack/reliability.md).
+
+### Typed Environment
+
+Create `src/config/env.ts` from
+[templates/env-contract.md](../templates/env-contract.md). Every `VITE_*` value
+is public client configuration and MUST NOT contain a secret.
+
+### E2E and Accessibility
+
+For every user-facing deployed application:
 
 ```bash
-pnpm dev              # Should start without errors
-pnpm build            # Should build without errors
-pnpm exec vitest --run  # Tests should pass
+pnpm add -D @playwright/test @axe-core/playwright
+pnpm exec playwright install
 ```
 
-## Step 13: If the Project Needs Authentication
+Copy [templates/playwright.config.md](../templates/playwright.config.md), define
+the browser/runtime matrix, and add the critical journeys before launch.
+
+### Network Contract Mocks
+
+When the project consumes an API:
+
+```bash
+pnpm add -D msw
+```
+
+Create the typed fetch boundary from
+[templates/api-client.md](../templates/api-client.md) and reuse MSW handlers for
+success, latency, cancellation, authorization, rate limit, server failure, and
+malformed-payload scenarios.
+
+### CI, Security, and Performance
+
+- Start from [templates/github-actions-ci.md](../templates/github-actions-ci.md)
+- Add [templates/dependabot.yml.md](../templates/dependabot.yml.md)
+- Protect the default branch with applicable required checks
+- Enable Dependabot, Dependency Review, CodeQL, and secret scanning where available
+- Pin Actions to verified full commit SHAs with minimum permissions
+- Complete [templates/performance-budgets.md](../templates/performance-budgets.md)
+- Document browser support using [targets/browser.md](../targets/browser.md)
+- Define preview smoke, release identity, rollout, and rollback before production
+
+## Step 13: Verify Setup
+
+```bash
+pnpm typecheck   # Whole-project typecheck
+pnpm lint        # Zero lint warnings/errors
+pnpm test:unit   # Unit and integration tests
+pnpm build       # Production artifact
+pnpm test:e2e    # Critical journeys against the artifact
+```
+
+## Step 14: If the Project Needs Authentication
 
 Use Better Auth as the default auth layer only when the project needs login/session management.
 
@@ -209,7 +264,7 @@ Use Better Auth as the default auth layer only when the project needs login/sess
 - If client and server are separate, install Better Auth in both parts as directed by the official docs
 - Apply **Official CLI-First + Impact Preflight** before any Better Auth CLI command
 
-## Step 14: If the Project Needs Data Access / ORM
+## Step 15: If the Project Needs Data Access / ORM
 
 Use Prisma only when the project has backend, server-side, or edge runtime and actually needs ORM-backed relational data access.
 
@@ -219,7 +274,7 @@ Use Prisma only when the project has backend, server-side, or edge runtime and a
 - If the project pairs Prisma with Cloudflare D1, follow the official Prisma + D1 guide and do not assume `prisma migrate dev` as the default workflow
 - Apply **Official CLI-First + Impact Preflight** before Prisma CLI commands that initialize schema, generate clients, or alter database state
 
-## Step 15: If the Project Needs Managed Services
+## Step 16: If the Project Needs Managed Services
 
 Use managed services only when the project actually needs database, object storage, or email delivery capabilities.
 
@@ -233,14 +288,14 @@ Use managed services only when the project actually needs database, object stora
 - D1, KV, and R2 should only be added when the project also has Functions, Workers, or another server-side/edge runtime surface
 - Apply **Official CLI-First + Impact Preflight** before Neon, Prisma, or Wrangler commands that modify infrastructure or schema
 
-## Step 16: If the Project Needs Bun Runtime
+## Step 17: If the Project Needs Bun Runtime
 
 - Bun is approved as an alternative runtime only; Node.js remains the default runtime baseline
 - Keep `pnpm` as the package manager even when the runtime is Bun
 - Validate CLI, dependency, and deployment compatibility before switching runtime assumptions
 - See [stack/tooling.md](../stack/tooling.md) for the canonical tooling policy
 
-## Step 17: If the Project Needs Advanced Capabilities
+## Step 18: If the Project Needs Advanced Capabilities
 
 Do not add workbench-style dependencies during the base setup. If the product
 explicitly needs Markdown, interactive tables, charts, diagrams, code editing,
