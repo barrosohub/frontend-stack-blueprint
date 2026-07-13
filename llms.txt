@@ -40,6 +40,7 @@
 - [State](stack/state-and-data.md): Zustand + TanStack Query (TanStack Store replaces Zustand at v1 GA)
 - [Dates](stack/dates.md): date-fns
 - [Content](stack/content.md): Lexical, ProseMirror, Shiki
+- [Advanced Capabilities](stack/advanced-capabilities.md): Capability-gated Markdown, tables, charts, diagrams, editor, terminal, collaboration, and PDF surfaces
 - [i18n](stack/i18n.md): Format.js, react-intl
 - [Observability](stack/observability.md): Sentry, OTel, Statsig
 - [Icons](stack/icons.md): Lucide (default), Phosphor, Tabler
@@ -82,6 +83,7 @@
 - [Why Neon](rationale/why-neon.md)
 - [Why Cloudflare R2](rationale/why-cloudflare-r2.md)
 - [Why Resend](rationale/why-resend.md)
+- [Why Advanced Capabilities](rationale/why-advanced-capabilities.md)
 - [Why date-fns](rationale/why-date-fns.md)
 - [Why Lexical](rationale/why-lexical-over-prosemirror.md)
 - [Electron vs Tauri](rationale/electron-vs-tauri.md)

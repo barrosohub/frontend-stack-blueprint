@@ -1,7 +1,7 @@
 ---
 title: "Content & Editing"
-version: "1.4.0"
-updated: "2026-03-09"
+version: "1.6.0"
+updated: "2026-07-13"
 tier: 1
 ---
 
@@ -9,11 +9,11 @@ tier: 1
 
 ## Lexical (Primary)
 
-| Attribute | Value                                |
-| --------- | ------------------------------------ |
-| Role      | Rich text editing                    |
-| Status    | ✅ Core (primary)                    |
-| Install   | `pnpm add lexical @lexical/react`    |
+| Attribute | Value                             |
+| --------- | --------------------------------- |
+| Role      | Rich text editing                 |
+| Status    | ✅ Core (primary)                 |
+| Install   | `pnpm add lexical @lexical/react` |
 
 ### Why Lexical
 
@@ -34,11 +34,11 @@ tier: 1
 
 ## ProseMirror (Fallback)
 
-| Attribute | Value                                                              |
-| --------- | ------------------------------------------------------------------ |
-| Role      | Rich text editing (advanced)                                       |
-| Status    | ⚠️ Secondary                                                       |
-| Install   | `pnpm add prosemirror-state prosemirror-view prosemirror-model`    |
+| Attribute | Value                                                           |
+| --------- | --------------------------------------------------------------- |
+| Role      | Rich text editing (advanced)                                    |
+| Status    | ⚠️ Secondary                                                    |
+| Install   | `pnpm add prosemirror-state prosemirror-view prosemirror-model` |
 
 ### When to Use (instead of Lexical)
 
@@ -85,3 +85,15 @@ const html = await codeToHtml("const x = 1;", {
   theme: "github-dark",
 });
 ```
+
+---
+
+## Advanced Content Surfaces
+
+Markdown rendering, technical diagrams, interactive code editing,
+collaboration, terminal surfaces, and PDF viewing are optional capabilities.
+They MUST NOT be installed as part of the base content stack.
+
+When the product explicitly needs one of those surfaces, follow
+[Advanced Capabilities](advanced-capabilities.md) for the approved package,
+security boundary, state ownership, and lifecycle rules.
