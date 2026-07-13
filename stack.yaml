@@ -3,7 +3,7 @@
 # This file is the single source of truth for versions.
 
 schema_version: "1.0"
-blueprint_version: "1.6.0"
+blueprint_version: "1.7.0"
 updated: "2026-07-13"
 
 core:
@@ -101,6 +101,18 @@ styling:
   motion:
     install: "motion"
     note: "Successor to framer-motion. Import from 'motion/react'"
+
+design_system:
+  design_md:
+    status: "provisional-optional"
+    spec_version: "alpha"
+    current: "0.3.0"
+    evaluated: "2026-07-13"
+    file: "DESIGN.md"
+    install: "@google/design.md@0.3.0"
+    binary: "designmd"
+    export: "designmd export --format css-tailwind DESIGN.md"
+    note: "Optional project-level design contract for visual intent and source token values. Pin the CLI exactly while the specification is alpha; do not install or create the file without an explicit product design need."
 
 forms:
   react_hook_form:

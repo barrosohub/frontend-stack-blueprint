@@ -10,6 +10,7 @@ pnpm (priority) · Node.js >=20.19 or >=22.12 · Bun ≥1 (runtime alternative)
 Vite ≥7 (Node.js >=20.19 or >=22.12) · Vitest ≥3.2 · Husky + lint-staged + ESLint + Prettier
 Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
 Tailwind CSS ≥4 + clsx + tailwind-merge · Motion (`import from 'motion/react'`)
+DESIGN.md Design Contract (provisional, optional): root DESIGN.md → generated Tailwind 4 tokens
 React Hook Form + Zod · date-fns ≥4.1 (+@date-fns/tz)
 Data Access (optional): Prisma ≥6
 Authentication (optional): Better Auth ≥1
@@ -62,6 +63,7 @@ Always cn() for Tailwind classes · Always `@/*` path aliases
 - NEVER put business logic in components — extract to hooks
 - NEVER install packages outside this stack without asking
 - ONLY install Advanced Capabilities when an explicit product requirement activates them
+- WHEN root `DESIGN.md` exists, ALWAYS read it before UI work and regenerate tokens after intentional contract changes
 
 ## Banned
 
@@ -82,6 +84,7 @@ Tauri → targets/tauri.md · PWA → targets/pwa.md
 - Authentication: stack/auth.md
 - Managed Services: stack/managed-services.md
 - Advanced Capabilities: stack/advanced-capabilities.md
+- DESIGN.md Design Contract: stack/design-system.md
 - Architecture: stack/architecture.md
 - Targets: targets/TARGETS.md
 - Versions: stack.yaml

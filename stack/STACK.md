@@ -1,6 +1,6 @@
 ---
 title: "Frontend Stack Blueprint — Complete Manifesto"
-version: "1.6.0"
+version: "1.7.0"
 updated: "2026-07-13"
 tier: 1
 tokens: "~3000"
@@ -20,15 +20,16 @@ This stack is the **reusable base** for any frontend project. It defines:
 2. **How to install and run** — package manager and runtime defaults
 3. **How to build UI** — framework, components, styling, animation
 4. **How to manage state and data** — client state, server state, cache
-5. **How to authenticate** — session lifecycle and auth boundary when needed
-6. **How to access application data** — ORM and relational data access when needed
-7. **How to connect managed services** — database, key-value, object storage, email when needed
-8. **How to build and test** — build tool, test runner, quality gates
-9. **How to handle content** — rich text, syntax, i18n
-10. **How to add advanced surfaces** — capability-gated tables, charts,
+5. **How to preserve design intent** — optional DESIGN.md visual contract and token flow
+6. **How to authenticate** — session lifecycle and auth boundary when needed
+7. **How to access application data** — ORM and relational data access when needed
+8. **How to connect managed services** — database, key-value, object storage, email when needed
+9. **How to build and test** — build tool, test runner, quality gates
+10. **How to handle content** — rich text, syntax, i18n
+11. **How to add advanced surfaces** — capability-gated tables, charts,
     diagrams, editors, terminals, collaboration, and document viewers
-11. **How to observe** — errors, tracing, feature flags
-12. **How to extend** — icons and future complements
+12. **How to observe** — errors, tracing, feature flags
+13. **How to extend** — icons and future complements
 
 What this stack **does NOT define** (project-dependent):
 
@@ -47,50 +48,51 @@ second, without making cloud hosting part of the mandatory core stack.
 
 ## Stack Overview
 
-| Layer                                      | Technology                                                               | Version          | Status                                                               |
-| ------------------------------------------ | ------------------------------------------------------------------------ | ---------------- | -------------------------------------------------------------------- |
-| Language                                   | TypeScript                                                               | ≥5.9             | ✅ Core                                                              |
-| UI Framework                               | React                                                                    | ≥19.2            | ✅ Core                                                              |
-| Routing (default)                          | TanStack Router                                                          | ≥1.x             | ✅ Core                                                              |
-| Routing (alt)                              | React Router                                                             | ≥7.1             | ✅ Core                                                              |
-| Package Manager                            | pnpm                                                                     | priority         | ⭐ Default                                                           |
-| Runtime (default)                          | Node.js                                                                  | ≥20.19 or ≥22.12 | ✅ Core                                                              |
-| Runtime (alt)                              | Bun                                                                      | ≥1.0             | ✅ Alternative                                                       |
-| Build                                      | Vite                                                                     | ≥7.x             | ✅ Core                                                              |
-| Test                                       | Vitest                                                                   | ≥3.2             | ✅ Core                                                              |
-| Quality                                    | Husky + lint-staged + ESLint + Prettier                                  | latest           | ✅ Core                                                              |
-| UI (headless)                              | Radix UI                                                                 | latest           | ✅ Core                                                              |
-| UI (headless)                              | Floating UI                                                              | latest           | ✅ Core                                                              |
-| UI (headless)                              | Embla Carousel                                                           | latest           | ✅ Core                                                              |
-| UI (headless)                              | cmdk                                                                     | latest           | ✅ Core                                                              |
-| UI (pre-styled)                            | shadcn/ui                                                                | latest           | ⭐ Recommended                                                       |
-| Styling                                    | Tailwind CSS                                                             | ≥4.x             | ✅ Core                                                              |
-| Styling                                    | clsx + tailwind-merge                                                    | latest           | ✅ Core                                                              |
-| Animation                                  | Motion (`motion`)                                                        | latest           | ✅ Core                                                              |
-| Forms                                      | React Hook Form                                                          | latest           | ✅ Core                                                              |
-| Validation                                 | Zod                                                                      | latest           | ✅ Core                                                              |
-| Data Access (optional)                     | Prisma                                                                   | ≥6.0             | ⭐ Recommended when ORM/server-side relational data access is needed |
-| Authentication (optional)                  | Better Auth                                                              | ≥1.0             | ⭐ Recommended when authentication is needed                         |
-| Managed DB (optional)                      | Neon Postgres                                                            | Managed service  | ⭐ Recommended when Postgres is needed                               |
-| Managed DB (optional, Cloudflare-specific) | Cloudflare D1                                                            | Managed service  | ⭐ Recommended when Cloudflare-native serverless SQL is needed       |
-| Object Storage (optional)                  | Cloudflare R2                                                            | Managed service  | ⭐ Recommended when object storage is needed                         |
-| Key-Value Storage (optional)               | Cloudflare KV                                                            | Managed service  | ⭐ Recommended when key-value storage is needed                      |
-| Email (optional)                           | Resend                                                                   | Managed service  | ⭐ Recommended when transactional/marketing email is needed          |
-| Dates                                      | date-fns                                                                 | ≥4.1             | ✅ Core                                                              |
-| Dates (tz)                                 | @date-fns/tz                                                             | latest           | ✅ Core (when needed)                                                |
-| Client State                               | Zustand                                                                  | latest           | ✅ Core                                                              |
-| Server State                               | TanStack Query                                                           | ≥5.60            | ✅ Core                                                              |
-| Rich Text                                  | Lexical                                                                  | latest           | ✅ Core                                                              |
-| Rich Text                                  | ProseMirror                                                              | latest           | ⚠️ Secondary                                                         |
-| Syntax                                     | Shiki                                                                    | latest           | ✅ Core                                                              |
-| Advanced capabilities                      | Markdown, tables, charts, diagrams, editor, terminal, collaboration, PDF | capability-gated | ✅ Optional                                                          |
-| i18n                                       | Format.js + react-intl                                                   | latest           | ✅ Core                                                              |
-| Error Tracking                             | Sentry                                                                   | latest           | ✅ Core                                                              |
-| Tracing                                    | OpenTelemetry                                                            | latest           | ✅ Core                                                              |
-| Feature Flags                              | Statsig                                                                  | latest           | ✅ Core                                                              |
-| Icons (default)                            | Lucide                                                                   | latest           | ⭐ Default                                                           |
-| Icons (alt)                                | Phosphor                                                                 | latest           | ✅ Alternative                                                       |
-| Icons (alt)                                | Tabler                                                                   | latest           | ✅ Alternative                                                       |
+| Layer                                      | Technology                                                               | Version           | Status                                                               |
+| ------------------------------------------ | ------------------------------------------------------------------------ | ----------------- | -------------------------------------------------------------------- |
+| Language                                   | TypeScript                                                               | ≥5.9              | ✅ Core                                                              |
+| UI Framework                               | React                                                                    | ≥19.2             | ✅ Core                                                              |
+| Routing (default)                          | TanStack Router                                                          | ≥1.x              | ✅ Core                                                              |
+| Routing (alt)                              | React Router                                                             | ≥7.1              | ✅ Core                                                              |
+| Package Manager                            | pnpm                                                                     | priority          | ⭐ Default                                                           |
+| Runtime (default)                          | Node.js                                                                  | ≥20.19 or ≥22.12  | ✅ Core                                                              |
+| Runtime (alt)                              | Bun                                                                      | ≥1.0              | ✅ Alternative                                                       |
+| Build                                      | Vite                                                                     | ≥7.x              | ✅ Core                                                              |
+| Test                                       | Vitest                                                                   | ≥3.2              | ✅ Core                                                              |
+| Quality                                    | Husky + lint-staged + ESLint + Prettier                                  | latest            | ✅ Core                                                              |
+| UI (headless)                              | Radix UI                                                                 | latest            | ✅ Core                                                              |
+| UI (headless)                              | Floating UI                                                              | latest            | ✅ Core                                                              |
+| UI (headless)                              | Embla Carousel                                                           | latest            | ✅ Core                                                              |
+| UI (headless)                              | cmdk                                                                     | latest            | ✅ Core                                                              |
+| UI (pre-styled)                            | shadcn/ui                                                                | latest            | ⭐ Recommended                                                       |
+| Styling                                    | Tailwind CSS                                                             | ≥4.x              | ✅ Core                                                              |
+| Styling                                    | clsx + tailwind-merge                                                    | latest            | ✅ Core                                                              |
+| Animation                                  | Motion (`motion`)                                                        | latest            | ✅ Core                                                              |
+| Design contract (optional)                 | DESIGN.md                                                                | alpha / CLI 0.3.0 | 🧪 Provisional                                                       |
+| Forms                                      | React Hook Form                                                          | latest            | ✅ Core                                                              |
+| Validation                                 | Zod                                                                      | latest            | ✅ Core                                                              |
+| Data Access (optional)                     | Prisma                                                                   | ≥6.0              | ⭐ Recommended when ORM/server-side relational data access is needed |
+| Authentication (optional)                  | Better Auth                                                              | ≥1.0              | ⭐ Recommended when authentication is needed                         |
+| Managed DB (optional)                      | Neon Postgres                                                            | Managed service   | ⭐ Recommended when Postgres is needed                               |
+| Managed DB (optional, Cloudflare-specific) | Cloudflare D1                                                            | Managed service   | ⭐ Recommended when Cloudflare-native serverless SQL is needed       |
+| Object Storage (optional)                  | Cloudflare R2                                                            | Managed service   | ⭐ Recommended when object storage is needed                         |
+| Key-Value Storage (optional)               | Cloudflare KV                                                            | Managed service   | ⭐ Recommended when key-value storage is needed                      |
+| Email (optional)                           | Resend                                                                   | Managed service   | ⭐ Recommended when transactional/marketing email is needed          |
+| Dates                                      | date-fns                                                                 | ≥4.1              | ✅ Core                                                              |
+| Dates (tz)                                 | @date-fns/tz                                                             | latest            | ✅ Core (when needed)                                                |
+| Client State                               | Zustand                                                                  | latest            | ✅ Core                                                              |
+| Server State                               | TanStack Query                                                           | ≥5.60             | ✅ Core                                                              |
+| Rich Text                                  | Lexical                                                                  | latest            | ✅ Core                                                              |
+| Rich Text                                  | ProseMirror                                                              | latest            | ⚠️ Secondary                                                         |
+| Syntax                                     | Shiki                                                                    | latest            | ✅ Core                                                              |
+| Advanced capabilities                      | Markdown, tables, charts, diagrams, editor, terminal, collaboration, PDF | capability-gated  | ✅ Optional                                                          |
+| i18n                                       | Format.js + react-intl                                                   | latest            | ✅ Core                                                              |
+| Error Tracking                             | Sentry                                                                   | latest            | ✅ Core                                                              |
+| Tracing                                    | OpenTelemetry                                                            | latest            | ✅ Core                                                              |
+| Feature Flags                              | Statsig                                                                  | latest            | ✅ Core                                                              |
+| Icons (default)                            | Lucide                                                                   | latest            | ⭐ Default                                                           |
+| Icons (alt)                                | Phosphor                                                                 | latest            | ✅ Alternative                                                       |
+| Icons (alt)                                | Tabler                                                                   | latest            | ✅ Alternative                                                       |
 
 ## Detailed Specs
 
@@ -106,6 +108,7 @@ Each layer has its own document:
 - [Authentication](auth.md) — Better Auth when login/session management is required
 - [Managed Services](managed-services.md) — Neon, Cloudflare D1, Cloudflare R2, Cloudflare KV, and Resend when those capabilities are required
 - [Styling](styling.md) — Tailwind, cn(), Motion
+- [DESIGN.md Design Contract](design-system.md) — Optional visual intent and token source
 - [State & Data](state-and-data.md) — Zustand + TanStack Query
 - [Dates](dates.md) — date-fns + timezone handling
 - [Content](content.md) — Lexical, ProseMirror, Shiki

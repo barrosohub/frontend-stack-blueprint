@@ -1,7 +1,7 @@
 ---
 title: "Styling & Animation"
-version: "1.4.0"
-updated: "2026-03-09"
+version: "1.7.0"
+updated: "2026-07-13"
 tier: 1
 ---
 
@@ -9,12 +9,12 @@ tier: 1
 
 ## Tailwind CSS ≥4
 
-| Attribute   | Value                                          |
-| ----------- | ---------------------------------------------- |
-| Role        | Utility-first CSS framework                    |
-| Min Version | ≥4.0                                           |
-| Status      | ✅ Core                                        |
-| Install     | `pnpm add -D tailwindcss @tailwindcss/vite`    |
+| Attribute   | Value                                       |
+| ----------- | ------------------------------------------- |
+| Role        | Utility-first CSS framework                 |
+| Min Version | ≥4.0                                        |
+| Status      | ✅ Core                                     |
+| Install     | `pnpm add -D tailwindcss @tailwindcss/vite` |
 
 ### Rules
 
@@ -25,10 +25,10 @@ tier: 1
 
 ## clsx + tailwind-merge (cn() utility)
 
-| Technology         | Role                                     | Install                      |
-| ------------------ | ---------------------------------------- | ---------------------------- |
-| **clsx**           | Conditional class concatenation          | `pnpm add clsx`             |
-| **tailwind-merge** | Smart Tailwind class conflict resolution | `pnpm add tailwind-merge`   |
+| Technology         | Role                                     | Install                   |
+| ------------------ | ---------------------------------------- | ------------------------- |
+| **clsx**           | Conditional class concatenation          | `pnpm add clsx`           |
+| **tailwind-merge** | Smart Tailwind class conflict resolution | `pnpm add tailwind-merge` |
 
 ### cn() Helper — Required in Every Project
 
@@ -66,6 +66,33 @@ export function cn(...inputs: ClassValue[]): string {
 
 This is the shadcn/ui ecosystem standard pattern. Agents MUST use `cn()`
 whenever combining Tailwind classes conditionally.
+
+---
+
+## DESIGN.md Integration (Optional)
+
+When a project activates the
+[DESIGN.md Design Contract](design-system.md), visual tokens originate in the
+root `DESIGN.md` and are exported to Tailwind 4 CSS:
+
+```text
+DESIGN.md -> src/app/design-tokens.css -> Tailwind utilities -> components
+```
+
+- `DESIGN.md` is the source of truth for product design intent and source token values
+- `src/app/design-tokens.css` is generated and MUST NOT be hand-edited
+- `app.css` imports Tailwind and the generated token file
+- shadcn/ui and Radix remain responsible for component structure and behavior
+- Agents MUST read root `DESIGN.md` before creating or restyling UI
+
+```css
+@import "tailwindcss";
+@import "./design-tokens.css";
+```
+
+Do not duplicate the same token in `DESIGN.md`, a handwritten `@theme` block,
+and component classes. See [the full contract](design-system.md) for activation,
+validation, and stability rules.
 
 ---
 

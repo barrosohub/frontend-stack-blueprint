@@ -1,13 +1,13 @@
 ---
 title: "Roadmap"
-version: "1.6.0"
+version: "1.7.0"
 updated: "2026-07-13"
 tier: 4
 ---
 
 # Roadmap
 
-## Current: v1.6.0 (2026-07-13)
+## Current: v1.7.0 (2026-07-13)
 
 The complete frontend stack blueprint is defined and documented.
 Zustand is the primary client state manager. TanStack Store succession
@@ -23,17 +23,20 @@ Advanced technical surfaces now have capability-gated defaults for Markdown,
 tables, charts, diagrams, code editing, terminal UI/PTY hosting,
 collaboration, and PDF viewing. The Electron target now defines a hardened
 process, IPC, packaging, and release boundary. Blueprint drift is checked in CI.
+The provisional DESIGN.md Design Contract now provides an opt-in, agent-readable
+source of visual intent and design tokens, with a pinned alpha CLI, Tailwind 4
+export, template, and drift validation guidance.
 
 ## Planned
 
-### v1.7.0 — Quality of Life
+### v1.8.0 — Quality of Life
 
 - [ ] Add E2E testing guidance (Playwright)
 - [ ] Add accessibility testing patterns
 - [ ] Add performance budgets template
 - [ ] Expand migration paths (more legacy stack coverage)
 
-### v1.8.0 — Extended Targets
+### v1.9.0 — Extended Targets
 
 - [ ] Mobile WebView target documentation
 - [ ] React Native / Expo evaluation

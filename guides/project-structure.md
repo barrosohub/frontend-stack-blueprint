@@ -1,7 +1,7 @@
 ---
 title: "Project Structure"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "1.7.0"
+updated: "2026-07-13"
 tier: 2
 ---
 
@@ -21,6 +21,7 @@ my-project/
 │   │   ├── App.tsx                 # Root component
 │   │   ├── providers.tsx           # Provider composition
 │   │   ├── router.tsx              # Route definitions
+│   │   ├── design-tokens.css       # Generated from DESIGN.md (when activated)
 │   │   └── app.css                 # Global styles (Tailwind imports)
 │   │
 │   ├── features/                   # ⭐ Feature modules (core pattern)
@@ -77,6 +78,7 @@ my-project/
 │
 ├── .husky/
 │   └── pre-commit
+├── DESIGN.md                        # Optional product design contract
 ├── tsconfig.json
 ├── vite.config.ts
 ├── vitest.config.ts
@@ -94,6 +96,8 @@ my-project/
 4. **Barrel files** — Every feature has `index.ts` with named exports
 5. **Path aliases** — `@/features/auth`, `@/shared/utils/cn`
 6. **No orphans** — Every file belongs to a feature or shared
+7. **Design contract** — When root `DESIGN.md` exists, read it before UI work
+8. **Generated tokens** — Never hand-edit `src/app/design-tokens.css`
 
 ## Import Examples
 

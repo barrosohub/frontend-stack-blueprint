@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.6.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.7.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -47,6 +47,7 @@ A **public repository** that serves as the **single source of truth** for modern
 │  UI PRE-STYLED  shadcn/ui (recommended)                      │
 │  STYLING        Tailwind CSS ≥4 + clsx + tailwind-merge      │
 │  ANIMATION      Motion (`import from 'motion/react'`)        │
+│  DESIGN (opt)   DESIGN.md contract (alpha, provisional)      │
 │                                                              │
 │  FORMS          React Hook Form + Zod                        │
 │  DATA ACCESS    Prisma ≥6 (optional)                         │
@@ -138,6 +139,7 @@ frontend-stack-blueprint/
 │   ├── auth.md           Better Auth (optional)
 │   ├── managed-services.md Managed Services (optional)
 │   ├── styling.md        Tailwind, Motion
+│   ├── design-system.md  DESIGN.md visual contract (optional)
 │   ├── state-and-data.md Zustand + TanStack Query
 │   ├── dates.md          date-fns
 │   ├── content.md        Lexical, ProseMirror, Shiki
@@ -159,6 +161,7 @@ frontend-stack-blueprint/
 ├── 🔧 templates/ (Tier 2)
 │   ├── tsconfig / vite / vitest / tailwind / eslint configs
 │   ├── cn-utility.md / zod-form-example.md
+│   └── DESIGN.example.md
 │
 ├── 💡 rationale/ (Tier 3 — Why Each Choice)
 │   ├── why-pnpm.md / why-bun-runtime.md
@@ -166,6 +169,7 @@ frontend-stack-blueprint/
 │   ├── why-prisma.md / why-cloudflare-d1.md / why-cloudflare-kv.md
 │   ├── why-neon.md / why-cloudflare-r2.md / why-resend.md
 │   ├── why-advanced-capabilities.md
+│   ├── why-design-md.md
 │   └── why-*.md files for every technology
 │
 └── 🔮 backlog/ (Tier 4 — Evolution)

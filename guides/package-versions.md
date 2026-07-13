@@ -1,6 +1,6 @@
 ---
 title: "Package Versions"
-version: "1.6.0"
+version: "1.7.0"
 updated: "2026-07-13"
 tier: 2
 ---
@@ -46,6 +46,16 @@ tier: 2
 | clsx           | latest      | `clsx`                          |
 | tailwind-merge | latest      | `tailwind-merge`                |
 | Motion         | latest      | `motion`                        |
+
+## Design Contract (provisional, optional)
+
+| Package             | Spec  | Current (2026-07-13) | Install                   |
+| ------------------- | ----- | -------------------- | ------------------------- |
+| `@google/design.md` | alpha | 0.3.0                | `@google/design.md@0.3.0` |
+
+Pin this tooling exactly while the specification is alpha. Use the
+cross-platform `designmd` binary and install it only when the project activates
+a root `DESIGN.md`. See [DESIGN.md Design Contract](../stack/design-system.md).
 
 ## Data Access
 

@@ -5,6 +5,22 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] — 2026-07-13
+
+### Added
+
+- **DESIGN.md Design Contract:** provisional, opt-in guidance for project-level visual intent, machine-readable tokens, agent precedence, and lifecycle rules
+- **Template:** `templates/DESIGN.example.md` provides a lintable starting point that consuming projects must customize before use
+- **Decision record:** ADR-024 and `rationale/why-design-md.md` document the fit, alternatives, alpha risk, and promotion gate
+- **Tailwind 4 flow:** pinned CLI guidance exports DESIGN.md tokens into generated `src/app/design-tokens.css`
+
+### Changed
+
+- **Machine-readable manifest:** `stack.yaml` now records `@google/design.md` 0.3.0 as provisional optional tooling and bumps the blueprint to 1.7.0
+- **Agent entry points:** all seven surfaces now require agents to read a root `DESIGN.md` before UI work when the contract is present
+- **Integrity CI:** the official pinned CLI validates the example contract, while the local integrity checker enforces file and terminology parity
+- **Roadmap:** remaining quality-of-life work moves to 1.8.0 and extended targets to 1.9.0
+
 ## [1.6.0] — 2026-07-13
 
 ### Added

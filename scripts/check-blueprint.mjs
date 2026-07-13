@@ -46,7 +46,7 @@ const agentEntryPoints = [
   "llms-full.txt",
 ];
 
-const parityTerms = ["Advanced Capabilities"];
+const parityTerms = ["Advanced Capabilities", "DESIGN.md Design Contract"];
 
 for (const path of agentEntryPoints) {
   for (const term of parityTerms) {
@@ -94,6 +94,9 @@ for (const path of operationalEntryPoints) {
 const requiredFiles = [
   "stack/advanced-capabilities.md",
   "rationale/why-advanced-capabilities.md",
+  "stack/design-system.md",
+  "rationale/why-design-md.md",
+  "templates/DESIGN.example.md",
   ".github/workflows/blueprint-integrity.yml",
 ];
 

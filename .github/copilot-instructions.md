@@ -35,8 +35,9 @@ frontend stack for any new project. For the complete reference, see:
 19. Write tests with Vitest for hooks and utils
 20. Never install packages outside this stack without asking
 21. Use [Advanced Capabilities](../stack/advanced-capabilities.md) only when an explicit product requirement activates Markdown, tables, charts, diagrams, code editing, terminal, collaboration, or PDF viewing
-22. Apply **Official CLI-First** when official docs recommend a CLI
-23. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
+22. If root `DESIGN.md` exists, treat it as the provisional DESIGN.md Design Contract: read it before UI work and regenerate Tailwind tokens after intentional changes
+23. Apply **Official CLI-First** when official docs recommend a CLI
+24. Run **Impact Preflight** before any official CLI execution; ask confirmation if non-trivial/uncertain
 
 ## Universal Governance Protocol (technology-agnostic)
 

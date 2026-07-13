@@ -10,7 +10,7 @@ compatibility: Designed for Claude Code, VSCode Copilot, Codex, and Antigravity.
 license: MIT
 metadata:
   author: barrosohub
-  version: "1.1"
+  version: "1.2"
   scope: internal
 ---
 
@@ -116,6 +116,7 @@ Before editing, ALWAYS:
 | node-pty             | https://github.com/microsoft/node-pty                                               |
 | Yjs                  | https://docs.yjs.dev/                                                               |
 | PDF.js               | https://mozilla.github.io/pdf.js/                                                   |
+| DESIGN.md            | https://github.com/google-labs-code/design.md                                       |
 
 ---
 
@@ -149,6 +150,8 @@ Before editing, ALWAYS:
    - stack/<layer>.md — add section or new file
    - rationale/why-<tech>.md — full justification
    - templates/<tech>.md — config template if applicable
+   - For DESIGN.md, keep the blueprint example under `templates/`; only a
+     consuming product with a visual identity may activate it at repository root
    - Update stack.yaml with install commands
    - Update stack/STACK.md manifesto table
    - Update ALL entry points: CLAUDE.md, AGENTS.md, .cursorrules,
