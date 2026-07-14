@@ -32,4 +32,4 @@ jobs:
         run: pnpm check
 
       - name: Validate DESIGN.md example
-        run: pnpm dlx @google/design.md@0.3.0 designmd lint templates/DESIGN.example.md
+        run: pnpm dlx @google/design.md@0.3.0 lint templates/DESIGN.example.md
