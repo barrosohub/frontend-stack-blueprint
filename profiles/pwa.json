@@ -1,0 +1,57 @@
+{
+  "$schema": "../schemas/profile.schema.json",
+  "schema_version": "1.0",
+  "id": "pwa",
+  "title": "Progressive Web App",
+  "description": "Installable browser delivery with explicit caching, offline states, update recovery, and storage policy.",
+  "extends": ["browser-app"],
+  "activation": {
+    "mode": "capability-gated",
+    "when": "The product explicitly requires installability, offline behavior, or service-worker caching."
+  },
+  "capabilities": [
+    "service-worker",
+    "offline",
+    "installability",
+    "update-recovery"
+  ],
+  "requirements": {
+    "files": [
+      {
+        "id": "pwa.manifest",
+        "description": "A web application manifest exists.",
+        "any_of": [
+          "public/manifest.webmanifest",
+          "public/manifest.json",
+          "src/manifest.webmanifest"
+        ],
+        "severity": "error"
+      }
+    ],
+    "packages": [
+      {
+        "id": "pwa.plugin",
+        "description": "Vite PWA integration is installed.",
+        "any_of": ["vite-plugin-pwa"],
+        "severity": "error"
+      }
+    ],
+    "scripts": [],
+    "evidence": [
+      {
+        "id": "pwa.offline-suite",
+        "description": "Offline and update recovery behavior is covered.",
+        "any_of": ["e2e/pwa.spec.ts", "tests/e2e/pwa.spec.ts"],
+        "severity": "error"
+      },
+      {
+        "id": "pwa.cache-policy",
+        "description": "Caching, invalidation, and storage limits are documented.",
+        "any_of": ["docs/pwa-cache-policy.md", "PWA.md"],
+        "severity": "error"
+      }
+    ]
+  },
+  "required_checks": ["pwa:offline", "pwa:update", "pwa:installability"],
+  "references": ["targets/pwa.md", "targets/browser.md", "stack/reliability.md"]
+}

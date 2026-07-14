@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test:unit": "vitest run",
+    "build": "vite build",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "react": "19.2.4"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
+    "@playwright/test": "1.61.1",
+    "typescript": "5.9.3",
+    "vite": "7.3.1",
+    "vitest": "4.0.0"
+  }
+}

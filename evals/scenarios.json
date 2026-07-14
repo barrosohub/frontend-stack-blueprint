@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "minimum_score": 90,
+  "scenarios": [
+    {
+      "id": "public-marketing-site",
+      "prompt": "Apply the blueprint to a public product marketing site with interactive navigation and a contact form submitted to an existing endpoint. It has no login, desktop shell, offline requirement, or shared component package.",
+      "expected_profiles": ["browser-app", "networked-app"],
+      "required_capabilities": [
+        "browser-runtime",
+        "accessibility",
+        "api-boundary",
+        "runtime-validation"
+      ],
+      "forbidden_capabilities": [
+        "electron",
+        "service-worker",
+        "storybook",
+        "authentication"
+      ],
+      "required_checks": [
+        "typecheck",
+        "lint",
+        "test:unit",
+        "build",
+        "test:e2e",
+        "network:error"
+      ]
+    },
+    {
+      "id": "authenticated-operations-dashboard",
+      "prompt": "Apply the blueprint to an authenticated browser dashboard that reads and mutates production APIs, is used by operations staff, and deploys continuously with staged rollout and rollback.",
+      "expected_profiles": [
+        "browser-app",
+        "networked-app",
+        "production-service"
+      ],
+      "required_capabilities": [
+        "browser-runtime",
+        "api-boundary",
+        "server-state",
+        "typed-environment",
+        "continuous-integration",
+        "rollback"
+      ],
+      "forbidden_capabilities": ["electron", "service-worker", "storybook"],
+      "required_checks": [
+        "typecheck",
+        "lint",
+        "test:unit",
+        "build",
+        "test:e2e",
+        "preview:smoke",
+        "performance:budget"
+      ]
+    },
+    {
+      "id": "electron-terminal-workbench",
+      "prompt": "Apply the blueprint to a signed Electron workbench with an xterm.js terminal backed by a trusted node-pty host, typed IPC, native packaging, updates, and production crash operations.",
+      "expected_profiles": ["electron-app", "production-service"],
+      "required_capabilities": [
+        "electron",
+        "typed-ipc",
+        "process-isolation",
+        "native-packaging",
+        "terminal",
+        "observability"
+      ],
+      "forbidden_capabilities": ["service-worker", "pwa-installability"],
+      "required_checks": [
+        "typecheck",
+        "lint",
+        "test:unit",
+        "build",
+        "electron:package",
+        "electron:native-abi",
+        "electron:update"
+      ]
+    },
+    {
+      "id": "shared-design-system",
+      "prompt": "Apply the blueprint to a shared React component library with brand tokens already supplied by design, Storybook state matrices, automated accessibility checks, and visual review.",
+      "expected_profiles": ["component-platform"],
+      "required_capabilities": [
+        "storybook",
+        "component-a11y",
+        "visual-regression",
+        "design-contract"
+      ],
+      "forbidden_capabilities": ["electron", "service-worker", "api-boundary"],
+      "required_checks": [
+        "typecheck",
+        "lint",
+        "test:unit",
+        "build",
+        "storybook:build",
+        "storybook:a11y",
+        "visual:review"
+      ]
+    },
+    {
+      "id": "offline-field-pwa",
+      "prompt": "Apply the blueprint to a production browser app used by field staff. It syncs remote records, must remain useful offline, is installable, and needs explicit cache invalidation and update recovery.",
+      "expected_profiles": [
+        "browser-app",
+        "networked-app",
+        "pwa",
+        "production-service"
+      ],
+      "required_capabilities": [
+        "browser-runtime",
+        "api-boundary",
+        "network-mocking",
+        "service-worker",
+        "offline",
+        "update-recovery",
+        "continuous-integration"
+      ],
+      "forbidden_capabilities": ["electron", "storybook"],
+      "required_checks": [
+        "typecheck",
+        "lint",
+        "test:unit",
+        "build",
+        "test:e2e",
+        "pwa:offline",
+        "pwa:update",
+        "preview:smoke"
+      ]
+    }
+  ]
+}

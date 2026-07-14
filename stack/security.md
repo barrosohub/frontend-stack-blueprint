@@ -1,6 +1,6 @@
 ---
 title: "Frontend Security & Supply Chain"
-version: "1.8.0"
+version: "1.9.0"
 updated: "2026-07-13"
 tier: 1
 scope: "mandatory"

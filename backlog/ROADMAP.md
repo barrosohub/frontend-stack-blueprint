@@ -1,13 +1,13 @@
 ---
 title: "Roadmap"
-version: "1.8.0"
+version: "1.9.0"
 updated: "2026-07-13"
 tier: 4
 ---
 
 # Roadmap
 
-## Current: v1.8.0 (2026-07-13)
+## Current: v1.9.0 (2026-07-13)
 
 The complete frontend stack blueprint is defined and documented.
 Zustand is the primary client state manager. TanStack Store succession
@@ -34,9 +34,14 @@ network scenarios, explicit browser support, supply-chain controls, preview smok
 release identity, rollout, and rollback. Observability and component-platform
 tooling are capability-gated instead of blanket project-init dependencies.
 
+Agent-Native Consumption now adds validated machine contracts, composable project
+profiles, a consumer skill, generated entry-point parity, local conformance reports,
+and golden agent scenarios while preserving the repository as contextual guidance
+rather than executable application boilerplate.
+
 ## Planned
 
-### v1.9.0 — Extended Targets
+### v1.10.0 — Extended Targets
 
 - [ ] Mobile WebView target documentation
 - [ ] React Native / Expo evaluation

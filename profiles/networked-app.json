@@ -1,0 +1,75 @@
+{
+  "$schema": "../schemas/profile.schema.json",
+  "schema_version": "1.0",
+  "id": "networked-app",
+  "title": "Networked application",
+  "description": "Typed, abortable, observable API boundaries with server-state ownership and deterministic mocks.",
+  "extends": ["core"],
+  "activation": {
+    "mode": "capability-gated",
+    "when": "The frontend consumes HTTP, GraphQL, realtime, or other remote data."
+  },
+  "capabilities": [
+    "api-boundary",
+    "runtime-validation",
+    "server-state",
+    "network-mocking",
+    "typed-environment"
+  ],
+  "requirements": {
+    "files": [
+      {
+        "id": "networked.api-client",
+        "description": "A shared API boundary exists.",
+        "any_of": [
+          "src/lib/api-client.ts",
+          "src/api/client.ts",
+          "src/lib/http.ts"
+        ],
+        "severity": "error"
+      },
+      {
+        "id": "networked.environment",
+        "description": "Client-visible environment values are parsed and validated.",
+        "any_of": ["src/config/env.ts", "src/env.ts"],
+        "severity": "error"
+      }
+    ],
+    "packages": [
+      {
+        "id": "networked.zod",
+        "description": "External data is validated with Zod.",
+        "any_of": ["zod"],
+        "severity": "error"
+      },
+      {
+        "id": "networked.query",
+        "description": "Remote server state is owned by TanStack Query.",
+        "any_of": ["@tanstack/react-query"],
+        "severity": "error"
+      },
+      {
+        "id": "networked.msw",
+        "description": "Network scenarios use shared MSW handlers.",
+        "any_of": ["msw"],
+        "severity": "error"
+      }
+    ],
+    "scripts": [],
+    "evidence": [
+      {
+        "id": "networked.handlers",
+        "description": "Reusable success, error, empty, and timeout handlers exist.",
+        "any_of": ["src/test/mocks/handlers.ts", "tests/mocks/handlers.ts"],
+        "severity": "error"
+      }
+    ]
+  },
+  "required_checks": ["network:success", "network:error", "network:timeout"],
+  "references": [
+    "stack/api-boundaries.md",
+    "stack/state-and-data.md",
+    "templates/api-client.md",
+    "templates/env-contract.md"
+  ]
+}

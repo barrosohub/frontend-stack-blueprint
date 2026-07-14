@@ -1,0 +1,81 @@
+{
+  "$schema": "../schemas/profile.schema.json",
+  "schema_version": "1.0",
+  "id": "production-service",
+  "title": "Production service",
+  "description": "Protected delivery with deterministic CI, release evidence, rollout, rollback, and performance budgets.",
+  "extends": ["core"],
+  "activation": {
+    "mode": "capability-gated",
+    "when": "The project is deployed for real users or business operations."
+  },
+  "capabilities": [
+    "continuous-integration",
+    "release-identity",
+    "preview-smoke",
+    "performance-budget",
+    "rollout",
+    "rollback"
+  ],
+  "requirements": {
+    "files": [
+      {
+        "id": "production.ci",
+        "description": "A CI workflow gates pull requests.",
+        "any_of": [".github/workflows/ci.yml", ".github/workflows/ci.yaml"],
+        "severity": "error"
+      },
+      {
+        "id": "production.performance-budget",
+        "description": "Performance budgets are versioned.",
+        "any_of": [
+          "performance-budgets.json",
+          "lighthouserc.json",
+          "docs/performance-budgets.md"
+        ],
+        "severity": "error"
+      }
+    ],
+    "packages": [],
+    "scripts": [
+      {
+        "id": "production.script-ci",
+        "description": "The full merge gate has a local equivalent.",
+        "name": "ci",
+        "severity": "error"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "production.release-runbook",
+        "description": "Release identity, preview smoke, and rollout ownership are documented.",
+        "any_of": ["docs/release-runbook.md", "RELEASE.md"],
+        "severity": "error"
+      },
+      {
+        "id": "production.rollback-runbook",
+        "description": "A tested rollback path and owner are documented.",
+        "any_of": ["docs/rollback-runbook.md", "ROLLBACK.md"],
+        "severity": "error"
+      },
+      {
+        "id": "production.observability",
+        "description": "Operational signals and release correlation are documented.",
+        "any_of": ["docs/observability.md", "OBSERVABILITY.md"],
+        "severity": "warning"
+      }
+    ]
+  },
+  "required_checks": [
+    "ci",
+    "preview:smoke",
+    "performance:budget",
+    "rollback:exercise"
+  ],
+  "references": [
+    "stack/reliability.md",
+    "stack/security.md",
+    "templates/github-actions-ci.md",
+    "templates/performance-budgets.md"
+  ]
+}

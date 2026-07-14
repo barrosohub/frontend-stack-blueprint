@@ -1,0 +1,6 @@
+{
+  "$schema": "../../../../schemas/consumer-config.schema.json",
+  "blueprint_version": "1.9.0",
+  "profiles": ["browser-app"],
+  "waivers": []
+}

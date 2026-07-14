@@ -1,0 +1,27 @@
+{
+  "name": "frontend-stack-blueprint-tooling",
+  "version": "1.9.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "check": "pnpm validate:contracts && pnpm test:contracts && pnpm check:generated && pnpm test:conformance && pnpm eval:self-test && node scripts/check-blueprint.mjs",
+    "check:generated": "node scripts/generate-agent-entrypoints.mjs --check",
+    "conformance": "node scripts/check-project-conformance.mjs",
+    "eval": "node scripts/run-agent-evals.mjs",
+    "eval:self-test": "node scripts/run-agent-evals.mjs --self-test",
+    "generate:agents": "node scripts/generate-agent-entrypoints.mjs --write",
+    "test:conformance": "node scripts/test-conformance.mjs",
+    "test:contracts": "node scripts/test-machine-contracts.mjs",
+    "validate:contracts": "node scripts/validate-machine-contracts.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "prettier": "3.9.5",
+    "yaml": "2.9.0"
+  }
+}

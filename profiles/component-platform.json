@@ -1,0 +1,73 @@
+{
+  "$schema": "../schemas/profile.schema.json",
+  "schema_version": "1.0",
+  "id": "component-platform",
+  "title": "Component platform",
+  "description": "Shared components with isolated states, accessibility checks, visual policy, and optional design contract.",
+  "extends": ["core"],
+  "activation": {
+    "mode": "capability-gated",
+    "when": "The repository owns a reusable design system or a large shared component surface."
+  },
+  "capabilities": [
+    "storybook",
+    "component-a11y",
+    "visual-regression",
+    "design-contract"
+  ],
+  "requirements": {
+    "files": [
+      {
+        "id": "components.storybook-config",
+        "description": "Storybook is configured.",
+        "any_of": [".storybook/main.ts", ".storybook/main.js"],
+        "severity": "error"
+      }
+    ],
+    "packages": [
+      {
+        "id": "components.storybook",
+        "description": "Storybook with the Vite React renderer is installed.",
+        "any_of": ["@storybook/react-vite"],
+        "severity": "error"
+      },
+      {
+        "id": "components.a11y",
+        "description": "The Storybook accessibility addon is installed.",
+        "any_of": ["@storybook/addon-a11y"],
+        "severity": "error"
+      }
+    ],
+    "scripts": [
+      {
+        "id": "components.script-storybook",
+        "description": "Storybook has a stable local command.",
+        "name": "storybook",
+        "severity": "error"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "components.stories",
+        "description": "Representative component states are captured.",
+        "any_of": [
+          "src/components/Button.stories.tsx",
+          "stories/Button.stories.tsx"
+        ],
+        "severity": "error"
+      },
+      {
+        "id": "components.visual-policy",
+        "description": "Visual review or regression policy is documented.",
+        "any_of": ["docs/visual-testing.md", "VISUAL_TESTING.md"],
+        "severity": "warning"
+      }
+    ]
+  },
+  "required_checks": ["storybook:build", "storybook:a11y", "visual:review"],
+  "references": [
+    "stack/design-system.md",
+    "stack/ui.md",
+    "templates/DESIGN.example.md"
+  ]
+}

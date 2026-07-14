@@ -1,6 +1,6 @@
 ---
 title: "API & Network Boundaries"
-version: "1.8.0"
+version: "1.9.0"
 updated: "2026-07-13"
 tier: 1
 scope: "mandatory when the product consumes network APIs"

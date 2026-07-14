@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://barrosohub.github.io/frontend-stack-blueprint/schemas/profile.schema.json",
+  "title": "Frontend Blueprint Project Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "description",
+    "extends",
+    "activation",
+    "capabilities",
+    "requirements",
+    "required_checks",
+    "references"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "1.0" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "extends": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+    },
+    "activation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "when"],
+      "properties": {
+        "mode": { "enum": ["always", "capability-gated"] },
+        "when": { "type": "string", "minLength": 1 }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files", "packages", "scripts", "evidence"],
+      "properties": {
+        "files": { "$ref": "#/$defs/pathRequirements" },
+        "packages": { "$ref": "#/$defs/pathRequirements" },
+        "scripts": { "$ref": "#/$defs/scriptRequirements" },
+        "evidence": { "$ref": "#/$defs/pathRequirements" }
+      }
+    },
+    "required_checks": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "references": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "pathRequirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description", "severity", "any_of"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+          },
+          "description": { "type": "string", "minLength": 1 },
+          "severity": { "enum": ["error", "warning"] },
+          "any_of": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "content_any_of": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "match_count": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "scriptRequirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description", "severity", "name"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+          },
+          "description": { "type": "string", "minLength": 1 },
+          "severity": { "enum": ["error", "warning"] },
+          "name": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

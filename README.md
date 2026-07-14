@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.8.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.9.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -92,6 +92,11 @@ This repository provides multiple entry points optimized for different coding ag
 | [`stack.yaml`](stack.yaml)                                                                 | Tooling         | Machine-readable manifest             |
 | [`.github/copilot-instructions.md`](.github/copilot-instructions.md)                       | GitHub Copilot  | Repository-level instructions         |
 
+The agent-native contract is not a project generator. It adds validated schemas,
+capability profiles, a consumer skill, conformance reports, and golden evals so an
+agent can apply this contextual guide without guessing or blanket-installing the
+catalog. Start with [`guides/agent-consumption.md`](guides/agent-consumption.md).
+
 ### How to Use in Your Project
 
 **Claude Code** — Add to your project's `CLAUDE.md`:
@@ -104,7 +109,9 @@ This repository provides multiple entry points optimized for different coding ag
 
 **Cursor** — The repo includes `.cursor/rules/*.mdc` (modern) and `.cursorrules` (legacy). Cursor auto-reads project rules from `.cursor/rules/`.
 
-**Any Agent** — Point the agent to `llms-full.txt` for complete context.
+**Any Agent** — Point the agent to `llms-full.txt` for complete context, or load
+[`skills/apply-frontend-blueprint/SKILL.md`](skills/apply-frontend-blueprint/SKILL.md)
+to inspect a project, select profiles, and verify conformance.
 
 ### Agent Installation Policy
 
@@ -127,7 +134,14 @@ frontend-stack-blueprint/
 │   ├── CLAUDE.md / AGENTS.md / .cursor/rules/*.mdc
 │   ├── .cursorrules (legacy) / .github/copilot-instructions.md
 │   ├── llms.txt / llms-full.txt
-│   └── stack.yaml
+│   ├── stack.yaml / agent-contract.json
+│   └── schemas/ / profiles/ / blueprint.config.example.json
+│
+├── 🤖 Agent Execution
+│   ├── skills/apply-frontend-blueprint/  Consumer workflow
+│   ├── scripts/check-project-conformance.mjs
+│   ├── scripts/generate-agent-entrypoints.mjs
+│   └── evals/                           Golden scenarios and scorer
 │
 ├── 📦 stack/ (Tier 1 — The Stack)
 │   ├── STACK.md          Full manifesto
@@ -161,6 +175,7 @@ frontend-stack-blueprint/
 │   ├── new-project-setup.md
 │   ├── package-versions.md
 │   ├── project-structure.md
+│   ├── agent-consumption.md
 │   └── migration-paths.md
 │
 ├── 🔧 templates/ (Tier 2)
@@ -178,6 +193,7 @@ frontend-stack-blueprint/
 │   ├── why-advanced-capabilities.md
 │   ├── why-design-md.md
 │   ├── why-production-reliability.md
+│   ├── why-agent-native-contracts.md
 │   └── why-*.md files for every technology
 │
 └── 🔮 backlog/ (Tier 4 — Evolution)

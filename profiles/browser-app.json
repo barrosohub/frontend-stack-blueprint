@@ -1,0 +1,80 @@
+{
+  "$schema": "../schemas/profile.schema.json",
+  "schema_version": "1.0",
+  "id": "browser-app",
+  "title": "Browser application",
+  "description": "User-facing browser delivery with accessibility, browser support, and critical-journey coverage.",
+  "extends": ["core"],
+  "activation": {
+    "mode": "capability-gated",
+    "when": "The project renders an interactive user interface in a browser."
+  },
+  "capabilities": [
+    "browser-runtime",
+    "accessibility",
+    "end-to-end-testing",
+    "browser-support-policy"
+  ],
+  "requirements": {
+    "files": [
+      {
+        "id": "browser.playwright-config",
+        "description": "Playwright is configured.",
+        "any_of": ["playwright.config.ts", "playwright.config.js"],
+        "content_any_of": ["@playwright/test", "defineConfig"],
+        "severity": "error"
+      }
+    ],
+    "packages": [
+      {
+        "id": "browser.playwright",
+        "description": "Playwright test tooling is installed.",
+        "any_of": ["@playwright/test"],
+        "severity": "error"
+      },
+      {
+        "id": "browser.accessibility",
+        "description": "Representative automated accessibility checks use axe.",
+        "any_of": ["@axe-core/playwright", "axe-core"],
+        "severity": "warning"
+      }
+    ],
+    "scripts": [
+      {
+        "id": "browser.script-e2e",
+        "description": "Critical browser journeys have a stable command.",
+        "name": "test:e2e",
+        "severity": "error"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "browser.support-policy",
+        "description": "Supported browsers and progressive-enhancement rules are documented.",
+        "any_of": ["docs/browser-support.md", "BROWSER_SUPPORT.md"],
+        "severity": "error"
+      },
+      {
+        "id": "browser.e2e-suite",
+        "description": "At least one critical-journey suite is present.",
+        "any_of": [
+          "e2e/smoke.spec.ts",
+          "tests/e2e/smoke.spec.ts",
+          "playwright/smoke.spec.ts"
+        ],
+        "content_any_of": ["test(", "test (", "it(", "it ("],
+        "severity": "error"
+      }
+    ]
+  },
+  "required_checks": [
+    "test:e2e",
+    "accessibility:automated",
+    "accessibility:manual"
+  ],
+  "references": [
+    "targets/browser.md",
+    "stack/reliability.md",
+    "templates/playwright.config.md"
+  ]
+}

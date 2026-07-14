@@ -33,6 +33,7 @@ the `rationale/` directory.
 | ADR-023 | Capability-gated advanced frontend libraries                    | 2026-07-13 | [why-advanced-capabilities.md](rationale/why-advanced-capabilities.md)       |
 | ADR-024 | DESIGN.md as provisional optional design contract               | 2026-07-13 | [why-design-md.md](rationale/why-design-md.md)                               |
 | ADR-025 | Production Reliability as a verifiable, profile-based contract  | 2026-07-13 | [why-production-reliability.md](rationale/why-production-reliability.md)     |
+| ADR-026 | Agent-native contracts for deterministic blueprint consumption  | 2026-07-13 | [why-agent-native-contracts.md](rationale/why-agent-native-contracts.md)     |
 
 ## Principles
 
