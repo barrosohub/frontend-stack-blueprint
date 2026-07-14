@@ -1,0 +1,13 @@
+{
+  "$schema": "./schemas/consumer-config.schema.json",
+  "blueprint_version": "1.9.0",
+  "profiles": ["browser-app", "networked-app", "production-service"],
+  "waivers": [
+    {
+      "id": "production.rollback-runbook",
+      "reason": "Temporary exception while the first deployment pipeline is commissioned.",
+      "owner": "frontend-platform",
+      "expires": "2026-08-31"
+    }
+  ]
+}

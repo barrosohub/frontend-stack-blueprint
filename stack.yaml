@@ -3,7 +3,7 @@
 # This file is the single source of truth for versions.
 
 schema_version: "1.0"
-blueprint_version: "1.8.0"
+blueprint_version: "1.9.0"
 updated: "2026-07-13"
 
 core:
@@ -392,6 +392,15 @@ targets:
     note: "Requires Rust toolchain"
   pwa:
     install: "vite-plugin-pwa"
+
+agent_contracts:
+  status: "mandatory-for-agent-consumption"
+  canonical: "agent-contract.json"
+  profiles: "profiles/*.json"
+  consumer_config: "blueprint.config.json"
+  conformance: "node scripts/check-project-conformance.mjs --project <path>"
+  evals: "evals/scenarios.json"
+  generated_entrypoints: "node scripts/generate-agent-entrypoints.mjs --check"
 
 banned:
   - { name: "any (type)", reason: "Use unknown + type guards" }

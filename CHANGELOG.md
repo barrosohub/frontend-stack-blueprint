@@ -5,6 +5,24 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] — 2026-07-13
+
+### Added
+
+- **Machine contracts:** JSON Schemas validate `stack.yaml`, project profiles, the canonical agent contract, consumer configuration, and eval scenarios
+- **Composable profiles:** core, browser, networked, production, component-platform, Electron, and PWA evidence contracts with explicit activation rules
+- **Consumer skill:** `apply-frontend-blueprint` guides inspection, profile selection, Impact Preflight, authorized changes, verification, and waiver handling
+- **Conformance:** a dependency-light checker reports project file, package, script, and evidence compliance as JSON or Markdown
+- **Golden evals:** five realistic scenarios score profile precision, required capabilities, prohibited capabilities, and verification selection
+- **Decision record:** ADR-026 documents why portable contracts preserve the repository's contextual purpose
+
+### Changed
+
+- **Generated entry points:** a compact block in all seven agent surfaces now derives from `agent-contract.json`
+- **Integrity CI:** installs pinned repository tooling, validates all contracts, checks generated drift, self-tests evals, and runs the existing blueprint audit
+- **Supply chain:** the integrity workflow and production CI template pin current Checkout and Setup Node releases to verified full commit SHAs
+- **Roadmap:** agent-native consumption becomes v1.9.0 and Extended Targets moves to v1.10.0
+
 ## [1.8.0] — 2026-07-13
 
 ### Added

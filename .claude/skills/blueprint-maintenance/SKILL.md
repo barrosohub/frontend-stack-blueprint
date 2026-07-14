@@ -10,7 +10,7 @@ compatibility: Designed for Claude Code, VSCode Copilot, Codex, and Antigravity.
 license: MIT
 metadata:
   author: barrosohub
-  version: "1.2"
+  version: "1.3"
   scope: internal
 ---
 
@@ -229,15 +229,24 @@ IF technology added/removed:
 
 ## Mandatory Drift Audit (Before Merge)
 
+When `stack.yaml`, project profiles, or agent policy changes:
+
+1. Update the corresponding schema and `agent-contract.json`.
+2. Regenerate all seven bounded entry-point blocks with `pnpm generate:agents`.
+3. Validate the consumer skill with the skill validator.
+4. Add or update a golden scenario when profile or capability selection changes.
+5. Run `pnpm check`; never edit a generated agent block directly.
+
 Run the automated integrity gate first:
 
 ```bash
-node scripts/check-blueprint.mjs
+pnpm check
 ```
 
-It validates release markers, agent entry-point parity, banned-list parity,
-required canonical files, and local Markdown links. The following manual checks
-remain useful for reviewing the semantic intent of a change:
+It validates schemas, generated entry-point parity, the conformance fixture, eval
+self-tests, release markers, banned-list parity, required canonical files, and
+local Markdown links. The following manual checks remain useful for reviewing the
+semantic intent of a change:
 
 Run these checks whenever stack rules, versions, or entry points changed:
 
@@ -252,8 +261,8 @@ Run these checks whenever stack rules, versions, or entry points changed:
    Compare stack.yaml banned entries with AGENTS.md / CLAUDE.md /
    .cursor/rules/*.mdc / .cursorrules / .github/copilot-instructions.md / llms-full.txt
 
-4. Automated integrity:
-   node scripts/check-blueprint.mjs
+4. Automated integrity, schemas, generated parity, conformance fixture, and evals:
+   pnpm check
 ```
 
 If any mismatch appears, do not finalize the change until drift is resolved.
@@ -294,7 +303,7 @@ removed previously. In this case you MUST:
 5. **Always preserve markdown frontmatter** (title, version, updated, tier)
 6. **Always update the `updated` field** in YAML frontmatter of modified files
 7. **Always test relative links** between documents after structural changes
-8. **Always run `node scripts/check-blueprint.mjs`** before finalizing a change
+8. **Always run `pnpm check`** before finalizing a change
 
 ---
 

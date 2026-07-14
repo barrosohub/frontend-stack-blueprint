@@ -1,4 +1,4 @@
-FRONTEND STACK BLUEPRINT v1.8.0 (2026-07-13)
+FRONTEND STACK BLUEPRINT v1.9.0 (2026-07-13)
 Agnostic — applies to ANY frontend project.
 Repository: https://github.com/barrosohub/frontend-stack-blueprint
 Audience: external coding agents consuming this repo as stack reference.
@@ -407,5 +407,36 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 ================================================================================
-VERSION: 1.8.0 | DATE: 2026-07-13 | SCHEMA: stack.yaml
+VERSION: 1.9.0 | DATE: 2026-07-13 | SCHEMA: stack.yaml
 ================================================================================
+
+<!-- BEGIN GENERATED: AGENT CONTRACT -->
+## Agent-Native Contract (generated)
+
+Blueprint `1.9.0`. Canonical machine sources:
+`stack.yaml`, `agent-contract.json`, `schemas/`, and `profiles/`.
+
+Foundations:
+
+- Inspect the consuming repository before proposing dependencies or file changes.
+- Run Impact Preflight before official CLIs or non-trivial writes.
+- Activate only profiles and capabilities supported by explicit project evidence.
+- Run the applicable project checks and the conformance checker after changes.
+
+Profile activation:
+
+- The core profile applies to every consuming frontend project.
+- Browser, networked, production, component-platform, Electron, and PWA profiles are capability-gated.
+- Create or enforce root DESIGN.md only when the product has explicit visual intent or source tokens.
+- Document temporary exceptions with an owner, reason, and expiry date.
+
+Prohibited behavior:
+
+- Do not install the full catalog by default.
+- Do not place secrets in client-visible environment variables or generated reports.
+- Do not infer optional profiles from preference alone.
+- Do not edit generated agent blocks manually; regenerate them from this contract.
+
+Apply or audit the contract with `skills/apply-frontend-blueprint/SKILL.md` and
+`node scripts/check-project-conformance.mjs --project <path> --format json`.
+<!-- END GENERATED: AGENT CONTRACT -->

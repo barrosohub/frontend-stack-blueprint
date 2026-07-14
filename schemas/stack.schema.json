@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://barrosohub.github.io/frontend-stack-blueprint/schemas/stack.schema.json",
+  "title": "Frontend Stack Blueprint Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "blueprint_version",
+    "updated",
+    "core",
+    "build",
+    "tooling",
+    "test",
+    "quality",
+    "reliability",
+    "security",
+    "api_boundaries",
+    "ui",
+    "styling",
+    "design_system",
+    "forms",
+    "data_access",
+    "auth",
+    "managed_services",
+    "dates",
+    "state",
+    "content",
+    "advanced_capabilities",
+    "i18n",
+    "observability",
+    "icons",
+    "targets",
+    "agent_contracts",
+    "banned"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "blueprint_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "updated": { "type": "string", "format": "date" },
+    "core": { "$ref": "#/$defs/section" },
+    "build": { "$ref": "#/$defs/section" },
+    "tooling": { "$ref": "#/$defs/section" },
+    "test": { "$ref": "#/$defs/section" },
+    "quality": { "$ref": "#/$defs/section" },
+    "reliability": { "$ref": "#/$defs/section" },
+    "security": { "$ref": "#/$defs/section" },
+    "api_boundaries": { "$ref": "#/$defs/section" },
+    "ui": { "$ref": "#/$defs/section" },
+    "styling": { "$ref": "#/$defs/section" },
+    "design_system": { "$ref": "#/$defs/section" },
+    "forms": { "$ref": "#/$defs/section" },
+    "data_access": { "$ref": "#/$defs/section" },
+    "auth": { "$ref": "#/$defs/section" },
+    "managed_services": { "$ref": "#/$defs/section" },
+    "dates": { "$ref": "#/$defs/section" },
+    "state": { "$ref": "#/$defs/section" },
+    "content": { "$ref": "#/$defs/section" },
+    "advanced_capabilities": { "$ref": "#/$defs/section" },
+    "i18n": { "$ref": "#/$defs/section" },
+    "observability": { "$ref": "#/$defs/section" },
+    "icons": { "$ref": "#/$defs/section" },
+    "targets": { "$ref": "#/$defs/section" },
+    "agent_contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "canonical",
+        "profiles",
+        "consumer_config",
+        "conformance",
+        "evals",
+        "generated_entrypoints"
+      ],
+      "properties": {
+        "status": { "const": "mandatory-for-agent-consumption" },
+        "canonical": { "type": "string", "minLength": 1 },
+        "profiles": { "type": "string", "minLength": 1 },
+        "consumer_config": { "type": "string", "minLength": 1 },
+        "conformance": { "type": "string", "minLength": 1 },
+        "evals": { "type": "string", "minLength": 1 },
+        "generated_entrypoints": { "type": "string", "minLength": 1 }
+      }
+    },
+    "banned": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "reason"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": true
+    }
+  }
+}

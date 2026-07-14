@@ -1,6 +1,6 @@
 ---
 title: "Frontend Stack Blueprint — Complete Manifesto"
-version: "1.8.0"
+version: "1.9.0"
 updated: "2026-07-13"
 tier: 1
 tokens: "~3000"
@@ -31,7 +31,8 @@ This stack is the **reusable base** for any frontend project. It defines:
 13. **How to add advanced surfaces** — capability-gated tables, charts,
     diagrams, editors, terminals, collaboration, and document viewers
 14. **How to observe** — capability-gated errors, tracing, feature flags
-15. **How to extend** — icons and future complements
+15. **How agents consume it** — validated profiles, generated contracts, conformance, and evals
+16. **How to extend** — icons and future complements
 
 What this stack **does NOT define** (project-dependent):
 
@@ -138,6 +139,20 @@ Each layer has its own document:
 - Browser/runtime support, preview smoke, release identity, rollout, and rollback are explicit.
 - Sentry, OpenTelemetry, Statsig, Storybook, MSW, and similar tools are activated
   only when their product capability applies.
+
+## Agent-Native Consumption Contract
+
+- `stack.yaml` and its JSON Schema define the canonical machine-readable stack.
+- `agent-contract.json` generates the shared block in all seven agent entry points.
+- `core` applies universally; optional profiles activate only from explicit evidence.
+- Consumers record profiles and expiring waivers in `blueprint.config.json`.
+- The local checker reports file, package, script, and evidence conformance as JSON
+  or Markdown without modifying the target project.
+- The `apply-frontend-blueprint` skill requires inspection, Impact Preflight,
+  authorized changes, project verification, and a post-change conformance report.
+- Golden scenarios detect profile-selection and capability-safety regressions.
+
+See [Agent-Native Consumption](../guides/agent-consumption.md).
 
 ## Installation Policy (Official CLI-First + Impact Preflight)
 

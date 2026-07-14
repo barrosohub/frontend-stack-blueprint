@@ -1,0 +1,120 @@
+{
+  "$schema": "../schemas/profile.schema.json",
+  "schema_version": "1.0",
+  "id": "core",
+  "title": "Core frontend",
+  "description": "Universal TypeScript, React, build, test, and quality baseline.",
+  "extends": [],
+  "activation": {
+    "mode": "always",
+    "when": "Every consuming frontend project."
+  },
+  "capabilities": [
+    "typescript",
+    "react",
+    "vite",
+    "unit-testing",
+    "linting",
+    "formatting"
+  ],
+  "requirements": {
+    "files": [
+      {
+        "id": "core.package-json",
+        "description": "A package manifest exists.",
+        "any_of": ["package.json"],
+        "severity": "error"
+      },
+      {
+        "id": "core.typescript-config",
+        "description": "A TypeScript configuration exists.",
+        "any_of": ["tsconfig.json", "tsconfig.app.json"],
+        "severity": "error"
+      },
+      {
+        "id": "core.vite-config",
+        "description": "A Vite configuration exists.",
+        "any_of": ["vite.config.ts", "vite.config.js", "vite.config.mts"],
+        "severity": "error"
+      },
+      {
+        "id": "core.vitest-config",
+        "description": "A Vitest configuration exists or is colocated with Vite.",
+        "any_of": [
+          "vitest.config.ts",
+          "vitest.config.js",
+          "vite.config.ts",
+          "vite.config.js"
+        ],
+        "severity": "error"
+      }
+    ],
+    "packages": [
+      {
+        "id": "core.react",
+        "description": "React is installed.",
+        "any_of": ["react"],
+        "severity": "error"
+      },
+      {
+        "id": "core.typescript",
+        "description": "TypeScript is installed.",
+        "any_of": ["typescript"],
+        "severity": "error"
+      },
+      {
+        "id": "core.vite",
+        "description": "Vite is installed.",
+        "any_of": ["vite"],
+        "severity": "error"
+      },
+      {
+        "id": "core.vitest",
+        "description": "Vitest is installed.",
+        "any_of": ["vitest"],
+        "severity": "error"
+      }
+    ],
+    "scripts": [
+      {
+        "id": "core.script-typecheck",
+        "description": "Type checking has a stable command.",
+        "name": "typecheck",
+        "severity": "error"
+      },
+      {
+        "id": "core.script-lint",
+        "description": "Linting has a stable command.",
+        "name": "lint",
+        "severity": "error"
+      },
+      {
+        "id": "core.script-unit",
+        "description": "Unit tests have a stable command.",
+        "name": "test:unit",
+        "severity": "error"
+      },
+      {
+        "id": "core.script-build",
+        "description": "Production build has a stable command.",
+        "name": "build",
+        "severity": "error"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "core.lockfile",
+        "description": "Exactly one committed package-manager lockfile is expected.",
+        "any_of": ["pnpm-lock.yaml", "package-lock.json"],
+        "severity": "error"
+      }
+    ]
+  },
+  "required_checks": ["typecheck", "lint", "test:unit", "build"],
+  "references": [
+    "stack/core.md",
+    "stack/build-and-test.md",
+    "stack/tooling.md",
+    "stack/architecture.md"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "../schemas/profile.schema.json",
+  "schema_version": "1.0",
+  "id": "electron-app",
+  "title": "Electron application",
+  "description": "Hardened Electron delivery with isolated renderer, typed IPC, package validation, signing, and updates.",
+  "extends": ["core"],
+  "activation": {
+    "mode": "capability-gated",
+    "when": "The product requires Electron desktop APIs or trusted native integrations."
+  },
+  "capabilities": [
+    "electron",
+    "typed-ipc",
+    "process-isolation",
+    "native-packaging",
+    "signed-updates"
+  ],
+  "requirements": {
+    "files": [
+      {
+        "id": "electron.forge-config",
+        "description": "Electron Forge packaging is configured.",
+        "any_of": ["forge.config.ts", "forge.config.js"],
+        "severity": "error"
+      },
+      {
+        "id": "electron.preload",
+        "description": "A narrow preload boundary exists.",
+        "any_of": ["src/preload.ts", "src/electron/preload.ts"],
+        "severity": "error"
+      }
+    ],
+    "packages": [
+      {
+        "id": "electron.runtime",
+        "description": "Electron is installed.",
+        "any_of": ["electron"],
+        "severity": "error"
+      },
+      {
+        "id": "electron.forge",
+        "description": "Electron Forge tooling is installed.",
+        "any_of": ["@electron-forge/cli"],
+        "severity": "error"
+      }
+    ],
+    "scripts": [
+      {
+        "id": "electron.script-package",
+        "description": "Packaged-build validation has a stable command.",
+        "name": "package",
+        "severity": "error"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "electron.security",
+        "description": "IPC, navigation, permissions, CSP, and update boundaries are documented.",
+        "any_of": ["docs/electron-security.md", "ELECTRON_SECURITY.md"],
+        "severity": "error"
+      }
+    ]
+  },
+  "required_checks": [
+    "electron:package",
+    "electron:smoke",
+    "electron:native-abi",
+    "electron:update"
+  ],
+  "references": [
+    "targets/electron.md",
+    "rationale/electron-vs-tauri.md",
+    "stack/security.md"
+  ]
+}

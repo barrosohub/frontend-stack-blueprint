@@ -19,9 +19,19 @@ function requireText(path, expected, label = expected) {
 const stackYaml = read("stack.yaml");
 const version = stackYaml.match(/^blueprint_version: "([^"]+)"$/m)?.[1];
 const updated = stackYaml.match(/^updated: "([^"]+)"$/m)?.[1];
+const packageVersion = JSON.parse(read("package.json")).version;
+const contractVersion = JSON.parse(
+  read("agent-contract.json"),
+).blueprint_version;
 
 if (!version || !updated) {
   failures.push("stack.yaml: blueprint_version or updated is missing");
+}
+
+if (version !== packageVersion || version !== contractVersion) {
+  failures.push(
+    "Version drift: stack.yaml, package.json, and agent-contract.json must match",
+  );
 }
 
 const versionSurfaces = [
@@ -50,6 +60,7 @@ const parityTerms = [
   "Advanced Capabilities",
   "DESIGN.md Design Contract",
   "Production Reliability",
+  "Agent-Native Contract",
 ];
 
 for (const path of agentEntryPoints) {
@@ -114,6 +125,26 @@ const requiredFiles = [
   "templates/api-client.md",
   "templates/performance-budgets.md",
   "templates/dependabot.yml.md",
+  "agent-contract.json",
+  "blueprint.config.example.json",
+  "schemas/stack.schema.json",
+  "schemas/profile.schema.json",
+  "schemas/agent-contract.schema.json",
+  "schemas/consumer-config.schema.json",
+  "profiles/core.json",
+  "profiles/browser-app.json",
+  "profiles/networked-app.json",
+  "profiles/production-service.json",
+  "profiles/component-platform.json",
+  "profiles/electron-app.json",
+  "profiles/pwa.json",
+  "skills/apply-frontend-blueprint/SKILL.md",
+  "guides/agent-consumption.md",
+  "evals/scenarios.json",
+  "scripts/validate-machine-contracts.mjs",
+  "scripts/generate-agent-entrypoints.mjs",
+  "scripts/check-project-conformance.mjs",
+  "scripts/run-agent-evals.mjs",
   ".github/workflows/blueprint-integrity.yml",
 ];
 
@@ -126,7 +157,7 @@ for (const path of requiredFiles) {
 function walk(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const path = resolve(directory, entry.name);
-    if (entry.name === ".git") return [];
+    if (entry.name === ".git" || entry.name === "node_modules") return [];
     return entry.isDirectory() ? walk(path) : [path];
   });
 }

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apply Frontend Blueprint"
+  short_description: "Apply and audit frontend blueprint profiles"
+  default_prompt: "Use $apply-frontend-blueprint to assess this repository, select profiles, plan changes, apply approved updates, and verify conformance."

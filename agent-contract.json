@@ -1,0 +1,67 @@
+{
+  "$schema": "./schemas/agent-contract.schema.json",
+  "schema_version": "1.0",
+  "blueprint_version": "1.9.0",
+  "source": "stack.yaml",
+  "foundations": [
+    {
+      "id": "foundation.inspect",
+      "rule": "Inspect the consuming repository before proposing dependencies or file changes."
+    },
+    {
+      "id": "foundation.preflight",
+      "rule": "Run Impact Preflight before official CLIs or non-trivial writes."
+    },
+    {
+      "id": "foundation.scope",
+      "rule": "Activate only profiles and capabilities supported by explicit project evidence."
+    },
+    {
+      "id": "foundation.verify",
+      "rule": "Run the applicable project checks and the conformance checker after changes."
+    }
+  ],
+  "activation_rules": [
+    {
+      "id": "activation.core",
+      "rule": "The core profile applies to every consuming frontend project."
+    },
+    {
+      "id": "activation.optional",
+      "rule": "Browser, networked, production, component-platform, Electron, and PWA profiles are capability-gated."
+    },
+    {
+      "id": "activation.design",
+      "rule": "Create or enforce root DESIGN.md only when the product has explicit visual intent or source tokens."
+    },
+    {
+      "id": "activation.waiver",
+      "rule": "Document temporary exceptions with an owner, reason, and expiry date."
+    }
+  ],
+  "prohibited": [
+    {
+      "id": "prohibited.blanket-install",
+      "rule": "Do not install the full catalog by default."
+    },
+    {
+      "id": "prohibited.secrets",
+      "rule": "Do not place secrets in client-visible environment variables or generated reports."
+    },
+    {
+      "id": "prohibited.unproven-profile",
+      "rule": "Do not infer optional profiles from preference alone."
+    },
+    {
+      "id": "prohibited.silent-drift",
+      "rule": "Do not edit generated agent blocks manually; regenerate them from this contract."
+    }
+  ],
+  "references": [
+    "guides/agent-consumption.md",
+    "profiles/README.md",
+    "schemas/stack.schema.json",
+    "blueprint.config.example.json",
+    "skills/apply-frontend-blueprint/SKILL.md"
+  ]
+}
