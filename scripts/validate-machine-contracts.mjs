@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import YAML from "yaml";
+import { profileGraphFailures } from "./lib/profile-graph.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const ajv = new Ajv2020({ allErrors: true, strict: true });
@@ -53,15 +54,7 @@ if (stack.blueprint_version !== contract.blueprint_version) {
   failures.push("agent-contract.json: blueprint_version must match stack.yaml");
 }
 
-for (const profile of profileDocuments.map(([, value]) => value)) {
-  for (const parent of profile.extends) {
-    if (!profileDocuments.some(([, candidate]) => candidate.id === parent)) {
-      failures.push(
-        `profiles/${profile.id}.json: unknown parent profile ${parent}`,
-      );
-    }
-  }
-}
+failures.push(...profileGraphFailures(profileDocuments));
 
 if (failures.length > 0) {
   console.error("Machine-contract validation failed:\n");

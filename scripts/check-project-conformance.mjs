@@ -1,8 +1,20 @@
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, lstatSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, isAbsolute, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import Ajv2020 from "ajv/dist/2020.js";
+import addFormats from "ajv-formats";
 
 const blueprintRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const ajv = new Ajv2020({ allErrors: true, strict: true });
+addFormats(ajv);
+const validateConsumerConfig = ajv.compile(
+  JSON.parse(
+    readFileSync(
+      resolve(blueprintRoot, "schemas/consumer-config.schema.json"),
+      "utf8",
+    ),
+  ),
+);
 
 function argumentsFrom(argv) {
   const options = { project: ".", format: "markdown" };
@@ -56,6 +68,35 @@ function resolveProfiles(selected, available) {
   return ordered;
 }
 
+function matchingPaths(projectRoot, requirement) {
+  return requirement.any_of.filter((path) => {
+    const absolutePath = resolve(projectRoot, path);
+    if (!existsSync(absolutePath) || !lstatSync(absolutePath).isFile()) {
+      return false;
+    }
+
+    const content = readFileSync(absolutePath, "utf8");
+    if (content.trim().length === 0) return false;
+    if (!requirement.content_any_of) return true;
+
+    const normalized = content.toLowerCase();
+    return requirement.content_any_of.some((expected) =>
+      normalized.includes(expected.toLowerCase()),
+    );
+  });
+}
+
+function requirementSatisfied(requirement, matches) {
+  return requirement.match_count === undefined
+    ? matches.length > 0
+    : matches.length === requirement.match_count;
+}
+
+function observedMatches(matches) {
+  if (matches.length === 0) return null;
+  return matches.length === 1 ? matches[0] : matches;
+}
+
 function inspectProject(projectRoot, profiles, waivers) {
   const packagePath = resolve(projectRoot, "package.json");
   const packageJson = existsSync(packagePath)
@@ -92,15 +133,25 @@ function inspectProject(projectRoot, profiles, waivers) {
   for (const profile of profiles) {
     for (const category of ["files", "evidence"]) {
       for (const requirement of profile.requirements[category]) {
-        const found = requirement.any_of.find((path) =>
-          existsSync(resolve(projectRoot, path)),
+        const matches = matchingPaths(projectRoot, requirement);
+        add(
+          profile,
+          category,
+          requirement,
+          requirementSatisfied(requirement, matches),
+          observedMatches(matches),
         );
-        add(profile, category, requirement, Boolean(found), found ?? null);
       }
     }
     for (const requirement of profile.requirements.packages) {
-      const found = requirement.any_of.find((name) => installed.has(name));
-      add(profile, "packages", requirement, Boolean(found), found ?? null);
+      const matches = requirement.any_of.filter((name) => installed.has(name));
+      add(
+        profile,
+        "packages",
+        requirement,
+        requirementSatisfied(requirement, matches),
+        observedMatches(matches),
+      );
     }
     for (const requirement of profile.requirements.scripts) {
       add(
@@ -188,8 +239,19 @@ try {
   if (!existsSync(configPath))
     throw new Error(`Missing consumer config: ${configPath}`);
   const config = JSON.parse(readFileSync(configPath, "utf8"));
-  if (!Array.isArray(config.profiles) || config.profiles.length === 0)
-    throw new Error("Consumer config must select at least one profile");
+  if (!validateConsumerConfig(config)) {
+    const details = (validateConsumerConfig.errors ?? [])
+      .map(
+        (error) =>
+          `${error.instancePath || "/"}: ${error.message ?? "invalid value"}`,
+      )
+      .join("; ");
+    throw new Error(`Invalid consumer config: ${details}`);
+  }
+  const waiverIds = config.waivers.map(({ id }) => id);
+  if (new Set(waiverIds).size !== waiverIds.length) {
+    throw new Error("Invalid consumer config: waiver IDs must be unique");
+  }
   const supportedVersion = JSON.parse(
     readFileSync(resolve(blueprintRoot, "agent-contract.json"), "utf8"),
   ).blueprint_version;

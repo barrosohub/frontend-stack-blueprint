@@ -145,6 +145,9 @@ const requiredFiles = [
   "scripts/generate-agent-entrypoints.mjs",
   "scripts/check-project-conformance.mjs",
   "scripts/run-agent-evals.mjs",
+  "scripts/lib/profile-graph.mjs",
+  "scripts/test-conformance.mjs",
+  "scripts/test-machine-contracts.mjs",
   ".github/workflows/blueprint-integrity.yml",
 ];
 

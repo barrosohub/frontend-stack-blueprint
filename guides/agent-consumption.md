@@ -45,6 +45,11 @@ For automation, use `--format json`. Exit code `0` means all error-severity
 requirements pass or have an active waiver; `1` means conformance failed; `2`
 means the checker could not run.
 
+The checker validates the consuming `blueprint.config.json` against its JSON
+Schema before honoring profiles or waivers. File evidence must be a non-empty
+regular file; individual requirements may also declare content sentinels or an
+exact match count when presence alone would be ambiguous.
+
 ## Waivers
 
 Waivers are temporary controls, not deletion of requirements. Each waiver must name

@@ -21,6 +21,7 @@
         "id": "browser.playwright-config",
         "description": "Playwright is configured.",
         "any_of": ["playwright.config.ts", "playwright.config.js"],
+        "content_any_of": ["@playwright/test", "defineConfig"],
         "severity": "error"
       }
     ],
@@ -61,6 +62,7 @@
           "tests/e2e/smoke.spec.ts",
           "playwright/smoke.spec.ts"
         ],
+        "content_any_of": ["test(", "test (", "it(", "it ("],
         "severity": "error"
       }
     ]

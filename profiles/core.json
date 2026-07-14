@@ -106,6 +106,7 @@
         "id": "core.lockfile",
         "description": "Exactly one committed package-manager lockfile is expected.",
         "any_of": ["pnpm-lock.yaml", "package-lock.json"],
+        "match_count": 1,
         "severity": "error"
       }
     ]
