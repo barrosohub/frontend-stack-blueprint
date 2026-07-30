@@ -30,18 +30,18 @@
 - [Architecture](stack/architecture.md): Modular, DRY, KISS, YAGNI
 - [Core](stack/core.md): TypeScript, React, TanStack Router / React Router
 - [Tooling](stack/tooling.md): pnpm (priority), Node.js default, Bun alternative
-- [Build & Test](stack/build-and-test.md): Vite (Node.js >=20.19 or >=22.12), Vitest, Husky
+- [Build & Test](stack/build-and-test.md): Vite 8 (Node.js >=22.22), Vitest 4, Husky
 - [Production Reliability](stack/reliability.md): CI, Playwright, WCAG 2.2, Web Vitals, rollout and rollback
 - [Frontend Security](stack/security.md): Typed environment, supply chain, CSP, privacy
 - [API Boundaries](stack/api-boundaries.md): fetch, Zod, cancellation, retry, MSW
-- [UI](stack/ui.md): Radix UI, shadcn/ui, Floating UI, Embla, cmdk
+- [UI](stack/ui.md): Base UI default, Radix/React Aria alternatives, shadcn/ui, Floating UI, Embla, cmdk
 - [Forms](stack/forms.md): React Hook Form + Zod
-- [Data Access](stack/data-access.md): Prisma ≥6 (recommended when ORM-backed server-side or edge data access is needed)
+- [Data Access](stack/data-access.md): Prisma ≥7 (recommended when ORM-backed server-side or edge data access is needed)
 - [Authentication](stack/auth.md): Better Auth ≥1 (recommended when the project needs authentication)
 - [Managed Services](stack/managed-services.md): Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, Resend (optional, capability-based)
 - [Styling](stack/styling.md): Tailwind CSS, Motion
 - [DESIGN.md Design Contract](stack/design-system.md): Provisional project visual intent and source tokens
-- [State](stack/state-and-data.md): Zustand + TanStack Query (TanStack Store replaces Zustand at v1 GA)
+- [State](stack/state-and-data.md): Zustand + TanStack Query (TanStack Store under evaluation)
 - [Dates](stack/dates.md): date-fns
 - [Content](stack/content.md): Lexical, ProseMirror, Shiki
 - [Advanced Capabilities](stack/advanced-capabilities.md): Capability-gated Markdown, tables, charts, diagrams, editor, terminal, collaboration, and PDF surfaces
@@ -56,6 +56,7 @@
 
 - [Overview](targets/TARGETS.md): When to use each
 - [Browser](targets/browser.md)
+- [Cloudflare Workers Static Assets](targets/cloudflare-workers-static-assets.md)
 - [Cloudflare Pages](targets/cloudflare-pages.md)
 - [Vercel](targets/vercel.md)
 - [Electron](targets/electron.md)
@@ -85,7 +86,7 @@
 - [Why Prisma](rationale/why-prisma.md)
 - [Why pnpm](rationale/why-pnpm.md)
 - [Why Bun Runtime](rationale/why-bun-runtime.md)
-- [Cloudflare Pages vs Vercel](rationale/cloudflare-pages-vs-vercel.md)
+- [Cloudflare Workers vs Pages vs Vercel](rationale/cloudflare-pages-vs-vercel.md)
 - [Why Cloudflare D1](rationale/why-cloudflare-d1.md)
 - [Why Cloudflare KV](rationale/why-cloudflare-kv.md)
 - [Why Neon](rationale/why-neon.md)
@@ -108,7 +109,7 @@
 <!-- BEGIN GENERATED: AGENT CONTRACT -->
 ## Agent-Native Contract (generated)
 
-Blueprint `1.9.0`. Canonical machine sources:
+Blueprint `2.0.0`. Canonical machine sources:
 `stack.yaml`, `agent-contract.json`, `schemas/`, and `profiles/`.
 
 Foundations:
@@ -117,6 +118,7 @@ Foundations:
 - Run Impact Preflight before official CLIs or non-trivial writes.
 - Activate only profiles and capabilities supported by explicit project evidence.
 - Run the applicable project checks and the conformance checker after changes.
+- Install only validated major lines and use maintained runtime releases; do not treat an unbounded latest release as compatible by default.
 
 Profile activation:
 
@@ -131,6 +133,7 @@ Prohibited behavior:
 - Do not place secrets in client-visible environment variables or generated reports.
 - Do not infer optional profiles from preference alone.
 - Do not edit generated agent blocks manually; regenerate them from this contract.
+- Do not publish production source maps by default; upload them privately and remove them from public artifacts when observability requires them.
 
 Apply or audit the contract with `skills/apply-frontend-blueprint/SKILL.md` and
 `node scripts/check-project-conformance.mjs --project <path> --format json`.

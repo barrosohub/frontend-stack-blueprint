@@ -8,7 +8,7 @@ tier: 3
 
 ## Decision
 
-Vitest ≥3.2 (4.x recommended) as the test runner.
+Vitest ≥4 as the test runner.
 
 ## Reasons
 

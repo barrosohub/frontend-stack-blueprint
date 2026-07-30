@@ -8,7 +8,8 @@ tier: 3
 
 ## Decision
 
-TanStack Router ≥1 as the default router. React Router ≥7.1 as alternative.
+TanStack Router ≥1 as the default router. React Router ≥8 as the ESM-only
+alternative for Node.js ≥22.22 and React ≥19.2.7.
 
 ## Reasons for Default
 
@@ -18,7 +19,7 @@ TanStack Router ≥1 as the default router. React Router ≥7.1 as alternative.
 4. **File-based routes** — Optional file-based route generation reduces boilerplate.
 5. **Built-in devtools** — Visual route tree for debugging.
 
-## When React Router 7 Instead
+## When React Router 8 Instead
 
 - Team already experienced with React Router
 - Project requires SSR via Remix / React Router framework mode

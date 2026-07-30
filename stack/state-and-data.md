@@ -1,7 +1,7 @@
 ---
 title: "State & Data"
-version: "1.4.0"
-updated: "2026-03-09"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 1
 ---
 
@@ -58,23 +58,20 @@ function ThemeToggle(): JSX.Element {
 }
 ```
 
-> **Succession plan:** TanStack Store is currently alpha (v0.x) and
-> under evaluation. **When TanStack Store reaches v1 GA, it will
-> become the priority client state manager**, replacing Zustand as the
-> default choice. Its reactive, framework-agnostic design and tight
-> integration with TanStack Query/Router make it the ideal long-term
-> fit. See `backlog/under-evaluation.md` for tracking.
+> TanStack Store remains under evaluation while it is pre-1.0. Reaching v1 is a
+> review trigger, not an automatic replacement decision. Zustand remains the
+> approved default until evidence, migration cost, and ecosystem fit are assessed.
 
 ---
 
 ## TanStack Query ≥5.60 (Server State)
 
-| Attribute   | Value                                                              |
-| ----------- | ------------------------------------------------------------------ |
-| Role        | Server state, cache, data fetching                                 |
-| Min Version | ≥5.60                                                              |
-| Status      | ✅ Core                                                            |
-| Install     | `pnpm add @tanstack/react-query @tanstack/react-query-devtools`    |
+| Attribute   | Value                                                           |
+| ----------- | --------------------------------------------------------------- |
+| Role        | Server state, cache, data fetching                              |
+| Min Version | ≥5.0                                                            |
+| Status      | ✅ Core                                                         |
+| Install     | `pnpm add @tanstack/react-query @tanstack/react-query-devtools` |
 
 ### Why TanStack Query
 

@@ -65,7 +65,8 @@ Rules:
 ### TanStack Table
 
 Use `@tanstack/react-table` for interactive data tables. It is headless, so
-Radix/shadcn and Tailwind remain responsible for markup and styling.
+The selected Base UI, Radix, React Aria, or shadcn primitives and Tailwind
+remain responsible for markup and styling.
 
 Rules:
 

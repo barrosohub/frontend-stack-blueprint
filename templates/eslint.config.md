@@ -1,7 +1,7 @@
 ---
 title: "Template: ESLint Flat Config"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 2
 ---
 
@@ -9,12 +9,16 @@ tier: 2
 
 ```javascript
 import js from "@eslint/js";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
+  reactHooks.configs.flat.recommended,
+  reactRefresh.configs.vite,
   {
     languageOptions: {
       parserOptions: {
@@ -25,13 +29,9 @@ export default tseslint.config(
   },
   {
     rules: {
-      // Enforce explicit return types
       "@typescript-eslint/explicit-function-return-type": "warn",
-      // No `any` — ever
       "@typescript-eslint/no-explicit-any": "error",
-      // Prefer interfaces for object types
       "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
-      // Enforce consistent imports
       "@typescript-eslint/consistent-type-imports": "error",
     },
   },
@@ -44,7 +44,9 @@ export default tseslint.config(
 ## Key Points
 
 - Uses **flat config** format (`eslint.config.js`) — no legacy `.eslintrc`
-- `strictTypeChecked` — Maximum type safety
+- ESLint 10 flat config with `typescript-eslint` type-aware rules
+- React Hooks 7.1 and React Refresh 0.5 recommended Vite rules
+- `strictTypeChecked` — maximum type safety
 - `no-explicit-any: 'error'` — Enforces the "no any" rule
 - `explicit-function-return-type` — Aligns with strong typing principle
-- `ignores` — Exclude build output and config files
+- `ignores` — excludes build output and configuration files

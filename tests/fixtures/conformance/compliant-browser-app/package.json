@@ -1,5 +1,6 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
@@ -8,13 +9,13 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "react": "19.2.4"
+    "react": "19.2.8"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",
-    "@playwright/test": "1.61.1",
-    "typescript": "5.9.3",
-    "vite": "7.3.1",
-    "vitest": "4.0.0"
+    "@playwright/test": "1.62.1",
+    "typescript": "7.0.2",
+    "vite": "8.2.0",
+    "vitest": "4.1.10"
   }
 }

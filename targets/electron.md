@@ -19,11 +19,11 @@ target: "electron"
 
 ## Stack Addition
 
-| Technology       | Version | Install                           |
-| ---------------- | ------- | --------------------------------- |
-| Electron         | ≥33     | `pnpm add -D electron`            |
-| Electron Forge   | latest  | `pnpm add -D @electron-forge/cli` |
-| electron-updater | latest  | `pnpm add electron-updater`       |
+| Technology       | Version | Install                                   |
+| ---------------- | ------- | ----------------------------------------- |
+| Electron         | ≥33     | `pnpm add -D electron`                    |
+| Electron Forge   | 7.11.2  | `pnpm add -D @electron-forge/cli@^7.11.2` |
+| electron-updater | 6.8.9   | `pnpm add electron-updater@^6.8.9`        |
 
 ## Project Structure
 

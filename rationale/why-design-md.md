@@ -31,7 +31,7 @@ repository root. It becomes the source of truth for design intent and source
 token values. Tailwind 4 tokens are generated from it, while Radix UI and
 shadcn/ui continue to provide accessible component foundations.
 
-The blueprint ships an example template and pins `@google/design.md` to `0.3.0`
+The blueprint ships an example template and pins `@google/design.md` to `0.4.0`
 when the convention is activated.
 
 ## Why It Fits

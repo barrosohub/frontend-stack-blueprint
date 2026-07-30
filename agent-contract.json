@@ -1,7 +1,7 @@
 {
   "$schema": "./schemas/agent-contract.schema.json",
   "schema_version": "1.0",
-  "blueprint_version": "1.9.0",
+  "blueprint_version": "2.0.0",
   "source": "stack.yaml",
   "foundations": [
     {
@@ -19,6 +19,10 @@
     {
       "id": "foundation.verify",
       "rule": "Run the applicable project checks and the conformance checker after changes."
+    },
+    {
+      "id": "foundation.compatibility",
+      "rule": "Install only validated major lines and use maintained runtime releases; do not treat an unbounded latest release as compatible by default."
     }
   ],
   "activation_rules": [
@@ -55,6 +59,10 @@
     {
       "id": "prohibited.silent-drift",
       "rule": "Do not edit generated agent blocks manually; regenerate them from this contract."
+    },
+    {
+      "id": "prohibited.public-sourcemaps",
+      "rule": "Do not publish production source maps by default; upload them privately and remove them from public artifacts when observability requires them."
     }
   ],
   "references": [
