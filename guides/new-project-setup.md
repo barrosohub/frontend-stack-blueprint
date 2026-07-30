@@ -1,7 +1,7 @@
 ---
 title: "New Project Setup"
-version: "1.9.0"
-updated: "2026-07-13"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 2
 ---
 
@@ -11,64 +11,46 @@ tier: 2
 
 ## Prerequisites
 
-- **Node.js >=20.19 or >=22.12** (required by Vite 7)
-- `pnpm` as the default package manager (provision with Corepack)
+- **Node.js 24 LTS** (minimum 22.22)
+- `pnpm` ≥11.18 as the default package manager
 - Bun is optional and runtime-only; Node.js remains the default runtime
 
 ## Step 1: Scaffold with Vite
 
 ```bash
-node --version  # Verify >=20.19 or >=22.12
-corepack enable pnpm
+node --version  # Verify >=22.22
+# If Corepack is available: corepack use pnpm@11.18.0
+# Otherwise use the official pnpm installer or: npm install -g pnpm@11.18.0
 pnpm --version
-pnpm create vite my-project --template react-ts
+pnpm create vite@9.1.2 my-project --template react-ts
 cd my-project
 pnpm install
 ```
 
 Create `.nvmrc` with a maintained Node.js release satisfying the Vite constraint
-(for example `22.12`). CI reads this file instead of duplicating a Node version.
+(for example `24`). CI reads this file instead of duplicating a Node version.
 
-## Step 2: Add Blueprint Dependencies
+## Step 2: Keep the Core Small
 
 ```bash
 # The Vite React + TypeScript template already includes React, TypeScript, and Vite.
-# Add the rest of the blueprint stack:
-
-# Routing (choose one)
-pnpm add @tanstack/react-router @tanstack/router-devtools
-# OR: pnpm add react-router
-
-# State & Data
-pnpm add zustand
-pnpm add @tanstack/react-query @tanstack/react-query-devtools
-
-# UI Components
-pnpm add @radix-ui/react-dialog @radix-ui/react-popover @radix-ui/react-select
-pnpm add @floating-ui/react embla-carousel-react cmdk
-
-# Styling
-pnpm add -D tailwindcss @tailwindcss/vite
-pnpm add clsx tailwind-merge motion
-
-# Forms
-pnpm add react-hook-form zod @hookform/resolvers
-
-# Dates
-pnpm add date-fns @date-fns/tz
-
-# Icons
-pnpm add lucide-react
+# The Vite template owns React, TypeScript, and Vite. Add only the packages
+# activated by explicit project evidence. Typical core quality packages:
+pnpm add -D vitest@^4.1.10 eslint@^10.8.0 prettier@^3.9.6
 ```
+
+Routing, server/client state, UI primitives, forms, timezone handling,
+animation, icons, and advanced surfaces are capability choices. Select their
+validated versions from `stack.yaml`; do not install the whole catalog.
 
 ## Step 3: Quality Gate
 
 ```bash
 # ESLint + Prettier
-pnpm add -D eslint @eslint/js typescript-eslint prettier
+pnpm add -D eslint@^10.8.0 @eslint/js@^10.0.1 typescript-eslint@^8.65.0 eslint-plugin-react-hooks@^7.1.1 eslint-plugin-react-refresh@^0.5.3 prettier@^3.9.6
 
 # Husky + lint-staged
-pnpm add -D husky lint-staged
+pnpm add -D husky@^9.1.7 lint-staged@^17.2.0
 pnpm exec husky init
 printf "pnpm exec lint-staged\n" > .husky/pre-commit
 ```
@@ -90,12 +72,13 @@ See [templates/tsconfig.json.md](../templates/tsconfig.json.md) — ensure `stri
 
 ## Step 5: Configure Vite
 
-See [templates/vite.config.md](../templates/vite.config.md) — add `@/` alias and Tailwind plugin.
+See [templates/vite.config.md](../templates/vite.config.md) — enable tsconfig
+paths, the React plugin, and the Tailwind plugin.
 
 ## Step 6: Configure Vitest
 
 ```bash
-pnpm add -D vitest @testing-library/react @testing-library/jest-dom
+pnpm add -D vitest@^4.1.10 @testing-library/react@^16.3.2 @testing-library/jest-dom@^7.0.0
 ```
 
 See [templates/vitest.config.md](../templates/vitest.config.md).
@@ -151,8 +134,8 @@ Use the official CLI for baseline setup. Do not manually recreate base
 files the CLI already generates.
 
 ```bash
-pnpm dlx shadcn@latest init
-pnpm dlx shadcn@latest add button input dialog
+pnpm dlx shadcn@4.16.0 init --base base
+pnpm dlx shadcn@4.16.0 add button input dialog
 ```
 
 ## Step 11: DESIGN.md Design Contract (Optional, Provisional)
@@ -163,10 +146,10 @@ cross-screen consistency, or will use agents to generate and modify UI.
 1. Copy [the example contract](../templates/DESIGN.example.md) to the project
    root as `DESIGN.md`.
 2. Replace the starter narrative and tokens with product-approved direction.
-3. Pin the alpha CLI exactly:
+3. Pin the pre-1.0 CLI exactly:
 
 ```bash
-pnpm add -D @google/design.md@0.3.0
+pnpm add -D @google/design.md@0.4.0
 ```
 
 4. Add scripts to `package.json`:
@@ -196,7 +179,7 @@ pnpm design:tokens
 
 Do not ship the example unchanged or hand-edit the generated token file. See
 [stack/design-system.md](../stack/design-system.md) for precedence, agent rules,
-CI guidance, and the alpha stability policy.
+CI guidance, and the pre-1.0 stability policy.
 
 ## Step 12: Configure Production Reliability
 
@@ -213,7 +196,7 @@ is public client configuration and MUST NOT contain a secret.
 For every user-facing deployed application:
 
 ```bash
-pnpm add -D @playwright/test @axe-core/playwright
+pnpm add -D @playwright/test@^1.62.1 @axe-core/playwright@^4.12.1
 pnpm exec playwright install
 ```
 
@@ -225,7 +208,7 @@ the browser/runtime matrix, and add the critical journeys before launch.
 When the project consumes an API:
 
 ```bash
-pnpm add -D msw
+pnpm add -D msw@^2.15.0
 ```
 
 Create the typed fetch boundary from
@@ -259,7 +242,7 @@ pnpm test:e2e    # Critical journeys against the artifact
 Use Better Auth as the default auth layer only when the project needs login/session management.
 
 - See [stack/auth.md](../stack/auth.md) for the canonical auth rules
-- Install `better-auth` with `pnpm add better-auth` only in projects that actually need authentication
+- Install `better-auth` with `pnpm add better-auth@^1.6.25` only in projects that actually need authentication
 - Better Auth requires a server-side runtime/auth handler; do not add it to purely static apps
 - If client and server are separate, install Better Auth in both parts as directed by the official docs
 - Apply **Official CLI-First + Impact Preflight** before any Better Auth CLI command
@@ -269,7 +252,7 @@ Use Better Auth as the default auth layer only when the project needs login/sess
 Use Prisma only when the project has backend, server-side, or edge runtime and actually needs ORM-backed relational data access.
 
 - See [stack/data-access.md](../stack/data-access.md) for the canonical data-access rules
-- Install Prisma with `pnpm add prisma @prisma/client` only when the project has trusted runtime for relational data access
+- Install Prisma with `pnpm add prisma@^7.9.1 @prisma/client@^7.9.1` only when the project has trusted runtime for relational data access
 - Do NOT add Prisma to purely static frontend apps
 - If the project pairs Prisma with Cloudflare D1, follow the official Prisma + D1 guide and do not assume `prisma migrate dev` as the default workflow
 - Apply **Official CLI-First + Impact Preflight** before Prisma CLI commands that initialize schema, generate clients, or alter database state
@@ -311,8 +294,9 @@ a terminal, collaborative state, or PDF viewing:
 
 Only if needed:
 
-- Cloud frontend hosting (default) → see [targets/cloudflare-pages.md](../targets/cloudflare-pages.md)
+- New Cloudflare frontend → see [Workers Static Assets](../targets/cloudflare-workers-static-assets.md)
+- Existing/explicit Pages project → see [Cloudflare Pages](../targets/cloudflare-pages.md)
 - Cloud frontend hosting (secondary) → see [targets/vercel.md](../targets/vercel.md)
-- Cloudflare Pages alone does not imply D1, KV, or R2 for purely static frontend hosting
+- Neither Cloudflare target implies D1, KV, or R2
 - Desktop → see [targets/electron.md](../targets/electron.md) or [targets/tauri.md](../targets/tauri.md)
 - PWA → see [targets/pwa.md](../targets/pwa.md)

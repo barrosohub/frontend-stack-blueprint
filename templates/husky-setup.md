@@ -1,7 +1,7 @@
 ---
 title: "Template: Husky + lint-staged Setup"
-version: "1.1.0"
-updated: "2026-02-28"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 2
 ---
 
@@ -10,13 +10,13 @@ tier: 2
 ## Install
 
 ```bash
-npm install -D husky lint-staged
+pnpm add -D husky@^9.1.7 lint-staged@^17.2.0
 ```
 
 ## Initialize Husky
 
 ```bash
-npx husky init
+pnpm exec husky init
 ```
 
 This creates `.husky/` directory and a sample pre-commit hook.
@@ -25,7 +25,7 @@ This creates `.husky/` directory and a sample pre-commit hook.
 
 ```bash
 # .husky/pre-commit
-npx lint-staged
+pnpm exec lint-staged
 ```
 
 ## Configure lint-staged
@@ -67,7 +67,7 @@ git commit -m "test: verify husky pre-commit"
 
 ## Rules
 
-- Setup is **mandatory on project init** — no exceptions
+- Setup is optional local feedback; protected CI remains mandatory
 - Code with lint errors NEVER enters the repository
 - Pre-commit runs on staged files only (fast)
 - Do NOT skip hooks with `--no-verify` in regular workflow

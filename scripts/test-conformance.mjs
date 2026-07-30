@@ -43,6 +43,22 @@ function check(name, mutate, expectedStatus, expectedText) {
 }
 
 try {
+  const fixtureLock = readFileSync(resolve(fixture, "pnpm-lock.yaml"), "utf8");
+  assert.match(fixtureLock, /typescript:\s*\n\s*specifier: 7\.0\.2/);
+  assert.match(fixtureLock, /vite:\s*\n\s*specifier: 8\.2\.0/);
+  assert.match(fixtureLock, /vitest:\s*\n\s*specifier: 4\.1\.10/);
+
+  const fixtureTsconfig = readFileSync(
+    resolve(fixture, "tsconfig.json"),
+    "utf8",
+  );
+  assert.match(fixtureTsconfig, /"types": \["vite\/client"\]/);
+  assert.doesNotMatch(fixtureTsconfig, /"baseUrl"/);
+
+  const fixtureVite = readFileSync(resolve(fixture, "vite.config.ts"), "utf8");
+  assert.match(fixtureVite, /tsconfigPaths: true/);
+  assert.match(fixtureVite, /sourcemap: false/);
+
   check("compliant", () => {}, 0, /"status": "pass"/);
 
   check(

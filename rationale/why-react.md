@@ -1,6 +1,6 @@
 ---
 title: "Why React"
-updated: "2026-02-28"
+updated: "2026-07-30"
 tier: 3
 ---
 
@@ -24,7 +24,7 @@ React ≥19.2 as the UI rendering framework for all projects.
 
 6. **Framework flexibility** — React is a library, not a framework. It works with any routing, state management, or build tool — aligning with our modular stack philosophy.
 
-7. **React Compiler** — Upcoming compiler will automatically optimize re-renders, eliminating manual memoization and making React the most performant option.
+7. **React Compiler** — The stable 1.x compiler can be adopted incrementally after compatibility checks; it is an optimization tool, not a reason to remove measurement.
 
 ## Alternatives Considered
 

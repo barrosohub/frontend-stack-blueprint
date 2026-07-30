@@ -1,7 +1,7 @@
 ---
 title: "Data Access (optional)"
-version: "1.5.0"
-updated: "2026-03-09"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 1
 ---
 
@@ -11,16 +11,16 @@ This layer applies only when the project has backend, server-side, or
 edge runtime and needs ORM-backed relational data access. It is not part
 of the mandatory frontend stack.
 
-## Prisma ORM ≥6
+## Prisma ORM ≥7
 
-| Attribute   | Value |
-| ----------- | ----- |
+| Attribute   | Value                                    |
+| ----------- | ---------------------------------------- |
 | Role        | TypeScript ORM and generated data client |
-| Min Version | ≥6.0 |
-| Current     | 6.18.0 |
-| Status      | ⭐ Recommended optional |
-| Install     | `pnpm add prisma @prisma/client` |
-| Tooling     | `pnpm exec prisma <command>` |
+| Min Version | ≥7.0                                     |
+| Current     | 7.9.1                                    |
+| Status      | ⭐ Recommended optional                  |
+| Install     | `pnpm add prisma @prisma/client`         |
+| Tooling     | `pnpm exec prisma <command>`             |
 
 ### When to Use
 
@@ -34,6 +34,10 @@ of the mandatory frontend stack.
 - Keep Prisma client usage in trusted backend, worker, API route, or other server-side/edge code
 - TanStack Query remains the frontend standard for fetching app data; Prisma does not replace query/cache patterns in the UI layer
 - Keep generated client setup, schema files, migrations, and connection credentials outside presentation components
+- Use the ESM-first `prisma-client` generator with an explicit output path
+- Configure a database driver adapter; Prisma 7 no longer treats the Rust query
+  engine as the default client architecture
+- Keep `prisma.config.ts` responsible for CLI configuration and environment loading
 
 ### Cloudflare D1 Caveat
 
@@ -44,7 +48,7 @@ of the mandatory frontend stack.
 
 ### Prisma vs Drizzle ORM
 
-- Prisma is approved now because it is on a stable `v6` release line
+- Prisma is approved on its stable `v7` release line
 - Drizzle ORM remains under evaluation until it reaches `v1 GA`
 - This blueprint does not promote Drizzle into the approved stack yet
 

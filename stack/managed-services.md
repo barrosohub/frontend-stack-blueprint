@@ -14,12 +14,12 @@ blueprint backend-first.
 
 ## Database (optional): Neon Postgres
 
-| Attribute | Value |
-| --------- | ----- |
-| Role      | Managed Postgres database |
-| Engine    | PostgreSQL |
-| Status    | ⭐ Recommended optional |
-| Tooling   | `pnpm dlx neonctl@latest <command>` |
+| Attribute | Value                          |
+| --------- | ------------------------------ |
+| Role      | Managed Postgres database      |
+| Engine    | PostgreSQL                     |
+| Status    | ⭐ Recommended optional        |
+| Tooling   | `pnpm dlx neonctl@2 <command>` |
 
 ### When to Use
 
@@ -42,12 +42,12 @@ blueprint backend-first.
 
 ## Database (optional, Cloudflare-specific): Cloudflare D1
 
-| Attribute | Value |
-| --------- | ----- |
+| Attribute | Value                                     |
+| --------- | ----------------------------------------- |
 | Role      | Cloudflare-native serverless SQL database |
-| Engine    | SQLite semantics |
-| Status    | ⭐ Recommended optional |
-| Tooling   | `pnpm dlx wrangler@latest <command>` |
+| Engine    | SQLite semantics                          |
+| Status    | ⭐ Recommended optional                   |
+| Tooling   | `pnpm dlx wrangler@4 <command>`           |
 
 ### When to Use
 
@@ -71,12 +71,12 @@ blueprint backend-first.
 
 ## Object Storage (optional): Cloudflare R2
 
-| Attribute | Value |
-| --------- | ----- |
-| Role      | Managed object storage |
+| Attribute | Value                                    |
+| --------- | ---------------------------------------- |
+| Role      | Managed object storage                   |
 | Access    | S3-compatible API or Cloudflare bindings |
-| Status    | ⭐ Recommended optional |
-| Tooling   | `pnpm dlx wrangler@latest <command>` |
+| Status    | ⭐ Recommended optional                  |
+| Tooling   | `pnpm dlx wrangler@4 <command>`          |
 
 ### When to Use
 
@@ -98,12 +98,12 @@ blueprint backend-first.
 
 ## Key-Value Storage (optional): Cloudflare KV
 
-| Attribute | Value |
-| --------- | ----- |
+| Attribute | Value                                      |
+| --------- | ------------------------------------------ |
 | Role      | Key-value storage for read-heavy workloads |
-| Access    | Workers / bindings / Cloudflare API |
-| Status    | ⭐ Recommended optional |
-| Tooling   | `pnpm dlx wrangler@latest <command>` |
+| Access    | Workers / bindings / Cloudflare API        |
+| Status    | ⭐ Recommended optional                    |
+| Tooling   | `pnpm dlx wrangler@4 <command>`            |
 
 ### When to Use
 
@@ -127,11 +127,11 @@ blueprint backend-first.
 
 ## Email (optional): Resend
 
-| Attribute | Value |
-| --------- | ----- |
-| Role      | Transactional email and audience/broadcast workflows |
+| Attribute   | Value                                                    |
+| ----------- | -------------------------------------------------------- |
+| Role        | Transactional email and audience/broadcast workflows     |
 | Integration | API-first; `resend` SDK is the usual backend integration |
-| Status    | ⭐ Recommended optional |
+| Status      | ⭐ Recommended optional                                  |
 
 ### When to Use
 

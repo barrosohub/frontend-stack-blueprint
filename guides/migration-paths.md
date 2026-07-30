@@ -1,13 +1,38 @@
 ---
 title: "Migration Paths"
-version: "1.9.0"
-updated: "2026-07-13"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 2
 ---
 
 # Migration Paths
 
 > How to migrate from common legacy setups to the Frontend Stack Blueprint.
+
+## Blueprint 1.9 → 2.0
+
+1. Upgrade the runtime to Node.js 24 LTS, or at minimum Node.js 22.22.
+2. Pin `"packageManager": "pnpm@11.18.0"` and provision pnpm explicitly when
+   Corepack is unavailable.
+3. Upgrade TypeScript to 7, remove `baseUrl`, remove redundant `DOM.Iterable`,
+   and use explicit ambient `types`.
+4. Upgrade React to at least 19.2.7 before selecting React Router 8.
+5. Upgrade Vite to 8 and `@vitejs/plugin-react` to 6. Replace duplicate aliases
+   with Vite's `resolve.tsconfigPaths: true`.
+6. Keep production source maps private: upload hidden maps to monitoring in CI
+   and remove them from the published artifact.
+7. Upgrade Vitest to 4, Playwright to 1.62, ESLint to 10, and pnpm to 11.18;
+   run every clean-install quality gate before merging.
+8. Existing Radix UI projects may stay on Radix. For new shadcn projects, declare
+   Base UI with `--base base`; never silently regenerate an existing component set.
+9. Prisma users must adopt the Prisma 7 ESM-first generator, explicit output,
+   driver adapter, and `prisma.config.ts` environment loading.
+10. Existing Cloudflare Pages sites may remain on Pages. New Cloudflare projects
+    default to Workers Static Assets; migrate only through a parallel preview and
+    tested rollback.
+
+Do not combine all application migrations into an unreviewed dependency bump.
+Land runtime/config prerequisites first, then tools, then optional capability changes.
 
 ## From Create React App (CRA) → Vite
 

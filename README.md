@@ -2,7 +2,7 @@
 
 > **The canonical frontend stack reference for AI coding agents.**
 
-[![Version](https://img.shields.io/badge/version-1.9.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM-Friendly](https://img.shields.io/badge/LLM-friendly-purple.svg)](llms.txt)
 
@@ -34,31 +34,31 @@ A **public repository** that serves as the **single source of truth** for modern
 │                    FRONTEND STACK BLUEPRINT                   │
 ├──────────────────────────────────────────────────────────────┤
 │                                                              │
-│  LANGUAGE       TypeScript ≥5.9 (strict, no `any`)          │
-│  UI FRAMEWORK   React ≥19.2 (functional only)               │
+│  LANGUAGE       TypeScript ≥7 (strict, no `any`)            │
+│  UI FRAMEWORK   React ≥19.2.7                               │
 │  ROUTING        TanStack Router ≥1 (default)                │
-│                 React Router ≥7.1 (alternative)              │
-│  TOOLING        pnpm (priority) · Bun ≥1 (runtime alt)      │
-│  BUILD          Vite ≥7 (Node.js >=20.19 or >=22.12)          │
-│  TEST           Vitest ≥3.2 · Playwright ≥1.61              │
+│                 React Router ≥8 (alternative)                │
+│  TOOLING        pnpm ≥11.18 · Node 24 LTS · Bun alt         │
+│  BUILD          Vite ≥8 (Node.js ≥22.22)                    │
+│  TEST           Vitest ≥4 · Playwright ≥1.61                │
 │  QUALITY        CI merge gate · Husky · ESLint · Prettier   │
 │  RELIABILITY    WCAG 2.2 AA · Web Vitals · rollback         │
 │  SECURITY       typed env · supply chain · CSP              │
 │                                                              │
-│  COMPONENTS     Radix UI · Floating UI · Embla · cmdk        │
-│  UI PRE-STYLED  shadcn/ui (recommended)                      │
+│  COMPONENTS     Base UI · Radix/React Aria alt · Embla       │
+│  UI PRE-STYLED  shadcn/ui (explicit base)                    │
 │  STYLING        Tailwind CSS ≥4 + clsx + tailwind-merge      │
 │  ANIMATION      Motion (`import from 'motion/react'`)        │
 │  DESIGN (opt)   DESIGN.md contract (alpha, provisional)      │
 │                                                              │
 │  FORMS          React Hook Form + Zod                        │
-│  DATA ACCESS    Prisma ≥6 (optional)                         │
+│  DATA ACCESS    Prisma ≥7 (optional)                         │
 │  AUTH (opt)     Better Auth ≥1                               │
 │  MANAGED (opt)  Neon Postgres · Cloudflare D1                │
 │                 Cloudflare R2 · Cloudflare KV · Resend       │
 │  DATES          date-fns ≥4.1 (+@date-fns/tz)               │
 │  STATE          Zustand                                      │
-│  SERVER STATE   TanStack Query ≥5.60                         │
+│  SERVER STATE   TanStack Query ≥5.60                            │
 │                                                              │
 │  RICH TEXT      Lexical (primary) · ProseMirror (fallback)   │
 │  SYNTAX         Shiki                                        │
@@ -70,7 +70,7 @@ A **public repository** that serves as the **single source of truth** for modern
 │  ICONS          Lucide (default) | Phosphor | Tabler         │
 │                                                              │
 ├──────────────────────────────────────────────────────────────┤
-│  TARGETS (opt)  Browser · Cloudflare Pages · Vercel          │
+│  TARGETS (opt)  Browser · Cloudflare Workers/Pages · Vercel  │
 │                 Electron · Tauri · PWA                       │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -168,7 +168,8 @@ frontend-stack-blueprint/
 │   └── icons.md          Lucide, Phosphor, Tabler
 │
 ├── 🎯 targets/ (Tier 2 — Optional)
-│   ├── browser.md / cloudflare-pages.md / vercel.md
+│   ├── browser.md / cloudflare-workers-static-assets.md
+│   ├── cloudflare-pages.md / vercel.md
 │   └── electron.md / tauri.md / pwa.md
 │
 ├── 📖 guides/ (Tier 2)

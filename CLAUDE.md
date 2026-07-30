@@ -1,4 +1,4 @@
-# Frontend Stack Blueprint v1.9.0
+# Frontend Stack Blueprint v2.0.0
 
 This repository defines the canonical frontend stack for any new
 frontend project. It is platform-agnostic — the same stack applies
@@ -6,25 +6,25 @@ whether the project targets browser, desktop, or anything else.
 
 ## The Stack (use for EVERY project)
 
-- **Language:** TypeScript ≥5.9 (strict mode, no `any`)
-- **UI:** React ≥19.2 (functional components only)
-- **Routing:** TanStack Router ≥1 (default) or React Router ≥7.1
-- **Tooling:** pnpm (priority package manager), Node.js >=20.19 or >=22.12, Bun ≥1 (alternative runtime)
-- **Build:** Vite ≥7 (Node.js >=20.19 or >=22.12)
-- **Test:** Vitest ≥3.2; Playwright ≥1.61 for user-facing deployed applications
+- **Language:** TypeScript ≥7 (strict mode, no `any`)
+- **UI:** React ≥19.2.7 (function product components; class Error Boundaries allowed)
+- **Routing:** TanStack Router ≥1 (default) or React Router ≥8
+- **Tooling:** pnpm ≥11.18, Node.js 24 LTS (minimum 22.22), Bun ≥1 (alternative runtime)
+- **Build:** Vite ≥8
+- **Test:** Vitest ≥4; Playwright ≥1.61 for user-facing deployed applications
 - **Quality:** protected CI merge gate + Husky + lint-staged + ESLint + Prettier
-- **Components:** Radix UI, Floating UI, Embla Carousel, cmdk
-- **Pre-styled UI:** shadcn/ui (recommended — Radix + Tailwind)
+- **Components:** Base UI default; Radix UI/React Aria alternatives; Floating UI, Embla Carousel, cmdk
+- **Pre-styled UI:** shadcn/ui with an explicit primitive base
 - **Styling:** Tailwind CSS ≥4 + clsx + tailwind-merge (no CSS-in-JS ever)
 - **Animations:** Motion (formerly Framer Motion) — `import from 'motion/react'`
 - **DESIGN.md Design Contract (provisional, optional):** root `DESIGN.md` for product visual intent and source tokens
 - **Forms:** React Hook Form + Zod
-- **Data Access (optional):** Prisma ≥6
+- **Data Access (optional):** Prisma ≥7
 - **Authentication (optional):** Better Auth ≥1
 - **Managed Services (optional):** Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, Resend
 - **Dates:** date-fns ≥4.1 (+@date-fns/tz for timezones)
-- **State:** Zustand (no Redux, MobX) — TanStack Store replaces Zustand at v1 GA
-- **Server State:** TanStack Query ≥5.60
+- **State:** Zustand (no Redux, MobX) — TanStack Store remains under evaluation
+- **Server State:** TanStack Query ≥5.60.60
 - **Rich Text:** Lexical (primary), ProseMirror (fallback only)
 - **Syntax:** Shiki
 - **Advanced Capabilities (optional):** secure Markdown, TanStack Table, Recharts, Mermaid, CodeMirror, xterm.js/node-pty, Yjs, PDF.js
@@ -40,7 +40,7 @@ whether the project targets browser, desktop, or anything else.
 - DRY: Extract patterns. Don't abstract prematurely.
 - KISS: Simplest solution. Components ≤150 lines. Functions ≤30 lines.
 - YAGNI: No speculative features or abstractions.
-- REACT COMPILER: Use when available. Removes need for manual memo.
+- REACT COMPILER: Stable 1.x; enable incrementally after compatibility checks.
 
 ## Universal Governance Protocol (technology-agnostic)
 
@@ -65,15 +65,15 @@ whether the project targets browser, desktop, or anything else.
 
 ## Rules
 
-- ALWAYS setup Husky + lint-staged on project init
+- Husky + lint-staged are optional local feedback; protected CI is mandatory
 - ALWAYS write tests (Vitest) for hooks and utils
 - ALWAYS run the applicable Production Reliability gate before merge
 - ALWAYS structure code by feature (`src/features/`)
 - ALWAYS use cn() helper for conditional Tailwind classes
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
-- ALWAYS use Radix primitives (shadcn/ui) before building custom
-- ALWAYS use Prisma ≥6 when the project needs ORM-backed server-side or edge relational data access
+- ALWAYS use the selected Base UI/Radix/React Aria/shadcn primitives before building custom
+- ALWAYS use Prisma ≥7 when the project needs ORM-backed server-side or edge relational data access
 - ALWAYS use Better Auth ≥1 when the project needs authentication
 - ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, Resend
 - ALWAYS use pnpm as the default package manager unless the developer explicitly overrides it
@@ -94,7 +94,7 @@ whether the project targets browser, desktop, or anything else.
 ## Banned Technologies
 
 redux, mobx, styled-components, emotion, jest, moment, dayjs,
-formik, yup, class components, CSS-in-JS, deep relative imports
+formik, yup, product UI class components (Error Boundaries excepted), CSS-in-JS, deep relative imports
 
 ## Deployment Targets (ONLY if the project needs one)
 
@@ -102,7 +102,8 @@ The stack above works as-is for browser projects.
 
 - Desktop (Electron): @targets/electron.md
 - Desktop (Tauri): @targets/tauri.md
-- Cloud frontend (default): @targets/cloudflare-pages.md
+- Cloud frontend (new Cloudflare default): @targets/cloudflare-workers-static-assets.md
+- Cloudflare Pages (existing/explicit): @targets/cloudflare-pages.md
 - Cloud frontend (secondary): @targets/vercel.md
 - PWA: @targets/pwa.md
 - If desktop needed but target unclear → ASK the developer.
@@ -126,10 +127,20 @@ The stack above works as-is for browser projects.
 - Machine-readable versions: @stack.yaml
 - New project: @guides/new-project-setup.md
 
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs are tracked in GitHub. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+This is a single-context repository. See `docs/agents/domain.md`.
+
 <!-- BEGIN GENERATED: AGENT CONTRACT -->
 ## Agent-Native Contract (generated)
 
-Blueprint `1.9.0`. Canonical machine sources:
+Blueprint `2.0.0`. Canonical machine sources:
 `stack.yaml`, `agent-contract.json`, `schemas/`, and `profiles/`.
 
 Foundations:
@@ -138,6 +149,7 @@ Foundations:
 - Run Impact Preflight before official CLIs or non-trivial writes.
 - Activate only profiles and capabilities supported by explicit project evidence.
 - Run the applicable project checks and the conformance checker after changes.
+- Install only validated major lines and use maintained runtime releases; do not treat an unbounded latest release as compatible by default.
 
 Profile activation:
 
@@ -152,6 +164,7 @@ Prohibited behavior:
 - Do not place secrets in client-visible environment variables or generated reports.
 - Do not infer optional profiles from preference alone.
 - Do not edit generated agent blocks manually; regenerate them from this contract.
+- Do not publish production source maps by default; upload them privately and remove them from public artifacts when observability requires them.
 
 Apply or audit the contract with `skills/apply-frontend-blueprint/SKILL.md` and
 `node scripts/check-project-conformance.mjs --project <path> --format json`.

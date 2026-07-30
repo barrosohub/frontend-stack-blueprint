@@ -1,7 +1,7 @@
 ---
 title: "Under Evaluation"
-version: "1.7.0"
-updated: "2026-07-13"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 4
 ---
 
@@ -9,17 +9,17 @@ tier: 4
 
 Technologies being actively evaluated for potential inclusion in the stack.
 
-| Technology         | Scope                                                        | Blocker                                                                                | ETA      |
-| ------------------ | ------------------------------------------------------------ | -------------------------------------------------------------------------------------- | -------- |
-| **React Compiler** | Auto-memoization (eliminates useMemo/useCallback)            | Stability in production                                                                | Q2 2026  |
-| **Biome**          | Replace ESLint + Prettier (Husky stays)                      | Plugin ecosystem maturity                                                              | Q2 2026  |
-| **TanStack Start** | Full-stack framework (SSR/streaming with TanStack Router)    | v1 RC → stable                                                                         | Q2 2026  |
-| **TanStack Store** | Priority successor to Zustand (reactive, framework-agnostic) | Reach v1 GA (currently alpha v0.x)                                                     | Watching |
-| **Drizzle ORM**    | TypeScript ORM / SQL-first data access                       | Reach v1 GA (official docs still indicate pre-v1 track)                                | Watching |
-| **Temporal API**   | Replace date-fns with native date handling                   | Safari support + polyfill maturity                                                     | Q3 2026  |
-| **Signals (TC39)** | Potential reactive primitive for state management            | Specification stage                                                                    | Watching |
-| **better-sqlite3** | Electron-local SQLite persistence                            | Native ABI/prebuild compatibility must be proven for the exact Electron release matrix | Watching |
-| **DESIGN.md**      | Promotion from provisional to recommended design contract    | Alpha specification and pre-1.0 CLI must demonstrate migration compatibility           | Watching |
+| Technology                  | Scope                                                        | Blocker                                                                                           | ETA      |
+| --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | -------- |
+| **React Compiler adoption** | Default-on auto-memoization                                  | Stable 1.x exists; prove library compatibility, diagnostics, and measured value before defaulting | Watching |
+| **Biome**                   | Replace ESLint + Prettier (Husky stays)                      | Confirm required type-aware and React ecosystem rule parity                                       | Watching |
+| **TanStack Start**          | Full-stack framework (SSR/streaming with TanStack Router)    | Production evidence and a clear use case beyond the client blueprint                              | Watching |
+| **TanStack Store**          | Priority successor to Zustand (reactive, framework-agnostic) | Reach v1 GA (currently alpha v0.x)                                                                | Watching |
+| **Drizzle ORM**             | TypeScript ORM / SQL-first data access                       | Reach v1 GA (official docs still indicate pre-v1 track)                                           | Watching |
+| **Temporal API**            | Replace date-fns with native date handling                   | Baseline/cross-browser support, especially Safari, plus migration evidence                        | Watching |
+| **Signals (TC39)**          | Potential reactive primitive for state management            | Specification stage                                                                               | Watching |
+| **better-sqlite3**          | Electron-local SQLite persistence                            | Native ABI/prebuild compatibility must be proven for the exact Electron release matrix            | Watching |
+| **DESIGN.md**               | Promotion from provisional to recommended design contract    | Alpha specification and pre-1.0 CLI must demonstrate migration compatibility                      | Watching |
 
 ## Evaluation Criteria
 

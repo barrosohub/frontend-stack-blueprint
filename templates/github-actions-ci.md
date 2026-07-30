@@ -4,7 +4,7 @@ Use this baseline for user-facing applications. Remove a capability-specific
 step only when the project documents why that reliability profile does not apply.
 
 The action references below are pinned to full commit SHAs verified on
-2026-07-13. Dependabot must keep GitHub Actions references current.
+2026-07-30. Dependabot must keep GitHub Actions references current.
 
 ```yaml
 # .github/workflows/ci.yml
@@ -35,7 +35,7 @@ jobs:
       - name: Set up pnpm
         uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
         with:
-          version: 10
+          version: 11.18.0
           run_install: false
 
       - name: Set up Node.js

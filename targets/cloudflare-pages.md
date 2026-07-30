@@ -1,28 +1,29 @@
 ---
 title: "Cloudflare Pages Target"
-version: "1.5.0"
-updated: "2026-03-09"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 2
 target: "cloudflare-pages"
 ---
 
 # Cloudflare Pages Target
 
-> Priority cloud frontend target when a project needs managed frontend hosting in the cloud.
+> Supported target for existing Pages projects and explicit Git-integrated static deployments.
 
 ## When to Use
 
-- The project needs cloud frontend hosting and no provider has been specified
+- The project already deploys through Cloudflare Pages
+- The team explicitly prefers the Pages Git integration for a static site
 - The team wants git-connected deployments with global edge delivery
 - The project already benefits from the broader Cloudflare ecosystem
 - Static assets and preview environments are the primary requirement
 
 ## Stack Addition
 
-| Technology | Status | Usage |
-| ---------- | ------ | ----- |
-| Cloudflare Pages | ⭐ Priority cloud target | Git integration or direct deployment of `dist/` |
-| Wrangler | Optional CLI | `pnpm dlx wrangler@latest pages deploy dist` |
+| Technology       | Status              | Usage                                           |
+| ---------------- | ------------------- | ----------------------------------------------- |
+| Cloudflare Pages | ✅ Supported target | Git integration or direct deployment of `dist/` |
+| Wrangler         | Optional CLI        | `pnpm dlx wrangler@4 pages deploy dist`         |
 
 ## Deployment Pattern
 
@@ -30,6 +31,8 @@ target: "cloudflare-pages"
 - Deploy the generated `dist/` output
 - Prefer git-connected Pages projects for continuous deployment
 - Use Wrangler for explicit CLI-driven deploys or scripted automation
+- For new Cloudflare projects, compare this flow with
+  [Workers Static Assets](cloudflare-workers-static-assets.md), the blueprint default
 
 ## Key Considerations
 
@@ -42,4 +45,6 @@ target: "cloudflare-pages"
 
 ## Agent Rule
 
-If the project needs cloud frontend hosting and does not specify a provider, use Cloudflare Pages first. If project constraints make Pages a poor fit, present Vercel as the secondary option.
+Do not migrate a healthy Pages project automatically. For a new Cloudflare
+project, default to Workers Static Assets. Use Pages when the developer explicitly
+selects its Git deployment model.

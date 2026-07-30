@@ -5,6 +5,39 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] — 2026-07-30
+
+### Added
+
+- **Research record:** primary-source review of the 2026 frontend ecosystem and
+  migration constraints
+- **Migration contract:** explicit 1.9 → 2.0 path for runtimes, build tools,
+  TypeScript, routing, UI primitives, Prisma, CI, and deployments
+- **Cloudflare target:** Workers Static Assets is documented for new projects
+- **Agent operations:** GitHub issue-tracker and domain-documentation conventions
+  adapted from the Matt Pocock skills repository
+
+### Changed
+
+- **Runtime baseline:** Node.js 24 LTS by default, Node.js ≥22.22 compatibility
+  floor, pnpm 11.18, and conditional Corepack guidance
+- **Core stack:** TypeScript 7.0.2, React 19.2.8, React Router 8.3, Vite 8.2,
+  Vitest 4.1, Playwright 1.62, ESLint 10.8, and current supporting packages
+- **UI:** Base UI is the new-project shadcn default; Radix UI and React Aria are
+  explicit supported alternatives
+- **Data:** Prisma 7 uses its ESM-first generated client and driver-adapter model
+- **Build safety:** public production source maps are prohibited by default
+- **Cloud deployment:** Workers Static Assets replaces Pages as the default for
+  new Cloudflare projects; existing Pages projects remain supported
+
+### Fixed
+
+- Removed obsolete `baseUrl`, manual Vite alias duplication, and deprecated
+  TypeScript configuration patterns
+- Resolved the class-component prohibition conflict by allowing class-based
+  React Error Boundaries where the framework API requires them
+- Replaced automatic future-technology promises with evidence-based review gates
+
 ## [1.9.0] — 2026-07-13
 
 ### Added

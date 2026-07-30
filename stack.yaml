@@ -2,69 +2,81 @@
 # Machine-readable stack manifest for LLMs and tooling
 # This file is the single source of truth for versions.
 
-schema_version: "1.0"
-blueprint_version: "1.9.0"
-updated: "2026-07-13"
+schema_version: "1.1"
+blueprint_version: "2.0.0"
+updated: "2026-07-30"
 
 core:
   typescript:
-    min: ">=5.9.0"
-    current: "5.9.3"
+    min: ">=7.0.0 <8.0.0"
+    current: "7.0.2"
     install: "typescript"
   react:
-    min: ">=19.2.0"
-    current: "19.2.4"
+    min: ">=19.2.7 <20.0.0"
+    current: "19.2.8"
     install: "react react-dom"
     types: "@types/react @types/react-dom"
   routing:
     default: "tanstack-router"
     alternative: "react-router"
     tanstack_router:
-      min: ">=1.0.0"
+      min: ">=1.0.0 <2.0.0"
+      current: "1.170.18"
       install: "@tanstack/react-router @tanstack/router-devtools"
     react_router:
-      min: ">=7.1.0"
+      min: ">=8.0.0 <9.0.0"
+      current: "8.3.0"
       install: "react-router"
+      note: "React Router 8 is ESM-only and requires React >=19.2.7 and Node.js >=22.22.0."
 
 build:
   vite:
-    min: ">=7.0.0"
-    current: "7.3.1"
+    min: ">=8.0.0 <9.0.0"
+    current: "8.2.0"
     install: "vite"
     plugins: "@vitejs/plugin-react"
-    node_requires: ">=20.19.0 || >=22.12.0"
+    plugin_react_current: "6.0.5"
+    bundler: "Rolldown"
+    transformer: "Oxc"
+    node_requires: ">=22.22.0"
 
 tooling:
   package_manager:
     default: "pnpm"
     alternative: "npm"
-    note: "pnpm is the priority package manager. Use Corepack to provision it by default; npm remains compatible but secondary."
+    current: "11.18.0"
+    package_manifest: "packageManager: pnpm@11.18.0"
+    note: "pnpm is the priority package manager. Pin it in package.json. Corepack is bundled only with Node.js versions below 25; install Corepack explicitly or use pnpm's official installer when it is absent."
   runtime:
     default: "node"
     alternative: "bun"
-    default_requires: ">=20.19.0 || >=22.12.0"
-    note: "Node.js is the default runtime. Bun is an alternative runtime only and does not replace pnpm as the default package manager."
+    default_line: "24 LTS"
+    default_requires: ">=22.22.0"
+    supported_lines: "Maintained Node.js 22, 24, and 26 releases"
+    note: "Node.js 24 LTS is the default. Node.js 22.22+ and 26 Current are supported while maintained. Node.js 20 is EOL and prohibited for new projects."
   pnpm:
     status: "priority"
-    install: "corepack enable pnpm"
+    current: "11.18.0"
+    provision_bundled_corepack: "corepack use pnpm@11.18.0"
+    provision_without_corepack: "npm install --global pnpm@11.18.0"
     add: "pnpm add <package>"
     add_dev: "pnpm add -D <package>"
-    dlx: "pnpm dlx <package>@latest <command>"
+    dlx: "pnpm dlx <package>@<validated-major> <command>"
     exec: "pnpm exec <command>"
   bun:
     status: "alternative"
-    min: ">=1.0.0"
+    min: ">=1.0.0 <2.0.0"
     note: "Alternative JavaScript runtime for projects that validate Bun compatibility."
 
 test:
   vitest:
-    min: ">=3.2.0"
-    recommended: ">=4.0.0"
+    min: ">=4.0.0 <5.0.0"
+    current: "4.1.10"
     install: "vitest @testing-library/react @testing-library/jest-dom"
   playwright:
     status: "required-for-user-facing-deployed-apps"
-    min: ">=1.61.0"
-    current: "1.61.1"
+    min: ">=1.61.0 <2.0.0"
+    current: "1.62.1"
     install: "@playwright/test"
     note: "Run critical journeys against the production build. Match projects to the declared browser/runtime matrix and retain traces on first retry in CI."
   accessibility:
@@ -82,19 +94,26 @@ test:
   component_platform:
     storybook:
       status: "optional-capability-gated"
-      current: "10.5.0"
+      current: "10.5.5"
       install: "storybook @storybook/react-vite @storybook/addon-a11y"
       note: "Activate for shared design systems, reusable component platforms, or complex state matrices; not a base dependency."
 
 quality:
   husky:
+    current: "9.1.7"
     install: "husky"
     init: "pnpm exec husky init"
   lint_staged:
+    current: "17.2.0"
     install: "lint-staged"
   eslint:
-    install: "eslint @eslint/js typescript-eslint"
+    current: "10.8.0"
+    typescript_eslint_current: "8.65.0"
+    react_hooks_current: "7.1.1"
+    react_refresh_current: "0.5.3"
+    install: "eslint @eslint/js typescript-eslint eslint-plugin-react-hooks eslint-plugin-react-refresh"
   prettier:
+    current: "3.9.6"
     install: "prettier"
   ci:
     status: "mandatory"
@@ -114,7 +133,7 @@ reliability:
   tooling:
     web_vitals:
       status: "optional-when-provider-does-not-collect"
-      current: "5.3.0"
+      current: "6.0.1"
       install: "web-vitals"
     lighthouse_ci:
       status: "optional-budget-implementation"
@@ -146,68 +165,91 @@ api_boundaries:
   note: "Do not add Axios without a concrete requirement that the platform fetch boundary cannot meet."
 
 ui:
+  default_primitive_base: "base-ui"
+  base_ui:
+    status: "default"
+    current: "1.6.0"
+    install: "@base-ui/react"
+    note: "Default primitive base for new shadcn/ui projects. Use the official shadcn CLI rather than installing this package manually when shadcn owns setup."
   radix:
+    status: "supported-alternative"
     install: "@radix-ui/react-dialog @radix-ui/react-popover @radix-ui/react-select @radix-ui/react-tabs"
-    note: "Install primitives individually as needed"
+    note: "Mature supported alternative. Pin shadcn initialization with --base radix when selected."
+  react_aria:
+    status: "supported-accessibility-alternative"
+    current: "1.19.0"
+    install: "react-aria-components"
+    note: "First-class shadcn/ui base for teams that choose React Aria's interaction and accessibility model."
   shadcn_ui:
     status: "recommended"
-    init: "pnpm dlx shadcn@latest init"
-    note: "Copy-paste components, not an npm dependency"
+    current: "4.16.0"
+    init: "pnpm dlx shadcn@4.16.0 init --base base"
+    alternatives: "pnpm dlx shadcn@4.16.0 init --base radix | pnpm dlx shadcn@4.16.0 init --base aria"
+    note: "Copy-paste component distribution, not a runtime npm dependency. Always declare the primitive base explicitly."
   floating_ui:
+    current: "0.27.20"
     install: "@floating-ui/react"
   embla_carousel:
+    current: "8.6.0"
     install: "embla-carousel-react"
   cmdk:
+    current: "1.1.1"
     install: "cmdk"
 
 styling:
   tailwind:
-    min: ">=4.0.0"
+    min: ">=4.0.0 <5.0.0"
+    current: "4.3.3"
     install: "tailwindcss @tailwindcss/vite"
   clsx:
+    current: "2.1.1"
     install: "clsx"
     note: "Always used with tailwind-merge via cn() helper"
   tailwind_merge:
+    current: "3.6.0"
     install: "tailwind-merge"
     note: "Resolves Tailwind class conflicts"
   motion:
+    current: "12.43.0"
     install: "motion"
     note: "Successor to framer-motion. Import from 'motion/react'"
 
 design_system:
   design_md:
     status: "provisional-optional"
-    spec_version: "alpha"
-    current: "0.3.0"
-    evaluated: "2026-07-13"
+    spec_version: "pre-1.0"
+    current: "0.4.0"
+    evaluated: "2026-07-30"
     file: "DESIGN.md"
-    install: "@google/design.md@0.3.0"
+    install: "@google/design.md@0.4.0"
     binary: "designmd"
     export: "designmd export --format css-tailwind DESIGN.md"
-    note: "Optional project-level design contract for visual intent and source token values. Pin the CLI exactly while the specification is alpha; do not install or create the file without an explicit product design need."
+    note: "Optional project-level design contract for visual intent and source token values. Pin the CLI exactly while the specification is pre-1.0; do not install or create the file without an explicit product design need."
 
 forms:
   react_hook_form:
+    current: "7.83.0"
     install: "react-hook-form"
   zod:
+    current: "4.4.3"
     install: "zod @hookform/resolvers"
 
 data_access:
   default: "prisma"
-  note: "Prisma is the approved ORM default when server-side or edge data access is needed. Drizzle ORM remains under evaluation until it reaches v1 GA."
+  note: "Prisma 7 is the approved ORM default when server-side or edge data access is needed. Drizzle ORM remains under evaluation until it reaches v1 GA."
   prisma:
     status: "recommended-optional"
-    min: ">=6.0.0"
-    current: "6.18.0"
+    min: ">=7.0.0 <8.0.0"
+    current: "7.9.1"
     install: "prisma @prisma/client"
     tooling: "prisma"
-    note: "Recommended only when a project has backend, server-side, or edge runtime and needs ORM-backed relational data access. Do not install for purely static frontend apps. Cloudflare D1 is supported via the official Prisma D1 guide, but Prisma Migrate is not the default D1 workflow."
+    note: "Recommended only when a project has backend, server-side, or edge runtime and needs ORM-backed relational data access. Use the Prisma 7 ESM-first prisma-client generator and a driver adapter. Do not install for purely static frontend apps. Cloudflare D1 is supported via the official guide, but Prisma Migrate is not the default D1 workflow."
 
 auth:
   better_auth:
     status: "recommended-optional"
-    min: ">=1.0.0"
-    current: "1.5.1"
+    min: ">=1.0.0 <2.0.0"
+    current: "1.6.25"
     install: "better-auth"
     tooling: "@better-auth/cli"
     note: "Recommended when a project needs authentication. Requires a server-side runtime/auth handler and is not mandatory for public or static apps without login."
@@ -253,32 +295,40 @@ managed_services:
 dates:
   date_fns:
     min: ">=4.1.0"
+    current: "4.4.0"
     install: "date-fns"
   date_fns_tz:
+    current: "1.5.0"
     install: "@date-fns/tz"
     note: "First-class timezone support via TZDate (date-fns v4+)"
 
 state:
   zustand:
     status: "core"
+    current: "5.0.14"
     install: "zustand"
     note: "Primary client state manager. Lightweight, minimal boilerplate."
   tanstack_store:
     status: "under-evaluation"
     install: "@tanstack/store @tanstack/react-store"
-    note: "Alpha (v0.x). Not GA yet. When v1 ships, TanStack Store becomes the priority state manager, replacing Zustand."
+    current: "0.11.0"
+    note: "Alpha (v0.x). Not GA yet. Re-evaluate against Zustand when v1 ships; no automatic replacement is pre-decided."
   tanstack_query:
     min: ">=5.60.0"
+    current: "5.101.4"
     install: "@tanstack/react-query @tanstack/react-query-devtools"
 
 content:
   lexical:
     status: "primary"
+    current: "0.49.0"
     install: "lexical @lexical/react"
   prosemirror:
     status: "fallback"
+    current: "state 1.4.4; view 1.42.2; model 1.25.11"
     install: "prosemirror-state prosemirror-view prosemirror-model"
   shiki:
+    current: "4.3.1"
     install: "shiki"
 
 advanced_capabilities:
@@ -291,7 +341,7 @@ advanced_capabilities:
       current: "10.1.0"
       install: "react-markdown"
     remark_gfm:
-      min: ">=4.0.0"
+      min: ">=4.0.0 <5.0.0"
       current: "4.0.1"
       install: "remark-gfm"
     rehype_sanitize:
@@ -300,13 +350,13 @@ advanced_capabilities:
       install: "rehype-sanitize"
   data_table:
     tanstack_table:
-      min: ">=8.0.0"
+      min: ">=8.0.0 <9.0.0"
       current: "8.21.3"
       install: "@tanstack/react-table"
   charts:
     recharts:
       min: ">=3.0.0"
-      current: "3.9.2"
+      current: "3.10.1"
       install: "recharts"
   diagrams:
     mermaid:
@@ -316,7 +366,7 @@ advanced_capabilities:
   code_editor:
     codemirror:
       min: ">=6.0.0"
-      current_view: "6.43.6"
+      current_view: "6.43.7"
       install: "@codemirror/state @codemirror/view @codemirror/commands @codemirror/language"
   terminal:
     xterm:
@@ -324,7 +374,7 @@ advanced_capabilities:
       current: "6.0.0"
       install: "@xterm/xterm"
     node_pty:
-      min: ">=1.0.0"
+      min: ">=1.0.0 <2.0.0"
       current: "1.1.0"
       install: "node-pty"
       note: "Trusted desktop/server host only. Validate native ABI compatibility for every target."
@@ -336,34 +386,41 @@ advanced_capabilities:
   pdf:
     pdfjs:
       min: ">=6.0.0"
-      current: "6.1.200"
+      current: "6.2.108"
       install: "pdfjs-dist"
 
 i18n:
   formatjs:
+    current: "react-intl 10.1.18"
     install: "react-intl"
 
 observability:
   sentry:
     status: "recommended-optional"
+    current: "10.69.0"
     install: "@sentry/react"
     note: "Activate when a deployed application needs error operations and release correlation."
   opentelemetry:
     status: "capability-gated"
+    current: "api 1.9.1; sdk-trace-web 2.10.0"
     install: "@opentelemetry/api @opentelemetry/sdk-trace-web"
     note: "Activate when frontend telemetry must correlate with distributed backend or edge traces."
   statsig:
     status: "capability-gated"
+    current: "3.33.3"
     install: "@statsig/react-bindings"
     note: "Activate for staged rollouts, experimentation, or dynamic configuration."
 
 icons:
   default: "lucide"
   lucide:
+    current: "1.28.0"
     install: "lucide-react"
   phosphor:
+    current: "2.1.10"
     install: "@phosphor-icons/react"
   tabler:
+    current: "3.46.0"
     install: "@tabler/icons-react"
 
 targets:
@@ -371,26 +428,38 @@ targets:
     status: "default"
     policy: "Baseline Widely Available unless product evidence requires another matrix"
     note: "Document browser families/versions, mobile/desktop scope, progressive enhancement, test matrix, preview smoke, and rollback."
-  cloudflare_pages:
-    status: "priority-optional"
+  cloudflare_workers_static_assets:
+    status: "default-cloudflare-target"
     type: "cloud-frontend-hosting"
-    evaluated: "2026-03-09"
+    evaluated: "2026-07-30"
     tooling: "wrangler"
-    note: "Default cloud frontend deployment target when a project needs frontend hosting and no provider is specified. Cloudflare data services such as D1, KV, or R2 remain optional and should only be added when the project also has edge or server-side runtime needs."
+    tooling_current: "4.116.0"
+    note: "Default for new Cloudflare frontend projects. Static-only projects do not need a Worker entry point; add runtime code and bindings only when required."
+  cloudflare_pages:
+    status: "supported-existing-or-explicit"
+    type: "cloud-frontend-hosting"
+    evaluated: "2026-07-30"
+    tooling: "wrangler"
+    tooling_current: "4.116.0"
+    note: "Keep existing Pages projects or select Pages explicitly for its Git-integrated static workflow. Do not migrate automatically."
   vercel:
     status: "secondary-optional"
     type: "cloud-frontend-hosting"
     evaluated: "2026-03-09"
     tooling: "vercel"
-    note: "Secondary cloud frontend deployment target when explicitly requested or when Cloudflare Pages is not a fit."
+    tooling_current: "58.4.0"
+    note: "Alternative cloud frontend deployment target when explicitly requested or when Cloudflare is not a fit."
   electron:
-    min: ">=33.0.0"
+    min: ">=43.0.0 <44.0.0"
+    current: "43.2.0"
     install: "electron"
     tooling: "@electron-forge/cli"
   tauri:
-    min: ">=2.10.0"
+    min: ">=2.10.0 <3.0.0"
+    current: "2.11.4"
     note: "Requires Rust toolchain"
   pwa:
+    current: "1.3.0"
     install: "vite-plugin-pwa"
 
 agent_contracts:
@@ -414,5 +483,8 @@ banned:
   - { name: "dayjs", reason: "Use date-fns" }
   - { name: "formik", reason: "Use React Hook Form + Zod" }
   - { name: "yup", reason: "Use Zod" }
-  - { name: "class components", reason: "Use functional components" }
+  - {
+      name: "product UI class components",
+      reason: "Use functional components; class-based Error Boundaries are the explicit infrastructure exception",
+    }
   - { name: "deep relative imports", reason: "Use @/* path aliases" }

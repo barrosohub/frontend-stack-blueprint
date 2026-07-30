@@ -19,10 +19,10 @@ target: "vercel"
 
 ## Stack Addition
 
-| Technology | Status | Usage |
-| ---------- | ------ | ----- |
-| Vercel | ✅ Secondary cloud target | Git integration or dashboard-driven deployments |
-| Vercel CLI | Optional CLI | `pnpm dlx vercel@latest` |
+| Technology | Status                    | Usage                                           |
+| ---------- | ------------------------- | ----------------------------------------------- |
+| Vercel     | ✅ Secondary cloud target | Git integration or dashboard-driven deployments |
+| Vercel CLI | Optional CLI              | `pnpm dlx vercel@58`                            |
 
 ## Deployment Pattern
 
@@ -38,4 +38,6 @@ target: "vercel"
 
 ## Agent Rule
 
-If the project already has a Vercel preference, use Vercel. Otherwise prefer Cloudflare Pages as the default cloud frontend hosting target.
+If the project already has a Vercel preference, use Vercel. For a new
+Cloudflare project, prefer Workers Static Assets; keep existing Pages projects
+on Pages unless migration has an approved benefit.

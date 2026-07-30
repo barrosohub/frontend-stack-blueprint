@@ -1,43 +1,48 @@
 ---
-title: "Cloudflare Pages vs Vercel"
-updated: "2026-03-09"
+title: "Cloudflare Workers Static Assets vs Pages vs Vercel"
+updated: "2026-07-30"
 tier: 3
 ---
 
-# Cloudflare Pages vs Vercel
+# Cloudflare Workers Static Assets vs Pages vs Vercel
 
 ## Decision
 
-Use Cloudflare Pages as the priority cloud frontend deployment target when a project needs cloud hosting and does not specify a provider. Keep Vercel as the approved secondary option.
+Use Workers Static Assets for new Cloudflare frontend projects. Keep Cloudflare
+Pages supported for existing projects and explicit Git-integrated static flows.
+Keep Vercel as an approved alternative.
 
 ## Reasons
 
-1. **Priority default** — Cloudflare Pages is now the default cloud target when provider choice is otherwise unspecified.
-2. **Ecosystem fit** — It aligns well with the broader Cloudflare platform, including the optional Cloudflare R2 recommendation already present in the blueprint.
-3. **Frontend-first deployment** — Pages covers the common frontend-hosting need without forcing a backend or framework rewrite.
-4. **CLI and Git flows** — The platform supports both git-connected deployment and direct CLI-driven deployment with Wrangler.
-5. **Secondary flexibility** — Vercel remains approved for teams that already depend on it or explicitly prefer it.
+1. **Current platform path** — Workers Static Assets serves static Vite output
+   and can add request-time Worker behavior without changing deployment products.
+2. **Migration restraint** — Existing Pages projects are supported; a default
+   change is not sufficient reason to migrate a healthy production site.
+3. **Capability boundaries** — Neither Cloudflare target implies D1, KV, or R2.
+4. **CLI and Git flows** — Wrangler owns Cloudflare preview/deployment; Pages
+   remains available for teams that explicitly want its Git flow.
+5. **Provider flexibility** — Vercel remains approved when requested or when its
+   operational model is a better fit.
 
 ## Comparison Matrix
 
-| Dimension | Cloudflare Pages | Vercel |
-| --------- | ---------------- | ------ |
-| Blueprint status | Priority cloud target | Secondary cloud target |
-| Default choice when unspecified | ✅ Yes | ❌ No |
-| Git-connected deployments | ✅ | ✅ |
-| CLI path | Wrangler | Vercel CLI |
-| Ecosystem overlap with current blueprint | Strong with Cloudflare R2 | Strong with frontend hosting workflows |
-| Use when explicitly requested | ✅ | ✅ |
+| Dimension | Workers Static Assets | Cloudflare Pages | Vercel |
+| --- | --- | --- | --- |
+| Blueprint status | New Cloudflare default | Existing/explicit supported | Alternative |
+| Optional request runtime | Worker | Pages Functions | Vercel Functions |
+| CLI path | Wrangler | Wrangler | Vercel CLI |
+| Use when explicitly requested | ✅ | ✅ | ✅ |
 
 ## Agent Behavior
 
 If the project needs cloud frontend hosting:
 
-1. Use Cloudflare Pages when the provider is not specified
-2. Use Vercel when the developer explicitly requests it
-3. Use Vercel when Cloudflare Pages is not a good operational fit
-4. Keep both choices in `targets/`, not in the mandatory core stack
+1. Use Workers Static Assets for a new Cloudflare project
+2. Keep an existing Pages project unless migration has an approved benefit
+3. Use Pages or Vercel when the developer explicitly requests them
+4. Keep all choices in `targets/`, not in the mandatory core stack
 
 ## Status
 
-Cloudflare Pages is the priority cloud target. Vercel remains approved as the secondary cloud target.
+Workers Static Assets is the new-project Cloudflare default. Pages and Vercel
+remain approved, supported targets.

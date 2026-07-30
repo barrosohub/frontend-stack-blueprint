@@ -58,7 +58,8 @@ Rules:
 - `strict: true` mandatory in tsconfig
 - `any` is **PROHIBITED** — use `unknown` + type guards
 - Props MUST have explicit interfaces/types
-- Return types MUST be explicit
+- Require explicit types at exported/public boundaries and for complex logic;
+  allow useful local inference when the inferred type is clear and stable
 - Discriminated unions for complex states
 - `as const` for literal values
 - Zod for ALL external data validation
@@ -91,7 +92,8 @@ const [state, setState] = useState<any>(null);
 
 ## 4. DRY — Don't Repeat Yourself
 
-- Pattern appears 2+ times → extract to util/hook/component
+- Extract only after shared semantics and change pressure are demonstrated;
+  repetition count alone does not justify an abstraction
 - Business logic NEVER duplicated
 - Constants and configs in dedicated files
 - **BUT:** don't abstract prematurely — wait for pattern confirmation
@@ -113,10 +115,9 @@ const [state, setState] = useState<any>(null);
 
 ## 7. React Compiler
 
-- When available and stable → **use always**
-- Eliminates need for `useMemo`, `useCallback`, `React.memo` manually
-- The compiler optimizes automatically — cleaner code, less boilerplate
-- Until adopted: manual memoization only when measurable benefit exists
+- React Compiler 1.x is stable but capability-gated
+- Enable it incrementally after compatibility diagnostics and performance validation
+- Preserve measured memoization until the compiler adoption is proven for the code path
 
 ## 8. Official CLI-First + Impact Preflight
 
@@ -174,7 +175,7 @@ See [reliability.md](reliability.md).
 ## Rules for Agents (Summary)
 
 1. **Structure by features** — never `components/`, `hooks/` at root
-2. **Type everything** — explicit types on functions, hooks, components, state
+2. **Type boundaries** — explicit exported/complex contracts; useful local inference is allowed
 3. **Extract logic** — zero business logic inline in components
 4. **Name with intention** — `useAuthSession` not `useAuth`
 5. **Clean exports** — barrel files with named exports
@@ -211,7 +212,8 @@ pnpm exec lint-staged
 }
 ```
 
-Setup mandatory on project init. Code with lint errors **never enters the repo**.
+Husky is optional local feedback. Protected CI is the mandatory authoritative
+gate; teams may activate hooks when their local workflow benefits.
 
 ### Authoritative: CI
 

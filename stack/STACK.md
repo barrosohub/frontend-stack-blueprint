@@ -1,7 +1,7 @@
 ---
 title: "Frontend Stack Blueprint — Complete Manifesto"
-version: "1.9.0"
-updated: "2026-07-13"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 1
 tokens: "~3000"
 ---
@@ -45,63 +45,64 @@ Those are **deployment targets** — optional layers in `targets/`.
 When a project has backend, server-side, or edge runtime needs, this
 blueprint may recommend optional ORM and managed-service providers
 without prescribing the surrounding backend architecture.
-When a project needs cloud frontend hosting and the provider is not
-specified, this blueprint recommends Cloudflare Pages first and Vercel
-second, without making cloud hosting part of the mandatory core stack.
+For a new Cloudflare-hosted project, this blueprint recommends Workers Static
+Assets. Existing Pages projects remain supported, and Vercel remains an explicit
+alternative, without making cloud hosting part of the mandatory core stack.
 
 ## Stack Overview
 
-| Layer                                      | Technology                                                               | Version           | Status                                                               |
-| ------------------------------------------ | ------------------------------------------------------------------------ | ----------------- | -------------------------------------------------------------------- |
-| Language                                   | TypeScript                                                               | ≥5.9              | ✅ Core                                                              |
-| UI Framework                               | React                                                                    | ≥19.2             | ✅ Core                                                              |
-| Routing (default)                          | TanStack Router                                                          | ≥1.x              | ✅ Core                                                              |
-| Routing (alt)                              | React Router                                                             | ≥7.1              | ✅ Core                                                              |
-| Package Manager                            | pnpm                                                                     | priority          | ⭐ Default                                                           |
-| Runtime (default)                          | Node.js                                                                  | ≥20.19 or ≥22.12  | ✅ Core                                                              |
-| Runtime (alt)                              | Bun                                                                      | ≥1.0              | ✅ Alternative                                                       |
-| Build                                      | Vite                                                                     | ≥7.x              | ✅ Core                                                              |
-| Unit/integration test                      | Vitest                                                                   | ≥3.2              | ✅ Core                                                              |
-| Production E2E                             | Playwright                                                               | ≥1.61             | ✅ Required for deployed user-facing apps                            |
-| Accessibility                              | WCAG 2.2 AA + axe + manual evaluation                                    | current standard  | ✅ Required by applicable profile                                    |
-| Quality                                    | Protected CI + Husky + lint-staged + ESLint + Prettier                   | policy            | ✅ Core                                                              |
-| Browser policy                             | Baseline Widely Available + explicit exceptions                          | current baseline  | ✅ Core                                                              |
-| API boundary                               | fetch + AbortSignal + Zod + MSW                                          | capability-gated  | ✅ Required when networked                                           |
-| Performance                                | Core Web Vitals + route budgets                                          | field + lab       | ✅ Required for production services                                  |
-| Security                                   | Typed env + supply-chain gates + CSP                                     | policy            | ✅ Core                                                              |
-| UI (headless)                              | Radix UI                                                                 | latest            | ✅ Core                                                              |
-| UI (headless)                              | Floating UI                                                              | latest            | ✅ Core                                                              |
-| UI (headless)                              | Embla Carousel                                                           | latest            | ✅ Core                                                              |
-| UI (headless)                              | cmdk                                                                     | latest            | ✅ Core                                                              |
-| UI (pre-styled)                            | shadcn/ui                                                                | latest            | ⭐ Recommended                                                       |
-| Styling                                    | Tailwind CSS                                                             | ≥4.x              | ✅ Core                                                              |
-| Styling                                    | clsx + tailwind-merge                                                    | latest            | ✅ Core                                                              |
-| Animation                                  | Motion (`motion`)                                                        | latest            | ✅ Core                                                              |
-| Design contract (optional)                 | DESIGN.md                                                                | alpha / CLI 0.3.0 | 🧪 Provisional                                                       |
-| Forms                                      | React Hook Form                                                          | latest            | ✅ Core                                                              |
-| Validation                                 | Zod                                                                      | latest            | ✅ Core                                                              |
-| Data Access (optional)                     | Prisma                                                                   | ≥6.0              | ⭐ Recommended when ORM/server-side relational data access is needed |
-| Authentication (optional)                  | Better Auth                                                              | ≥1.0              | ⭐ Recommended when authentication is needed                         |
-| Managed DB (optional)                      | Neon Postgres                                                            | Managed service   | ⭐ Recommended when Postgres is needed                               |
-| Managed DB (optional, Cloudflare-specific) | Cloudflare D1                                                            | Managed service   | ⭐ Recommended when Cloudflare-native serverless SQL is needed       |
-| Object Storage (optional)                  | Cloudflare R2                                                            | Managed service   | ⭐ Recommended when object storage is needed                         |
-| Key-Value Storage (optional)               | Cloudflare KV                                                            | Managed service   | ⭐ Recommended when key-value storage is needed                      |
-| Email (optional)                           | Resend                                                                   | Managed service   | ⭐ Recommended when transactional/marketing email is needed          |
-| Dates                                      | date-fns                                                                 | ≥4.1              | ✅ Core                                                              |
-| Dates (tz)                                 | @date-fns/tz                                                             | latest            | ✅ Core (when needed)                                                |
-| Client State                               | Zustand                                                                  | latest            | ✅ Core                                                              |
-| Server State                               | TanStack Query                                                           | ≥5.60             | ✅ Core                                                              |
-| Rich Text                                  | Lexical                                                                  | latest            | ✅ Core                                                              |
-| Rich Text                                  | ProseMirror                                                              | latest            | ⚠️ Secondary                                                         |
-| Syntax                                     | Shiki                                                                    | latest            | ✅ Core                                                              |
-| Advanced capabilities                      | Markdown, tables, charts, diagrams, editor, terminal, collaboration, PDF | capability-gated  | ✅ Optional                                                          |
-| i18n                                       | Format.js + react-intl                                                   | latest            | ✅ Core                                                              |
-| Error Tracking                             | Sentry                                                                   | latest            | ⭐ Recommended when operated                                         |
-| Tracing                                    | OpenTelemetry                                                            | latest            | ✅ Capability-gated                                                  |
-| Feature Flags                              | Statsig                                                                  | latest            | ✅ Capability-gated                                                  |
-| Icons (default)                            | Lucide                                                                   | latest            | ⭐ Default                                                           |
-| Icons (alt)                                | Phosphor                                                                 | latest            | ✅ Alternative                                                       |
-| Icons (alt)                                | Tabler                                                                   | latest            | ✅ Alternative                                                       |
+| Layer                                      | Technology                                                               | Version                | Status                                                               |
+| ------------------------------------------ | ------------------------------------------------------------------------ | ---------------------- | -------------------------------------------------------------------- |
+| Language                                   | TypeScript                                                               | ≥7.0                   | ✅ Core                                                              |
+| UI Framework                               | React                                                                    | ≥19.2                  | ✅ Core                                                              |
+| Routing (default)                          | TanStack Router                                                          | ≥1.x                   | ✅ Core                                                              |
+| Routing (alt)                              | React Router                                                             | ≥8.0                   | ✅ Core                                                              |
+| Package Manager                            | pnpm                                                                     | ≥11.18                 | ⭐ Default                                                           |
+| Runtime (default)                          | Node.js                                                                  | 24 LTS; ≥22.22         | ✅ Core                                                              |
+| Runtime (alt)                              | Bun                                                                      | ≥1.0                   | ✅ Alternative                                                       |
+| Build                                      | Vite                                                                     | ≥8.x                   | ✅ Core                                                              |
+| Unit/integration test                      | Vitest                                                                   | ≥4.0                   | ✅ Core                                                              |
+| Production E2E                             | Playwright                                                               | ≥1.61                  | ✅ Required for deployed user-facing apps                            |
+| Accessibility                              | WCAG 2.2 AA + axe + manual evaluation                                    | current standard       | ✅ Required by applicable profile                                    |
+| Quality                                    | Protected CI + Husky + lint-staged + ESLint + Prettier                   | policy                 | ✅ Core                                                              |
+| Browser policy                             | Baseline Widely Available + explicit exceptions                          | current baseline       | ✅ Core                                                              |
+| API boundary                               | fetch + AbortSignal + Zod + MSW                                          | capability-gated       | ✅ Required when networked                                           |
+| Performance                                | Core Web Vitals + route budgets                                          | field + lab            | ✅ Required for production services                                  |
+| Security                                   | Typed env + supply-chain gates + CSP                                     | policy                 | ✅ Core                                                              |
+| UI (headless)                              | Base UI                                                                  | ≥1.6                   | ⭐ New-project default                                               |
+| UI (headless alternatives)                 | Radix UI / React Aria Components                                         | current                | ✅ Supported                                                         |
+| UI (headless)                              | Floating UI                                                              | 0.27.20                | ✅ Core                                                              |
+| UI (headless)                              | Embla Carousel                                                           | 8.6.0                  | ✅ Core                                                              |
+| UI (headless)                              | cmdk                                                                     | 1.1.1                  | ✅ Core                                                              |
+| UI (pre-styled)                            | shadcn/ui CLI                                                            | 4.16.0                 | ⭐ Recommended                                                       |
+| Styling                                    | Tailwind CSS                                                             | ≥4.x                   | ✅ Core                                                              |
+| Styling                                    | clsx + tailwind-merge                                                    | 2.1.1 / 3.6.0          | ✅ Core                                                              |
+| Animation                                  | Motion (`motion`)                                                        | 12.43.0                | ✅ Core                                                              |
+| Design contract (optional)                 | DESIGN.md                                                                | pre-1.0 / CLI 0.4.0    | 🧪 Provisional                                                       |
+| Forms                                      | React Hook Form                                                          | 7.83.0                 | ✅ Core                                                              |
+| Validation                                 | Zod                                                                      | 4.4.3                  | ✅ Core                                                              |
+| Data Access (optional)                     | Prisma                                                                   | ≥7.0                   | ⭐ Recommended when ORM/server-side relational data access is needed |
+| Authentication (optional)                  | Better Auth                                                              | ≥1.0                   | ⭐ Recommended when authentication is needed                         |
+| Managed DB (optional)                      | Neon Postgres                                                            | Managed service        | ⭐ Recommended when Postgres is needed                               |
+| Managed DB (optional, Cloudflare-specific) | Cloudflare D1                                                            | Managed service        | ⭐ Recommended when Cloudflare-native serverless SQL is needed       |
+| Object Storage (optional)                  | Cloudflare R2                                                            | Managed service        | ⭐ Recommended when object storage is needed                         |
+| Key-Value Storage (optional)               | Cloudflare KV                                                            | Managed service        | ⭐ Recommended when key-value storage is needed                      |
+| Email (optional)                           | Resend                                                                   | Managed service        | ⭐ Recommended when transactional/marketing email is needed          |
+| Dates                                      | date-fns                                                                 | ≥4.1                   | ✅ Core                                                              |
+| Dates (tz)                                 | @date-fns/tz                                                             | 1.5.0                  | ✅ Core (when needed)                                                |
+| Client State                               | Zustand                                                                  | 5.0.14                 | ✅ Core                                                              |
+| Server State                               | TanStack Query                                                           | ≥5                     | ✅ Core                                                              |
+| Rich Text                                  | Lexical                                                                  | 0.49.0                 | ✅ Core                                                              |
+| Rich Text                                  | ProseMirror                                                              | state 1.4.4            | ⚠️ Secondary                                                         |
+| Syntax                                     | Shiki                                                                    | 4.3.1                  | ✅ Core                                                              |
+| Advanced capabilities                      | Markdown, tables, charts, diagrams, editor, terminal, collaboration, PDF | capability-gated       | ✅ Optional                                                          |
+| i18n                                       | Format.js + react-intl                                                   | 10.1.18                | ✅ Core                                                              |
+| Error Tracking                             | Sentry                                                                   | 10.69.0                | ⭐ Recommended when operated                                         |
+| Tracing                                    | OpenTelemetry                                                            | API 1.9.1 / SDK 2.10.0 | ✅ Capability-gated                                                  |
+| Feature Flags                              | Statsig                                                                  | 3.33.3                 | ✅ Capability-gated                                                  |
+| Icons (default)                            | Lucide                                                                   | 1.28.0                 | ⭐ Default                                                           |
+| Icons (alt)                                | Phosphor                                                                 | 2.1.10                 | ✅ Alternative                                                       |
+| Icons (alt)                                | Tabler                                                                   | 3.46.0                 | ✅ Alternative                                                       |
 
 ## Detailed Specs
 
@@ -171,18 +172,18 @@ See [Agent-Native Consumption](../guides/agent-consumption.md).
 
 ## Banned Technologies
 
-| Banned                | Use Instead             |
-| --------------------- | ----------------------- |
-| `any` (type)          | `unknown` + type guards |
-| Redux                 | Zustand                 |
-| MobX                  | Zustand                 |
-| styled-components     | Tailwind CSS            |
-| Emotion               | Tailwind CSS            |
-| Jest                  | Vitest                  |
-| Moment.js             | date-fns                |
-| Day.js                | date-fns                |
-| Formik                | React Hook Form + Zod   |
-| Yup                   | Zod                     |
-| Class components      | Functional components   |
-| CSS-in-JS (any)       | Tailwind CSS            |
-| Deep relative imports | Path aliases (@/\*)     |
+| Banned                      | Use Instead                                             |
+| --------------------------- | ------------------------------------------------------- |
+| `any` (type)                | `unknown` + type guards                                 |
+| Redux                       | Zustand                                                 |
+| MobX                        | Zustand                                                 |
+| styled-components           | Tailwind CSS                                            |
+| Emotion                     | Tailwind CSS                                            |
+| Jest                        | Vitest                                                  |
+| Moment.js                   | date-fns                                                |
+| Day.js                      | date-fns                                                |
+| Formik                      | React Hook Form + Zod                                   |
+| Yup                         | Zod                                                     |
+| Product UI class components | Function components; class Error Boundaries are allowed |
+| CSS-in-JS (any)             | Tailwind CSS                                            |
+| Deep relative imports       | Path aliases (@/\*)                                     |

@@ -1,30 +1,33 @@
 ---
 title: "Roadmap"
-version: "1.9.0"
-updated: "2026-07-13"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 4
 ---
 
 # Roadmap
 
-## Current: v1.9.0 (2026-07-13)
+## Current: v2.0.0 (2026-07-30)
 
-The complete frontend stack blueprint is defined and documented.
-Zustand is the primary client state manager. TanStack Store succession
-plan is in place for when it reaches v1 GA.
+The blueprint baseline now targets TypeScript 7, React 19.2.8, Vite 8,
+Vitest 4, Node.js 24 LTS, pnpm 11, React Router 8, Prisma 7, ESLint 10,
+Tailwind CSS 4.3, and current production-test tooling.
+Zustand remains the primary client state manager. TanStack Store reaching
+v1 will trigger an evidence-based review, not an automatic replacement.
 Official CLI-First and Impact Preflight are now mandatory governance rules.
 Better Auth is now the recommended optional authentication layer.
 Data access defaults now cover Prisma for optional ORM-backed server-side access.
 Managed services defaults now cover Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, and Resend.
 pnpm is now the priority package manager, Bun is the alternative runtime,
-and Cloudflare Pages / Vercel are approved cloud frontend targets.
+and Workers Static Assets is the default for new Cloudflare projects;
+Cloudflare Pages and Vercel remain supported alternatives.
 Drizzle ORM remains under evaluation until it reaches v1 GA.
 Advanced technical surfaces now have capability-gated defaults for Markdown,
 tables, charts, diagrams, code editing, terminal UI/PTY hosting,
 collaboration, and PDF viewing. The Electron target now defines a hardened
 process, IPC, packaging, and release boundary. Blueprint drift is checked in CI.
 The provisional DESIGN.md Design Contract now provides an opt-in, agent-readable
-source of visual intent and design tokens, with a pinned alpha CLI, Tailwind 4
+source of visual intent and design tokens, with a pinned pre-1.0 CLI, Tailwind 4
 export, template, and drift validation guidance.
 
 Production Reliability now defines when the approved stack is ready to ship:
@@ -41,7 +44,7 @@ rather than executable application boilerplate.
 
 ## Planned
 
-### v1.10.0 — Extended Targets
+### v2.1.0 — Extended Targets
 
 - [ ] Mobile WebView target documentation
 - [ ] React Native / Expo evaluation
@@ -53,13 +56,13 @@ rather than executable application boilerplate.
 - [ ] Re-verify pinned GitHub Actions and reliability package versions quarterly
 - [ ] Expand provider-specific preview, rollout, and rollback examples
 
-### v2.0.0 — Potential Major Changes
+### Future evidence gates
 
-- [ ] TanStack Store replaces Zustand as primary state manager (when v1 GA ships)
-- [ ] React Compiler becomes default (remove manual memo guidance)
-- [ ] Biome replaces ESLint + Prettier (if plugin ecosystem matures)
-- [ ] TanStack Start as framework option (when v1 stable)
-- [ ] Temporal API replaces date-fns (when cross-browser ready)
+- [ ] Re-evaluate Zustand against TanStack Store after v1 GA and migration evidence
+- [ ] Make React Compiler default only after compatibility and performance validation
+- [ ] Replace ESLint + Prettier with Biome only after rule-parity validation
+- [ ] Add TanStack Start only for a proven full-stack use case
+- [ ] Replace date-fns with Temporal only after required browser support
 
 ## Principles for Evolution
 

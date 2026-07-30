@@ -1,26 +1,26 @@
 ---
 title: "Build & Test"
-version: "1.9.0"
-updated: "2026-07-13"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 1
 ---
 
 # Build & Test
 
-## Vite ≥7
+## Vite ≥8
 
 | Attribute   | Value                                   |
 | ----------- | --------------------------------------- |
 | Role        | Dev server + production build           |
-| Min Version | ≥7.0                                    |
-| Requires    | Node.js >=20.19 or >=22.12              |
+| Min Version | ≥8.0                                    |
+| Requires    | Node.js >=22.22                         |
 | Status      | ✅ Core                                 |
 | Install     | `pnpm add -D vite @vitejs/plugin-react` |
 
 ### Why Vite
 
 - Native ESM dev server — instant hot reload
-- Rollup-based production builds — optimized output
+- Rolldown production builds and Oxc transforms
 - First-class TypeScript support
 - Official React plugin
 - Rich plugin ecosystem
@@ -31,15 +31,12 @@ tier: 1
 // vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { resolve } from "path";
-
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      "@": resolve(__dirname, "./src"),
-    },
+    tsconfigPaths: true,
   },
+  build: { sourcemap: false },
 });
 ```
 
@@ -47,12 +44,12 @@ See [templates/vite.config.md](../templates/vite.config.md) for full config.
 
 ---
 
-## Vitest ≥3.2
+## Vitest ≥4
 
 | Attribute   | Value                                                                 |
 | ----------- | --------------------------------------------------------------------- |
 | Role        | Unit + integration testing                                            |
-| Min Version | ≥3.2 (4.x recommended)                                                |
+| Min Version | ≥4.0                                                                  |
 | Status      | ✅ Core                                                               |
 | Install     | `pnpm add -D vitest @testing-library/react @testing-library/jest-dom` |
 
@@ -78,14 +75,10 @@ See [templates/vite.config.md](../templates/vite.config.md) for full config.
 // vitest.config.ts
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
-import { resolve } from "path";
-
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      "@": resolve(__dirname, "./src"),
-    },
+    tsconfigPaths: true,
   },
   test: {
     globals: true,
@@ -126,6 +119,13 @@ See [templates/vitest.config.md](../templates/vitest.config.md) for full config.
 - Match Playwright projects to the declared target/browser matrix
 
 See [templates/playwright.config.md](../templates/playwright.config.md).
+
+## Production Source Maps
+
+Keep public production source maps disabled by default. If an error-monitoring
+service needs them, generate hidden maps, upload them privately during CI, and
+remove them from the published artifact. Never expose maps containing proprietary
+source or secrets through a public asset path.
 
 ---
 
@@ -170,7 +170,7 @@ component platform, or a large interactive state matrix.
 | Install   | `pnpm add -D husky`    |
 | Init      | `pnpm exec husky init` |
 
-Setup is **mandatory on project init**. No exceptions.
+Husky is optional local feedback. The protected CI gate is mandatory.
 
 ### lint-staged
 
@@ -181,10 +181,10 @@ Setup is **mandatory on project init**. No exceptions.
 
 ### ESLint (Flat Config)
 
-| Attribute | Value                                             |
-| --------- | ------------------------------------------------- |
-| Role      | Code linting                                      |
-| Install   | `pnpm add -D eslint @eslint/js typescript-eslint` |
+| Attribute | Value                                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| Role      | Code linting                                                                                            |
+| Install   | `pnpm add -D eslint @eslint/js typescript-eslint eslint-plugin-react-hooks eslint-plugin-react-refresh` |
 
 Use flat config format (`eslint.config.js`). No legacy `.eslintrc`.
 

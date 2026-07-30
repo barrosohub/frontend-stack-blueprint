@@ -1,7 +1,7 @@
 ---
 title: "UI Components"
-version: "1.4.0"
-updated: "2026-03-09"
+version: "2.0.0"
+updated: "2026-07-30"
 tier: 1
 ---
 
@@ -9,29 +9,27 @@ tier: 1
 
 ## Headless Components
 
-### Radix UI
+### Base UI (default)
 
-| Attribute | Value                                     |
-| --------- | ----------------------------------------- |
-| Role      | Accessible headless UI primitives         |
-| Status    | ✅ Core                                   |
-| Install   | `pnpm add @radix-ui/react-<primitive>`    |
+| Attribute | Value                                                |
+| --------- | ---------------------------------------------------- |
+| Role      | Accessible, unstyled React components                |
+| Status    | ⭐ Default primitive base for new shadcn/ui projects |
+| Install   | Prefer `pnpm dlx shadcn@4.16.0 init --base base`     |
 
-Install primitives individually as needed:
+Use the official shadcn CLI when shadcn owns component setup. Install
+`@base-ui/react` directly only for projects that intentionally use raw primitives.
 
-- `@radix-ui/react-dialog` — Modals
-- `@radix-ui/react-popover` — Popovers
-- `@radix-ui/react-select` — Selects
-- `@radix-ui/react-tabs` — Tab navigation
-- `@radix-ui/react-tooltip` — Tooltips
-- `@radix-ui/react-dropdown-menu` — Dropdown menus
-- `@radix-ui/react-accordion` — Accordions
+### Supported alternatives
 
-**Rules:**
+| Base       | Select when                                          | shadcn initialization                      |
+| ---------- | ---------------------------------------------------- | ------------------------------------------ |
+| Radix UI   | Existing Radix codebase or primitive/API preference  | `pnpm dlx shadcn@4.16.0 init --base radix` |
+| React Aria | Team prefers Adobe's interaction/accessibility model | `pnpm dlx shadcn@4.16.0 init --base aria`  |
 
-- ALWAYS check if a Radix primitive exists before building custom
-- ALWAYS use Radix for: Dialog, Select, Tabs, Tooltip, Dropdown
-- Radix handles accessibility (ARIA, keyboard nav) automatically
+Declare the primitive base explicitly. Do not mix implementations casually
+inside one design system, and test accessible names, focus, keyboard interaction,
+and portal behavior regardless of the library.
 
 ### Floating UI
 
@@ -45,11 +43,11 @@ Use for custom positioning logic when Radix primitives don't cover the case.
 
 ### Embla Carousel
 
-| Attribute | Value                              |
-| --------- | ---------------------------------- |
-| Role      | Carousels and sliders              |
-| Status    | ✅ Core                            |
-| Install   | `pnpm add embla-carousel-react`    |
+| Attribute | Value                           |
+| --------- | ------------------------------- |
+| Role      | Carousels and sliders           |
+| Status    | ✅ Core                         |
+| Install   | `pnpm add embla-carousel-react` |
 
 Lightweight, extensible, and accessible carousel engine. Use for any
 horizontal scrolling, card sliders, or image galleries.
@@ -71,14 +69,14 @@ and integrates well with Radix.
 
 ### shadcn/ui
 
-| Attribute | Value                           |
-| --------- | ------------------------------- |
-| Role      | Radix + Tailwind implementation |
-| Status    | ⭐ Recommended                  |
-| Init      | `pnpm dlx shadcn@latest init`   |
+| Attribute | Value                                                           |
+| --------- | --------------------------------------------------------------- |
+| Role      | Owned component source generated from a declared primitive base |
+| Status    | ⭐ Recommended                                                  |
+| Init      | `pnpm dlx shadcn@4.16.0 init --base base`                       |
 
 **Important:** shadcn/ui is NOT an npm dependency — it's a collection of
-copy-paste components that combine Radix UI + Tailwind CSS. Components
+copy-paste components that combine the selected primitive base + Tailwind CSS. Components
 live in YOUR codebase, giving you full ownership and customization.
 
 **When to use:** 80%+ of projects will benefit from shadcn/ui as the
@@ -88,19 +86,19 @@ out of the box.
 **Agent behavior:**
 
 - Suggest shadcn/ui **by default** for new projects
-- If developer declines → fall back to raw Radix + Tailwind
+- Default new projects to Base UI; keep Radix and React Aria as explicit alternatives
 - Follow **Official CLI-First**: use official shadcn CLI for base setup
 - Run **Impact Preflight** before CLI (overwrite + structural compatibility checks)
 - If impact is non-trivial or uncertain, ask developer confirmation before running CLI
-- Never manually recreate shadcn base setup that `pnpm dlx shadcn@latest init` can generate
+- Never manually recreate shadcn base setup that `pnpm dlx shadcn@4.16.0 init` can generate
 - NEVER install a competing UI library (Material UI, Ant Design, Chakra)
 
 **Setup:**
 
 ```bash
-pnpm dlx shadcn@latest init
+pnpm dlx shadcn@4.16.0 init --base base
 # Then add components as needed:
-pnpm dlx shadcn@latest add button
-pnpm dlx shadcn@latest add dialog
-pnpm dlx shadcn@latest add input
+pnpm dlx shadcn@4.16.0 add button
+pnpm dlx shadcn@4.16.0 add dialog
+pnpm dlx shadcn@4.16.0 add input
 ```

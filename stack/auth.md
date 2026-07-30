@@ -9,14 +9,14 @@ tier: 1
 
 ## Better Auth ≥1
 
-| Attribute   | Value                                                           |
-| ----------- | --------------------------------------------------------------- |
+| Attribute   | Value                                                            |
+| ----------- | ---------------------------------------------------------------- |
 | Role        | Authentication and session management when a project needs login |
-| Min Version | ≥1.0                                                            |
-| Current     | 1.5.1                                                           |
+| Min Version | ≥1.0                                                             |
+| Current     | 1.6.25                                                           |
 | Status      | ⭐ Recommended optional                                          |
-| Install     | `pnpm add better-auth`                                          |
-| Tooling     | `pnpm dlx @better-auth/cli@latest <command>`                    |
+| Install     | `pnpm add better-auth`                                           |
+| Tooling     | `pnpm dlx @better-auth/cli@1.4.21 <command>`                     |
 
 ### When to Use
 

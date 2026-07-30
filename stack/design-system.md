@@ -74,7 +74,7 @@ choosing a new visual direction.
 Pin the alpha CLI exactly so validation does not change unexpectedly:
 
 ```bash
-pnpm add -D @google/design.md@0.3.0
+pnpm add -D @google/design.md@0.4.0
 ```
 
 Use the cross-platform `designmd` binary in package scripts:
@@ -144,9 +144,9 @@ non-zero exit code.
 
 ## Stability Policy
 
-- Current verified CLI: `@google/design.md` `0.3.0` on 2026-07-13.
+- Current verified CLI: `@google/design.md` `0.4.0` on 2026-07-30.
 - Current format version: `alpha`.
-- Do not use `latest` in CI or package scripts while the format is alpha.
+- Pin the exact reviewed CLI in CI and package scripts while the format is pre-1.0.
 - Re-evaluate the schema, exporter, and migration impact before every CLI bump.
 - Promotion from provisional to recommended requires a stable specification or
   sufficient compatibility evidence across releases.

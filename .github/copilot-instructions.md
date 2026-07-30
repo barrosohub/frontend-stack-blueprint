@@ -14,24 +14,24 @@ frontend stack for any new project. For the complete reference, see:
 
 ## Key Rules for Copilot
 
-1. Use TypeScript ≥5.9 with `strict: true` — no `any`
-2. Use React ≥19.2 functional components only
+1. Use TypeScript ≥7 with `strict: true` — no `any`
+2. Use React ≥19.2.7 function product components; class Error Boundaries are allowed
 3. Use pnpm as the default package manager
-4. Use Vite ≥7 with Node.js >=20.19 or >=22.12
+4. Use Vite ≥8 with Node.js >=22.22
 5. Treat Bun ≥1 as an alternative runtime only
 6. Structure by feature (`src/features/`), never by file type
 7. Use `@/*` path aliases, never `../../../`
 8. Use `cn()` utility for conditional Tailwind classes
 9. Use React Hook Form + Zod for forms with 2+ fields
-10. If the project needs ORM-backed server-side or edge relational data access, use Prisma ≥6; do not add ORM to purely static apps
+10. If the project needs ORM-backed server-side or edge relational data access, use Prisma ≥7; do not add ORM to purely static apps
 11. If the project needs authentication, use Better Auth ≥1; do not assume auth is mandatory
 12. If the project needs managed services, prefer Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, and Resend by capability; do not assume they are mandatory
-13. If the project needs cloud frontend hosting and no provider is specified, prefer Cloudflare Pages; use Vercel when explicitly requested or when Pages is not a fit
+13. For new Cloudflare projects use Workers Static Assets; keep existing Pages projects unless migration is justified; use Vercel when explicitly requested
 14. Use TanStack Query for server state
-15. Use Zustand for client state (no Redux, MobX). TanStack Store replaces Zustand at v1 GA
+15. Use Zustand for client state (no Redux, MobX). TanStack Store remains under evaluation
 16. Use Motion (import from `motion/react`) for animations
 17. Use date-fns ≥4.1 + @date-fns/tz for dates and timezones (no Moment, no Day.js)
-18. Use Radix/shadcn primitives before building custom components
+18. Use the selected Base UI/Radix/React Aria/shadcn primitives before custom components
 19. Write tests with Vitest; use Playwright for critical deployed-UI journeys
 20. Never install packages outside this stack without asking
 21. Use [Advanced Capabilities](../stack/advanced-capabilities.md) only when an explicit product requirement activates Markdown, tables, charts, diagrams, code editing, terminal, collaboration, or PDF viewing
@@ -65,12 +65,12 @@ frontend stack for any new project. For the complete reference, see:
 ## Banned
 
 redux, mobx, styled-components, emotion, jest, moment, dayjs,
-formik, yup, class components, CSS-in-JS, deep relative imports
+formik, yup, product UI class components (Error Boundaries excepted), CSS-in-JS, deep relative imports
 
 <!-- BEGIN GENERATED: AGENT CONTRACT -->
 ## Agent-Native Contract (generated)
 
-Blueprint `1.9.0`. Canonical machine sources:
+Blueprint `2.0.0`. Canonical machine sources:
 `stack.yaml`, `agent-contract.json`, `schemas/`, and `profiles/`.
 
 Foundations:
@@ -79,6 +79,7 @@ Foundations:
 - Run Impact Preflight before official CLIs or non-trivial writes.
 - Activate only profiles and capabilities supported by explicit project evidence.
 - Run the applicable project checks and the conformance checker after changes.
+- Install only validated major lines and use maintained runtime releases; do not treat an unbounded latest release as compatible by default.
 
 Profile activation:
 
@@ -93,6 +94,7 @@ Prohibited behavior:
 - Do not place secrets in client-visible environment variables or generated reports.
 - Do not infer optional profiles from preference alone.
 - Do not edit generated agent blocks manually; regenerate them from this contract.
+- Do not publish production source maps by default; upload them privately and remove them from public artifacts when observability requires them.
 
 Apply or audit the contract with `skills/apply-frontend-blueprint/SKILL.md` and
 `node scripts/check-project-conformance.mjs --project <path> --format json`.

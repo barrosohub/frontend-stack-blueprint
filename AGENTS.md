@@ -1,22 +1,22 @@
 # Frontend Stack Blueprint
 
 > Canonical frontend stack for any new project. Platform-agnostic.
-> Deployment targets (Cloudflare Pages, Vercel, Electron, Tauri, PWA) are optional add-ons.
+> Deployment targets (Cloudflare Workers/Pages, Vercel, Electron, Tauri, PWA) are optional add-ons.
 
 ## Stack (ALL projects)
 
-TypeScript ≥5.9 strict · React ≥19.2 · TanStack Router ≥1 (or React Router ≥7.1)
-pnpm (priority) · Node.js >=20.19 or >=22.12 · Bun ≥1 (runtime alternative)
-Vite ≥7 · Vitest ≥3.2 · Playwright ≥1.61 for deployed UI · protected CI merge gate
+TypeScript ≥7 strict · React ≥19.2.7 · TanStack Router ≥1 (or React Router ≥8)
+pnpm ≥11.18 · Node.js 24 LTS (minimum 22.22) · Bun ≥1 (runtime alternative)
+Vite ≥8 · Vitest ≥4 · Playwright ≥1.61 for deployed UI · protected CI merge gate
 Husky + lint-staged + ESLint + Prettier
-Radix UI · shadcn/ui (recommended) · Floating UI · Embla · cmdk
+Base UI (default) · Radix/React Aria (alternatives) · shadcn/ui · Floating UI · Embla · cmdk
 Tailwind CSS ≥4 + clsx + tailwind-merge · Motion (`import from 'motion/react'`)
 DESIGN.md Design Contract (provisional, optional): root DESIGN.md → generated Tailwind 4 tokens
 React Hook Form + Zod · date-fns ≥4.1 (+@date-fns/tz)
-Data Access (optional): Prisma ≥6
+Data Access (optional): Prisma ≥7
 Authentication (optional): Better Auth ≥1
 Managed Services (optional): Neon Postgres | Cloudflare D1 | Cloudflare R2 | Cloudflare KV | Resend
-Zustand · TanStack Query ≥5.60 (TanStack Store replaces Zustand at v1 GA)
+Zustand · TanStack Query ≥5.60 (TanStack Store remains under evaluation)
 Lexical (primary) · ProseMirror (fallback) · Shiki
 Advanced Capabilities (optional): Markdown · TanStack Table · Recharts · Mermaid · CodeMirror · xterm/node-pty · Yjs · PDF.js
 Format.js · react-intl · Sentry / OpenTelemetry / Statsig (capability-gated)
@@ -26,7 +26,7 @@ Icons: Lucide (default) | Phosphor | Tabler
 
 Feature-based modules · Strong typing (no `any`) · DRY · KISS · YAGNI
 Composition > inheritance · Logic in hooks · Tests required (Vitest)
-Husky pre-commit required · React Compiler when available
+Protected CI required · Husky optional · React Compiler 1.x opt-in after compatibility checks
 Always cn() for Tailwind classes · Always `@/*` path aliases
 
 ## Production Reliability (MANDATORY by applicable profile)
@@ -53,14 +53,14 @@ Production operation: preview smoke · immutable release ID · privacy policy ·
 ## Rules
 
 - ALWAYS structure by feature (`src/features/`), NEVER by file type
-- ALWAYS setup Husky + lint-staged on project init
+- Husky + lint-staged are optional local feedback; protected CI is mandatory
 - ALWAYS write tests (Vitest) for hooks and utils
 - ALWAYS run the applicable Production Reliability gate before merge
 - ALWAYS use cn() helper for conditional Tailwind classes
 - ALWAYS use path aliases (`@/*` → `src/*`), never ../../../
 - ALWAYS use React Hook Form + Zod for forms with 2+ fields
-- ALWAYS use Radix/shadcn primitives before building custom
-- ALWAYS use Prisma ≥6 when the project needs ORM-backed server-side or edge relational data access
+- ALWAYS use the selected Base UI/Radix/React Aria/shadcn primitives before building custom
+- ALWAYS use Prisma ≥7 when the project needs ORM-backed server-side or edge relational data access
 - ALWAYS use Better Auth ≥1 when the project needs authentication
 - ALWAYS use the managed-service defaults when the project needs them: Neon Postgres, Cloudflare D1, Cloudflare R2, Cloudflare KV, Resend
 - ALWAYS use pnpm as the default package manager unless the developer explicitly overrides it
@@ -81,11 +81,12 @@ Production operation: preview smoke · immutable release ID · privacy policy ·
 ## Banned
 
 redux · mobx · styled-components · emotion · jest · moment · dayjs
-formik · yup · class components · CSS-in-JS · deep relative imports
+formik · yup · product UI class components (Error Boundaries excepted) · CSS-in-JS · deep relative imports
 
 ## Targets (optional)
 
-Browser → default · Cloudflare Pages → targets/cloudflare-pages.md
+Browser → default · Cloudflare Workers Static Assets → targets/cloudflare-workers-static-assets.md
+Cloudflare Pages (existing/explicit) → targets/cloudflare-pages.md
 Vercel → targets/vercel.md · Electron → targets/electron.md
 Tauri → targets/tauri.md · PWA → targets/pwa.md
 
@@ -110,7 +111,7 @@ Tauri → targets/tauri.md · PWA → targets/pwa.md
 <!-- BEGIN GENERATED: AGENT CONTRACT -->
 ## Agent-Native Contract (generated)
 
-Blueprint `1.9.0`. Canonical machine sources:
+Blueprint `2.0.0`. Canonical machine sources:
 `stack.yaml`, `agent-contract.json`, `schemas/`, and `profiles/`.
 
 Foundations:
@@ -119,6 +120,7 @@ Foundations:
 - Run Impact Preflight before official CLIs or non-trivial writes.
 - Activate only profiles and capabilities supported by explicit project evidence.
 - Run the applicable project checks and the conformance checker after changes.
+- Install only validated major lines and use maintained runtime releases; do not treat an unbounded latest release as compatible by default.
 
 Profile activation:
 
@@ -133,6 +135,7 @@ Prohibited behavior:
 - Do not place secrets in client-visible environment variables or generated reports.
 - Do not infer optional profiles from preference alone.
 - Do not edit generated agent blocks manually; regenerate them from this contract.
+- Do not publish production source maps by default; upload them privately and remove them from public artifacts when observability requires them.
 
 Apply or audit the contract with `skills/apply-frontend-blueprint/SKILL.md` and
 `node scripts/check-project-conformance.mjs --project <path> --format json`.
