@@ -5,6 +5,19 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Evaluation protocol and backlog entries for tsrs, Oxlint/Oxfmt, Vite+, fate,
+  and Void, including correctness, portability, and reproducible benchmark gates
+- Feature co-location guidance for UI, data hooks, types, and behavior tests
+
+### Changed
+
+- Preserve the existing stack, CI gates, and deployment choices while candidates
+  are evaluated; no candidate is approved as a default by this research
+
 ## [2.0.0] — 2026-07-30
 
 ### Added
