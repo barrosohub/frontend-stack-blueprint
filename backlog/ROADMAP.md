@@ -1,7 +1,7 @@
 ---
 title: "Roadmap"
 version: "2.0.0"
-updated: "2026-07-30"
+updated: "2026-11-10"
 tier: 4
 ---
 
@@ -63,10 +63,16 @@ rather than executable application boilerplate.
 - [ ] Replace ESLint + Prettier with Biome only after rule-parity validation
 - [ ] Add TanStack Start only for a proven full-stack use case
 - [ ] Replace date-fns with Temporal only after required browser support
+- [ ] Evaluate tsrs, Oxlint + Oxfmt (with Biome), Vite+, fate, and Void in the
+      order and with the gates set by the
+      [tooling and data evaluation protocol](../docs/research/2026-11-tooling-and-data-evaluation.md)
 
 ## Principles for Evolution
 
 1. **Conservative updates** — Don't chase trends. Wait for stability.
 2. **Semantic versioning** — Breaking changes = MAJOR, new tech = MINOR, fixes = PATCH.
 3. **Evidence-based** — Only add technology with proven production track record.
-4. **One at a time** — Evaluate one candidate technology at a time.
+4. **One at a time** — Reach one promotion decision at a time. Overlapping
+   candidates may be watched together, but are evaluated in a documented
+   sequence (see the
+   [tooling and data evaluation protocol](../docs/research/2026-11-tooling-and-data-evaluation.md#sequence-and-dependencies)).

@@ -5,6 +5,24 @@ All notable changes to the Frontend Stack Blueprint will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Evaluation protocol
+  ([docs/research/2026-11-tooling-and-data-evaluation.md](docs/research/2026-11-tooling-and-data-evaluation.md))
+  and backlog entries for tsrs, Oxlint/Oxfmt, Vite+, fate, and Void, including
+  correctness, portability, reproducible benchmark gates, an evaluation sequence,
+  source dates and versions, and a revisit-trigger column in the backlog; no
+  candidate is approved as a default, and the existing stack, CI gates, and
+  deployment choices are unchanged
+- Feature co-location guidance for UI, data hooks, types, and behavior tests,
+  synchronized across the project-structure guide and template, architecture
+  principles, state and data rules, and `llms-full.txt`, with retry and caching
+  ownership kept in TanStack Query configuration
+- Roadmap evidence gate for the new candidates; principle 4 now reads as one
+  promotion decision at a time
+
 ## [2.0.0] — 2026-07-30
 
 ### Added

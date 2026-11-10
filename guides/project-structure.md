@@ -1,7 +1,7 @@
 ---
 title: "Project Structure"
 version: "1.9.0"
-updated: "2026-07-13"
+updated: "2026-11-10"
 tier: 2
 ---
 
@@ -106,7 +106,7 @@ my-project/
 ## Rules
 
 1. **`features/`** — Each feature is a self-contained module
-2. **`shared/`** — Only code used by 2+ features
+2. **`shared/`** — Only code used by 2+ features with a stable responsibility
 3. **Co-location** — Tests, types, hooks live next to their feature
 4. **Barrel files** — Every feature has `index.ts` with named exports
 5. **Path aliases** — `@/features/auth`, `@/shared/utils/cn`
@@ -117,6 +117,25 @@ my-project/
 10. **API boundary** — Transport code lives in `shared/api`; domain usage stays in features
 11. **E2E boundary** — Critical journeys and accessibility live in top-level `e2e/`
 12. **CI authority** — The protected-branch workflow verifies the production artifact
+
+## Co-location for changes and review
+
+Keep the UI, feature-specific query hook, domain types, and behavior tests in the
+same feature. A feature-owned hook uses the shared API boundary; it must not
+reimplement transport or runtime response validation (owned by `shared/api/`),
+nor hand-roll retry or caching logic (owned by TanStack Query configuration).
+Setting query options such as `retry` or `staleTime` on the feature's
+`useQuery` call is configuration, not reimplementation. Place reusable query
+keys alongside the feature's hooks. Move code to `shared/` only when it is used
+by at least two features and has a stable responsibility.
+
+For example, a `users/` feature can group `components/UserList.tsx`,
+`hooks/useUsers.ts`, `types.ts`, and `users.test.ts`; its hook calls the
+project-owned `shared/api/` boundary and uses TanStack Query. Cover loading,
+error, empty, and success states where applicable. See
+[API boundaries](../stack/api-boundaries.md) for cancellation, validation, and
+retry ownership, and [State & Data](../stack/state-and-data.md) for query rules.
+This is an organizational example, not a mandate to install additional libraries.
 
 ## Import Examples
 

@@ -1,7 +1,7 @@
 ---
 title: "Under Evaluation"
 version: "2.0.0"
-updated: "2026-07-30"
+updated: "2026-11-10"
 tier: 4
 ---
 
@@ -9,17 +9,27 @@ tier: 4
 
 Technologies being actively evaluated for potential inclusion in the stack.
 
-| Technology                  | Scope                                                        | Blocker                                                                                           | ETA      |
-| --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | -------- |
-| **React Compiler adoption** | Default-on auto-memoization                                  | Stable 1.x exists; prove library compatibility, diagnostics, and measured value before defaulting | Watching |
-| **Biome**                   | Replace ESLint + Prettier (Husky stays)                      | Confirm required type-aware and React ecosystem rule parity                                       | Watching |
-| **TanStack Start**          | Full-stack framework (SSR/streaming with TanStack Router)    | Production evidence and a clear use case beyond the client blueprint                              | Watching |
-| **TanStack Store**          | Priority successor to Zustand (reactive, framework-agnostic) | Reach v1 GA (currently alpha v0.x)                                                                | Watching |
-| **Drizzle ORM**             | TypeScript ORM / SQL-first data access                       | Reach v1 GA (official docs still indicate pre-v1 track)                                           | Watching |
-| **Temporal API**            | Replace date-fns with native date handling                   | Baseline/cross-browser support, especially Safari, plus migration evidence                        | Watching |
-| **Signals (TC39)**          | Potential reactive primitive for state management            | Specification stage                                                                               | Watching |
-| **better-sqlite3**          | Electron-local SQLite persistence                            | Native ABI/prebuild compatibility must be proven for the exact Electron release matrix            | Watching |
-| **DESIGN.md**               | Promotion from provisional to recommended design contract    | Alpha specification and pre-1.0 CLI must demonstrate migration compatibility                      | Watching |
+| Technology                  | Scope                                                        | Blocker                                                                                           | ETA      | Revisit trigger                                                                           |
+| --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------- |
+| **React Compiler adoption** | Default-on auto-memoization                                  | Stable 1.x exists; prove library compatibility, diagnostics, and measured value before defaulting | Watching | —                                                                                         |
+| **Biome**                   | Replace ESLint + Prettier (Husky stays)                      | Confirm required type-aware and React ecosystem rule parity                                       | Watching | Compared together with Oxlint + Oxfmt (see sequence)                                      |
+| **tsrs**                    | Experimental TypeScript type checker                         | Diagnostic and project-reference parity, platforms, editor support, and representative benchmarks | Watching | tsrs leaves experimental status or the blueprint pins the TypeScript version tsrs targets |
+| **Oxlint + Oxfmt**          | Potential lint and format alternative                        | Prove React, accessibility, type-aware rule and format parity against existing CI                 | Watching | tsrs result recorded; Oxfmt reaches 1.0 or Oxlint ships tsrs-powered type-aware rules     |
+| **Vite+**                   | Integrated development toolchain                             | Validate pnpm interoperability, CI equivalence, migration and independent exit paths              | Watching | Oxlint + Oxfmt decision recorded                                                          |
+| **fate**                    | Normalized server-state alternative                          | Validate API integration, cache correctness, operational maturity, and migration cost             | Watching | A consuming project needs normalized server state beyond TanStack Query                   |
+| **Void**                    | Vite-based full-stack and deployment platform                | Validate hosting portability, security boundaries, operational maturity, and project need         | Watching | A consuming project has a concrete full-stack requirement                                 |
+| **TanStack Start**          | Full-stack framework (SSR/streaming with TanStack Router)    | Production evidence and a clear use case beyond the client blueprint                              | Watching | —                                                                                         |
+| **TanStack Store**          | Priority successor to Zustand (reactive, framework-agnostic) | Reach v1 GA (currently alpha v0.x)                                                                | Watching | —                                                                                         |
+| **Drizzle ORM**             | TypeScript ORM / SQL-first data access                       | Reach v1 GA (official docs still indicate pre-v1 track)                                           | Watching | —                                                                                         |
+| **Temporal API**            | Replace date-fns with native date handling                   | Baseline/cross-browser support, especially Safari, plus migration evidence                        | Watching | —                                                                                         |
+| **Signals (TC39)**          | Potential reactive primitive for state management            | Specification stage                                                                               | Watching | —                                                                                         |
+| **better-sqlite3**          | Electron-local SQLite persistence                            | Native ABI/prebuild compatibility must be proven for the exact Electron release matrix            | Watching | —                                                                                         |
+| **DESIGN.md**               | Promotion from provisional to recommended design contract    | Alpha specification and pre-1.0 CLI must demonstrate migration compatibility                      | Watching | —                                                                                         |
+
+See [Tooling and data evaluation protocol](../docs/research/2026-11-tooling-and-data-evaluation.md)
+for evidence requirements, comparisons, the current decision, and the evaluation
+sequence for tsrs, Oxlint + Oxfmt (with Biome), Vite+, fate, and Void. Revisit
+triggers marked — have not been recorded yet.
 
 ## Evaluation Criteria
 
