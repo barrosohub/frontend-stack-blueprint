@@ -1,7 +1,7 @@
 ---
 title: "Project Structure"
 version: "1.9.0"
-updated: "2026-07-13"
+updated: "2026-11-10"
 tier: 2
 ---
 
@@ -117,6 +117,21 @@ my-project/
 10. **API boundary** — Transport code lives in `shared/api`; domain usage stays in features
 11. **E2E boundary** — Critical journeys and accessibility live in top-level `e2e/`
 12. **CI authority** — The protected-branch workflow verifies the production artifact
+
+## Co-location for changes and review
+
+Keep the UI, feature-specific query hook, domain types, and behavior tests in the
+same feature. A feature-owned hook uses the shared API boundary; it must not
+reimplement transport, runtime response validation, retries, or caching. Place
+reusable query keys alongside the feature's hooks. Move code to `shared/` only
+when it is used by at least two features and has a stable responsibility.
+
+For example, a `users/` feature can group `components/UserList.tsx`,
+`hooks/useUsers.ts`, `types.ts`, and `users.test.ts`; its hook calls the
+project-owned `shared/api/` boundary and uses TanStack Query. Cover loading,
+error, empty, and success states where applicable. See
+[API boundaries](../stack/api-boundaries.md) for cancellation and validation.
+This is an organizational example, not a mandate to install additional libraries.
 
 ## Import Examples
 
