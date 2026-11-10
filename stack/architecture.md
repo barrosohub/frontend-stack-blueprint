@@ -1,7 +1,7 @@
 ---
 title: "Architecture Principles"
 version: "1.9.0"
-updated: "2026-07-13"
+updated: "2026-11-10"
 tier: 1
 scope: "mandatory"
 ---
@@ -50,6 +50,12 @@ Rules:
 
 - Barrel files (`index.ts`) with named exports per module
 - Each module importable and testable in isolation
+- A feature-owned query hook uses the `shared/api/` boundary; it must not
+  reimplement transport or runtime response validation, nor hand-roll retry or
+  caching logic (owned by TanStack Query configuration)
+- Reusable query keys live alongside the feature's hooks
+- Move code to `shared/` only when it is used by at least two features and has
+  a stable responsibility
 - **Path aliases required:** `@/*` → `src/*` in tsconfig + vite config
 - Never `../../../` — always `@/features/auth`
 

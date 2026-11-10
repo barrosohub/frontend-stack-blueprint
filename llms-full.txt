@@ -192,6 +192,10 @@ ARCHITECTURE (MANDATORY — these are RULES, not suggestions)
 1. MODULAR BY FEATURE
    Structure by feature/domain, NEVER by file type.
    Each feature: components, hooks, utils, types, tests — co-located.
+   Feature query hooks use shared/api; they never reimplement transport or
+   response validation, nor hand-roll retry/caching (TanStack Query owns both).
+   Reusable query keys live alongside the feature's hooks.
+   shared/ only for code used by 2+ features with a stable responsibility.
    Barrel files (index.ts) with named exports per module.
    Path aliases: @/* → src/*. Never ../../../
 

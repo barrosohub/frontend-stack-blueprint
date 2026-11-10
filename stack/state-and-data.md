@@ -1,7 +1,7 @@
 ---
 title: "State & Data"
 version: "2.0.0"
-updated: "2026-07-30"
+updated: "2026-11-10"
 tier: 1
 ---
 
@@ -86,7 +86,8 @@ function ThemeToggle(): JSX.Element {
 
 - Use for ALL async/server state — API calls, data fetching
 - NEVER store server data in client state (Zustand)
-- Query keys must be consistent and descriptive
+- Query keys must be consistent and descriptive; keep reusable keys alongside
+  the feature's hooks (see [Project Structure](../guides/project-structure.md#co-location-for-changes-and-review))
 - Custom hooks wrap queries: `useUsers()`, not inline `useQuery()`
 - Always handle loading, error, and success states
 

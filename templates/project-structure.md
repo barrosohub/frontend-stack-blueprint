@@ -1,7 +1,7 @@
 ---
 title: "Template: Project Structure"
 version: "1.9.0"
-updated: "2026-07-13"
+updated: "2026-11-10"
 tier: 2
 ---
 
@@ -85,7 +85,8 @@ my-project/
 ## Rules
 
 - Feature modules are **self-contained** — tests, types, hooks co-located
-- `shared/` only contains code used by **2+ features**
+- `shared/` only contains code used by **2+ features** with a stable responsibility
+- Reusable query keys live alongside the feature's hooks
 - Every feature has an `index.ts` barrel file
 - All imports use `@/` path aliases
 - `cn.ts` is always at `src/shared/utils/cn.ts`
@@ -93,5 +94,6 @@ my-project/
 - `src/app/design-tokens.css` is generated and must not be hand-edited
 - Features import typed `env`; they never read raw `import.meta.env`
 - Network transport stays in `shared/api`; domain usage stays in features
+- Feature query hooks never hand-roll retry or caching; TanStack Query owns both
 - Critical E2E and accessibility journeys stay in top-level `e2e/`
 - Protected CI, not Husky, is the authoritative merge gate
